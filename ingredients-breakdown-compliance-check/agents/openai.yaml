@@ -1,0 +1,4 @@
+interface:
+  display_name: "成分拆解与合规审查"
+  short_description: "调研产品成分的知识产权与合规风险"
+  default_prompt: "用 $ingredients-breakdown-compliance-check 分析这个 ASIN、品牌、配方或成分，从提示词库中选取最接近的起始模板，并评估成分、知识产权、FDA 和亚马逊风险。"

@@ -1,0 +1,13 @@
+{
+  "suite": "US_Sup_Product_Research",
+  "checks": [
+    {
+      "name": "v2_payload_generates_and_validates",
+      "script": "python skills/US_Sup_Product_Research/scripts/render_deliverables.py all --input skills/US_Sup_Product_Research/evals/files/sample_payload_minimal.json --root .",
+      "expects_stdout_contains": [
+        "generated:",
+        "validate_ok:"
+      ]
+    }
+  ]
+}

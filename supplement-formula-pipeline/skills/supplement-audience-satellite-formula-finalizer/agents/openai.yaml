@@ -1,0 +1,4 @@
+interface:
+  display_name: "受众卫星配方收口"
+  short_description: "以受众为根基的最终配方简报。"
+  default_prompt: "使用这个 skill，把已选保健品方向收成一份中文最终配方简报：先讲清受众、场景和痛点，再定义主星与 1-2 个卫星卖点，最后附上实验室对接清单。"

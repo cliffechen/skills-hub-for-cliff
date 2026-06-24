@@ -1,0 +1,4 @@
+interface:
+  display_name: "成分流量边界分析"
+  short_description: "从 Sif 关键词报告分析保健品成分与流量边界。"
+  default_prompt: "使用本 skill 分析 Amazon US 保健品案例：从 Sif Excel 报告、锚定 ASIN 和 Supplement Facts 出发，创建隔离案例文件夹，解析关键词报告，结合 Sorftime/AnySearch/Exa 证据，输出边界报告、方案对比、雷达图和候选 Supplement Facts。"

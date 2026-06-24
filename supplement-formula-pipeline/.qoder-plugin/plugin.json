@@ -1,0 +1,30 @@
+{
+  "name": "supplement-formula-pipeline",
+  "displayName": "保健品配方研发",
+  "displayNameEn": "Supplement Formula Pipeline",
+  "version": "1.0.0",
+  "description": "Amazon US dietary supplement competitive analysis and differentiated formula development toolkit. 5 chained skills: ingredient risk check, safe rebuild, formula optimization, ingredient-traffic boundary analysis, audience-satellite formula finalizer.",
+  "descriptionZh": "Amazon US 保健品竞品分析与差异化配方开发全套工具链。5 个串联技能：成分风险查验、安全重建、配方优化、成分流量边界分析、受众卫星配方收口。从竞品 ASIN / Supplement Facts / Sif 关键词 Excel 出发，输出风险报告、安全替代方案、配方升级方案、雷达图和最终配方简报。",
+  "author": {
+    "name": "Nexus"
+  },
+  "category": "amazon",
+  "keywords": [
+    "supplement",
+    "formula",
+    "Amazon",
+    "ingredient",
+    "traffic boundary",
+    "risk check",
+    "保健品",
+    "配方",
+    "竞品分析"
+  ],
+  "skills": [
+    "./skills/ingredients-breakdown-compliance-check",
+    "./skills/supplement-safe-rebuild",
+    "./skills/formula-reconstruction",
+    "./skills/amazon-supplement-boundary-analysis",
+    "./skills/supplement-audience-satellite-formula-finalizer"
+  ]
+}

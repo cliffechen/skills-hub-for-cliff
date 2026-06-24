@@ -1,0 +1,16 @@
+{
+  "asin": "B0GKPTBN59",
+  "core_ingredient": "C15 Pentadecanoic Acid",
+  "marketplace": "US",
+  "package_count": 90,
+  "dosage_form": "softgels",
+  "required_inputs": {
+    "sif_excel": "",
+    "supplement_facts_text": ""
+  },
+  "mcp_layers": {
+    "station": "sorftime",
+    "offsite_search": ["exa", "apify"],
+    "spreadsheet": "excel"
+  }
+}

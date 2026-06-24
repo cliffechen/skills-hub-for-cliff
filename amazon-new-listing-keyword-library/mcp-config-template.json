@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "Sorftime_MCP": {
+      "comment": "Sorftime官方MCP——查亚马逊关键词搜索量/趋势/首页竞争结构/类目报告。在 sorftime.com 获取你的接入方式(通常为带token的SSE/HTTP URL或API key),按官方文档替换下方占位。未配置时skill自动降级运行。",
+      "type": "sse",
+      "url": "https://<SORFTIME_MCP_ENDPOINT>?token=<YOUR_API_TOKEN>"
+    }
+  }
+}
