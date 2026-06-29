@@ -1,0 +1,7 @@
+interface:
+  display_name: "Amazon Supplement Visual Content"
+  short_description: "Amazon supplement images and A+ content design."
+  default_prompt: "Use $amazon-supplement-visual-content to turn my supplement facts, bottle images, and product brief into Amazon-ready image, gallery, and A+ content plans."
+
+policy:
+  allow_implicit_invocation: true
