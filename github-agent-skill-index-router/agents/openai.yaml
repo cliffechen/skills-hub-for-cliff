@@ -1,0 +1,5 @@
+interface:
+  display_name: "GitHub Agent Skill Index Router"
+  short_description: "Sync GitHub skills to Obsidian and route skill choices"
+  default_prompt: "Use $github-agent-skill-index-router to scan my skills repository, update the Obsidian index, and recommend the right skill for my task."
+
