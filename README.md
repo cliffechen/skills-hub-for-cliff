@@ -27,6 +27,8 @@
 | 采集 Amazon US 搜索框下拉词 | [`amazon-dropdown-expander`](./amazon-dropdown-expander/) | 轻量 Python 工具，输出 CSV |
 | 搭建新品关键词库、P0/P1/P2、Search Term 和广告词基础 | [`amazon-new-listing-keyword-library`](./amazon-new-listing-keyword-library/) | 输入 ABA、Sif、下拉词、产品信息图，输出 Excel + 策略报告 |
 | 做 Amazon US 膳食补充剂选品和 Go/No-Go 判断 | [`US_Sup_Product_Research_for_Qoderwork`](./US_Sup_Product_Research_for_Qoderwork/) | 重型选品调研，依赖 Sorftime / xCrawl 等工具 |
+| 调用 Sorftime MCP / ZooData 兼容数据层，查商品、市场、评论、历史趋势 | [`zoodata`](./zoodata/) | 共享数据层，默认优先走 Sorftime MCP |
+| 做亚马逊市场、竞品、定价、进入、选品、评论等多工作流分析 | [`amazon-analysis`](./amazon-analysis/) 及 `amazon-*` 数据分析技能 | 基于 `zoodata.py` 的一组 Amazon 数据分析技能 |
 | 检查成分、商标、专利、FDA/Amazon 和商业化风险 | [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/) | 适合上架、换标、仿制、改配方前先跑风险报告 |
 | 做完整保健品配方研发链路 | [`supplement-formula-pipeline`](./supplement-formula-pipeline/) | 包含风险查验、安全重建、配方优化、流量边界和最终收口 |
 | 扫描本仓库、更新 Obsidian 索引、查询该用哪个 skill | [`github-agent-skill-index-router`](./github-agent-skill-index-router/) | 本仓库的“索引维护员 + skill 路由员” |
@@ -37,13 +39,24 @@
 .
 ├── US_Sup_Product_Research_for_Qoderwork/
 ├── amazon-dropdown-expander/
+├── amazon-analysis/
+├── amazon-competitor-intelligence-monitor/
+├── amazon-daily-market-radar/
+├── amazon-keywords/
+├── amazon-listing-audit-pro/
+├── amazon-market-entry-analyzer/
+├── amazon-market-trend-scanner/
+├── amazon-opportunity-discoverer/
+├── amazon-pricing-command-center/
+├── amazon-review-intelligence-extractor/
 ├── amazon-new-listing-keyword-library/
 ├── amazon-supplement-visual-content/
 ├── amazon-supplement-visual-content-WB/
 ├── github-agent-skill-index-router/
 ├── ingredients-breakdown-compliance-check/
 ├── spf-products-advances-to-image-copy/
-└── supplement-formula-pipeline/
+├── supplement-formula-pipeline/
+└── zoodata/
 ```
 
 ## 平台区分
@@ -74,6 +87,23 @@
 - 站外信号
 - Go / No-Go 评分
 - MD、HTML、Dashboard、Excel 四件套交付
+
+[`zoodata`](./zoodata/) 和配套 `amazon-*` 数据分析技能
+
+用于直接走 Sorftime MCP / ZooData 兼容数据层，完成 Amazon US 市场和产品分析：
+
+- `zoodata`：共享数据层，查商品、类目、市场、评论、价格带、品牌、历史趋势
+- `amazon-analysis`：综合市场 / 竞品 / 机会 / 定价分析
+- `amazon-market-entry-analyzer`：市场进入 GO / CAUTION / AVOID 判断
+- `amazon-opportunity-discoverer`：机会产品扫描和评级
+- `amazon-competitor-intelligence-monitor`：竞品矩阵、价格地图、趋势和告警
+- `amazon-pricing-command-center`：RAISE / HOLD / LOWER 定价信号
+- `amazon-review-intelligence-extractor`：评论痛点、购买因素和用户画像
+- `amazon-daily-market-radar`：每日市场监控
+- `amazon-market-trend-scanner`：品类趋势扫描
+- `amazon-keywords`：关键词拓词、搜索结果和 ASIN 流量词分析
+
+默认优先使用已配置的 `sorftime-mcp`；需要 ZooData 时可显式指定 `--provider zoodata`。
 
 ### 2. 关键词与运营
 
@@ -204,4 +234,3 @@ python github-agent-skill-index-router/scripts/scan_skill_repo.py --repo-path .
 本仓库中的成分、合规、FDA/Amazon、商标和专利相关 skill 用于 **业务研究和风险初筛**。
 
 正式上架、标签、广告、专利、商标和 FDA/FTC 风险，请结合专业人士或官方政策进行最终确认。
-
