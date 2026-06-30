@@ -31,7 +31,7 @@
 | 做亚马逊市场、竞品、定价、进入、选品、评论等多工作流分析 | [`amazon-analysis`](./amazon-analysis/) 及 `amazon-*` 数据分析技能 | 基于 `zoodata.py` 的一组 Amazon 数据分析技能 |
 | 检查成分、商标、专利、FDA/Amazon 和商业化风险 | [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/) | 适合上架、换标、仿制、改配方前先跑风险报告 |
 | 做完整保健品配方研发链路 | [`supplement-formula-pipeline`](./supplement-formula-pipeline/) | 包含风险查验、安全重建、配方优化、流量边界和最终收口 |
-| 扫描本仓库、更新 Obsidian 索引、查询该用哪个 skill | [`github-agent-skill-index-router`](./github-agent-skill-index-router/) | 本仓库的“索引维护员 + skill 路由员” |
+| 扫描本仓库、更新 Obsidian 索引、查询该用哪个 skill | [`ob-skill-github-organizer`](./ob-skill-github-organizer/) | 本仓库的“索引维护员 + skill 路由员” |
 
 ## 顶层目录
 
@@ -52,7 +52,7 @@
 ├── amazon-new-listing-keyword-library/
 ├── amazon-supplement-visual-content/
 ├── amazon-supplement-visual-content-WB/
-├── github-agent-skill-index-router/
+├── ob-skill-github-organizer/
 ├── ingredients-breakdown-compliance-check/
 ├── spf-products-advances-to-image-copy/
 ├── supplement-formula-pipeline/
@@ -150,7 +150,7 @@
 
 ### 5. Skill 管理与 Obsidian 索引
 
-[`github-agent-skill-index-router`](./github-agent-skill-index-router/)
+[`ob-skill-github-organizer`](./ob-skill-github-organizer/)
 
 这是一个元 skill，用来管理本仓库里的其他 skill。
 
@@ -165,7 +165,7 @@
 示例：
 
 ```text
-用 github-agent-skill-index-router 扫描我的 skills-hub 仓库并更新 Obsidian 索引
+用 ob-skill-github-organizer 扫描我的 skills-hub 仓库并更新 Obsidian 索引
 ```
 
 ```text
@@ -218,7 +218,7 @@ skill-package/
 
 1. 更新或新增对应 skill 文件夹。
 2. 确认每个 skill 至少有 `SKILL.md`。
-3. 使用 `github-agent-skill-index-router` 扫描仓库。
+3. 使用 `ob-skill-github-organizer` 扫描仓库。
 4. 更新 Obsidian 索引。
 5. 如果新增 WorkBuddy 版本，确认是否只是 `-WB` 目录，还是完整 WorkBuddy 标准包。
 6. 提交并推送到 GitHub。
@@ -226,7 +226,7 @@ skill-package/
 扫描命令示例：
 
 ```bash
-python github-agent-skill-index-router/scripts/scan_skill_repo.py --repo-path .
+python ob-skill-github-organizer/scripts/scan_skill_repo.py --repo-path .
 ```
 
 ## 合规边界

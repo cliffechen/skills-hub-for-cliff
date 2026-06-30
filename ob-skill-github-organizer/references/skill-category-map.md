@@ -11,7 +11,7 @@ Use these categories in the Obsidian index.
 | 图片与 A+ 内容 | `amazon-supplement-visual-content`, `amazon-supplement-visual-content-WB`, `spf-products-advances-to-image-copy` |
 | 成分研发、合规与 IP 风险 | `ingredients-breakdown-compliance-check`, `supplement-formula-pipeline` |
 | 成分研发套件子 Skill | skills under `supplement-formula-pipeline/skills/` |
-| Skill 管理与路由 | `github-agent-skill-index-router` |
+| Skill 管理与路由 | `ob-skill-github-organizer` |
 
 ## Category Heuristics
 

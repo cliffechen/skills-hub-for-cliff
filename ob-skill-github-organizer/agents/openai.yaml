@@ -1,0 +1,4 @@
+interface:
+  display_name: "OB Skill GitHub Organizer"
+  short_description: "Sync GitHub skills to Obsidian and route skill choices"
+  default_prompt: "Use $ob-skill-github-organizer to scan my skills repository, update the Obsidian index, and recommend the right skill for my task."

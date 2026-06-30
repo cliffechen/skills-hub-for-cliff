@@ -1,9 +1,9 @@
 ---
-name: github-agent-skill-index-router
+name: ob-skill-github-organizer
 description: Maintain and query a GitHub-hosted agent skill library across Codex/OpenAI, WorkBuddy, Claude Code, QoderWork, and Obsidian. Use when the user asks to scan or sync a GitHub skills repository, update an Obsidian Markdown skill index, distinguish Codex vs WorkBuddy skill structures, detect new/duplicate/stale skill directories, standardize WorkBuddy package notes, or asks which skill to use for a business task such as Amazon supplement image copy, keyword research, product research, ingredient compliance, formula rebuild, or A+ content.
 ---
 
-# GitHub Agent Skill Index Router
+# OB Skill GitHub Organizer
 
 ## Purpose
 
