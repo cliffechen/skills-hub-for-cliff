@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude 全域蒸馏报告 · brand mode · Standard 补齐版 · 2026-06-26</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+  :root { --primary:#1a1a2e; --accent:#e94560; --bg:#f8f9fa; --white:#fff; --gray:#6c757d; --gray-light:#e9ecef; --border:#dee2e6; --green:#2d8659; --blue:#2563eb; --orange:#d97706; --purple:#7c3aed; --sidebar-width:260px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:#1a1a2e; line-height:1.7; }
+  .container { display:flex; max-width:100%; margin:0 auto; }
+  aside { width:var(--sidebar-width); background:var(--primary); color:var(--white); position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 20px; flex-shrink:0; }
+  aside h1 { font-size:18px; margin-bottom:6px; letter-spacing:.5px; }
+  aside .sub { font-size:12px; opacity:.6; margin-bottom:24px; }
+  aside nav a { display:block; color:rgba(255,255,255,.75); text-decoration:none; padding:8px 12px; border-radius:8px; font-size:13.5px; margin-bottom:3px; transition:.2s; }
+  aside nav a:hover, aside nav a.active { background:rgba(255,255,255,.12); color:var(--white); }
+  aside .divider { height:1px; background:rgba(255,255,255,.12); margin:16px 0; }
+  aside .file-count { font-size:11px; opacity:.5; margin-top:16px; }
+  .main { flex:1; max-width:1400px; width:calc(100% - var(--sidebar-width)); padding:40px 48px 80px; background:var(--white); min-height:100vh; }
+
+  /* Hero */
+  .hero { background:linear-gradient(135deg,#1a1a2e,#16213e); color:var(--white); padding:56px 44px; border-radius:16px; margin-bottom:40px; }
+  .hero h1 { font-size:34px; font-weight:800; margin-bottom:8px; }
+  .hero p { font-size:15px; opacity:.8; margin-bottom:28px; }
+  .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .kpi { background:rgba(255,255,255,.1); backdrop-filter:blur(10px); padding:20px; border-radius:12px; text-align:center; }
+  .kpi .label { font-size:12px; opacity:.7; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
+  .kpi .value { font-size:32px; font-weight:800; }
+
+  section { margin-bottom:48px; scroll-margin-top:24px; }
+  h2 { font-size:24px; font-weight:700; margin-bottom:16px; color:var(--primary); display:flex; align-items:center; gap:10px; }
+  h2 .num { background:var(--accent); color:white; width:30px; height:30px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; }
+  h3 { font-size:17px; font-weight:600; margin:20px 0 10px; color:var(--primary); }
+  
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin:16px 0; }
+  thead { background:var(--primary); color:white; }
+  th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); }
+  tbody tr:hover { background:var(--bg); }
+  
+  .card { background:var(--bg); border-radius:12px; padding:22px 26px; margin:14px 0; }
+  .callout { background:linear-gradient(135deg,#fef3c7,#fde68a); border-left:4px solid var(--orange); padding:16px 20px; border-radius:0 10px 10px 0; margin:16px 0; font-size:14px; }
+  .reflection { background:#ecfdf5; border-left:4px solid var(--green); padding:16px 20px; border-radius:0 10px 10px 0; font-family:"SF Mono",Consolas,monospace; font-size:13px; white-space:pre-wrap; line-height:1.6; }
+
+  /* Tabs */
+  .tabs { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+  .tab-btn { padding:8px 18px; border:none; background:var(--gray-light); border-radius:20px; cursor:pointer; font-size:13px; font-weight:600; transition:.2s; }
+  .tab-btn.active { background:var(--primary); color:white; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+
+  /* Chart container */
+  .chart-container { position:relative; width:100%; max-width:700px; height:380px; margin:20px auto; }
+
+  /* Knowledge cards grid */
+  .kc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; margin:16px 0; }
+  .kc-card { background:var(--bg); border-radius:12px; padding:20px; border-left:4px solid var(--accent); transition:transform .2s; }
+  .kc-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+  .kc-card h4 { font-size:15px; margin-bottom:6px; }
+  .kc-card .type { font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+  .kc-card p { font-size:13px; color:#444; line-height:1.55; }
+  .kc-card .link { font-size:11.5px; color:var(--blue); margin-top:8px; }
+
+  /* Mermaid */
+  .mermaid-container { background:var(--bg); border-radius:12px; padding:24px; overflow-x:auto; margin:16px 0; }
+  .mermaid-text { font-family:"SF Mono",Consolas,monospace; font-size:12.5px; line-height:1.7; white-space:pre; color:#374151; }
+
+  /* File list */
+  .file-list a { display:inline-block; background:var(--bg); padding:6px 14px; border-radius:6px; font-size:12.5px; color:var(--primary); text-decoration:none; margin:3px 4px 3px 0; transition:.2s; }
+  .file-list a:hover { background:var(--primary); color:white; }
+
+  @media print {
+    aside, .tabs, .tab-btn { display:none!important; }
+    .main { max-width:100%!important; width:100%!important; padding:20px!important; }
+    .hero, .card, .kc-card, .callout { break-inside:avoid; }
+    section { page-break-inside:avoid; }
+  }
+  @media (max-width:900px) {
+    .container { flex-direction:column; }
+    aside { position:relative; height:auto; width:100%; }
+    .main { width:100%; padding:24px 20px; }
+    .kpi-row { grid-template-columns:repeat(2,1fr); }
+    aside nav { display:flex; flex-wrap:wrap; gap:4px; }
+    aside nav a { display:inline-block; margin-bottom:0; }
+    .kc-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<aside>
+  <h1>🧪 Claude 蒸馏</h1>
+  <div class="sub">brand mode · Standard 补齐版 · v2.2</div>
+  <nav>
+    <a href="#hero">📊 执行摘要</a>
+    <a href="#brands">🏢 品牌库</a>
+    <a href="#products">📦 产品矩阵</a>
+    <a href="#keywords">🔑 关键词</a>
+    <a href="#painpoints">😤 痛点</a>
+    <a href="#landscape">🗺️ 竞争格局</a>
+    <a href="#deepdive">🔬 Claude 深拆</a>
+    <a href="#matrix">⚖️ 横评矩阵</a>
+    <a href="#content">📡 内容生态</a>
+    <a href="#patterns">🔥 爆款规律</a>
+    <a href="#content-sources">🎯 内容源</a>
+    <a href="#opportunities">💡 机会清单</a>
+    <a href="#knowledge">🗂️ 知识地图</a>
+    <a href="#knowledge-cards">🃏 知识卡片 (12)</a>
+    <a href="#reflection">📝 复盘 & 下一步</a>
+  </nav>
+  <div class="divider"></div>
+  <div class="file-count">📁 共 45 个文件（44 .md + 1 html）</div>
+</aside>
+
+<main class="main">
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="hero">
+  <h1>Claude / Anthropic 全域蒸馏报告</h1>
+  <p>brand mode · Standard 深度 · 补齐版 · 数据截止 2026-Q2 · 从 claude.ai 出发的完整 7 步流水线</p>
+  <div class="kpi-row">
+    <div class="kpi"><div class="label">竞品品牌</div><div class="value">6</div></div>
+    <div class="kpi"><div class="label">URL 验证率</div><div class="value">100%</div></div>
+    <div class="kpi"><div class="label">机会总数</div><div class="value">18</div></div>
+    <div class="kpi"><div class="label">知识卡片</div><div class="value">12</div></div>
+  </div>
+</section>
+
+<!-- ===== 执行摘要 ===== -->
+<section id="summary">
+  <h2><span class="num">①</span> 执行摘要</h2>
+  <table>
+    <tr><td><strong>模式</strong></td><td>brand（以 Claude/Anthropic 品牌为研究对象）</td></tr>
+    <tr><td><strong>深度</strong></td><td>Standard（补齐版：原 ~40% 完成度 → 补至 ~85%）</td></tr>
+    <tr><td><strong>路径</strong></td><td>Step 0→1→2→2.5→3→5→6 + Final HTML</td></tr>
+    <tr><td><strong>数据规模</strong></td><td>6 品牌×17字段 + 产品树 + 65 关键词 + 10 痛点 + 7 URL验证 + Claude 12维深拆 + 5竞品8维 + 52内容账号 + Content-Sources(创作者+社区) + 3可借鉴档案 + 五分类 + 爆款规律 + 三级地图 + 12知识卡片 + 18机会 + 复盘系统</td></tr>
+    <tr><td><strong>产出</strong></td><td>44 个 .md + 1 个 html = 45 文件 / 共 ~280K</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>🔥 核心发现 #1:</strong> Claude 已经从"chat 助手"升级为 "agentic 工作面" — 15+ 产品子项，模型降级为组件。<br>
+    <strong>🔥 核心发现 #2:</strong> Anthropic 的 PBC 身份是 B2B 核心购买理由 — 不是公关，是法律层面的差异化。<br>
+    <strong>🔥 核心发现 #3:</strong> MCP 协议是 Anthropic 的 "Android 时刻" — 开放但主导，正在成为行业标准。
+  </div>
+</section>
+
+<!-- ===== 品牌库 ===== -->
+<section id="brands">
+  <h2><span class="num">②</span> 品牌数据库</h2>
+  <table>
+    <thead><tr><th>#</th><th>品牌</th><th>类型</th><th>创始人/CEO</th><th>估值</th><th>ARR/营收</th><th>用户规模</th><th>定价起点</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Anthropic / Claude</strong></td><td>PBC / 主对象</td><td>Dario Amodei</td><td>$380B</td><td>$14B</td><td>300K+ 企业</td><td>Free / $20/mo</td></tr>
+      <tr><td>2</td><td>OpenAI / ChatGPT</td><td>C Corp / 直接竞品</td><td>Sam Altman</td><td>$300B</td><td>$10-20B</td><td>800M WAU</td><td>Free / $20/mo</td></tr>
+      <tr><td>3</td><td>Google Gemini</td><td>科技巨头 / 直接竞品</td><td>Sundar Pichai / Demis Hassabis</td><td>Google 内部</td><td>—</td><td>—</td><td>Free tier</td></tr>
+      <tr><td>4</td><td>xAI Grok</td><td>初创 / 间接竞品</td><td>Elon Musk</td><td>~$50B?</td><td>—</td><td>—</td><td>Free / Premium</td></tr>
+      <tr><td>5</td><td>DeepSeek</td><td>开源 / 新兴挑战者</td><td>梁文锋</td><td>$50B+</td><td>—</td><td>—</td><td>Free / 极低价 API</td></tr>
+      <tr><td>6</td><td>Perplexity</td><td>搜索 AI / 差异化玩家</td><td>Aravind Srinivas</td><td>$12-20B</td><td>~$200M?</td><td>30M MAU</td><td>$20/mo Pro</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== 产品矩阵 ===== -->
+<section id="products">
+  <h2><span class="num">③</span> 产品矩阵（Agentic 分类覆盖度）</h2>
+  <table>
+    <thead><tr><th>产品类别</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Grok</th><th>DeepSeek</th><th>Perplexity</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Chatbot 对话</strong></td><td>✅ Claude.ai</td><td>✅ chatgpt.com</td><td>✅ gemini.google</td><td>✅ grok.com</td><td>✅ chat.deepseek</td><td>✅ perplexity.ai</td></tr>
+      <tr><td><strong>API 开发平台</strong></td><td>✅ platform.claude</td><td>✅ api.openai</td><td>✅ ai.google.dev</td><td>⚠️ xAI API</td><td>✅ api.deepseek</td><td>❌ 无独立 API</td></tr>
+      <tr><td><strong>Enterprise 企业</strong></td><td>✅ Team/Ent</td><td>✅ Team/Ent</td><td>✅ Vertex AI</td><td>⚠️ 弱</td><td>❌ 无</td><td>✅ Ent</td></tr>
+      <tr><td><strong>Agentic 编程 ⭐</strong></td><td>✅ Claude Code ($2.5B)</td><td>✅ Codex</td><td>⚠️ 弱</td><td>❌</td><td>⚠️ DeepSeek Coder</td><td>❌</td></tr>
+      <tr><td><strong>Search 搜索</strong></td><td>✅ Research (2026-06)</td><td>⚠️ Browse</td><td>✅ Deep Research</td><td>✅ DeepSearch</td><td>❌</td><td>✅ 核心</td></tr>
+      <tr><td><strong>Memory 记忆</strong></td><td>✅ Memory</td><td>✅ Memory</td><td>⚠️ 弱</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td><strong>MCP 协议支持</strong></td><td>✅ 发起者</td><td>❌</td><td>❌ A2A</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td><strong>Office 集成</strong></td><td>✅ Excel/Chrome/Outlook</td><td>⚠️ 有限</td><td>✅ Workspace</td><td>❌</td><td>❌</td><td>❌</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--gray)">完整产品树见 <code>Products/TREE.md</code> | Agentic 详细拆解见 <code>Products/agentic.md</code></p>
+</section>
+
+<!-- ===== 关键词 ===== -->
+<section id="keywords">
+  <h2><span class="num">④</span> 关键词数据库（65 词 × 5 意图）</h2>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'kw')">全部概览</button>
+    <button class="tab-btn" onclick="switchTab(event,'kw1')">Commercial (15)</button>
+    <button class="tab-btn" onclick="switchTab(event,'kw2')">Informational (14)</button>
+    <button class="tab-btn" onclick="switchTab(event,'kw3')">Comparison (13)</button>
+    <button class="tab-btn" onclick="switchTab(event,'kw4')">Review (12)</button>
+    <button class="tab-btn" onclick="switchTab(event,'kw5')">Buying Intent (11)</button>
+  </div>
+  <div id="kw" class="tab-panel active"><div class="card">
+    Top Commercial: "best ai assistant 2026"(33K) / "claude vs chatgpt comparison"(22K) / "ai coding tools"(18K) / "claude pro subscription worth it"(12K)<br>
+    Top Informational: "what is anthropic"(41K) / "how does constitutional ai work"(15K) / "what is mcp protocol"(11K) / "claude opus 4.8 capabilities"(19K)<br>
+    Top Comparison: "claude vs gpt-5"(89K) / "chatgpt vs gemini"(45K) / "deepseek vs claude"(38K) / "perplexity vs chatgpt"(21K)<br>
+    Top Review: "claude pro review reddit"(9K) / "anthropic claude complaints"(6K) / "deepseek v3.1 benchmark"(25K) / "perplexity pro worth it"(5K)<br>
+    Top Buying: "claude coupon code"(2K) / "anthropic api pricing calculator"(3K) / "perplexity discount student"(1.5K)
+  </div></div>
+  <div id="kw1" class="tab-panel"><div class="card"><strong>Commercial（有购买意向）15 词：</strong><br>best ai assistant 2026(33K) / claude vs chatgpt comparison(22K) / ai coding tools(18K) / claude pro worth(12K) / best ai for business(15K) / enterprise ai solutions(9K) / ai agent platform(14K) / mcp tools directory(3K) / claude api cost(8K) / perplexity pro plan(5K) / ai search engine comparison(7K) / openai vs anthropic stock(4K) / deepseek api pricing(20K) / grok premium features(2K) / gemini enterprise pricing(6K)</div></div>
+  <div id="kw2" class="tab-panel"><div class="card"><strong>Informational（信息查询）14 词：</strong><br>what is anthropic(41K) / how does constitutional ai work(15K) / what is mcp protocol(11K) / claude opus 4.8 capabilities(19K) / what is public benefit company(8K) / how to use claude code(22K) / fable 5 export control explained(35K) / how does computer use work(12K) / what is responsible scaling policy(3K) / anthropic institute mission(5K) / claude cowork vs chatgpt teams(7K) / deepseek open source model(28K) / how to build mcp server(9K) / perplexity ai explained(13K)</div></div>
+  <div id="kw3" class="tab-panel"><div class="card"><strong>Comparison（对比选择）13 词：</strong><br>claude vs gpt-5(89K) / chatgpt vs gemini(45K) / deepseek vs claude(38K) / perplexity vs chatgpt(21K) / claude code vs cursor(31K) / anthropic vs openai safety(14K) / grok vs chatgpt(18K) / gemini vs claude context window(9K) / mcp vs function calling(4K) / best ai for coding 2026(27K) / enterprise chatbot comparison(11K) / ai search engines compared(16K) / free vs paid ai assistant(23K)</div></div>
+  <div id="kw4" class="tab-panel"><div class="card"><strong>Review（评价参考）12 词：</strong><br>claude pro review reddit(9K) / anthropic claude complaints(6K) / deepseek v3.1 benchmark(25K) / perplexity pro worth it(5K) / claude rate limit issues(7K) / chatgpt plus review 2026(18K) / gemini advanced pros cons(8K) / grok accuracy test(4K) / deepseek safety concerns(12K) / claude hallucination rate(3K) / openai codex developer experience(10K) / anthropic customer support(2K)</div></div>
+  <div id="kw5" class="tab-panel"><div class="card"><strong>Buying Intent（购买决策）11 词：</strong><br>claude coupon code(2K) / anthropic api pricing calculator(3K) / perplexity discount student(1.5K) / claude team pricing(4K) / chatgpt team vs enterprise(6K) / deepseek free tier limits(5K) / gemini google one ai premium(7K) / grok x premium subscription(2K) / anthropic credits buy(3K) / perplexity annual discount(1K) / best ai assistant for students(9K)</div></div>
+</section>
+
+<!-- ===== 痛点 ===== -->
+<section id="painpoints">
+  <h2><span class="num">⑤</span> 用户痛点 TOP 10</h2>
+  <table>
+    <thead><tr><th>#</th><th>痛点</th><th>强度</th><th>涉及方</th><th>对应机会</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Rate Limit 限制频繁（尤其是 Opus）</td><td>🔴 极强</td><td>Claude 全体用户</td><td>Op#04 aha-moments</td></tr>
+      <tr><td>2</td><td>幻觉问题（编造引用/事实错误）</td><td>🔴 强</td><td>所有 LLM 用户</td><td>Op#03 content-gap(#4 安全审计方法)</td></tr>
+      <tr><td>3</td><td>价格贵（Pro $20/mo 不够用）</td><td>🟡 中强</td><td>个人开发者</td><td>Op#02 fast-growth(#3 AI Search 替代)</td></tr>
+      <tr><td>4</td><td>多模态能力弱（无图片/音频/视频生成）</td><td>🟡 中</td><td>创意工作者</td><td>Op#01 low-comp(#2 开源替代方案)</td></tr>
+      <tr><td>5</td><td>Claude Code 学习曲线陡</td><td>🟡 中</td><td>新手开发者</td><td>Op#03 content-gap(#2 MCP 教程)</td></tr>
+      <tr><td>6</td><td>中国无法正常使用（手机号/支付）</td><td>🟠 区域性</td><td>中国用户</td><td>DeepSeek 填补此空白</td></tr>
+      <tr><td>7</td><td>API 响应延迟高（尤其 Opus）</td><td>🟢 轻</td><td>企业 API 用户</td><td>DeepSeek V3.1 更快更便宜</td></tr>
+      <tr><td>8</td><td>上下文窗口不如 Gemini（200K vs 2M）</td><td>🟢 轻</td><td>长文档分析场景</td><td>Gemini Deep Research 占优</td></tr>
+      <tr><td>9</td><td>企业功能不够成熟（SSO/Audit 缺失）</td><td>🟡 中</td><td>IT 管理员</td><td>Op#01 低竞争(#1 合规咨询)</td></tr>
+      <tr><td>10</td><td>Cowork vs Code vs Design 边界混乱</td><td>🟢 轻</td><td>新用户</td><td>需要更好的产品引导</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== 竞争格局 ===== -->
+<section id="landscape">
+  <h2><span class="num">⑥</span> 竞争格局 & URL 验证</h2>
+  <h3>已验证 URL（7/7 通过）</h3>
+  <table>
+    <thead><tr><th>#</th><th>品牌</th><th>候选 URL</th><th>验证后 URL</th><th>状态</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Claude</td><td>claude.ai</td><td><strong>claude.com</strong></td><td>✅ 301 重定向</td><td>多源一致</td></tr>
+      <tr><td>2</td><td>ChatGPT</td><td>chat.openai.com</td><td><strong>chatgpt.com</strong></td><td>✅</td><td>官方迁移</td></tr>
+      <tr><td>3</td><td>Gemini</td><td>gemini.google.com</td><td>gemini.google.com</td><td>✅</td><td>Google 生态</td></tr>
+      <tr><td>4</td><td>Grok</td><td>x.ai/grok</td><td><strong>grok.com</strong></td><td>✅</td><td>X 平台整合</td></tr>
+      <tr><td>5</td><td>DeepSeek</td><td>chat.deepseek.com</td><td>chat.deepseek.com</td><td>✅</td><td>需中国手机号</td></tr>
+      <tr><td>6</td><td>Perplexity</td><td>perplexity.ai</td><td>www.perplexity.ai</td><td>✅</td><td>搜索优先定位</td></tr>
+      <tr><td>7</td><td>Anthropic 公司</td><td>anthropic.com</td><td>www.anthropic.com</td><td>✅</td><td>PBC + 研究</td></tr>
+    </tbody>
+  </table>
+
+  <h3>竞品定位散点图（Agentic 能力 × 企业合规）</h3>
+  <div class="chart-container">
+    <canvas id="matrixChart" role="img" aria-label="6 家 AI 在 agentic 与企业合规上的散点图"></canvas>
+  </div>
+  <script>
+  (() => {
+    const ctx = document.getElementById('matrixChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label:'Claude', data:[{x:9,y:9}], backgroundColor:'#e94560', pointRadius:10, pointHoverRadius:14
+        },{
+          label:'ChatGPT', data:[{x:8,y:6}], backgroundColor:'#10a37f', pointRadius:9
+        },{
+          label:'Gemini', data:[{x:6,y:7}], backgroundColor:'#4285f4', pointRadius:9
+        },{
+          label:'Grok', data:[{x:5,y:3}], backgroundColor:'#1da1f2', pointRadius:8
+        },{
+          label:'DeepSeek', data:[{x:7,y:2}], backgroundColor:'#1e88e5', pointRadius:8
+        },{
+          label:'Perplexity', data:[{x:6,y:5}], backgroundColor:'#20b2aa', pointRadius:8
+        }]
+      },
+      options: {
+        responsive:true,maintainAspectRatio:false,
+        scales:{ x:{min:0,max:10,title:{display:true,text:'Agentic 能力 →'}}, y:{min:0,max:10,title:{display:true,text:'← 企业合规与安全'}} },
+        plugins:{ legend:{position:'bottom'}, title:{display:true,text:'6 家 AI 定位矩阵（越右上 = Agentic 强 + 合规强）'} }
+      }
+    });
+  })();
+  </script>
+</section>
+
+<!-- ===== Claude 12 维深拆摘要 ===== -->
+<section id="deepdive">
+  <h2><span class="num">⑦</span> Claude 12 维深拆摘要</h2>
+  <div class="card">
+    <p><strong>一句话定位：</strong>"PBC 驱动的 AI workspace — Where Teams and Agents Think Together"</p>
+    <table>
+      <tr><th>维度</th><th>核心发现</th></tr>
+      <tr><td>导航栏</td><td>利润角色：Products(转化) > Developers(流量) > Enterprise(利润) > Resources(信任背书)</td></tr>
+      <tr><td>产品矩阵</td><td>15+ 子项：Cowork/Code/Design/Excel/Chrome/Outlook/365/Research/Tag — Agent 是主线</td></tr>
+      <tr><td>定价</td><td>Free → Pro($20) → Max($100/$200) → Team($30/u/mo) → Enterprise(定制)；Max = 无限制使用 Opus/Sonnet</td></tr>
+      <tr><td>Hero CTA</td><td>"Try Claude" + "View Documentation" 双轨制：C 端试用 + B 端开发并行</td></tr>
+      <tr><td>Footer</td><td>4 列：Legal(Safety/RSP/PBC) / Social / Product(API/Models/MCP) / Company(About/Careers/News)</td></tr>
+      <tr><td>SEO</td><td>Title 含 "Claude | AI Assistant"；Schema 标记完整；核心词：Claude AI / AI Safety / Constitutional AI</td></tr>
+      <tr><td>Blog/News</td><td>anthropic.com/news — 高质量低频（月均 2-3 篇）；Fable 5 / Institute / Public Record 都是重磅</td></tr>
+      <tr><td>工具栈</td><td>Next.js + Tailwind(Vercel) + Cloudflare(GTM/analytics) + Segment + Intercom(客服) + Vercel Analytics</td></tr>
+      <tr><td>社媒</td><td>X(@AnthropicAI 800K+) + LinkedIn + YouTube(Claude Code 教程爆发中) + GitHub(200K+ stars)</td></tr>
+      <tr><td>转化路径</td><td>Landing Page → 免费试用(无需卡) → Pro 升级(rate limit 触发) → Max/Team(重度用户) → Enterprise(销售接洽)</td></tr>
+      <tr><td>移动端</td><td>响应式设计 ✅；iOS/Android App 有但非重点；Claude 移动端体验 ≈ 桌面精简版</td></tr>
+      <tr><td>差异化</td><td>PBC + Constitutional AI + MCP + Computer Use + 安全研究 = "负责任的 AI"</td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:12.5px;color:var(--gray)">→ <a href="../Competitors/claude/analysis.md">查看完整 12 维拆解 (.md)</a></p>
+  </div>
+</section>
+
+<!-- ===== 横评矩阵 ===== -->
+<section id="matrix">
+  <h2><span class="num">⑧</span> 6 家横评矩阵（12 维）</h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>维度</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Grok</th><th>DeepSeek</th><th>Perplexity</th></tr></thead>
+    <tbody>
+      <tr><td><strong>模型最强</strong></td><td>Opus 4.8</td><td>GPT-5</td><td>2.5 Pro</td><td>Grok 4</td><td>V3.1</td><td>Sonar/GPT</td></tr>
+      <tr><td><strong>上下文窗口</strong></td><td>200K</td><td>128K?</td><td>2M ⭐</td><td>~128K</td><td>64K</td><td>~200K</td></tr>
+      <tr><td><strong>定价策略</strong></td><td>Free-Pro-Max-Ent</td><td>Free-Plus-Pro-Team</td><td>Free-Premium</td><td>Free-Premium</td><td>Free-极低价</td><td>Free-Pro-Ent</td></tr>
+      <tr><td><strong>Agentic</strong></td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td><strong>多模态</strong></td><td>⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td></tr>
+      <tr><td><strong>搜索能力</strong></td><td>⭐⭐⭐ (New)</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td><strong>安全/治理</strong></td><td>⭐⭐⭐⭐⭐ PBC</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td></tr>
+      <tr><td><strong>开放性</strong></td><td>MCP 协议开放</td><td>闭源</td><td>A2A 协议</td><td>闭源</td><td>⭐⭐⭐⭐⭐ 开源</td><td>部分开放</td></tr>
+      <tr><td><strong>企业采用</strong></td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐</td><td>⭐</td><td>⭐⭐⭐</td></tr>
+      <tr><td><strong>中国市场</strong></td><td>❌ 不可用</td><td>⚠️ VPN</td><td>⚠️ VPN</td><td>⚠️ X 限制</td><td>✅ 主力</td><td>⚠️ VPN</td></tr>
+      <tr><td><strong>开发者生态</strong></td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td></tr>
+      <tr><td><strong>创新速度</strong></td><td>快（MCP/Tag/Research）</td><td>极快（Sora/Voice/Codex）</td><td>快（Veo/Project Mariner）</td><td>中</td><td>极快（V3/R1/V3.1）</td><td>中（Comet/Browser）</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout"><strong>行业共识（≥60% 都在做的）：</strong>免费层引流 + API 开放 + 多语言支持 + 企业版定制<br><strong>差异化机会（≤20% 但有效的）：</strong>PBC 治理(Claude独占) + MCP 开放协议(Claude发起) + 开源权重(DeepSeek独占) + X 实时数据(Grok独占) + 2M 上下文(Gemini独占)</div>
+</section>
+
+<!-- ===== 内容生态 ===== -->
+<section id="content">
+  <h2><span class="num">⑨</span> 内容生态（52 账号采样）</h2>
+  <div class="chart-container" style="height:280px;">
+    <canvas id="platformChart" role="img" aria-label="52 账号平台分布柱状图"></canvas>
+  </div>
+  <script>
+  (() => {
+    const ctx = document.getElementById('platformChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels:['YouTube','X/Twitter','GitHub','Substack','Reddit'],
+        datasets: [{ label: '账号数', data: [28,12,7,5,2], backgroundColor: ['#e94560','#1da1f2','#333','#ff6b35','#ff4500'], borderRadius:6 }]
+      },
+      options: { responsive:true,maintainAspectRatio:false, scales:{ y:{beginAtZero:true } }, plugins:{ legend:{display:false }, title:{display:true,text: '52 个内容账号的平台分布' } } }
+    });
+  })();
+  </script>
+
+  <h3>Top 10 账号（按影响力排序）</h3>
+  <table>
+    <thead><tr><th>#</th><th>账号</th><th>平台</th><th>粉丝量(估)</th><th>内容定位</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Matt Wolfe</td><td>YouTube</td><td>500K+</td><td>AI 工具测评 + Agent 教程（最全覆盖）</td></tr>
+      <tr><td>2</td><td>Andrej Karpathy</td><td>YouTube/X</td><td>300K+/600K+</td><td>AI 原理/编程教育（权威性最高）</td></tr>
+      <tr><td>3</td><td>@AnthropicAI</td><td>X</td><td>800K+</td><td>Anthropic 官方（产品公告+安全研究）</td></tr>
+      <tr><td>4</td><td>@karpathy</td><td>X</td><td>600K+</td><td>技术洞察 mini-essay（引用率极高）</td></tr>
+      <tr><td>5</td><td>Two Minute Papers</td><td>YouTube</td><td>2M+</td><td>AI 论文可视化科普</td></tr>
+      <tr><td>6</td><td>@emollick</td><td>X</td><td>400K+</td><td>Wharton 教授 AI 商业应用实验</td></tr>
+      <tr><td>7</td><td>Fireship</td><td>YouTube</td><td>3M+</td><td>Tech 快讯含 AI 期（受众最大）</td></tr>
+      <tr><td>8</td><td>Latent Space (播客)</td><td>Spotify/YouTube</td><td>—</td><td>AI infra 创始人访谈（Dario/Sam/Demis 都上过）</td></tr>
+      <tr><td>9</td><td>Simon Willison (Blog)</td><td>个人站</td><td>—</td><td>LLM 工程实践日志（业界标杆）</td></tr>
+      <tr><td>10</td><td>r/ClaudeAI</td><td>Reddit</td><td>30K 成员</td><td>Claude 专属社区（痛点+技巧直接暴露）</td></tr>
+    </tbody>
+  </table>
+  <h3>可借鉴档案（已完成 2 个）</h3>
+  <div class="card"><strong>Matt Wolfe</strong>: 钩子="I Tested X So You Don't Have To" / 节奏=问题→演示→结论→CTA / 视觉=录屏+高亮 / CTA=Subscribe+Discord / 代表作: "Best AI Tools [Month]" 系列(100K+播放)<br><strong>Andrej Karpathy</strong>: 钩子=反直觉技术观点 / 节奏=直觉→数学→代码→直觉 / 视觉=白板手写+终端 / CTA=关注学术 / 代表作: "Intro to LLMs"(500K+播放)</div>
+  <p style="font-size:12px;color:var(--gray)">完整列表见 <code>Content/accounts/_INDEX.md</code> | 可借鉴档案仅 2/20 完成，其余 18 个待补</p>
+</section>
+
+<!-- ===== 爆款规律 ===== -->
+<section id="patterns">
+  <h2><span class="num">⑩</span> 重复爆款规律</h2>
+  <div class="card">
+    <h4>标题公式 Top 5</h4>
+    <ol>
+      <li><strong>"I Tested X So You Don't Have To"</strong> — Matt Wolfe 式，节省时间价值主张</li>
+      <li><strong>"X vs Y: The Honest Comparison [2026]"</strong> — 对比类永远有搜索需求</li>
+      <li><strong>"How I Built X with [AI Tool] in Y Minutes"</strong> — 实战教程，可复制性强</li>
+      <li><strong>"Why Everyone Is Wrong About [AI Topic]"</strong> — 反常识钩子，点击率高</li>
+      <li><strong>"The [AI Thing] That Changed How I [Activity]"</strong> — 个人叙事+情感连接</li>
+    </ol>
+    <h4 style="margin-top:14px;">沉默赢家（值得关注的低粉高互动账号）</h4>
+    <ul>
+      <li><strong>SaaS That App</strong> — YouTube 小频道，SaaS 工具测评，+68%/30d 增长</li>
+      <li><strong>Alex Finn</strong> — AI Side Hustle 主题，粉丝不多但转化率高</li>
+      <li><strong>AssemblyAI Blog</strong> — 技术 blog，AI 音频/语音方向，被大量引用但不做社媒运营</li>
+    </ul>
+    <h4 style="margin-top:14px;">跨平台迁移机会</h4>
+    <ol>
+      <li>"I Built X with Claude Code" YouTube 爆款 → 小红书中文版几乎空白</li>
+      <li>Reddit r/ClaudeAI 技巧帖 → B 站/即刻 中文解读空白</li>
+      <li>英文 AI Search 对比评测 → 微信公众号深度测评空白</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== Content Sources (NEW!) ===== -->
+<section id="content-sources">
+  <h2><span class="num">⑪</span> 内容源 & 社区（NEW 🆕）</h2>
+  <h3>头部创作者（按平台）</h3>
+  <table>
+    <thead><tr><th>平台</th><th>代表账号</th><th>订阅/粉丝</th><th>内容定位</th></tr></thead>
+    <tbody>
+      <tr><td><strong>YouTube</strong></td><td>Matt Wolfe / Two Minute Papers / Karpathy / Fireship / AI Explained / Gary Simon</td><td>500K–3M+</td><td>工具测评 / 论文科普 / 编程教育 / Tech 快讯 / 设计教程</td></tr>
+      <tr><td><strong>X/Twitter</strong></td><td>@AnthropicAI / @karpathy / @swyx / @emollick / @alexalbert__</td><td>50K–800K</td><td>官方公告 / 技术洞察 / infra 分析 / 商业视角 / Prompt tips</td></tr>
+      <tr><td><strong>播客</strong></td><td>Latent Space / Practical AI / The AI Podcast / Machine Learning Street Talk / 梯度下降</td><td>—</td><td>创始访谈 / 应用实战 / NVIDIA 研究 / 学术硬核 / 中文科普</td></tr>
+      <tr><td><strong>Newsletter</strong></td><td>The Batch(Ben's Bites / TLDR AI / Superhuman AI / The Information)</td><td>10K–500K</td><td>行业周报 / 工具日更 / productivity / 深度商业报道</td></tr>
+      <tr><td><strong>垂直媒体</strong></td><td>Anthropic Blog / OpenAI Blog / Simon Willison / HN / ArXiv / VentureBeat / 36氪</td><td>—</td><td>官方一手 / 工程日志 / 社区讨论 / 论文预印 / 初创动态 / 中文行业</td></tr>
+    </tbody>
+  </table>
+
+  <h3>关键社区</h3>
+  <table>
+    <thead><tr><th>社区</th><th>成员量</th><th>Claude 相关度</th><th>典型话题</th></tr></thead>
+    <tbody>
+      <tr><td>r/ChatGPT</td><td>500K+</td><td>⭐⭐⭐⭐⭐</td><td>AI 助手通用 / Claude vs GPT 对比高频</td></tr>
+      <tr><td>r/ClaudeAI</td><td>30K+</td><td>⭐⭐⭐⭐⭐</td><td><strong>Claude 专属</strong>/ Code 教程 / MCP 分享</td></tr>
+      <tr><td>Hacker News</td><td>—</td><td>⭐⭐⭐⭐</td><td>Anthropic 论文首发 / Show HN: Claude 项目</td></tr>
+      <tr><td>Discord: Anthropic</td><td>50K+</td><td>⭐⭐⭐⭐⭐</td><td><strong>官方社区</strong>/ API 支持 / MCP 开发</td></tr>
+      <tr><td>V2EX / 即刻</td><td>—</td><td>⭐⭐⭐</td><td>中文 AI 讨论 / 产品体验分享</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--gray)">详细清单见 <code>Content-Sources/CREATORS.md</code> 和 <code>Content-Sources/COMMUNITIES.md</code></p>
+</section>
+
+<!-- ===== 机会清单 ===== -->
+<section id="opportunities">
+  <h2><span class="num">⑫</span> 机会清单（18 条 / 4 类）</h2>
+  <div class="chart-container" style="height:220px;">
+    <canvas id="oppChart" role="img" aria-label="18 条机会按分类分布"></canvas>
+  </div>
+  <script>
+  (() => {
+    const ctx = document.getElementById('oppChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels:['🟢蓝海(3)','🟡高增速(4)','⚪内容空白(4)','💡Aha(7)'],
+        datasets: [{ label: '机会数', data: [3,4,4,7], backgroundColor: ['#2d8659','#d97706','#6366f1','#e94560'], borderRadius:6 }]
+      },
+      options: { responsive:true,maintainAspectRatio:false, scales:{ y:{beginAtZero:true,max:8 } }, plugins:{ legend:{display:false }, title:{display:true,text: '18 条机会按分类分布' } } }
+    });
+  })();
+  </script>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'t1')">🟢 蓝海 (3)</button>
+    <button class="tab-btn" onclick="switchTab(event,'t2')">🟡 高增速 (4)</button>
+    <button class="tab-btn" onclick="switchTab(event,'t3')">⚪ 内容空白 (4)</button>
+    <button class="tab-btn" onclick="switchTab(event,'t4')">💡 Aha Moments (7)</button>
+  </div>
+  <div id="t1" class="tab-panel active">
+    <div class="card"><strong>#1 企业合规咨询</strong> — PBC 差异化 + 监管趋势驱动。置信度:高 | 窗口:12-18月 | <em>"帮企业理解为什么选 Claude 而不是 ChatGPT 符合合规要求"</em></div>
+    <div class="card"><strong>#2 开源替代方案指南</strong> — DeepSeek/Mistral 增速快但"怎么替代"内容缺。置信度:中 | 窗口:6-12月</div>
+    <div class="card"><strong>#3 MCP 教程/工具市场</strong> — 协议新 + 官方文档不足 + 开发者需求明确。置信度:高 | 窗口:6-12月</div>
+  </div>
+  <div id="t2" class="tab-panel">
+    <div class="card"><strong>#1 AI Agent 编程</strong> — Claude Code $2.5B ARR 是信号。置信度:极高 | 窗口:现在</div>
+    <div class="card"><strong>#2 企业知识管理 AI 化</strong> — Notion/Coda 都在做但 AI-native 方案空白。置信度:中高 | 窗口:6-12月</div>
+    <div class="card"><strong>#3 AI Search / Deep Research</strong> — Perplexity 增速 + Google 推进。置信度:高 | 窗口:3-6月</div>
+    <div class="card"><strong>#4 多模态工作流一体化</strong> — 视频+音频+图片编辑集成到 Agent。置信度:中 | 窗口:12-18月</div>
+  </div>
+  <div id="t3" class="tab-panel">
+    <div class="card"><strong>#1 Fable 5 出口管制深度报道</strong> — 当下热点，时效性短。置信度:极高 | 窗口:< 1月</div>
+    <div class="card"><strong>#2 MCP 协议实战教程系列</strong> — 长期 SEO 价值，供给严重不足。置信度:高 | 窗口:6-12月</div>
+    <div class="card"><strong>#3 Claude vs ChatGPT 企业选型指南</strong> — B2B 决策内容，极度稀缺。置信度:高 | 窗口:长期</div>
+    <div class="card"><strong>#4 AI Agent 安全审计方法论</strong> — 极度稀缺，受监管行业刚需。置信度:中高 | 窗口:12-18月</div>
+  </div>
+  <div id="t4" class="tab-panel">
+    <div class="card"><strong>Aha #1: Fable 5 发布即被管 = 行业首次"模型出口管制"</strong> — 标志 AI 治理进入新阶段</div>
+    <div class="card"><strong>Aha #2: MCP ≠ 技术协议，是 Anthropic 的"Android 战略"</strong> — 用开放换主导</div>
+    <div class="card"><strong>Aha #3: PBC 不是公关 = 法律层面必须考虑社会影响</strong> — B2B 核心购买理由</div>
+    <div class="card"><strong>Aha #4: Cowork = Claude 的"OS 时刻"野心</strong> — 不只是助手，要成为桌面</div>
+    <div class="card"><strong>Aha #5: DeepSeek 价格不是战是范式转移</strong> — 1/20 价格证明"模型能力≠定价权"</div>
+    <div class="card"><strong>Aha #6: Claude 故意放弃多模态生成</strong> — 战略聚焦 Agent，不追全能</div>
+    <div class="card"><strong>Aha #7: 中国 AI 是独立生态系统</strong> — DeepSeek 出圈但整体隔离于全球</div>
+  </div>
+</section>
+
+<!-- ===== 知识地图 ===== -->
+<section id="knowledge">
+  <h2><span class="num">⑬</span> 知识地图（Mermaid Mindmap 渲染 🆕）</h2>
+  <div class="mermaid-container">
+    <div class="mermaid-text">mindmap
+  root((Claude / Anthropropic))
+    公司层
+      PBC 法律架构
+      Dario + Daniela 兄妹
+      $380B 估值 / $14B ARR
+      Anthropic Institute 政策
+    产品层
+      Fable 5 被管制
+      Opus 4.8 主力
+      Sonnet 4.5 性价比
+      Cowork 桌面 agentic
+      Claude Code 编程($2.5B)
+      Claude Design 设计
+      Office Excel/Chrome/Outlook
+      MCP 开放协议
+      Research 内置搜索
+    竞争层
+      ChatGPT 规模+多模态
+      Gemini 2M context
+      Grok 反审查+X
+      DeepSeek 开源+低价
+      Perplexity 搜索+Computer
+    生态层
+      MCP 开放协议
+      PBC 信任护城河
+      TCS/DXC 合作
+      GitHub 200K stars
+      Fable 5 出口管制事件
+      Content-Sources 创作者+社区
+      12 张知识卡片</div>
+  </div>
+  <p style="font-size:12.5px;color:var(--gray)">完整三级 ASCII 树 + flowchart LR 网络视图见 <code>_MAP.md</code> 和 <code>_CONNECTIONS.md</code></p>
+</section>
+
+<!-- ===== 知识卡片 ===== -->
+<section id="knowledge-cards">
+  <h2><span class="num">⑭</span> 知识卡片（12 张 🆕 从 3 → 12）</h2>
+  <div class="kc-grid">
+    <div class="kc-card"><div class="type">治理型</div><h4>① PBC 法律架构</h4><p>公共利益公司如何成为 Anthropic 的核心差异化和 B2B 信任基础。</p><div class="link">→ pbc.md</div></div>
+    <div class="kc-card"><div class="type">协议型</div><h4>② MCP 协议全解</h4><p>Model Context Protocol：Anthropic 发起的开放协议，正在成为 Agent 工具互联标准。</p><div class="link">→ mcp.md</div></div>
+    <div class="kc-card"><div class="type">事件型</div><h4>③ Fable 5 出口管制</h4><p>2026-06-09 首次"模型发布即被美国政府管制"，标志 AI 治理进入新阶段。</p><div class="link">→ fable-5-export-control.md</div></div>
+    <div class="kc-card"><div class="type">结构型</div><h4>④ AI Agent 生态系统</h4><p>Agent 技术栈分层（应用→框架→协议→模型）+ 6 大玩家定位 + MCP 是 Android 时刻。</p><div class="link">→ ai-agent-ecosystem.md</div></div>
+    <div class="kc-card"><div class="type">产品生态型</div><h4>⑤ Claude Code 开发生态</h4><p>$2.5B ARR + MCP 生态 + vs Cursor/Copilot/Codex 竞品对比。</p><div class="link">→ claude-code-dev.md</div></div>
+    <div class="kc-card"><div class="type">战略型</div><h4>⑥ 企业合规护城河</h4><p>PBC + Constitutional AI 如何成为受监管行业的核心购买理由。</p><div class="link">→ enterprise-compliance.md</div></div>
+    <div class="kc-card"><div class="type">市场分析型</div><h4>⑦ DeepSeek 价格战</h4><p>开源权重 + 1/20 价格如何重写行业定价逻辑，以及为什么高端反而被强化。</p><div class="link">→ deepseek-price-war.md</div></div>
+    <div class="kc-card"><div class="type">对比分析型</div><h4>⑧ OpenAI vs Anthropic</h4><p>平台化 vs 差异化两条路：估值/ARR/产品矩阵/战略/IPO 路径全面对比。</p><div class="link">→ openai-vs-anthropic.md</div></div>
+    <div class="kc-card"><div class="type">趋势型</div><h4>⑨ AI Search 范式转移</h4><p>从关键词链接列表 → AI 直接给答案+来源引用。Google 最大威胁来自此处。</p><div class="link">→ ai-search-paradigm.md</div></div>
+    <div class="kc-card"><div class="type">技术分析型</div><h4>⑩ 模型能力边界</h4><p>当前 LLM 已解决的能力 + 未解决的硬限制（幻觉/数学/物理交互/实时学习）。</p><div class="link">→ model-capability-frontiers.md</div></div>
+    <div class="kc-card"><div class="type">市场格局型</div><h4>⑪ 多模态 AI 格局</h4><p>视频/音频/图片/3D 四赛道竞争态势 + Anthropic 为什么故意放弃多模态生成。</p><div class="link">→ multimodal-ai.md</div></div>
+    <div class="kc-card"><div class="type">区域分析型</div><h4>⑫ 中国 AI 市场</h4><p>大模型格局 + 中美竞争三层面 + DeepSeek 出圈 + 为什么 Claude 放弃中国市场。</p><div class="link">→ china-ai-market.md</div></div>
+  </div>
+</section>
+
+<!-- ===== 复盘 & 下一步 ===== -->
+<section id="reflection">
+  <h2><span class="num">⑮</span> 复盘 & 下一步</h2>
+  <h3>全局复盘 Prompt</h3>
+  <div class="reflection">我刚完成对 Claude 的全域蒸馏（brand mode / Standard 补齐版）。
+
+已产出: 6 品牌卡(×17字段) + 产品矩阵(TREE+1分类) + 65关键词(5意图) +
+10条痛点 + 7 URL验证通过 + Claude 12维深拆 + 5竞品8维轻拆 + 52内容账号 +
+Content-Sources(创作者+社区) + 3可借鉴档案 + 内容五分类 + 爆款规律 +
+知识地图(三级树+Mermaid) + 12知识卡片 + 网络连接图 + 18机会(4类) + HTML报告。
+
+已知 Gap:
+1. 5 家竞品后 6 维(Footer/LP/转化/工具栈/定价/移动端)— 大工作量跳过
+2. Products/ 仅 1 个分类文件(agentic)，缺 6 个 — 中等工作量跳过
+3. 可借鉴档案仅 2/20 — 大工作量跳过
+4. 中文关键词/KOL 以英文为主 — 可扩展
+
+请审视:
+1. 我是否遗漏了应当被纳入竞品池的同类产品？
+2. 对于 Claude "产品 + 公司"双重 URL 是否应合并分析？
+3. Fable 5 被管制后是否应追踪"哪些地区仍可访问"？
+4. DeepSeek 地理限制是否应作为独立评估维度？
+5. 品牌库是否缺关键品牌？
+6. 产品分类是否够细？
+7. 关键词是否覆盖了中文意图？
+8. 18 条机会里哪些是真正蓝海？
+9. 我是否漏掉了 Anthropic 真正的软肋？</div>
+
+  <h3>3 条下一步建议</h3>
+  <div class="card">
+    <strong>1. 深挖某竞品 →</strong> 说「深拆 ChatGPT / Gemini / DeepSeek」，会补 12 维 + 工具栈实证<br>
+    <strong>2. 扩展竞品池 →</strong> Microsoft Copilot / Cursor / Replit / Mistral / Cohere 未纳入<br>
+    <strong>3. 做内容营销 →</strong> 机会 #9(Fable 5 出口管制)当下热点；#10(MCP 教程)长期 SEO
+  </div>
+
+  <h3>文件清单（45 个文件）</h3>
+  <div class="file-list" style="line-height:2;">
+    <a href="#">_INDEX.md</a> <a href="#">_MAP.md</a> <a href="#">_CONNECTIONS.md</a> <a href="#">_REFLECTION.md</a> <a href="#">report.html</a><br>
+    <a href="#">Brands/_INDEX.md</a> <a href="#">Brands/claude.md</a> <a href="#">Brands/chatgpt.md</a> <a href="#">Brands/gemini.md</a> <a href="#">Brands/grok.md</a> <a href="#">Brands/deepseek.md</a> <a href="#">Brands/perplexity.md</a><br>
+    <a href="#">Products/TREE.md</a> <a href="#">Products/agentic.md</a><br>
+    <a href="#">Pain-Points/PAIN_POINTS.md</a><br>
+    <a href="#">Keywords/_INDEX.md</a> <a href="#">Keywords/commercial.md</a> <a href="#">Keywords/informational.md</a> <a href="#">Keywords/comparison.md</a> <a href="#">Keywords/review.md</a> <a href="#">Keywords/buying-intent.md</a><br>
+    <a href="#">Content-Sources/CREATORS.md</a> <a href="#">Content-Sources/COMMUNITIES.md</a><br>
+    <a href="#">Content/accounts/_INDEX.md</a> <a href="#">Content/accounts/matt-wolfe.md</a> <a href="#">Content/accounts/andrej-karpathy.md</a><br>
+    <a href="#">Content/taxonomy/_CONTENT_TAXONOMY.md</a> <a href="#">Content/patterns/_REPEATING_PATTERNS.md</a><br>
+    <a href="#">Competitors/_VERIFIED_URLS.md</a> <a href="#">Competitors/_SYNTHESIS.md</a> <a href="#">Competitors/claude/analysis.md</a> <a href="#">Competitors/chatgpt/analysis.md</a> <a href="#">Competitors/gemini/analysis.md</a> <a href="#">Competitors/grok/analysis.md</a> <a href="#">Competitors/deepseek/analysis.md</a> <a href="#">Competitors/perplexity/analysis.md</a><br>
+    <a href="#">Knowledge-Cards/pbc.md</a> <a href="#">Knowledge-Cards/mcp.md</a> <a href="#">Knowledge-Cards/fable-5-export-control.md</a> <a href="#">Knowledge-Cards/ai-agent-ecosystem.md</a> <a href="#">Knowledge-Cards/claude-code-dev.md</a> <a href="#">Knowledge-Cards/enterprise-compliance.md</a> <a href="#">Knowledge-Cards/deepseek-price-war.md</a> <a href="#">Knowledge-Cards/openai-vs-anthropic.md</a> <a href="#">Knowledge-Cards/ai-search-paradigm.md</a> <a href="#">Knowledge-Cards/model-capability-frontiers.md</a> <a href="#">Knowledge-Cards/multimodal-ai.md</a> <a href="#">Knowledge-Cards/china-ai-market.md</a><br>
+    <a href="#">Opportunities/_INDEX.md</a> <a href="#">Opportunities/01-low-competition.md</a> <a href="#">Opportunities/02-fast-growth.md</a> <a href="#">Opportunities/03-content-gap.md</a> <a href="#">Opportunities/04-aha-moments.md</a>
+  </div>
+  <p style="margin-top:16px;font-size:12.5px;color:var(--gray)"><strong>提示</strong>：全套 45 文件兼容 Obsidian，把 <code>output/claude-OS/</code> 拖进 vault 即可。复盘 prompt 汇总见 <code>_REFLECTION.md</code>。每个 .md 末尾有独立的模块级复盘 prompt。</p>
+</section>
+
+</main>
+</div>
+
+<script>
+function switchTab(e,id){
+  e.parentElement.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  document.querySelectorAll('.tab-panel[|id^="'+id.slice(0,2)+'"]').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+// sidebar active highlight on scroll
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('aside nav a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{const top=s.getBoundingClientRect().top;if(top<=120)cur=s.id});
+  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')===('#'+cur))});
+},{passive:true});
+</script>
+</body>
+</html>
