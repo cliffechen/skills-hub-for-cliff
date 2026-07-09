@@ -1,0 +1,26 @@
+{
+  "_comment": "排除规则配置。替换此文件可适配其他类目。不侵入核心代码。",
+  "target_category": "human_dietary_supplements",
+  "exclude_patterns": [
+    "\\bdog\\b", "\\bcat\\b", "\\bpet\\b", "\\bpuppy\\b", "\\bkitten\\b",
+    "\\bfor dogs\\b", "\\bfor cats\\b", "\\bfor pets\\b",
+    "\\bcanine\\b", "\\bfeline\\b", "\\bveterinary\\b"
+  ],
+  "exclude_keywords": [
+    "dog collagen drops", "cat melatonin drops", "dog eye drops",
+    "dental powder for cats", "plaque off powder for cats",
+    "dog supplements", "dog is human multivitamin itch relief",
+    "garlic mincer", "garlic press", "garlic cloves", "peeled garlic",
+    "cast iron skillets", "curling iron", "t3 curling iron", "steam iron",
+    "iron man", "iron man helmet",
+    "grass seed", "bird seed", "seed starter tray", "seed starter soil",
+    "bermuda grass seed", "copper cups", "copper water bottle",
+    "copper bracelets for women", "copper bracelet for men", "copper tongue scraper"
+  ],
+  "exclude_usage_patterns": [
+    "\\bbody lotion\\b", "\\bface mask\\b", "\\bshampoo\\b",
+    "\\bserum for face\\b", "\\bskin care\\b", "\\btoothpaste\\b",
+    "\\bmouthwash\\b", "\\bcream\\b", "\\bsoap\\b"
+  ],
+  "notes": "exclude_patterns: 正则匹配宠物类; exclude_keywords: 精确排除; exclude_usage_patterns: 外用/非口服类（可选启用）"
+}

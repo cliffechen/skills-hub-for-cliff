@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧬 保健品爆品关键词监测报告 - {{ week_label }}</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 2em; margin-bottom: 10px; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.meta { color: #94a3b8; margin-bottom: 30px; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.stat-card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+.stat-card .label { color: #94a3b8; font-size: 0.85em; }
+.stat-card .value { font-size: 2em; font-weight: 700; margin-top: 4px; }
+.stat-card .value.red { color: #f87171; }
+.stat-card .value.yellow { color: #fbbf24; }
+.stat-card .value.green { color: #34d399; }
+.stat-card .value.blue { color: #38bdf8; }
+.section { margin-bottom: 40px; }
+.section-title { font-size: 1.4em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #334155; }
+.section-title.t1 { color: #f87171; border-color: #991b1b; }
+.section-title.t2 { color: #fbbf24; border-color: #854d0e; }
+.section-title.t3 { color: #34d399; border-color: #065f46; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧬 保健品爆品关键词监测报告</h1>
+<p class="meta">{{ week_label }} ({{ week_code }}) | 生成时间: {{ generated_at }} | 数据源: AMZ123 ABA + Sorftime</p>
+
+<style>
+.keyword-card { background: #1e293b; border-radius: 12px; padding: 24px; margin-bottom: 16px; border: 1px solid #334155; transition: border-color 0.2s; }
+.keyword-card:hover { border-color: #818cf8; }
+.keyword-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.keyword-name { font-size: 1.3em; font-weight: 700; color: #f1f5f9; }
+.keyword-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.tier-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
+.tier-1 { background: #991b1b; color: #fca5a5; }
+.tier-2 { background: #854d0e; color: #fde68a; }
+.tier-3 { background: #065f46; color: #6ee7b7; }
+.burst-tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.8em; }
+.burst-first { background: #1e40af; color: #93c5fd; }
+.burst-rebound { background: #7c2d12; color: #fdba74; }
+.burst-steady { background: #065f46; color: #6ee7b7; }
+.burst-decline { background: #4a1d1d; color: #fca5a5; }
+.burst-longtail { background: #3b1f7c; color: #d8b4fe; }
+.cat-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; }
+.cat-ingredient { background: #1e3a5f; color: #60a5fa; }
+.cat-benefit { background: #1a3a2a; color: #4ade80; }
+.cat-brand { background: #3b2f1a; color: #fbbf24; }
+.cat-condition { background: #3b1a2a; color: #f472b6; }
+.cat-form { background: #2a1a3e; color: #a78bfa; }
+.keyword-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.mini-stat { background: #0f172a; border-radius: 8px; padding: 10px 14px; }
+.mini-stat .ms-label { color: #64748b; font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.5px; }
+.mini-stat .ms-value { font-size: 1.1em; font-weight: 600; margin-top: 2px; }
+.analysis-text { color: #94a3b8; font-size: 0.9em; margin-top: 10px; line-height: 1.7; padding: 12px; background: #0f172a; border-radius: 8px; border-left: 3px solid #818cf8; }
+.extends-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.extends-list .tag { background: #334155; color: #cbd5e1; padding: 3px 10px; border-radius: 4px; font-size: 0.8em; }
+.sparkline { display: flex; align-items: flex-end; gap: 2px; height: 50px; }
+.sparkline .bar { border-radius: 2px 2px 0 0; min-width: 6px; flex: 1; }
+.sparkline .bar.high { background: #818cf8; }
+.sparkline .bar.mid { background: #475569; }
+.sparkline .bar.low { background: #334155; }
+.sparkline .bar:last-child { background: #38bdf8 !important; }
+.summary-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 30px; }
+.summary-box h3 { color: #38bdf8; margin-bottom: 12px; }
+.summary-box ul { list-style: none; padding: 0; }
+.summary-box li { padding: 8px 0; padding-left: 24px; position: relative; border-bottom: 1px solid #1e293b; }
+.summary-box li:last-child { border-bottom: none; }
+.summary-box li::before { content: "→"; position: absolute; left: 0; color: #818cf8; }
+.track-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.track-card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+.track-card h4 { color: #f1f5f9; margin-bottom: 8px; }
+.track-card p { color: #94a3b8; font-size: 0.85em; }
+.track-card .track-kws { color: #64748b; font-size: 0.8em; margin-top: 6px; }
+.up { color: #34d399; }
+.down { color: #f87171; }
+.cpc-val { color: #fbbf24; }
+.volume-val { color: #38bdf8; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+th { background: #1e293b; color: #94a3b8; text-align: left; padding: 10px 12px; font-weight: 600; position: sticky; top: 0; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; }
+td { padding: 10px 12px; border-bottom: 1px solid #1e293b; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+.kw-cell { font-weight: 600; color: #f1f5f9; }
+.new-words { background: #1e293b; border-radius: 12px; padding: 16px; border: 1px solid #334155; }
+.new-words span { display: inline-block; background: #334155; color: #cbd5e1; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; margin: 2px; }
+.method-box { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; color: #94a3b8; font-size: 0.85em; }
+.method-box strong { color: #e2e8f0; }
+@media (max-width: 768px) { .keyword-header { flex-direction: column; } .keyword-stats { grid-template-columns: 1fr 1fr; } }
+</style>
+
+<!-- 概览统计 -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="label">抓取关键词总数</div><div class="value blue">{{ "{:,}".format(total_scraped) }}</div></div>
+  <div class="stat-card"><div class="label">保健品相关词</div><div class="value green">{{ total_supplement }}</div></div>
+  <div class="stat-card"><div class="label">🔴 Tier 1 大潜力</div><div class="value red">{{ tier1_count }}</div></div>
+  <div class="stat-card"><div class="label">🟡 Tier 2 中潜力</div><div class="value yellow">{{ tier2_count }}</div></div>
+  <div class="stat-card"><div class="label">🟢 Tier 3 长尾</div><div class="value green">{{ tier3_count }}</div></div>
+  <div class="stat-card"><div class="label">📚 新增词典词</div><div class="value" style="color:#94a3b8">{{ total_new_words }}</div></div>
+  <div class="stat-card"><div class="label">⚠️ 已排除</div><div class="value" style="color:#94a3b8">{{ excluded_count }}</div></div>
+</div>
+
+<!-- 赛道热度排行 -->
+{% if tracks %}
+<div class="section">
+  <div class="section-title" style="color:#38bdf8;border-color:#1e40af">🏆 本周赛道热度排行</div>
+  <div class="track-grid">
+    {% for track in tracks %}
+    <div class="track-card">
+      <h4>{{ track.icon }} {{ track.name }}</h4>
+      <p>{{ track.summary }}</p>
+      <div class="track-kws">{{ track.keywords | join(', ') }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- 核心发现 -->
+{% if core_findings %}
+<div class="section">
+  <div class="section-title" style="color:#38bdf8;border-color:#1e40af">📊 本周核心发现</div>
+  <table>
+    <thead><tr><th>#</th><th>核心发现</th></tr></thead>
+    <tbody>
+    {% for finding in core_findings %}
+    <tr><td style="color:#64748b;text-align:center;width:40px">{{ loop.index }}</td><td>{{ finding }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<!-- Tier 1 关键词卡片 -->
+<div class="section">
+<div class="section-title t1">🔴 Tier 1 — 大潜力信号 ({{ tier1_count }}个关键词)</div>
+{% if tier1 %}
+  {% for item in tier1 %}
+  <div class="keyword-card">
+    <div class="keyword-header">
+      <div>
+        <span class="keyword-name">{{ item.keyword }}</span>
+        {% if item.zh_name %}<span style="color:#64748b;font-size:0.85em;margin-left:8px">{{ item.zh_name }}</span>{% endif %}
+        <span class="tier-badge tier-1">Tier 1</span>
+        {% if item.burst_type_css %}<span class="burst-tag {{ item.burst_type_css }}">{{ item.burst_type_label }}</span>{% endif %}
+      </div>
+      <span class="cat-tag {{ item.category_css }}">{{ item.category_label }}</span>
+    </div>
+    <div class="keyword-stats">
+      <div class="mini-stat"><div class="ms-label">本周排名</div><div class="ms-value">{{ "{:,}".format(item.current_rank) }}</div></div>
+      <div class="mini-stat"><div class="ms-label">上周排名</div><div class="ms-value">{{ "{:,}".format(item.previous_rank) if item.previous_rank else 'NEW' }}</div></div>
+      <div class="mini-stat"><div class="ms-label">排名变化</div><div class="ms-value {% if item.rank_direction == 'up' %}up{% elif item.rank_direction == 'down' %}down{% endif %}">{{ item.rank_change_display }}</div></div>
+      <div class="mini-stat"><div class="ms-label">月搜索量</div><div class="ms-value volume-val">{{ "{:,}".format(item.latest_volume) }}</div></div>
+      <div class="mini-stat"><div class="ms-label">CPC</div><div class="ms-value cpc-val">{{ item.cpc }}</div></div>
+      <div class="mini-stat"><div class="ms-label">月环比</div><div class="ms-value">{{ item.mom_pct }}</div></div>
+    </div>
+    {% if item.sparkline_data and item.sparkline_data|length > 1 %}
+    <div style="margin-bottom:10px">
+      <div style="color:#64748b;font-size:0.75em;margin-bottom:4px">搜索量趋势 (近12月)</div>
+      <div class="sparkline">
+        {% set max_v = item.sparkline_data | max if item.sparkline_data | max > 0 else 1 %}
+        {% for v in item.sparkline_data %}
+          {% set pct = (v / max_v * 100) if max_v > 0 else 0 %}
+          <div class="bar {% if pct > 66 %}high{% elif pct > 33 %}mid{% else %}low{% endif %}" style="height:{{ [pct, 4] | max }}%"></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% if item.analysis_text %}
+    <div class="analysis-text">{{ item.analysis_text }}</div>
+    {% endif %}
+    {% if item.extended_keywords %}
+    <div style="margin-top:10px">
+      <div style="color:#64748b;font-size:0.75em;margin-bottom:4px">变体词/延伸词</div>
+      <table style="font-size:0.8em">
+        <thead><tr><th>关键词</th><th>周搜索量</th><th>排名</th><th>月搜索量</th><th>CPC</th><th>旺季</th></tr></thead>
+        <tbody>
+        {% for ext in item.extended_keywords[:8] %}
+        <tr>
+          {% if ext is mapping %}
+          <td class="kw-cell">{{ ext.get('关键词', ext.get('keyword', '')) }}</td>
+          <td class="volume-val">{{ "{:,}".format(ext.get('周搜索量', 0)) if ext.get('周搜索量') else '-' }}</td>
+          <td>{{ "{:,}".format(ext.get('周搜索排名', 0)) if ext.get('周搜索排名') else '-' }}</td>
+          <td class="volume-val">{{ "{:,}".format(ext.get('月搜索量', 0)) if ext.get('月搜索量') else '-' }}</td>
+          <td class="cpc-val">{{ '$' + ext.get('cpc推荐竞价', '') if ext.get('cpc推荐竞价') else '-' }}</td>
+          <td style="color:#64748b;font-size:0.85em">{{ ext.get('季节性', '') }}</td>
+          {% else %}
+          <td class="kw-cell" colspan="6">{{ ext }}</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+{% else %}
+<p style="color:#64748b;padding:20px;text-align:center">本周无 Tier 1 信号</p>
+{% endif %}
+</div>
+
+<!-- Tier 2 表格 -->
+<div class="section">
+<div class="section-title t2">🟡 Tier 2 — 中潜力信号 ({{ tier2_count }}个关键词)</div>
+{% if tier2 %}
+<table>
+  <thead><tr>
+    <th>关键词</th><th>中文</th><th>分类</th><th>排名</th><th>上周</th><th>排名变化</th>
+    <th>月搜索量</th><th>爆发类型</th><th>月环比</th>
+  </tr></thead>
+  <tbody>
+  {% for item in tier2 %}
+  <tr>
+    <td class="kw-cell">{{ item.keyword }}</td>
+    <td style="color:#64748b;font-size:0.85em">{{ item.zh_name }}</td>
+    <td><span class="cat-tag {{ item.category_css }}">{{ item.category_label }}</span></td>
+    <td>{{ "{:,}".format(item.current_rank) }}</td>
+    <td>{{ "{:,}".format(item.previous_rank) if item.previous_rank else 'NEW' }}</td>
+    <td class="{% if item.rank_direction == 'up' %}up{% elif item.rank_direction == 'down' %}down{% endif %}">{{ item.rank_change_display }}</td>
+    <td class="volume-val">{{ "{:,}".format(item.latest_volume) if item.latest_volume else '-' }}</td>
+    <td>{% if item.burst_type_css %}<span class="burst-tag {{ item.burst_type_css }}">{{ item.burst_type_label }}</span>{% else %}{{ item.burst_type_label }}{% endif %}</td>
+    <td>{{ item.mom_pct }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="color:#64748b;padding:20px;text-align:center">本周无 Tier 2 信号</p>
+{% endif %}
+</div>
+
+<!-- Tier 3 表格 -->
+<div class="section">
+<div class="section-title t3">🟢 Tier 3 — 长尾潜力信号 ({{ tier3_count }}个关键词)</div>
+{% if tier3 %}
+<table>
+  <thead><tr>
+    <th>关键词</th><th>中文</th><th>分类</th><th>排名</th><th>排名变化</th><th>来源</th>
+  </tr></thead>
+  <tbody>
+  {% for item in tier3 %}
+  <tr>
+    <td class="kw-cell">{{ item.keyword }}</td>
+    <td style="color:#64748b;font-size:0.85em">{{ item.zh_name }}</td>
+    <td><span class="cat-tag {{ item.category_css }}">{{ item.category_label }}</span></td>
+    <td>{{ "{:,}".format(item.current_rank) }}</td>
+    <td class="{% if item.rank_direction == 'up' %}up{% elif item.rank_direction == 'down' %}down{% endif %}">{{ item.rank_change_display }}</td>
+    <td style="color:#64748b;font-size:0.8em">{{ item.combo_label }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="color:#64748b;padding:20px;text-align:center">本周无 Tier 3 信号</p>
+{% endif %}
+</div>
+
+<!-- 新增词典词 -->
+{% if total_new_words > 0 %}
+<div class="section">
+  <div class="section-title" style="color:#e2e8f0">📚 本周新增词典词 ({{ total_new_words }})</div>
+  <div class="new-words">
+    {% for cat, words in new_words.items() %}
+      {% if words %}
+        <div style="margin-bottom:8px;color:#64748b;font-size:0.75em">{{ cat }}:</div>
+        {% for w in words %}<span>{{ w }}</span>{% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- 已排除关键词 -->
+{% if excluded_keywords %}
+<div class="section">
+  <div class="section-title" style="color:#fbbf24;border-color:#854d0e">⚠️ 已排除关键词 ({{ excluded_count }})</div>
+  <div style="background:#1e293b;border:1px solid #854d0e;border-radius:12px;padding:16px">
+    <p style="color:#94a3b8;font-size:0.85em;margin-bottom:12px">以下关键词被排除规则过滤（宠物用品、非口服类等），不计入保健品分析：</p>
+    <table>
+      <thead><tr><th>关键词</th><th>排除原因</th></tr></thead>
+      <tbody>
+      {% for kw, reason in excluded_keywords.items() %}
+      <tr>
+        <td style="text-decoration:line-through;color:#64748b">{{ kw }}</td>
+        <td style="color:#94a3b8;font-size:0.85em">{{ reason }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<!-- 方法论 -->
+<div class="section">
+  <div class="section-title" style="color:#94a3b8;border-color:#334155">📋 方法论说明</div>
+  <div class="method-box">
+    <p><strong>数据来源：</strong>AMZ123 ABA 热搜词榜单 (6组排名×涨幅组合，每组最多5页) + Sorftime 历史趋势数据（24个月窗口）</p>
+    <p><strong>过滤方法：</strong>本地保健品词典匹配 + AI LLM 分类 + 排除规则（宠物/厨具/园艺等非人用保健品）</p>
+    <p><strong>Tier 分层：</strong>Tier 1 = TOP 1000 且涨幅≥50%或≥1000位 | Tier 2 = 1000-50000 且从10万+进入5万内 | Tier 3 = 50000+ 首次出现或大幅跨越</p>
+    <p><strong>深度分析：</strong>Tier 1 查 Sorftime trend+detail+extends (3接口) | Tier 2 查 trend (1接口)</p>
+    <p><strong>排名变化：</strong>正数（绿色）= 排名上升（数字变小），负数（红色）= 排名下跌（数字变大）。ABA 排名越接近1越高。</p>
+  </div>
+</div>
+
+<!-- 爆发类型定义 -->
+<div class="section">
+  <div class="section-title" style="color:#94a3b8;border-color:#334155">📖 爆发类型定义</div>
+  <div class="method-box">
+    <table style="font-size:0.85em">
+      <thead><tr><th style="width:160px">类型</th><th>定义</th><th style="width:120px">时间窗口</th></tr></thead>
+      <tbody>
+        <tr><td><span class="burst-tag burst-first">🆕 首次爆发</span></td><td>在 Sorftime 可追溯的 24 个月历史数据中，该关键词从未进入过 ABA TOP 1000 排名，本周首次冲入。属于全新信号，可能是新成分、新品类或新趋势的早期指标。</td><td>24 个月</td></tr>
+        <tr><td><span class="burst-tag burst-rebound">🔄 回弹</span></td><td>该关键词在 24 个月内曾进入过 ABA TOP 1000（甚至 TOP 100），之后排名回落，本周再次冲回高位。说明该赛道有周期性需求或季节性波动，当前处于上升周期。</td><td>24 个月</td></tr>
+        <tr><td><span class="burst-tag burst-steady">📈 持续爆发</span></td><td>该关键词最近连续 3 个月排名持续改善（数字持续变小），呈现稳定上升趋势。属于中长期看好的信号。</td><td>近 3 个月</td></tr>
+        <tr><td><span class="burst-tag burst-longtail">🌱 长尾扩展</span></td><td>该关键词的词根（如 "nmn"）已经是 Tier 1 热词，本词是其长尾变体（如 "nmn supplement 1000mg"）首次进入高排名。说明核心赛道正在向细分需求扩展。</td><td>当期</td></tr>
+        <tr><td><span class="burst-tag burst-decline">📉 下跌中</span></td><td>该关键词的月搜索量环比下跌超过 30%，虽然当前排名仍在 Tier 范围内，但热度正在快速消退，需谨慎评估。</td><td>近 1 个月</td></tr>
+        <tr><td>❓ 未知</td><td>Sorftime 未返回该关键词的历史趋势数据，无法判断爆发类型。可能是极新的词或数据覆盖不足。</td><td>-</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 运行信息 -->
+<div class="section" style="margin-top:40px">
+  <div class="section-title" style="color:#475569;border-color:#1e293b;font-size:1em">⚙️ 本次运行信息</div>
+  <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:0.8em;color:#475569">
+    <div><span style="color:#334155">生成时间</span><br><span style="color:#64748b">{{ generated_at }}</span></div>
+    <div><span style="color:#334155">Sorftime MCP 调用</span><br><span style="color:#64748b">{{ sorftime_stats.get('total_calls', 0) }} 次（Tier1×3 + Tier2×1）</span></div>
+    <div><span style="color:#334155">成功丰富关键词</span><br><span style="color:#64748b">{{ sorftime_stats.get('enriched', 0) }} 个</span></div>
+    <div><span style="color:#334155">LLM 分类调用</span><br><span style="color:#64748b">1 次（批量）</span></div>
+    <div><span style="color:#334155">数据来源</span><br><span style="color:#64748b">AMZ123 ABA + Sorftime MCP</span></div>
+    <div><span style="color:#334155">历史数据窗口</span><br><span style="color:#64748b">24 个月</span></div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "亚马逊保健品关键词监测"
+  short_description: "监测美国站 ABA 保健品热词、分层趋势并生成中文机会报告"
+  default_prompt: "Use $supplement-keyword-monitor to run this week's Amazon US supplement keyword monitor and generate the Chinese HTML opportunity report."
