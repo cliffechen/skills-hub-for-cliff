@@ -1,0 +1,531 @@
+{
+  "run": {
+    "keyword": "algae calcium",
+    "primary_research_keyword": null,
+    "keyword_handoff": false,
+    "related_keyword": "red algae calcium",
+    "marketplace": "US",
+    "started_at": "2026-07-14T15:25:00+08:00",
+    "completed_at": "2026-07-14T17:05:00+08:00",
+    "methodology": "项目背景/亚马逊选品调研方法论.md",
+    "status": "partial"
+  },
+  "sources": [
+    {
+      "id": "sorftime-keyword",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:40:00+08:00",
+      "scope": "US keyword detail and 24-month trend for algae calcium",
+      "status": "observed"
+    },
+    {
+      "id": "sorftime-category",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "scope": "Calcium node 3774291, current Top 100 and trend metrics",
+      "status": "observed"
+    },
+    {
+      "id": "sorftime-products-reviews",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:55:00+08:00",
+      "scope": "Five selected algae-calcium competitors, product details, recent negative reviews and Customers Say",
+      "status": "observed"
+    },
+    {
+      "id": "google-trends-web",
+      "source": "google_trends",
+      "retrieved_at": "2026-07-14T16:20:00+08:00",
+      "scope": "US, past five years, Web Search",
+      "status": "observed",
+      "raw_file": "raw/google-trends/web_search_us_5y.csv"
+    },
+    {
+      "id": "tavily-offsite",
+      "source": "tavily",
+      "retrieved_at": "2026-07-14T17:42:00+08:00",
+      "scope": "Off-Amazon cross-validation",
+      "status": "observed",
+      "notes": "Tavily Search API authentication succeeded. Current Codex process must be restarted before the configured Tavily MCP can inherit the newly saved user environment variable."
+    }
+  ],
+  "source_usage": {
+    "generated_at": "2026-07-14T17:05:00+08:00",
+    "scope": "Legacy example created before per-call accounting was introduced.",
+    "total_calls": 0,
+    "source_count": 0,
+    "headline_metrics": [],
+    "tool_calls": [],
+    "outputs": [],
+    "notes": ["Historical tool-call counts were not recorded and are not inferred from the final report."]
+  },
+  "market_capacity": {
+    "primary_keyword_selection": {
+      "value": {"seed_keyword":"algae calcium","primary_research_keyword":null,"keyword_handoff":false,"selection_status":"insufficient_evidence","selection_formula":"V × R × I × C × (0.85 + 0.15 × S)","ranked_candidates":[]},
+      "unit": null,
+      "definition": "Fixed primary-keyword selection from Sorftime demand, Top20 relevance, intent, coverage and sales support",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:40:00+08:00",
+      "status": "missing",
+      "raw_file": null,
+      "notes": "This legacy example predates the primary-keyword selection module."
+    },
+    "amazon_keyword_detail": {
+      "value": {
+        "weekly_search_volume": 113,
+        "monthly_search_volume": 852,
+        "weekly_search_rank": 764857,
+        "search_result_count": 590,
+        "reported_peak_month": "July"
+      },
+      "unit": "Sorftime estimated searches",
+      "definition": "Current Sorftime keyword detail for the exact phrase algae calcium",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:40:00+08:00",
+      "status": "observed",
+      "raw_file": null,
+      "notes": "The exact keyword is low-volume and the results contain semantically unrelated calcium products."
+    },
+    "amazon_keyword_trend_12m": {
+      "value": {
+        "months": [
+          {"month": "2025-07", "search_volume": 2162},
+          {"month": "2025-08", "search_volume": 1118},
+          {"month": "2025-09", "search_volume": 1346},
+          {"month": "2025-10", "search_volume": 768},
+          {"month": "2025-11", "search_volume": 991},
+          {"month": "2025-12", "search_volume": 594},
+          {"month": "2026-01", "search_volume": 1172},
+          {"month": "2026-02", "search_volume": 1330},
+          {"month": "2026-03", "search_volume": 1428},
+          {"month": "2026-04", "search_volume": 1771},
+          {"month": "2026-05", "search_volume": 1192},
+          {"month": "2026-06", "search_volume": 918}
+        ],
+        "recent_12m_average": 1232.5,
+        "previous_12m_average": 1303.25,
+        "year_over_year_change_pct": -5.43,
+        "six_consecutive_month_decline": false
+      },
+      "unit": "Sorftime estimated monthly searches",
+      "definition": "Exact-keyword monthly series, July 2025 through June 2026, compared with the preceding 12 months",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:40:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Direction is mixed and roughly stable, not a continuous six-month decline."
+    },
+    "keyword_drift_analysis": {
+      "value": null,
+      "unit": null,
+      "definition": "Term-family trends and Top20 organic-result overlap, with branded and non-branded demand kept separate",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:40:00+08:00",
+      "status": "missing",
+      "raw_file": null,
+      "notes": "This legacy example predates the keyword-drift module; a new run must collect the term family before upgrading the market gate."
+    },
+    "google_trends_web_5y": {
+      "value": {
+        "recent_52w_mean": 51.54,
+        "previous_52w_mean": 31.81,
+        "year_over_year_change_pct": 62.03,
+        "recent_13w_yoy_change_pct": 58.6,
+        "recent_52w_slope_per_week": 0.7619,
+        "peak_week": "2026-03-29",
+        "peak_value": 100,
+        "classification": "rising"
+      },
+      "unit": "relative interest index 0-100",
+      "definition": "Google Trends US Web Search, five-year query window",
+      "source": "google_trends",
+      "retrieved_at": "2026-07-14T16:20:00+08:00",
+      "status": "derived",
+      "raw_file": "raw/google-trends/analysis.json",
+      "notes": "Relative interest only; it is not Amazon search volume."
+    },
+    "top10_monthly_units": {
+      "value": [55361, 24916, 23273, 23067, 22471, 21026, 17865, 16193, 15675, 15135],
+      "unit": "estimated monthly units",
+      "definition": "Top 10 products in the broad Calcium category node 3774291, sorted by monthly units",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "observed",
+      "raw_file": null,
+      "notes": "Broad category evidence; it is not an algae-calcium-only Top 10."
+    },
+    "category_trend": {
+      "value": {
+        "recent_12m_average_units": 573996.5,
+        "previous_12m_average_units": 516105.08,
+        "year_over_year_change_pct": 11.22
+      },
+      "unit": "estimated monthly units",
+      "definition": "Broad Calcium node 3774291 Top 100 trend, July 2025 through June 2026 versus previous 12 months",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Broad category grew while the exact keyword was roughly stable."
+    },
+    "trend_classification": {
+      "value": "stable_or_mixed",
+      "unit": null,
+      "definition": "Combined interpretation of exact Amazon keyword, broad category, and Google Web Search",
+      "source": "sorftime+google_trends",
+      "retrieved_at": "2026-07-14T17:02:00+08:00",
+      "status": "conflicting",
+      "raw_file": null,
+      "notes": "Amazon exact-keyword average is down 5.43%, broad-category units are up 11.22%, and Google Web Search interest is up 62.03%."
+    },
+    "seasonality_classification": {
+      "value": "strong_or_event_driven",
+      "unit": null,
+      "definition": "Exact Amazon keyword recent-12-month peak/trough and Google Trends variation",
+      "source": "sorftime+google_trends",
+      "retrieved_at": "2026-07-14T17:02:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Amazon keyword peak 2162 versus trough 594; Google Web Search also shows a sharp 2026 spike."
+    },
+    "gate": {
+      "value": "VERIFY",
+      "unit": null,
+      "definition": "Market-capacity gate",
+      "source": "derived",
+      "retrieved_at": "2026-07-14T17:02:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Demand exists, but exact-keyword scale is small and the cross-source trend signals are not aligned."
+    }
+  },
+  "competition": {
+    "top20_products": {
+      "value": [
+        {"rank": 1, "asin": "B0016KITZ6", "brand": "Nature's Bounty", "price": 8.86, "monthly_units": 55361, "reviews": 43286, "listing_date": "2022-01-28"},
+        {"rank": 2, "asin": "B004N6GAAQ", "brand": "Viactiv", "price": 9.99, "monthly_units": 24916, "reviews": 5065, "listing_date": "2018-07-18"},
+        {"rank": 3, "asin": "B002FH5I0I", "brand": "Nature Made", "price": 16.27, "monthly_units": 23273, "reviews": 27287, "listing_date": "2022-02-10"},
+        {"rank": 4, "asin": "B07RF1QQ4H", "brand": "Citracal", "price": 24.98, "monthly_units": 23067, "reviews": 11435, "listing_date": "2019-05-04"},
+        {"rank": 5, "asin": "B00172XUWU", "brand": "Pure Encapsulations", "price": 32.5, "monthly_units": 22471, "reviews": 5939, "listing_date": "2013-09-20"},
+        {"rank": 6, "asin": "B01MZ6YI2A", "brand": "New Chapter", "price": 32.59, "monthly_units": 21026, "reviews": 8757, "listing_date": "2019-11-26"},
+        {"rank": 7, "asin": "B07RCJY6WD", "brand": "Citracal", "price": null, "monthly_units": 17865, "reviews": 8327, "listing_date": "2019-05-08"},
+        {"rank": 8, "asin": "B0013TMWIK", "brand": "Caltrate", "price": 16.78, "monthly_units": 16193, "reviews": 16530, "listing_date": "2022-04-23"},
+        {"rank": 9, "asin": "B008HEZ6TG", "brand": "Nature Made", "price": 9.99, "monthly_units": 15675, "reviews": 4447, "listing_date": "2022-06-27"},
+        {"rank": 10, "asin": "B002BXAMJS", "brand": "Nature's Bounty", "price": 5.84, "monthly_units": 15135, "reviews": 23095, "listing_date": "2021-07-03"},
+        {"rank": 11, "asin": "B088KV4MTM", "brand": "Bariatric Advantage", "price": 41.45, "monthly_units": 14531, "reviews": 2102, "listing_date": "2020-05-28"},
+        {"rank": 12, "asin": "B000OD1F7U", "brand": "Nature Made", "price": 9.99, "monthly_units": 13157, "reviews": 20036, "listing_date": "2022-02-26"},
+        {"rank": 13, "asin": "B0012D38G2", "brand": "Nature's Bounty", "price": 8.5, "monthly_units": 10583, "reviews": 8370, "listing_date": "2022-02-04"},
+        {"rank": 14, "asin": "B07FTNZBZQ", "brand": "Bariatric Fusion", "price": 26.99, "monthly_units": 10227, "reviews": 4865, "listing_date": "2018-08-02"},
+        {"rank": 15, "asin": "B087YCD1QJ", "brand": "Solaray", "price": 24.39, "monthly_units": 9837, "reviews": 5524, "listing_date": "2020-08-05"},
+        {"rank": 16, "asin": "B001IY03L8", "brand": "Caltrate", "price": 21.99, "monthly_units": 9823, "reviews": 15803, "listing_date": "2011-03-27"},
+        {"rank": 17, "asin": "B06VVTCHB8", "brand": "Thorne", "price": 28.0, "monthly_units": 6944, "reviews": 956, "listing_date": "2017-03-11"},
+        {"rank": 18, "asin": "B009E9YK90", "brand": "Life Extension", "price": 17.97, "monthly_units": 6870, "reviews": 3502, "listing_date": "2013-10-01"},
+        {"rank": 19, "asin": "B097TFPQRM", "brand": "PrimeMD", "price": 23.95, "monthly_units": 6577, "reviews": 3908, "listing_date": "2025-07-22"},
+        {"rank": 20, "asin": "B07Y315DNW", "brand": "NuBest", "price": 55.0, "monthly_units": 6530, "reviews": 3524, "listing_date": "2019-09-28"}
+      ],
+      "unit": null,
+      "definition": "Broad Calcium category node 3774291 current Top 20 by monthly units",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "observed",
+      "raw_file": null,
+      "notes": "This scope is broader than algae calcium and is retained as category context."
+    },
+    "strict_algae_subset": {
+      "value": [
+        {"asin": "B01MZ6YI2A", "brand": "New Chapter", "price": 32.59, "monthly_units": 21026, "reviews": 8757, "listing_date": "2019-11-26"},
+        {"asin": "B0B1N5Z372", "brand": "ALGAECAL", "price": 85.0, "monthly_units": 6148, "reviews": 1848, "listing_date": "2022-06-01"},
+        {"asin": "B09ZQ74495", "brand": "ALGAECAL", "price": 60.0, "monthly_units": 5788, "reviews": 1310, "listing_date": "2022-05-20"},
+        {"asin": "B0C5CHLP8C", "brand": "LILICARE", "price": 29.89, "monthly_units": 3478, "reviews": 906, "listing_date": "2023-05-31"},
+        {"asin": "B07MFZSLFZ", "brand": "ALGAECAL", "price": 115.0, "monthly_units": 3458, "reviews": 2213, "listing_date": "2019-01-11"},
+        {"asin": "B07VP749CF", "brand": "PlantFusion", "price": 27.58, "monthly_units": 2791, "reviews": 1687, "listing_date": "2019-08-02"}
+      ],
+      "unit": null,
+      "definition": "Six high-confidence products whose title or brand explicitly supports an algae-calcium interpretation",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:55:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "This is a semantic subset, not a complete ranked Top 20."
+    },
+    "new_listing_share_6m_top20": {
+      "value": 0.0,
+      "unit": "proportion",
+      "definition": "Broad Calcium Top 20 listings first available on or after 2026-01-14 divided by 20",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "High-competition signal under the methodology threshold. Exact algae subset is also 0 of 6, but the subset is incomplete."
+    },
+    "sorftime_new_product_sales_share_3m_top100": {
+      "value": 0.0,
+      "unit": "proportion",
+      "definition": "Sorftime-reported share of category Top 100 sales from products listed within three months",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "observed",
+      "raw_file": null,
+      "notes": "A separate Sorftime proxy; it does not replace the six-month listing-count metric."
+    },
+    "review_concentration_top3_top10": {
+      "value": 0.4906,
+      "unit": "proportion",
+      "definition": "Review count of broad-category Top 3 products divided by review count of broad-category Top 10 products",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Low-concentration signal in the broad category. The strict six-product algae subset is 71.26% for Top 3/Top 6, a high-concentration signal but not the formal Top 3/Top 10 metric."
+    },
+    "brand_listing_concentration_top3_top20": {
+      "value": 0.4,
+      "unit": "proportion",
+      "definition": "Listing count of the three most frequent brands divided by the broad-category Top 20",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Broad category. In the strict algae subset, ALGAECAL alone holds 3 of 6 listings."
+    },
+    "unit_concentration_top3_top10": {
+      "value": 0.4407,
+      "unit": "proportion",
+      "definition": "Monthly units of broad-category Top 3 divided by broad-category Top 10",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Broad category. In the strict six-product algae subset, Top 3/Top 6 is 77.21%, which signals a much more concentrated niche."
+    },
+    "sorftime_category_proxies": {
+      "value": {
+        "top3_product_share_top100_units": 0.1732,
+        "top3_brand_share_top100_units": 0.3312,
+        "amazon_owned_share_top100_units": 0.487,
+        "top100_monthly_units": 597771,
+        "average_price_top80pct_units": 22.354,
+        "median_price_top80pct_units": 9.62
+      },
+      "unit": "mixed",
+      "definition": "Sorftime current category report proxy metrics for node 3774291",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:45:00+08:00",
+      "status": "observed",
+      "raw_file": null,
+      "notes": "Proxy definitions differ from the methodology metrics and are not substituted for them."
+    },
+    "price_bands": {
+      "value": {
+        "broad_top20": {"under_15": 6, "15_to_24_99": 7, "25_to_39_99": 4, "40_plus": 2, "missing": 1},
+        "strict_algae_prices": [27.58, 29.89, 32.59, 60.0, 85.0, 115.0],
+        "candidate_gap": "35-50 USD in the strict six-product subset"
+      },
+      "unit": "USD and listing counts",
+      "definition": "Current one-time displayed price distribution",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:55:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "The apparent strict-subset gap is not a confirmed market gap because the semantic subset is incomplete and broader plant-calcium products occupy this range."
+    },
+    "entry_position": {
+      "value": "Potential mid-premium algae-calcium format with easier daily use and stronger physical stability, subject to a complete semantic Top 20 and formula/compliance validation.",
+      "unit": null,
+      "definition": "Candidate entry position derived from price and complaint evidence",
+      "source": "derived",
+      "retrieved_at": "2026-07-14T17:03:00+08:00",
+      "status": "conflicting",
+      "raw_file": null,
+      "notes": "The niche has concentrated sales and no recent high-confidence entrants, so this is a validation hypothesis rather than a recommendation."
+    },
+    "gate": {
+      "value": "VERIFY",
+      "unit": null,
+      "definition": "Competition gate",
+      "source": "derived",
+      "retrieved_at": "2026-07-14T17:03:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Broad category appears distributed, but the strict niche is concentrated and lacks recent entrants."
+    }
+  },
+  "differentiation": {
+    "selected_competitors": {
+      "value": [
+        {"asin": "B01MZ6YI2A", "brand": "New Chapter", "reason": "Highest-volume explicit red-marine-algae calcium product"},
+        {"asin": "B0B1N5Z372", "brand": "ALGAECAL", "reason": "Premium multi-nutrient red-algae formula"},
+        {"asin": "B09ZQ74495", "brand": "ALGAECAL", "reason": "Premium simplified plant-calcium formula"},
+        {"asin": "B0C5CHLP8C", "brand": "LILICARE", "reason": "Gummy format and lower price tier"},
+        {"asin": "B07VP749CF", "brand": "PlantFusion", "reason": "Tablet format using Icelandic red algae"}
+      ],
+      "unit": null,
+      "definition": "Five competitors selected for volume, price tier, brand, and dosage-form coverage",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:55:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": null
+    },
+    "negative_review_sample_size": {
+      "value": {
+        "returned_reviews": 44,
+        "informative_complaints": 43,
+        "target": 100,
+        "by_asin": {"B01MZ6YI2A": 16, "B0B1N5Z372": 9, "B09ZQ74495": 6, "B0C5CHLP8C": 9, "B07VP749CF": 4}
+      },
+      "unit": "reviews",
+      "definition": "Sorftime negative reviews from the recent one-year window",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:55:00+08:00",
+      "status": "missing",
+      "raw_file": null,
+      "notes": "Only 44 reviews were returned; expand the Sorftime competitor set to reach the target."
+    },
+    "complaint_clusters": {
+      "value": [
+        {"rank": 1, "cluster": "Physical product or packaging instability", "explicit_review_occurrences": 13, "affected_competitors": 3, "examples": "broken tablets; dried, melted, stale, moldy or sticking gummies; expired unit"},
+        {"rank": 2, "cluster": "Digestive intolerance", "explicit_review_occurrences": 8, "affected_competitors": 3, "examples": "nausea, constipation, cramps, bloating or abdominal discomfort"},
+        {"rank": 3, "cluster": "Allergy or sensitivity reports", "explicit_review_occurrences": 5, "affected_competitors": 4, "examples": "rash, hives, itching, sore throat or suspected red-algae sensitivity"},
+        {"rank": 4, "cluster": "Swallowability or daily pill burden", "explicit_review_occurrences": 4, "affected_competitors": 3, "examples": "large or sharp tablets, shattering when cut, multiple units per daily serving"},
+        {"rank": 5, "cluster": "Formula or serving clarity", "explicit_review_occurrences": 4, "affected_competitors": 2, "examples": "one-month supply misunderstood, missing expected ingredients, concern about combined minerals"}
+      ],
+      "unit": "manually coded occurrences",
+      "definition": "One primary complaint code per relevant statement in the 44 returned negative reviews; logistics-only noise was separated",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T17:03:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Counts are directional because the 100-review target was not met. Customers Say independently corroborates digestive tolerance and pill-size themes."
+    },
+    "customers_say_corroboration": {
+      "value": [
+        {"asin": "B01MZ6YI2A", "theme": "stomach effects", "negative_mentions": 54},
+        {"asin": "B0B1N5Z372", "theme": "digestive system", "negative_mentions": 36},
+        {"asin": "B09ZQ74495", "theme": "digestibility", "negative_mentions": 12},
+        {"asin": "B0C5CHLP8C", "theme": "taste", "negative_mentions": 23},
+        {"asin": "B07VP749CF", "theme": "pill size", "negative_mentions": 30}
+      ],
+      "unit": "Amazon Customers Say negative mentions",
+      "definition": "Aggregated Amazon Customers Say topics returned by Sorftime",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:57:00+08:00",
+      "status": "observed",
+      "raw_file": null,
+      "notes": "Aggregate topic counts corroborate themes but do not replace the missing individual review sample."
+    },
+    "candidate_price_position": {
+      "value": "35-50 USD hypothesis",
+      "unit": "USD",
+      "definition": "Gap in the strict six-product price list",
+      "source": "sorftime",
+      "retrieved_at": "2026-07-14T16:55:00+08:00",
+      "status": "conflicting",
+      "raw_file": null,
+      "notes": "Must be rechecked against a complete algae-calcium product set; broader plant-calcium products already occupy this interval."
+    },
+    "product_improvements": {
+      "value": [
+        {"pain_point": "Tablet breakage and difficult swallowing", "hypothesis": "Use a smoother, smaller unit with verified drop, friability and transit stability tests; clearly state units per serving."},
+        {"pain_point": "Gummy drying, melting and batch inconsistency", "hypothesis": "If using gummies, validate heat stability, moisture control, packaging barrier and batch appearance before choosing the format."},
+        {"pain_point": "Digestive intolerance", "hypothesis": "Run formulation and tolerance review with qualified professionals and test serving-size instructions; do not convert anecdotal reviews into a medical promise."},
+        {"pain_point": "Serving and formula confusion", "hypothesis": "Show days of supply, units per day and included nutrients prominently and consistently across label, images and listing copy."}
+      ],
+      "unit": null,
+      "definition": "Product-development hypotheses mapped to repeated user complaints",
+      "source": "derived",
+      "retrieved_at": "2026-07-14T17:04:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "All formulation and safety hypotheses require professional and compliance review."
+    },
+    "open_validation_questions": {
+      "value": [
+        "Can a complete semantic Top 20 confirm whether the 35-50 USD interval is genuinely under-served?",
+        "Can at least 56 additional informative negative reviews be obtained without requiring an unauthorized login action?",
+        "Which algae-calcium source, form and serving pattern can improve daily use while remaining label-accurate and compliant?",
+        "Do independent off-Amazon sources corroborate a sustained consumer trend rather than a temporary 2026 spike?",
+        "Does a production-ready dosage form pass transit, heat, moisture and breakage tests?"
+      ],
+      "unit": null,
+      "definition": "Questions that could materially change the differentiation decision",
+      "source": "derived",
+      "retrieved_at": "2026-07-14T17:04:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": null
+    },
+    "gate": {
+      "value": "VERIFY",
+      "unit": null,
+      "definition": "Differentiation gate",
+      "source": "derived",
+      "retrieved_at": "2026-07-14T17:04:00+08:00",
+      "status": "derived",
+      "raw_file": null,
+      "notes": "Repeated problems exist, but the individual-review target and off-Amazon validation are incomplete."
+    }
+  },
+  "decision": {
+    "result": "VERIFY",
+    "confidence": "medium",
+    "reason_codes": [
+      "EXACT_KEYWORD_LOW_VOLUME",
+      "CROSS_SOURCE_TREND_CONFLICT",
+      "STRONG_OR_EVENT_DRIVEN_VARIATION",
+      "NO_RECENT_TOP20_ENTRANTS",
+      "STRICT_NICHE_CONCENTRATION_HIGH",
+      "REVIEW_SAMPLE_BELOW_TARGET",
+      "OFFSITE_DEMAND_EVIDENCE_LOW_AUTHORITY"
+    ],
+    "summary": "Demand is real and broad calcium is large, but the exact algae-calcium niche is small, semantically noisy and concentrated. Validate the complete niche set, additional reviews and independent off-Amazon evidence before advancing."
+  },
+  "missing_fields": [
+    {
+      "field": "competition.complete_semantic_top20",
+      "impact": "Formal niche-level Top 3/Top 10 concentration and price-gap calculations cannot be finalized."
+    },
+    {
+      "field": "differentiation.minimum_100_negative_reviews",
+      "impact": "Complaint counts remain directional; 56 more informative reviews are needed."
+    }
+  ],
+  "offsite_validation": {
+    "status": "partial",
+    "retrieved_at": "2026-07-14T17:42:00+08:00",
+    "findings": [
+      {
+        "claim": "Human evidence exists for Aquamin as a red-algae-derived multimineral intervention.",
+        "assessment": "The located 90-day human trial studied colonic mucosal markers, not Amazon demand or bone-density outcomes, so it cannot substantiate a bone-density product promise.",
+        "source_title": "A Multi-Mineral Intervention to Modulate Colonic Mucosal Protein Profile",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33799486"
+      },
+      {
+        "claim": "Calcium supplement structure/function claims require substantiation and appropriate disclaimer language.",
+        "assessment": "Product positioning should stay with normal structure/function language and avoid disease-treatment wording.",
+        "source_title": "Structure/Function Claims",
+        "url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/structurefunction-claims"
+      },
+      {
+        "claim": "Commercial market pages describe growing interest in plant-based calcium.",
+        "assessment": "The sources are commercial market-report pages and did not provide sufficiently transparent algae-calcium-specific US evidence, so they do not upgrade the demand gate.",
+        "source_title": "Commercial market-report search results",
+        "url": null
+      }
+    ]
+  },
+  "conflicts": [
+    {
+      "field": "market_capacity.trend",
+      "evidence_a": "Sorftime exact-keyword recent 12-month average is 5.43% below the previous 12 months.",
+      "evidence_b": "Google Web Search recent 52-week average is 62.03% above the previous 52 weeks.",
+      "resolution": "Classify as stable_or_mixed and retain VERIFY."
+    },
+    {
+      "field": "competition.concentration",
+      "evidence_a": "Broad Calcium Top 3/Top 10 unit share is 44.07% and review share is 49.06%.",
+      "evidence_b": "Strict six-product algae subset Top 3/Top 6 unit share is 77.21% and review share is 71.26%.",
+      "resolution": "Treat the niche as potentially concentrated and collect a complete semantic Top 20."
+    }
+  ]
+}
