@@ -27,6 +27,7 @@
 | 采集 Amazon US 搜索框下拉词 | [`amazon-dropdown-expander`](./amazon-dropdown-expander/) | 轻量 Python 工具，输出 CSV |
 | 搭建新品关键词库、P0/P1/P2、Search Term 和广告词基础 | [`amazon-new-listing-keyword-library`](./amazon-new-listing-keyword-library/) | 输入 ABA、Sif、下拉词、产品信息图，输出 Excel + 策略报告 |
 | 做 Amazon US 膳食补充剂选品和 Go/No-Go 判断 | [`US_Sup_Product_Research_for_Qoderwork`](./US_Sup_Product_Research_for_Qoderwork/) | 重型选品调研，依赖 Sorftime / xCrawl 等工具 |
+| 围绕种子词做 Amazon US 选品调研、自动处理关键词漂移，并生成审计报告 | [`amazon-sorftime-mcp-with-serpapi-tavily`](./amazon-sorftime-mcp-with-serpapi-tavily/) | Sorftime 主数据 + SerpApi Google Web Trends + Tavily；固定输出 JSON、Markdown、HTML |
 | 调用 Sorftime MCP / ZooData 兼容数据层，查商品、市场、评论、历史趋势 | [`zoodata-amz-marketing-skill/zoodata`](./zoodata-amz-marketing-skill/zoodata/) | 共享数据层，默认优先走 Sorftime MCP |
 | 做亚马逊市场、竞品、定价、进入、选品、评论等多工作流分析 | [`zoodata-amz-marketing-skill`](./zoodata-amz-marketing-skill/) | 集中收纳 `zoodata` 与一组 `amazon-*` 数据分析技能 |
 | 检查成分、商标、专利、FDA/Amazon 和商业化风险 | [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/) | 适合上架、换标、仿制、改配方前先跑风险报告 |
@@ -40,6 +41,7 @@
 ├── US_Sup_Product_Research_for_Qoderwork/
 ├── amazon-dropdown-expander/
 ├── amazon-new-listing-keyword-library/
+├── amazon-sorftime-mcp-with-serpapi-tavily/
 ├── amazon-supplement-visual-content/
 ├── amazon-supplement-visual-content-WB/
 ├── ob-skill-github-organizer/
@@ -77,6 +79,15 @@
 - 站外信号
 - Go / No-Go 评分
 - MD、HTML、Dashboard、Excel 四件套交付
+
+[`amazon-sorftime-mcp-with-serpapi-tavily`](./amazon-sorftime-mcp-with-serpapi-tavily/)
+
+用于由种子词出发做 Amazon US 补充剂选品调研，先以 Sorftime 验证语义候选词、搜索结果相关率和消费者真实搜索路径，再自动将完整调研接管到得分最高的主词：
+
+- Sorftime MCP：站内关键词、商品、销量、上架日期和评论证据
+- SerpApi：Google Web Trends（不采集 Google Shopping）
+- Tavily：站外科学、法规与趋势交叉验证
+- 固定交付物：`data.json`、`report.md`、`html/report.html` 和脱敏原始审计文件
 
 [`zoodata-amz-marketing-skill`](./zoodata-amz-marketing-skill/)：`zoodata` 和配套 `amazon-*` 数据分析技能
 

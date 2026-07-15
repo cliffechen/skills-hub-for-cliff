@@ -1,0 +1,26 @@
+# Copy these sections into %USERPROFILE%\.codex\config.toml or add them in Codex Settings.
+# Replace placeholders locally. Never commit or share the completed file.
+
+[mcp_servers.sorftime_mcp]
+url = "https://mcp.sorftime.com?key=REPLACE_WITH_SORFTIME_API_KEY"
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+
+[mcp_servers.tavily_remote]
+url = "https://mcp.tavily.com/mcp/"
+bearer_token_env_var = "TAVILY_API_KEY"
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+
+# Optional: copy assets/feishu-mcp to a stable local folder first.
+[mcp_servers.feishu_docs]
+command = "python"
+args = ["C:/REPLACE_WITH_STABLE_PATH/feishu-mcp/server.py"]
+cwd = "C:/REPLACE_WITH_STABLE_PATH/feishu-mcp"
+startup_timeout_sec = 10
+tool_timeout_sec = 60
+enabled = false
+default_tools_approval_mode = "writes"
+enabled_tools = ["feishu_connection_check", "feishu_bitable_inspect", "feishu_bitable_append_record"]

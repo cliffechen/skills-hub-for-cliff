@@ -1,0 +1,20 @@
+interface:
+  display_name: "Amazon Primary Keyword Research"
+  short_description: "Amazon research with automatic consumer-path keyword selection"
+  default_prompt: "Use $amazon-sorftime-mcp-with-serpapi-tavily to discover and score Amazon US keyword candidates, hand research off to the strongest consumer-path keyword, and produce auditable Markdown and HTML reports."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "sorftime_mcp"
+      description: "Primary Amazon category, keyword, product, and review evidence"
+      transport: "streamable_http"
+      url: "https://mcp.sorftime.com?key=REPLACE_WITH_SORFTIME_API_KEY"
+    - type: "mcp"
+      value: "tavily_remote"
+      description: "Independent off-Amazon source discovery and extraction"
+      transport: "streamable_http"
+      url: "https://mcp.tavily.com/mcp/"
+
+policy:
+  allow_implicit_invocation: true

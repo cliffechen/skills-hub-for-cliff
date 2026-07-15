@@ -1,0 +1,65 @@
+{
+  "seed_keyword": "algae calcium",
+  "reference_universe": {
+    "asin_count": 30,
+    "brand_count": 15,
+    "form_count": 7
+  },
+  "terms": [
+    {
+      "keyword": "algae calcium",
+      "classification": "generic_core",
+      "current_monthly_search_volume": 966,
+      "top_asins": ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20"],
+      "top20_total_count": 20,
+      "strict_relevant_count": 16,
+      "top20_total_monthly_units": 60000,
+      "strict_relevant_monthly_units": 48000,
+      "market_coverage_raw": 0.90
+    },
+    {
+      "keyword": "algaecal",
+      "classification": "brand_root",
+      "current_monthly_search_volume": 37826,
+      "top_asins": ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","S11","S12","A01","A02","A03","A04","A05","A06","A07","A08"],
+      "top20_total_count": 20,
+      "strict_relevant_count": 18,
+      "top20_total_monthly_units": 80000,
+      "strict_relevant_monthly_units": 76000,
+      "market_coverage_raw": 0.90
+    },
+    {
+      "keyword": "algaecal plus",
+      "classification": "brand_product",
+      "current_monthly_search_volume": 50065,
+      "top_asins": ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"],
+      "top20_total_count": 20,
+      "strict_relevant_count": 19,
+      "top20_total_monthly_units": 95000,
+      "strict_relevant_monthly_units": 90000,
+      "market_coverage_raw": 0.80
+    },
+    {
+      "keyword": "algae cal",
+      "classification": "brand_variant",
+      "current_monthly_search_volume": 7793,
+      "top_asins": ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","S11","V01","V02","V03","V04","V05","V06","V07","V08","V09"],
+      "top20_total_count": 20,
+      "strict_relevant_count": 17,
+      "top20_total_monthly_units": 76000,
+      "strict_relevant_monthly_units": 70000,
+      "market_coverage_raw": 0.80
+    },
+    {
+      "keyword": "algae supplement",
+      "classification": "broad_product",
+      "current_monthly_search_volume": 80000,
+      "top_asins": ["S01","S02","N01","N02","N03","N04","N05","N06","N07","N08","N09","N10","N11","N12","N13","N14","N15","N16","N17","N18"],
+      "top20_total_count": 20,
+      "strict_relevant_count": 2,
+      "top20_total_monthly_units": 120000,
+      "strict_relevant_monthly_units": 10000,
+      "market_coverage_raw": 0.40
+    }
+  ]
+}
