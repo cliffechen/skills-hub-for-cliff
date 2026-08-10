@@ -1,0 +1,84 @@
+# AMZ-QA-Creator 医疗声明禁用词清单（保健品/膳食补充剂场景）
+# 用法：build_qa_xlsx.py 自动加载本文件；一行一词，# 开头为注释
+# 两级：REDLINE=红线词（问与答均不得出现，命中打回重写）
+#       WARNING=医疗敏感词（仅允许出现在"请咨询医生"类安全问答中，命中列行号人工复核）
+
+[REDLINE]
+# 疗效/治愈宣称（FDA 结构功能宣称红线）
+cure
+cures
+cured
+curing
+treat
+treats
+treating
+treatment
+treatments
+diagnose
+diagnosis
+prevent
+prevents
+prevention
+heal
+heals
+healing
+reverse
+reverses
+reversing
+remedy
+therapeutic
+miracle
+magic pill
+guaranteed
+guarantee results
+clinically proven to cure
+fda approved
+fda cleared
+doctor recommended cure
+# 疾病宣称（不得声称针对任何疾病）
+cancer
+tumor
+alzheimer
+dementia
+parkinson
+covid
+virus
+infection
+arthritis
+diabetes cure
+heart disease cure
+# 绝对化宣称
+100% effective
+no side effects
+zero side effects
+risk free
+works for everyone
+instant results
+overnight results
+
+[WARNING]
+# 具体药名/病名：仅允许在"用药前请咨询医生"安全问答中出现
+warfarin
+statin
+levothyroxine
+ssri
+antidepressant
+blood thinner
+immunosuppressant
+chemotherapy
+insulin
+metformin
+afib
+ckd
+fibromyalgia
+neuropathy
+sleep apnea
+diabetes
+diabetic
+hypertension
+pregnant
+pregnancy
+breastfeeding
+nursing
+surgery
+transplant

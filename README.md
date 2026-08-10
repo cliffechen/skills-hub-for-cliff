@@ -26,6 +26,7 @@
 | 快速生成 7 张图和 A+ 图片英文文案 | [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/) | 偏文案生成，适合已有 SFP 和卖点时快速出稿 |
 | 采集 Amazon US 搜索框下拉词 | [`amazon-dropdown-expander`](./amazon-dropdown-expander/) | 轻量 Python 工具，输出 CSV |
 | 搭建新品关键词库、P0/P1/P2、Search Term 和广告词基础 | [`amazon-new-listing-keyword-library`](./amazon-new-listing-keyword-library/) | 输入 ABA、Sif、下拉词、产品信息图，输出 Excel + 策略报告 |
+| 批量生成亚马逊 Listing QA（默认200组，埋词/品牌词/语义痕迹） | [`amz-qa-creator`](./amz-qa-creator/) | 上游接 `amazon-new-listing-keyword-library` 的词库 Excel，配 ASIN/Sorftime VOC，输出 xlsx/csv/txt + 质检报告 |
 | 做 Amazon US 膳食补充剂选品和 Go/No-Go 判断 | [`US_Sup_Product_Research_for_Qoderwork`](./US_Sup_Product_Research_for_Qoderwork/) | 重型选品调研，依赖 Sorftime / xCrawl 等工具 |
 | 围绕种子词做 Amazon US 选品调研、自动处理关键词漂移，并生成审计报告 | [`amazon-sorftime-mcp-with-serpapi-tavily`](./amazon-sorftime-mcp-with-serpapi-tavily/) | Sorftime 主数据 + SerpApi Google Web Trends + Tavily；固定输出 JSON、Markdown、HTML |
 | 调用 Sorftime MCP / ZooData 兼容数据层，查商品、市场、评论、历史趋势 | [`zoodata-amz-marketing-skill/zoodata`](./zoodata-amz-marketing-skill/zoodata/) | 共享数据层，默认优先走 Sorftime MCP |
@@ -41,6 +42,7 @@
 ├── US_Sup_Product_Research_for_Qoderwork/
 ├── amazon-dropdown-expander/
 ├── amazon-new-listing-keyword-library/
+├── amz-qa-creator/
 ├── amazon-sorftime-mcp-with-serpapi-tavily/
 ├── amazon-supplement-visual-content/
 ├── amazon-supplement-visual-content-WB/
@@ -113,6 +115,9 @@
 
 [`amazon-new-listing-keyword-library`](./amazon-new-listing-keyword-library/)  
 把 ABA、Sif、下拉词和产品信息图整合成新品关键词词库，输出 P0/P1/P2、否定词、Search Term 和选词策略。
+
+[`amz-qa-creator`](./amz-qa-creator/)  
+`amazon-new-listing-keyword-library` 的下游：消费词库 Excel（P0/P1/P2 + 品牌词否定清单接力复用），结合 ASIN/Listing 信息（Sorftime MCP + 竞品 VOC）批量生成 200 组亚马逊 QA；含敏感词双层过滤、事实锚点校验、断点续跑，输出 xlsx/csv/txt 三件套 + 质检报告。
 
 ### 3. 图片与 A+ 内容
 
