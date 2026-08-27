@@ -31,6 +31,7 @@
 | 围绕种子词做 Amazon US 选品调研、自动处理关键词漂移，并生成审计报告 | [`amazon-sorftime-mcp-with-serpapi-tavily`](./amazon-sorftime-mcp-with-serpapi-tavily/) | Sorftime 主数据 + SerpApi Google Web Trends + Tavily；固定输出 JSON、Markdown、HTML |
 | 调用 Sorftime MCP / ZooData 兼容数据层，查商品、市场、评论、历史趋势 | [`zoodata-amz-marketing-skill/zoodata`](./zoodata-amz-marketing-skill/zoodata/) | 共享数据层，默认优先走 Sorftime MCP |
 | 做亚马逊市场、竞品、定价、进入、选品、评论等多工作流分析 | [`zoodata-amz-marketing-skill`](./zoodata-amz-marketing-skill/) | 集中收纳 `zoodata` 与一组 `amazon-*` 数据分析技能 |
+| 为跨境出口企业做指定产品+目标市场的深度市场进入/GTM 战略报告（B2B/B2C 通用） | [`GinvSkill-market-entry-report`](./GinvSkill-market-entry-report/) | 麦肯锡式分析框架，按固定七章结构输出可交付客户的 HTML 战略报告 |
 | 检查成分、商标、专利、FDA/Amazon 和商业化风险 | [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/) | 适合上架、换标、仿制、改配方前先跑风险报告 |
 | 做完整保健品配方研发链路 | [`supplement-formula-pipeline`](./supplement-formula-pipeline/) | 包含风险查验、安全重建、配方优化、流量边界和最终收口 |
 | 扫描本仓库、更新 Obsidian 索引、查询该用哪个 skill | [`ob-skill-github-organizer`](./ob-skill-github-organizer/) | 本仓库的“索引维护员 + skill 路由员” |
@@ -39,13 +40,18 @@
 
 ```text
 .
+├── ABAKeywords-tracker-for-codex/
+├── ABAKeywords-tracker-for-workbuddy/
+├── GinvSkill-market-entry-report/
 ├── US_Sup_Product_Research_for_Qoderwork/
 ├── amazon-dropdown-expander/
 ├── amazon-new-listing-keyword-library/
 ├── amz-qa-creator/
+├── amazon-search-term-advisor/
 ├── amazon-sorftime-mcp-with-serpapi-tavily/
 ├── amazon-supplement-visual-content/
 ├── amazon-supplement-visual-content-WB/
+├── marketing-distiller/
 ├── ob-skill-github-organizer/
 ├── ingredients-breakdown-compliance-check/
 ├── spf-products-advances-to-image-copy/
@@ -108,7 +114,19 @@
 
 默认优先使用已配置的 `sorftime-mcp`；需要 ZooData 时可显式指定 `--provider zoodata`。
 
-### 2. 关键词与运营
+### 2. 跨品类出海市场进入与 GTM 战略
+
+[`GinvSkill-market-entry-report`](./GinvSkill-market-entry-report/)
+
+作者 Ginv（公众号「Adobe of Amazon」）的市场进入战略报告生成器，不限于亚马逊补充剂业务，任何跨境出口企业的【产品 + 目标市场 + 商业模式】组合都适用：
+
+- 输入三个变量：产品/品类、目标市场（可多国组合）、商业模式（B2B / B2C / 两者皆有）
+- 深度研究：PESTEL、市场规模、竞争格局、客户画像与 JTBD、渠道生态、风险
+- 按固定七章 MECE 结构写作（执行摘要 → 宏观环境 → 市场规模与竞争 → B2B 客户画像 → 产品需求洞察 → 渠道与 GTM → 行动蓝图）
+- 五维自检后输出可直接交付海外渠道伙伴或终端客户的 HTML 战略报告
+- B2B 与 B2C 的客户画像、渠道策略框架分别处理；多国市场逐国细颗粒度分析
+
+### 3. 关键词与运营
 
 [`amazon-dropdown-expander`](./amazon-dropdown-expander/)  
 采集 Amazon US 搜索框下拉联想词，适合做长尾词、PPC 精准词、Listing 备选词。
@@ -119,7 +137,7 @@
 [`amz-qa-creator`](./amz-qa-creator/)  
 `amazon-new-listing-keyword-library` 的下游：消费词库 Excel（P0/P1/P2 + 品牌词否定清单接力复用），结合 ASIN/Listing 信息（Sorftime MCP + 竞品 VOC）批量生成 200 组亚马逊 QA；含敏感词双层过滤、事实锚点校验、断点续跑，输出 xlsx/csv/txt 三件套 + 质检报告。
 
-### 3. 图片与 A+ 内容
+### 4. 图片与 A+ 内容
 
 [`amazon-supplement-visual-content`](./amazon-supplement-visual-content/)  
 用于 Amazon US 补充剂主图合规判断、辅图文案、A+ 页面结构、设计 brief 和生图 prompt。
@@ -130,7 +148,7 @@
 [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/)  
 偏“图片文案生成”，适合根据 Supplement Facts 和卖点快速产出 7 张图和 A+ 模块文案。
 
-### 4. 成分合规、IP 风险与配方研发
+### 5. 成分合规、IP 风险与配方研发
 
 [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/)  
 用于拆解成分堆栈，识别 branded ingredient、TM/R、专利、FDA/Amazon 和商业化风险。
@@ -154,7 +172,7 @@
 → 实验室沟通简报
 ```
 
-### 5. Skill 管理与 Obsidian 索引
+### 6. Skill 管理与 Obsidian 索引
 
 [`ob-skill-github-organizer`](./ob-skill-github-organizer/)
 
