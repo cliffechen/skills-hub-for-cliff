@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文案工作台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================ 顶栏 ============================ -->
+<header id="topbar">
+  <div class="brand">
+    <span class="brand-mark">文案工作台</span>
+    <span class="brand-prod" id="metaProduct">文案工作台</span>
+    <span class="brand-spec" id="metaSpec"></span>
+  </div>
+
+  <div class="tools">
+    <div class="seg" id="styleSeg" title="切换风格（快捷键 1 2 3 4）"></div>
+
+    <div class="seg" id="viewSeg" title="切换视图（快捷键 Tab）">
+      <button type="button" data-view="work" class="on">工作台</button>
+      <button type="button" data-view="compare">四风格对比</button>
+    </div>
+
+    <button type="button" id="btnCalib" title="标定模式（快捷键 Esc 退出）">标定</button>
+    <button type="button" id="btnCheck" title="扫描当前风格的黑名单词">合规检查</button>
+    <button type="button" id="btnSave" title="保存（Ctrl+S）">保存</button>
+
+    <div class="dropdown" id="ddExport">
+      <button type="button" id="btnExport">导出 ▾</button>
+      <div class="menu" id="exportMenu">
+        <button type="button" data-style="A">导出当前风格（A）为 Markdown</button>
+        <button type="button" data-style="B">导出当前风格（B）为 Markdown</button>
+        <button type="button" data-style="C">导出当前风格（C）为 Markdown</button>
+        <button type="button" data-style="D">导出当前风格（D）为 Markdown</button>
+        <hr>
+        <button type="button" data-act="openExportDir">打开导出目录</button>
+      </div>
+    </div>
+
+    <button type="button" id="btnTheme" title="切换日间 / 夜间模式">☀️ 日间</button>
+
+    <span class="status" id="status"><span class="dot">●</span><span id="statusText">加载中…</span></span>
+  </div>
+</header>
+
+<!-- ============================ 主区 ============================ -->
+<main id="main">
+
+  <section id="left">
+    <div id="flagbar"></div>
+    <div id="canvasWrap">
+      <div id="canvas">
+        <img id="shot" alt="" draggable="false">
+        <div id="overlay"></div>
+      </div>
+    </div>
+    <div id="modmeta"></div>
+  </section>
+
+  <div id="splitter" title="拖动调整左右比例"></div>
+
+  <section id="right">
+    <div id="cards" class="pane"></div>
+    <div id="compare" class="pane hidden"></div>
+  </section>
+
+</main>
+
+<!-- ============================ 底栏 ============================ -->
+<footer id="bottombar">
+  <nav id="moduleNav"></nav>
+  <span class="kbdhint">
+    <b>← →</b> 模块　<b>↑ ↓</b> 槽位　<b>1 2 3 4</b> 风格　<b>Tab</b> 对比　<b>Ctrl+S</b> 保存　<b>?</b> 快捷键
+  </span>
+</footer>
+
+<!-- ============================ 浮层 ============================ -->
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span id="modalTitle">标题</span>
+      <button type="button" id="modalClose" title="关闭（Esc）">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
