@@ -259,6 +259,33 @@ code, .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
 
 .menu button:hover { background: var(--card-hi); border-color: transparent; }
 
+/* 风格下拉：主行 + 副说明 */
+#styleMenu { min-width: 300px; }
+
+#styleMenu .opt-main {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+#styleMenu .opt-sub {
+  display: block;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 1px;
+  white-space: normal;
+}
+
+#styleMenu button.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+#styleMenu button.on .opt-main,
+#styleMenu button.on .opt-sub { color: var(--accent-ink); }
+#styleMenu button.on .opt-sub { color: rgba(19, 20, 8, .62); }
+
 .menu hr {
   border: none;
   border-top: 1px solid var(--border);
@@ -736,6 +763,37 @@ details.sub .body { padding-top: 6px; }
 
 .alt-actions { display: flex; gap: 6px; margin-top: 5px; }
 
+/* ---------- 发散性文案 ---------- */
+
+.div-head {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin: 9px 0 6px;
+}
+
+.div-item { margin-bottom: 8px; }
+.div-item:last-child { margin-bottom: 0; }
+
+.div-zh {
+  font-size: 10px;
+  line-height: 1.7;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--card-hi);
+  color: var(--muted);
+  white-space: nowrap;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card.sel .div-head { color: rgba(19, 20, 8, .55); }
+
+.card.sel .div-zh {
+  background: rgba(0, 0, 0, .08);
+  color: rgba(19, 20, 8, .6);
+}
+
 /* ---------- 四风格对比 ---------- */
 
 .cmp-tip {
@@ -820,8 +878,269 @@ details.sub .body { padding-top: 6px; }
 
 .cmp-table tr.cur td { background: var(--accent-dim); }
 
-/* ============================ 底栏 ============================ */
+/* ---------- 自由创作视图 ---------- */
 
+.free-read {
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+}
+
+.free-read .k {
+  color: var(--muted);
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.angle-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 10px 12px 11px;
+  margin-bottom: 10px;
+}
+
+.angle-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.angle-head .grow { flex: 1 1 auto; }
+
+.angle-no {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+
+.angle-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.angle-why {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  border-left: 2px solid var(--border);
+  padding-left: 8px;
+  margin-bottom: 9px;
+}
+
+.text.free-headline {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-text);
+  letter-spacing: .2px;
+}
+
+/* 角度卡悬停 → 高亮底色（与工作台选中卡同款配色） */
+.angle-card {
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.angle-card:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(214, 244, 63, .22);
+}
+
+.angle-card:hover .angle-name { color: var(--accent-ink); }
+.angle-card:hover .angle-why {
+  color: rgba(19, 20, 8, .72);
+  border-left-color: rgba(0, 0, 0, .22);
+}
+.angle-card:hover .field-label { color: rgba(19, 20, 8, .6); }
+.angle-card:hover .text {
+  background: rgba(0, 0, 0, .055);
+  border-color: rgba(0, 0, 0, .16);
+  color: var(--accent-ink);
+}
+.angle-card:hover .text.free-headline { color: var(--accent-ink); }
+.angle-card:hover button {
+  background: rgba(0, 0, 0, .08);
+  border-color: rgba(0, 0, 0, .22);
+  color: var(--accent-ink);
+}
+.angle-card:hover button:hover { background: rgba(0, 0, 0, .14); }
+
+/* ---------- 消费人群画像视图 ---------- */
+
+.aud-sec {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 14px 0 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.aud-sec.primary {
+  font-size: 13.5px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  padding: 3px 12px;
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.aud-sec.sub {
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 1px dashed var(--border);
+}
+
+.aud-card,
+.scene-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 9px 11px 10px;
+  margin-bottom: 9px;
+}
+
+.aud-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.aud-ing,
+.aud-seg-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+.tier-badge {
+  font-size: 10.5px;
+  line-height: 1.6;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent);
+  white-space: nowrap;
+}
+
+.aud-card.tier-second .tier-badge {
+  background: transparent;
+  color: var(--accent-text);
+}
+
+.aud-card.tier-chance .tier-badge {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+.aud-line {
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.aud-line:last-child { margin-bottom: 0; }
+.aud-line .k { color: var(--muted); margin-right: 6px; white-space: nowrap; }
+
+.aud-line.hook { padding-left: 10px; border-left: 2px solid var(--accent-dim); }
+.aud-line.warn { color: var(--warn); }
+
+.aud-sub {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin: 7px 0 4px;
+}
+
+.aud-caution {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-bd);
+  border-radius: 12px;
+  padding: 9px 11px;
+  margin-bottom: 9px;
+}
+
+.scene-head {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.scene-head .grow { flex: 1 1 auto; }
+
+.scene-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+/* 人群画像：功效卡 / 分层卡 / 场景卡 悬停 → 高亮底色（与角度卡同款） */
+.aud-card,
+.scene-card {
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.aud-card:hover,
+.scene-card:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(214, 244, 63, .22);
+}
+
+.aud-card:hover .aud-ing,
+.aud-card:hover .aud-seg-name,
+.scene-card:hover .scene-title { color: var(--accent-ink); }
+
+.aud-card:hover .aud-line,
+.scene-card:hover .aud-line { color: var(--accent-ink); }
+
+.aud-card:hover .aud-line .k,
+.scene-card:hover .aud-line .k { color: rgba(19, 20, 8, .6); }
+
+.aud-card:hover .aud-sub { color: rgba(19, 20, 8, .6); }
+.aud-card:hover .aud-line.hook { border-left-color: rgba(0, 0, 0, .22); }
+.aud-card:hover .aud-line.warn { color: #5e1408; }
+
+.aud-card:hover .tier-badge {
+  background: rgba(0, 0, 0, .10);
+  border-color: rgba(0, 0, 0, .24);
+  color: var(--accent-ink);
+}
+
+.aud-card:hover button,
+.scene-card:hover button {
+  background: rgba(0, 0, 0, .08);
+  border-color: rgba(0, 0, 0, .22);
+  color: var(--accent-ink);
+}
+
+.aud-card:hover button:hover,
+.scene-card:hover button:hover { background: rgba(0, 0, 0, .14); }
+
+/* ============================ 底栏 ============================ */
 #bottombar {
   flex: 0 0 auto;
   display: flex;

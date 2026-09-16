@@ -3,7 +3,7 @@
     "product": "ZABORATORY Algae Calcium Renew+",
     "spec": "Vegan Softgel ｜ 2 softgels per serving ｜ 90 softgels ｜ 45 servings",
     "version": "v1.0",
-    "savedAt": null,
+    "savedAt": "2026-09-15T09:03:27",
     "disclaimer": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
     "banned": [
       "anti-aging",
@@ -49,10 +49,26 @@
     ]
   },
   "styles": [
-    { "id": "A", "name": "AG1 型", "desc": "清晰教育——结论先行，机制解释给想弄懂的人" },
-    { "id": "B", "name": "Ritual-HUM 型", "desc": "简洁透明——剂量、天数、标签可读性优先" },
-    { "id": "C", "name": "Onnit 型", "desc": "直接具体——剂量直给，动词开路" },
-    { "id": "D", "name": "Thorne 型", "desc": "准确易懂——形态学名与剂量口径即信任" }
+    {
+      "id": "A",
+      "name": "AG1 型",
+      "desc": "清晰教育——结论先行，机制解释给想弄懂的人"
+    },
+    {
+      "id": "B",
+      "name": "Ritual-HUM 型",
+      "desc": "简洁透明——剂量、天数、标签可读性优先"
+    },
+    {
+      "id": "C",
+      "name": "Onnit 型",
+      "desc": "直接具体——剂量直给，动词开路"
+    },
+    {
+      "id": "D",
+      "name": "Thorne 型",
+      "desc": "准确易懂——形态学名与剂量口径即信任"
+    }
   ],
   "modules": [
     {
@@ -61,7 +77,10 @@
       "img": "1.png",
       "task": "一眼交代什么剂型、几粒、几天",
       "flags": [
-        { "level": "warn", "text": "原三数值与底部句为 AKME Whey Protein 残留（蛋白/支链氨基酸/糖），必须替换" }
+        {
+          "level": "warn",
+          "text": "原三数值与底部句为 AKME Whey Protein 残留（蛋白/支链氨基酸/糖），必须替换"
+        }
       ],
       "slots": [
         {
@@ -70,14 +89,47 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "Softgel form / Liquid Inside / Dual-Action",
-          "rects": [[3, 33, 45, 27]],
+          "rects": [
+            [
+              3,
+              33,
+              45,
+              27
+            ]
+          ],
           "values": {
-            "A": { "rec": "Vegan softgel.\nSix actives,\ntwo softgels.", "alt": "Bone support first.\nCellular support second.\nBoth in two softgels." },
-            "B": { "rec": "Vegan softgel.\nSix actives.\nTwo a day.", "alt": "400 mg calcium.\nNine ingredients listed.\nTwo softgels daily." },
-            "C": { "rec": "Take two.\nGet six actives.\nSkip the powder.", "alt": "Two softgels.\n400 mg calcium.\n45 days." },
-            "D": { "rec": "Vegan softgel.\nTwo per serving.\nSix stated actives.", "alt": "Algae-derived calcium.\n400 mg per serving.\n90 softgels." }
+            "A": {
+              "rec": "Vegan softgel.\nSix actives,\ntwo softgels.",
+              "alt": "Bones first.\nCells second.\nTwo softgels."
+            },
+            "B": {
+              "rec": "Vegan softgel.\nSix actives.\nTwo a day.",
+              "alt": "400 mg calcium.\nSix doses, stated.\nTwo softgels."
+            },
+            "C": {
+              "rec": "Take two.\nGet six actives.\nSkip powder.",
+              "alt": "Two softgels.\n400 mg calcium.\n45 days."
+            },
+            "D": {
+              "rec": "Vegan softgel.\nTwo per serving.\nSix actives.",
+              "alt": "Calcium 400 mg.\nFrom algae.\n90 softgels."
+            }
           },
-          "note": "原为剂型口号位，与本品事实无对应；按「剂型 + 粒数 + 活性数」重写。"
+          "note": "原为剂型口号位，与本品事实无对应；按「剂型 + 粒数 + 活性数」重写。",
+          "divs": [
+            {
+              "en": "You take calcium.\nWhere does it go?\nAsk vitamin K2.",
+              "zh": "买家原话疑问→点出 K2 机制"
+            },
+            {
+              "en": "Calcium without K2\nis a dose with\nnowhere to go.",
+              "zh": "点名缺 K2 的失败解法"
+            },
+            {
+              "en": "Six actives.\nStated doses.\nZero blends.",
+              "zh": "透明三连否定式"
+            }
+          ]
         },
         {
           "id": "M1-S",
@@ -85,14 +137,47 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "23g of protein / 5.6g of branched-chain amino acids / 1.32g of sugars",
-          "rects": [[20, 67, 62, 15]],
+          "rects": [
+            [
+              20,
+              67,
+              62,
+              15
+            ]
+          ],
           "values": {
-            "A": { "rec": "400 mg — algae-derived calcium per serving  ·  6 — actives, each with a stated dose  ·  45 — servings per bottle", "alt": "400 mg — calcium per serving  ·  2 — softgels a day  ·  45 — days per bottle" },
-            "B": { "rec": "400 mg — algae-derived calcium per serving  ·  2 — softgels a day  ·  45 — days per bottle", "alt": "400 mg — calcium per serving  ·  6 — actives  ·  45 — servings" },
-            "C": { "rec": "400 MG — algae calcium per serving  ·  2 — vegan softgels a day  ·  45 — servings per bottle", "alt": "400 MG — algae calcium  ·  2 — softgels daily  ·  45 — days" },
-            "D": { "rec": "Calcium — 400 mg per serving (31% DV)  ·  2 softgels — per serving  ·  45 servings — per container", "alt": "Calcium 400 mg (31% DV) — per serving  ·  2 softgels — per serving  ·  90 softgels — per container" }
+            "A": {
+              "rec": "400 mg — algae-derived calcium  ·  6 — actives, dosed  ·  45 — servings a bottle",
+              "alt": "400 mg — calcium per serving  ·  2 — softgels a day  ·  45 — days per bottle"
+            },
+            "B": {
+              "rec": "400 mg — algae calcium per serving  ·  2 — softgels a day  ·  45 — days",
+              "alt": "400 mg — calcium per serving  ·  6 — actives  ·  45 — servings"
+            },
+            "C": {
+              "rec": "400 MG — algae calcium  ·  2 — softgels a day  ·  45 — servings",
+              "alt": "Calcium 400 mg a serving  ·  2 softgels a day  ·  45 servings"
+            },
+            "D": {
+              "rec": "Calcium 400 mg (31% DV)  ·  2 softgels per serving  ·  45 servings",
+              "alt": "Calcium 400 mg (31% DV)  ·  D3 25 mcg (125% DV)  ·  K2 90 mcg (75% DV)"
+            }
           },
-          "note": "AKME Whey Protein 残留（蛋白 / 支链氨基酸 / 糖），三项均非本品成分，必须全部替换。「  ·  」为三格分隔符。"
+          "note": "AKME Whey Protein 残留（蛋白 / 支链氨基酸 / 糖），三项均非本品成分，必须全部替换。「  ·  」为三格分隔符。",
+          "divs": [
+            {
+              "en": "400 mg — calcium  ·  25 mcg — D3  ·  90 mcg — K2",
+              "zh": "三大剂量极简排面"
+            },
+            {
+              "en": "31% DV — calcium  ·  125% DV — D3  ·  75% DV — K2",
+              "zh": "三个 %DV 证据链"
+            },
+            {
+              "en": "2 — softgels a day  ·  90 — per bottle  ·  45 — days",
+              "zh": "使用成本账"
+            }
+          ]
         },
         {
           "id": "M1-B",
@@ -100,14 +185,117 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "Every scoop of AKME Whey Protein is engineered to deliver exactly what your body needs and nothing it doesn't.",
-          "rects": [[8, 89, 84, 8]],
+          "rects": [
+            [
+              8,
+              89,
+              84,
+              8
+            ]
+          ],
           "values": {
-            "A": { "rec": "Every part of this formula is on the label, from the algae-derived calcium to the vegan softgel shell.", "alt": "Two softgels carry the full formula: algae-derived calcium with D3 and K2, plus Urolithin A, NR Chloride, and astaxanthin." },
-            "B": { "rec": "Six actives, three helper ingredients, one vegan softgel shell — all on the label.", "alt": "Everything in the bottle is named, measured, and printed on the label." },
-            "C": { "rec": "Two vegan softgels deliver the whole formula — no blends, no guessing.", "alt": "One ingredient panel, six stated doses, two softgels to take." },
-            "D": { "rec": "Calcium 400 mg from an algae-derived mineral complex leads a six-active formula in a vegan softgel.", "alt": "Each serving — two vegan softgels — provides six actives at stated doses." }
+            "A": {
+              "rec": "Every part of this formula is on the label, from the algae-derived calcium to the vegan softgel shell.",
+              "alt": "Two softgels carry the formula: algae-derived calcium with D3 and K2, plus Urolithin A and NR Chloride."
+            },
+            "B": {
+              "rec": "Six actives, three helper ingredients, one vegan softgel shell — all on the label.",
+              "alt": "Everything in the bottle is named, measured, and printed on the label."
+            },
+            "C": {
+              "rec": "Two vegan softgels deliver the whole formula — no blends, no guessing.",
+              "alt": "One ingredient panel, six stated doses, two softgels to take."
+            },
+            "D": {
+              "rec": "Calcium 400 mg from an algae-derived mineral complex leads a six-active formula in a vegan softgel.",
+              "alt": "Each serving — two vegan softgels — provides six actives at stated doses."
+            }
           },
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "Powder, gummies, calcium-only tablets — two softgels carry six stated actives instead.",
+              "zh": "点名三种失败解法后给替代"
+            },
+            {
+              "en": "Read the panel before the front of the bottle.",
+              "zh": "编辑器口吻：先看证据"
+            },
+            {
+              "en": "Six actives, six doses, one panel — nothing hidden inside a blend.",
+              "zh": "反暗腔+剂量可查"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "详情页第一屏：左侧三行超大标题交代剂型、活性数与粒数，下方三格数值摊开规格，右侧瓶身特写提供实物信任。",
+        "angles": [
+          {
+            "name": "剂型即卖点——两颗软胶囊替代一勺粉",
+            "why": "第一屏用超大字号独占视觉，最适合把「软胶囊 vs 粉剂」这个剂型差异直接当主张打；配方里 6 项活性确实装在 2 粒软胶囊里。",
+            "copy": {
+              "headline": "Two softgels.\nNot a scoop.\nNot a shaker.",
+              "subhead": "Six actives in two vegan softgels a day.",
+              "points": [
+                "Vegan softgel shell, not a pressed powder",
+                "No scoops to count, nothing to mix",
+                "All six stated actives in two softgels"
+              ],
+              "closer": "Two a day is the whole routine."
+            }
+          },
+          {
+            "name": "双域并行——骨骼与细胞一次交代",
+            "why": "配方一半给骨骼（钙+D3+K2）、一半给细胞（Urolithin A+Nicotinamide Riboside Chloride），第一屏可把「两件事一起办」说透，与右侧瓶身「Dual-Action」呼应。",
+            "copy": {
+              "headline": "Bones today.\nCells for\nthe long run.",
+              "subhead": "Two softgels, two kinds of support.*",
+              "points": [
+                "Calcium 400 mg with D3 and K2 for bone support",
+                "Urolithin A 250 mg and Nicotinamide Riboside Chloride 300 mg for cells",
+                "Astaxanthin 4 mg for antioxidant support"
+              ],
+              "closer": "Six actives, two softgels, both jobs.*"
+            }
+          },
+          {
+            "name": "透明剂量——每个数字都印在瓶上",
+            "why": "画面右侧是瓶身实物、下方是三格数值，把「剂量全部印在标签上」当主张，文案与画面互相印证。",
+            "copy": {
+              "headline": "Six actives.\nSix doses.\nRead the panel.",
+              "subhead": "400 mg calcium, 25 mcg D3, 90 mcg K2 — all stated.",
+              "points": [
+                "90 softgels, 45 servings, one bottle",
+                "No proprietary blends to hide behind",
+                "Third-party tested in a cGMP facility"
+              ],
+              "closer": "Every number is on the label."
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "第一屏的三秒判断",
+          "problem": "买家在详情页第一屏只有三秒，想确认「这是软胶囊还是粉」以及「一天要吞几颗」。",
+          "solution": "两颗软胶囊、六项活性、剂量全部印在标签上。",
+          "after": "她拇指停在屏幕上，视线从「Two softgels」滑到右侧瓶身，眉头松开，继续往下划。",
+          "placement": "左侧三行大字位 + 下方三格数值位；右侧瓶身特写承接"
+        },
+        {
+          "title": "从粉剂换过来的那一刻",
+          "problem": "手上还有半桶结块的粉，勺子在抽屉里找不到。",
+          "solution": "把「一勺粉」换成「两颗软胶囊」，其余不变。",
+          "after": "旧粉桶被推到台面边缘虚焦，前景是掌心里两颗软胶囊清晰可见。",
+          "placement": "大字位写剂型对比（Not a scoop），底部说明句承接"
+        },
+        {
+          "title": "把规格一次性摊开",
+          "problem": "她不想猜，想知道一瓶能吃多久、每份几颗。",
+          "solution": "90 softgels / 2 per serving / 45 servings 三个数字并排。",
+          "after": "手指点在第二格数字上停顿半秒，点头，继续读。",
+          "placement": "三格数值位正是这个动作的落点"
         }
       ]
     },
@@ -117,7 +305,10 @@
       "img": "2.png",
       "task": "配方里每个成分是干什么的",
       "flags": [
-        { "level": "error", "text": "第 3 条原文为 Magnesium —— 配方已删镁，必须替换" }
+        {
+          "level": "error",
+          "text": "第 3 条原文为 Magnesium —— 配方已删镁，必须替换"
+        }
       ],
       "slots": [
         {
@@ -126,13 +317,46 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*页面标题",
-          "rects": [[4, 5, 45, 11]],
+          "rects": [
+            [
+              4,
+              5,
+              45,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "What each active does.", "alt": "Four things to know about the formula." },
-            "B": { "rec": "What's inside, and why.", "alt": "What each one is for." },
-            "C": { "rec": "Know what you're taking.", "alt": "Four actives, four jobs." },
-            "D": { "rec": "Each active, and its role.", "alt": "What the formula contains." }
-          }
+            "A": {
+              "rec": "What each active does.",
+              "alt": "Four things to know about the formula."
+            },
+            "B": {
+              "rec": "What's inside, and why.",
+              "alt": "What each one is for."
+            },
+            "C": {
+              "rec": "Know what you're taking.",
+              "alt": "Four actives, four jobs."
+            },
+            "D": {
+              "rec": "Each active, and its role.",
+              "alt": "What the formula contains."
+            }
+          },
+          "divs": [
+            {
+              "en": "Six actives. Six jobs.",
+              "zh": "数字对仗"
+            },
+            {
+              "en": "Every active, explained.",
+              "zh": "教育式邀约"
+            },
+            {
+              "en": "The why behind each one.",
+              "zh": "悬念式"
+            }
+          ]
         },
         {
           "id": "M2-B1",
@@ -140,14 +364,47 @@
           "kind": "text",
           "judge": "真实内容·保留",
           "insp": "Calcium supports bone structure",
-          "rects": [[4, 25, 30, 11]],
+          "rects": [
+            [
+              4,
+              25,
+              30,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "Algae calcium supports **bone structure**", "alt": "Calcium from algae supports **bone structure**" },
-            "B": { "rec": "Algae calcium — the **bone foundation**", "alt": "Algae calcium — for **bone support**" },
-            "C": { "rec": "Build on algae calcium for **bone structure**", "alt": "Start with algae calcium for **bone support**" },
-            "D": { "rec": "Calcium (400 mg) from an algae-derived mineral complex supports **bone structure**", "alt": "Calcium 400 mg from an algae-derived mineral complex supports **bone structure**" }
+            "A": {
+              "rec": "Algae calcium\nfor **bone structure**",
+              "alt": "Calcium from algae\nfor **bone structure**"
+            },
+            "B": {
+              "rec": "Algae calcium —\n**bone foundation**",
+              "alt": "Algae calcium\nfor **bone support**"
+            },
+            "C": {
+              "rec": "Build on algae\nfor **bone structure**",
+              "alt": "Start with algae\nfor **bone support**"
+            },
+            "D": {
+              "rec": "Calcium 400 mg\nfrom algae. **Bone**",
+              "alt": "400 mg of calcium,\nfrom algae. **Bone**"
+            }
           },
-          "note": "** 内为设计高亮词位，排版按设计稿样式加粗，不显示星号。"
+          "note": "** 内为设计高亮词位，排版按设计稿样式加粗，不显示星号。",
+          "divs": [
+            {
+              "en": "From algae,\nnot limestone.",
+              "zh": "来源对比做记忆点"
+            },
+            {
+              "en": "400 mg calcium,\nalgae-derived.",
+              "zh": "剂量+来源具体化"
+            },
+            {
+              "en": "The mineral bones\nare built on.",
+              "zh": "角色定位"
+            }
+          ]
         },
         {
           "id": "M2-B2",
@@ -155,14 +412,47 @@
           "kind": "text",
           "judge": "真实内容·保留",
           "insp": "D3 helps absorption",
-          "rects": [[4, 39, 25, 11]],
+          "rects": [
+            [
+              4,
+              39,
+              25,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "Vitamin D3 helps your body **absorb calcium**", "alt": "D3 helps your body **absorb calcium**" },
-            "B": { "rec": "Vitamin D3 — helps calcium **absorb**", "alt": "D3 — for calcium **absorption**" },
-            "C": { "rec": "Absorb more with vitamin D3 — **absorption**", "alt": "Take in more with D3 — **absorption**" },
-            "D": { "rec": "Vitamin D3 (cholecalciferol, 25 mcg) supports **calcium absorption**", "alt": "Vitamin D3 25 mcg (cholecalciferol) supports **calcium absorption**" }
+            "A": {
+              "rec": "D3 helps you\n**absorb calcium**",
+              "alt": "D3 25 mcg for\n**absorption**"
+            },
+            "B": {
+              "rec": "D3 25 mcg —\n**absorption**",
+              "alt": "D3 —\nfor **absorption**"
+            },
+            "C": {
+              "rec": "Take D3.\n**Absorb** more.",
+              "alt": "Take D3 to\n**absorb** more"
+            },
+            "D": {
+              "rec": "**Absorption** —\nD3, 25 mcg",
+              "alt": "D3 25 mcg,\ncholecalciferol"
+            }
           },
-          "note": "** 内为设计高亮词位。"
+          "note": "** 内为设计高亮词位。",
+          "divs": [
+            {
+              "en": "D3 opens\nthe door.",
+              "zh": "开门机制，短促"
+            },
+            {
+              "en": "25 mcg so it\nlands.",
+              "zh": "剂量+落点"
+            },
+            {
+              "en": "Without D3,\ncalcium waits.",
+              "zh": "点名缺 D3 的失败解法"
+            }
+          ]
         },
         {
           "id": "M2-B3",
@@ -170,14 +460,47 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "Magnesium supports muscle + nerve signals",
-          "rects": [[12, 66, 34, 11]],
+          "rects": [
+            [
+              12,
+              66,
+              34,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "Urolithin A and NR Chloride support **cellular energy**", "alt": "Urolithin A and NR Chloride support **cellular function**" },
-            "B": { "rec": "Urolithin A + NR Chloride — **cellular support**", "alt": "Urolithin A + NR Chloride — **cellular function**" },
-            "C": { "rec": "Power the cellular side with Urolithin A + NR — **cellular energy**", "alt": "Cover the cellular side with Urolithin A + NR — **cellular function**" },
-            "D": { "rec": "Urolithin A (250 mg) and NR Chloride (300 mg) support **cellular function**", "alt": "Urolithin A 250 mg and NR Chloride 300 mg support **cellular function**" }
+            "A": {
+              "rec": "Urolithin A 250 mg,\nNR Chloride 300 mg",
+              "alt": "Urolithin A and NR\nfor **cells**"
+            },
+            "B": {
+              "rec": "Urolithin A + NR\n— **cellular support**",
+              "alt": "Urolithin A + NR\n— **cellular function**"
+            },
+            "C": {
+              "rec": "Power the cells\n— **cellular energy**",
+              "alt": "Cover the cells\n— **cellular function**"
+            },
+            "D": {
+              "rec": "Urolithin A 250 mg,\n**NR Chloride** 300 mg",
+              "alt": "Urolithin A 250 mg\nplus NR 300 mg"
+            }
           },
-          "note": "配方已删镁与粉包，改为第二卫星「Urolithin A + Nicotinamide Riboside Chloride」细胞组。"
+          "note": "配方已删镁与粉包，改为第二卫星「Urolithin A + Nicotinamide Riboside Chloride」细胞组。",
+          "divs": [
+            {
+              "en": "Aging is cellular\ntoo — 250 + 300 mg.",
+              "zh": "抗衰关切引到细胞机制"
+            },
+            {
+              "en": "Two actives for\nthe cellular half.",
+              "zh": "分工定位"
+            },
+            {
+              "en": "Urolithin A 250 mg\nplus NR 300 mg.",
+              "zh": "纯剂量证据"
+            }
+          ]
         },
         {
           "id": "M2-B4",
@@ -185,14 +508,47 @@
           "kind": "text",
           "judge": "真实内容·保留",
           "insp": "Vitamin K supports bone proteins",
-          "rects": [[4, 78, 30, 11]],
+          "rects": [
+            [
+              4,
+              78,
+              30,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "Vitamin K2 helps direct calcium to **bone proteins**", "alt": "Vitamin K2 (MK-7) helps direct calcium to **bone**" },
-            "B": { "rec": "Vitamin K2 (MK-7) — guides calcium to **bone**", "alt": "K2 (MK-7) — sends calcium to **bone**" },
-            "C": { "rec": "Send calcium to bone with K2 — **bone proteins**", "alt": "Direct calcium with K2 — **bone proteins**" },
-            "D": { "rec": "Vitamin K2 (menaquinone-7, 90 mcg) supports **bone protein function**", "alt": "Vitamin K2 90 mcg (menaquinone-7) supports **bone protein function**" }
+            "A": {
+              "rec": "K2 directs calcium\nto **bone proteins**",
+              "alt": "K2 (MK-7) for\ncalcium to **bone**"
+            },
+            "B": {
+              "rec": "K2 (MK-7) — 90 mcg\n— **bone**",
+              "alt": "K2 (MK-7) — sends\ncalcium to **bone**"
+            },
+            "C": {
+              "rec": "Send it to bone\nwith K2 — **bone**",
+              "alt": "Point it at bone\n— **bone proteins**"
+            },
+            "D": {
+              "rec": "K2 90 mcg (MK-7)\n— **bone proteins**",
+              "alt": "K2 90 mcg of\n**menaquinone-7**"
+            }
           },
-          "note": "** 内为设计高亮词位。"
+          "note": "** 内为设计高亮词位。",
+          "divs": [
+            {
+              "en": "K2 is the route,\nnot the dose.",
+              "zh": "点名只补钙的失败解法"
+            },
+            {
+              "en": "90 mcg that sends\ncalcium to bone.",
+              "zh": "剂量+交付机制"
+            },
+            {
+              "en": "MK-7 — the last\nstep of delivery.",
+              "zh": "形态名+环节定位"
+            }
+          ]
         },
         {
           "id": "M2-R",
@@ -200,15 +556,142 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "ONLY WHAT（5 处同文重复）",
-          "rects": [[80, 23, 18, 5], [84, 42, 18, 5], [82, 73, 18, 5], [48, 77, 18, 5], [42, 34, 18, 5]],
+          "rects": [
+            [
+              80,
+              23,
+              18,
+              5
+            ],
+            [
+              84,
+              42,
+              18,
+              5
+            ],
+            [
+              82,
+              73,
+              18,
+              5
+            ],
+            [
+              48,
+              77,
+              18,
+              5
+            ],
+            [
+              42,
+              34,
+              18,
+              5
+            ]
+          ],
           "values": {
-            "A": { "rec": "STATED DOSES ｜ SIX ACTIVES ｜ NO PROPRIETARY BLENDS ｜ VEGAN SOFTGEL SHELL ｜ MCT OIL BASE", "alt": "NO BLENDS ｜ STATED DOSES ｜ PLANT-BASED SHELL ｜ MCT OIL BASE ｜ SIX ACTIVES" },
-            "B": { "rec": "STATED DOSES ｜ PLAIN LABEL ｜ MCT OIL BASE ｜ VEGAN SOFTGEL ｜ SIX ACTIVES", "alt": "DOSES SHOWN ｜ NO BLENDS ｜ MCT OIL ｜ VEGAN SHELL ｜ SIX ACTIVES" },
-            "C": { "rec": "DOSED, NOT BLENDED ｜ SIX ACTIVES ｜ MCT OIL BASE ｜ VEGAN SOFTGEL ｜ DOSES ON LABEL", "alt": "NO BLENDS ｜ SIX ACTIVES ｜ MCT OIL ｜ VEGAN SHELL ｜ STATED DOSES" },
-            "D": { "rec": "STATED DOSES ｜ SIX ACTIVES ｜ NO PROPRIETARY BLENDS ｜ VEGAN SOFTGEL SHELL ｜ ORGANIC MCT OIL", "alt": "DOSES STATED ｜ SIX ACTIVES ｜ NO BLENDS ｜ VEGAN SHELL ｜ MCT OIL BASE" }
+            "A": {
+              "rec": "STATED DOSES ｜ SIX ACTIVES ｜ NO BLENDS ｜ VEGAN SHELL ｜ MCT OIL",
+              "alt": "NO BLENDS ｜ STATED DOSES ｜ VEGAN SHELL ｜ MCT OIL ｜ SIX ACTIVES"
+            },
+            "B": {
+              "rec": "STATED DOSES ｜ PLAIN LABEL ｜ MCT OIL ｜ VEGAN SHELL ｜ SIX ACTIVES",
+              "alt": "DOSES SHOWN ｜ NO BLENDS ｜ MCT OIL ｜ VEGAN SHELL ｜ SIX ACTIVES"
+            },
+            "C": {
+              "rec": "DOSED NOT BLENDS ｜ SIX ACTIVES ｜ MCT OIL ｜ VEGAN SHELL ｜ DOSES SHOWN",
+              "alt": "NO BLENDS ｜ SIX ACTIVES ｜ MCT OIL ｜ VEGAN SHELL ｜ STATED DOSES"
+            },
+            "D": {
+              "rec": "STATED DOSES ｜ SIX ACTIVES ｜ NO BLENDS ｜ VEGAN SHELL ｜ MCT OIL",
+              "alt": "DOSES STATED ｜ SIX ACTIVES ｜ NO BLENDS ｜ VEGAN SHELL ｜ MCT OIL"
+            }
           },
           "note": "「｜」为 5 处标签的分隔符，依次填入 5 个环绕位（右上 / 右 / 右下 / 左下 / 左）。原稿 5 处均为同文 ONLY WHAT，须各给可辨别内容。",
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "FROM ALGAE ｜ NOT LIMESTONE ｜ VEGAN SHELL ｜ SIX ACTIVES ｜ STATED DOSES",
+              "zh": "来源+剂型+透明五连"
+            },
+            {
+              "en": "D3 OPENS ｜ K2 ROUTES ｜ CALCIUM BUILDS ｜ UROLITHIN RENEWS ｜ NR FUELS",
+              "zh": "五动词写全机制链"
+            },
+            {
+              "en": "TWO A DAY ｜ 45 DAYS ｜ 90 SOFTGELS ｜ TESTED ｜ CGMP FACILITY",
+              "zh": "用量+信任五连"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "四条两行药丸块把「成分→作用」一对一说清，粗体词落在第二行；环绕瓶身的 5 个小标签补配方特征，环形弧线暗示这是一个体系。",
+        "angles": [
+          {
+            "name": "机制链——钙需要一条路线",
+            "why": "四条作用并排，天然适合讲一条完整链路：D3 打开吸收、K2 决定去向、钙是材料。这也正是设计把粗体词放在每块第二行的用意。",
+            "copy": {
+              "headline": "Calcium needs\na route.",
+              "subhead": "D3 opens it. K2 shows the way.",
+              "points": [
+                "D3 25 mcg so your body can absorb calcium",
+                "K2 (MK-7) 90 mcg to direct calcium to bone proteins",
+                "Calcium 400 mg from an algae-derived mineral complex"
+              ],
+              "closer": "Three steps, two softgels.*"
+            }
+          },
+          {
+            "name": "买家疑问——我补的钙到底去哪了",
+            "why": "环绕标签与四条作用都在回答同一个问题：吃了钙，它落到哪。用买家内心疑问开句，比陈述句更能拦住人。",
+            "copy": {
+              "headline": "You take calcium.\nWhere does it go?",
+              "subhead": "Without D3 and K2, a dose has nowhere to land.",
+              "points": [
+                "D3 25 mcg supports calcium absorption",
+                "K2 90 mcg supports calcium delivery to bone",
+                "Calcium 400 mg, from algae rather than limestone"
+              ],
+              "closer": "This formula answers the question.*"
+            }
+          },
+          {
+            "name": "对比失败解法——只补钙是只做了一半",
+            "why": "四条并排的结构适合逐个点名「只做一半」的做法，每点一个就多一次「我也试过」的认同。",
+            "copy": {
+              "headline": "Calcium alone\nis half the job.",
+              "subhead": "Absorption and delivery are the other half.",
+              "points": [
+                "Calcium-only tablets skip the absorption step",
+                "D3 25 mcg covers absorption",
+                "K2 (MK-7) 90 mcg covers delivery"
+              ],
+              "closer": "Six actives, so nothing is left out.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "「我补的钙去哪了」",
+          "problem": "吃了两年钙片，说不清有没有落到骨头上，也没人解释过。",
+          "solution": "D3 打开吸收、K2 引钙到骨蛋白，两个环节各有一个剂量。",
+          "after": "她读完四条作用，把手机拿远一点又看了一遍——这次看懂了。",
+          "placement": "四条药丸块是机制链的四个落点；环绕标签补配方特征"
+        },
+        {
+          "title": "只补钙的那几年",
+          "problem": "只买过钙片，没人告诉她还需要 D3 和 K2。",
+          "solution": "一条链路补齐：吸收、投递、材料三段不可缺。",
+          "after": "她把旧钙片瓶盖拧上，放到一旁，不再纠结要不要吃完。",
+          "placement": "四条并排结构天然适合「点名对比」，粗体词落在第二行"
+        },
+        {
+          "title": "配方里还有什么",
+          "problem": "除了主星，她想知道这一瓶到底装了几样东西。",
+          "solution": "环绕瓶身的五个标签把配方特征一次说完。",
+          "after": "视线绕着瓶身转了一圈，五个标签逐个扫过，像在核对清单。",
+          "placement": "五个环绕标签位就是这个动作的载体"
         }
       ]
     },
@@ -218,7 +701,10 @@
       "img": "3.png",
       "task": "一天几粒，能用多久",
       "flags": [
-        { "level": "error", "text": "原文「30 Capsules」与新规格 90 Softgels / 45 servings 冲突；且 Capsules 剂型错配" }
+        {
+          "level": "error",
+          "text": "原文「30 Capsules」与新规格 90 Softgels / 45 servings 冲突；且 Capsules 剂型错配"
+        }
       ],
       "slots": [
         {
@@ -227,13 +713,46 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*页面标题",
-          "rects": [[13, 15, 40, 11]],
+          "rects": [
+            [
+              13,
+              15,
+              40,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "Two softgels a day.", "alt": "The daily amount, in one photo." },
-            "B": { "rec": "A 45-day bottle.", "alt": "Two a day, forty-five days." },
-            "C": { "rec": "Know your dose.", "alt": "Two a day. That's the whole ask." },
-            "D": { "rec": "Two softgels per serving.", "alt": "The serving size, spelled out." }
-          }
+            "A": {
+              "rec": "Two softgels a day.",
+              "alt": "The daily amount, in one photo."
+            },
+            "B": {
+              "rec": "A 45-day bottle.",
+              "alt": "Two a day, forty-five days."
+            },
+            "C": {
+              "rec": "Know your dose.",
+              "alt": "Two a day. That's the whole ask."
+            },
+            "D": {
+              "rec": "Two softgels per serving.",
+              "alt": "The serving size, spelled out."
+            }
+          },
+          "divs": [
+            {
+              "en": "Meet your daily two.",
+              "zh": "拟人邀约"
+            },
+            {
+              "en": "The whole routine, here.",
+              "zh": "极简"
+            },
+            {
+              "en": "Small softgel, full formula.",
+              "zh": "小大反差"
+            }
+          ]
         },
         {
           "id": "M3-X",
@@ -241,14 +760,47 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "（空白块，无指令）",
-          "rects": [[8, 53, 27, 37]],
+          "rects": [
+            [
+              8,
+              53,
+              27,
+              37
+            ]
+          ],
           "values": {
-            "A": { "rec": "90 vegan softgels.\n45 servings.\nOne bottle is a 45-day supply.", "alt": "90 softgels.\n2 a day.\n45 days." },
-            "B": { "rec": "90 softgels.\n2 a day.\n45 days.", "alt": "45 days per bottle.\n90 softgels." },
-            "C": { "rec": "90 softgels.\nTwo a day.\n45 days.", "alt": "90 softgels.\n2 daily.\n45 days." },
-            "D": { "rec": "90 vegan softgels  ·  45 servings per container", "alt": "90 softgels  ·  45 servings" }
+            "A": {
+              "rec": "90 vegan softgels.\n45 servings.\nOne bottle is a 45-day supply.",
+              "alt": "90 softgels.\n2 a day.\n45 days."
+            },
+            "B": {
+              "rec": "90 softgels.\n2 a day.\n45 days.",
+              "alt": "45 days per bottle.\n90 softgels."
+            },
+            "C": {
+              "rec": "90 softgels.\nTwo a day.\n45 days.",
+              "alt": "90 softgels.\n2 daily.\n45 days."
+            },
+            "D": {
+              "rec": "90 vegan softgels.\n45 servings.\nA 45-day supply.",
+              "alt": "90 softgels  ·  45 servings"
+            }
           },
-          "note": "设计未标注该块指令，按规格信息填充；字数上限需设计师确认（缺口 G8）。"
+          "note": "设计未标注该块指令，按规格信息填充；字数上限需设计师确认（缺口 G8）。",
+          "divs": [
+            {
+              "en": "90 vegan softgels.\n45 servings.\nA 45-day supply.",
+              "zh": "装量三连"
+            },
+            {
+              "en": "A month and a half.\nOne bottle.\nNo refills.",
+              "zh": "天数账口语化"
+            },
+            {
+              "en": "Six actives inside.\nNinety softgels.\nOne habit.",
+              "zh": "从成分到习惯"
+            }
+          ]
         },
         {
           "id": "M3-Y",
@@ -256,14 +808,47 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "（空白块，无指令）",
-          "rects": [[66, 33, 28, 34]],
+          "rects": [
+            [
+              66,
+              33,
+              28,
+              34
+            ]
+          ],
           "values": {
-            "A": { "rec": "Serving size: 2 softgels.\nTake with water, at any time of day.", "alt": "Serving size: 2 softgels, with water." },
-            "B": { "rec": "Serving size 2 softgels — with water, any time.", "alt": "Two softgels, with water." },
-            "C": { "rec": "Take 2 with water, whenever.", "alt": "Two softgels. Any time. With water." },
-            "D": { "rec": "Serving size: 2 softgels, taken with water.", "alt": "Serving size 2 softgels." }
+            "A": {
+              "rec": "Serving size: 2 softgels.\nTake with water, at any time of day.",
+              "alt": "Serving size: 2 softgels.\nWith water, any time."
+            },
+            "B": {
+              "rec": "Serving size 2 softgels —\nwith water, any time.",
+              "alt": "Two softgels, with water."
+            },
+            "C": {
+              "rec": "Take 2 with water, whenever.",
+              "alt": "Two softgels. Any time. With water."
+            },
+            "D": {
+              "rec": "Serving size: 2 softgels,\nwith water.",
+              "alt": "Serving size 2 softgels."
+            }
           },
-          "note": "同上，需设计师确认字数上限（缺口 G8）。"
+          "note": "同上，需设计师确认字数上限（缺口 G8）。",
+          "divs": [
+            {
+              "en": "Serving size: 2 softgels.\nWith water.\nAny time of day.",
+              "zh": "用法拆成三行"
+            },
+            {
+              "en": "Two softgels, water, done.\nNo powder to mix.\nNo shaker to clean.",
+              "zh": "点名粉剂两道麻烦"
+            },
+            {
+              "en": "Morning or night.\nThe bottle travels\nbetter than a tub.",
+              "zh": "对比大桶粉剂"
+            }
+          ]
         },
         {
           "id": "M3-N",
@@ -271,24 +856,134 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "30 / Capsules Daily supply",
-          "rects": [[62, 72, 30, 10]],
+          "rects": [
+            [
+              62,
+              72,
+              30,
+              10
+            ]
+          ],
           "values": {
-            "A": { "rec": "90 — Softgels  ·  45-day — daily supply", "alt": "90 / Softgels / 45 days" },
-            "B": { "rec": "90 — softgels  ·  45 — days", "alt": "90 — softgels  ·  45 — days per bottle" },
-            "C": { "rec": "90 — softgels  ·  2 — a day  ·  45 — days", "alt": "90 — softgels  ·  45 — days" },
-            "D": { "rec": "2 softgels — per serving  ·  45 — servings per container", "alt": "Calcium 400 mg per serving  ·  2 softgels per serving  ·  45 servings per container" }
+            "A": {
+              "rec": "90 — Softgels\n45-day supply",
+              "alt": "90 — Softgels\n45 days"
+            },
+            "B": {
+              "rec": "90 — softgels\n45 — days",
+              "alt": "45 — days\n2 — a day"
+            },
+            "C": {
+              "rec": "90 — softgels\n2 — a day",
+              "alt": "90 — softgels\n45 — days"
+            },
+            "D": {
+              "rec": "2 — softgels\nper serving",
+              "alt": "90 — softgels\n45 — servings"
+            }
           },
-          "note": "原 30 粒与新规格冲突，按 90 softgels / 45 servings 修正。"
+          "note": "原 30 粒与新规格冲突，按 90 softgels / 45 servings 修正。",
+          "divs": [
+            {
+              "en": "90 — softgels\n45-day supply",
+              "zh": "瓶装+天数两行"
+            },
+            {
+              "en": "45 — days\n2 — softgels daily",
+              "zh": "天数账两行"
+            },
+            {
+              "en": "1 — bottle\n45 — days handled",
+              "zh": "极简对仗"
+            }
+          ]
         },
         {
           "id": "M3-F",
           "label": "底部利益句",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[62, 82, 34, 11]],
+          "rects": [
+            [
+              62,
+              82,
+              34,
+              11
+            ]
+          ],
           "text": "Supports Cellular Renewal, Muscle Strength & Immune Function",
           "note": "与白名单句式一致，保留。需补 * 脚注。",
           "needs": "本图需上图 DSHEA 免责声明全文"
+        }
+      ],
+      "free": {
+        "read": "实拍手托软胶囊建立质感与真实感，左侧深色块与右上白块是设计留出的两处展示位（未给指令），右中数字块讲装量与天数。",
+        "angles": [
+          {
+            "name": "45 天账——一瓶就是一个周期",
+            "why": "掌心实拍传达「每天两颗」的真实尺寸，右中数字块正好把一瓶 45 天的账算清，是这张图信息密度最高的落点。",
+            "copy": {
+              "headline": "One bottle,\n45 days.",
+              "subhead": "90 softgels. Two a day. That's the whole supply.",
+              "points": [
+                "90 vegan softgels per bottle",
+                "2 softgels per serving, 45 servings",
+                "No powder tub to finish before it clumps"
+              ],
+              "closer": "45 days handled in one bottle."
+            }
+          },
+          {
+            "name": "剂型体验——吞服这一件小事",
+            "why": "掌心实拍突出软胶囊的体积与形态，适合写别的品牌少讲的「吞服体验」与「携带」，把剂型优势落到日常动作。",
+            "copy": {
+              "headline": "Small enough\nto forget.",
+              "subhead": "A vegan softgel with a liquid fill, not a chalky tablet.",
+              "points": [
+                "Shell: modified food starch, glycerin, purified water, carrageenan",
+                "Liquid fill in organic MCT oil",
+                "Take with water, any time of day"
+              ],
+              "closer": "Two softgels, water, done."
+            }
+          },
+          {
+            "name": "空白展示位——把配方纪律写上去",
+            "why": "左侧深色块与右上白块是设计师留下的两块空白，最适合放一组「配方纪律」式短主张，填满留白而不与数字块抢注意力。",
+            "copy": {
+              "headline": "Six actives.\nZero blends.",
+              "subhead": "What's on the panel is what's in the softgel.",
+              "points": [
+                "400 mg calcium, 25 mcg D3, 90 mcg K2",
+                "Urolithin A 250 mg, Nicotinamide Riboside Chloride 300 mg, astaxanthin 4 mg",
+                "No proprietary blends, no hidden fillers"
+              ],
+              "closer": "Everything stated, nothing hidden.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "掌心上的大小",
+          "problem": "怕颗粒太大吞不下，也怕太小说明剂量不够。",
+          "solution": "实拍对比：软胶囊落在掌心中央，大小一目了然。",
+          "after": "她摊开手掌比了比，觉得「这个尺寸可以」，随手把瓶子放到餐边柜。",
+          "placement": "手掌实拍是主视觉；两块空白区放剂型与辅料纪律"
+        },
+        {
+          "title": "一瓶就是一个周期",
+          "problem": "不想囤货，也不想月底断档。",
+          "solution": "90 颗、每天两颗、45 天。",
+          "after": "日历上标了一次购买提醒，之后 45 天不再想这件事。",
+          "placement": "右中数字块（数量 + 天数）正是这个账目"
+        },
+        {
+          "title": "出门带不带",
+          "problem": "出差一周，粉桶塞不进箱子。",
+          "solution": "一瓶 45 天，随手塞进背包侧袋。",
+          "after": "行李箱半开，侧面插着那瓶软胶囊；她单手按压合箱，动作很顺。",
+          "placement": "空白展示位写「便携 / 无需分装」"
         }
       ]
     },
@@ -298,9 +993,18 @@
       "img": "9.png",
       "task": "软胶囊交付形式与标签透明度是否可信",
       "flags": [
-        { "level": "error", "text": "说明段尾句「Ready to absorb.」为无依据吸收主张，必须删除" },
-        { "level": "error", "text": "对比表 5 行中 4 项无本品材料支撑（Certified / Premium / No Artificial Additives / Exceptional Purity）" },
-        { "level": "warn", "text": "列头「Others」打 ✗ 属无依据比较与贬低，建议改中性列头或删列——需品牌确认（缺口 G9）" }
+        {
+          "level": "error",
+          "text": "说明段尾句「Ready to absorb.」为无依据吸收主张，必须删除"
+        },
+        {
+          "level": "error",
+          "text": "对比表 5 行中 4 项无本品材料支撑（Certified / Premium / No Artificial Additives / Exceptional Purity）"
+        },
+        {
+          "level": "warn",
+          "text": "列头「Others」打 ✗ 属无依据比较与贬低，建议改中性列头或删列——需品牌确认（缺口 G9）"
+        }
       ],
       "slots": [
         {
@@ -308,7 +1012,14 @@
           "label": "标题",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[3, 6, 40, 9]],
+          "rects": [
+            [
+              3,
+              6,
+              40,
+              9
+            ]
+          ],
           "text": "Delivery Matters",
           "note": "设计师定稿，保留。"
         },
@@ -318,13 +1029,46 @@
           "kind": "text",
           "judge": "真实内容·保留",
           "insp": "Softgels, not powder capsules.",
-          "rects": [[3, 14, 55, 8]],
+          "rects": [
+            [
+              3,
+              14,
+              55,
+              8
+            ]
+          ],
           "values": {
-            "A": { "rec": "Vegan softgels, not powder capsules.", "alt": "Softgels, not powder capsules." },
-            "B": { "rec": "Vegan softgels, not powder capsules.", "alt": "Softgels, not powder capsules." },
-            "C": { "rec": "Softgels, not powder capsules.", "alt": "A softgel, not a powder capsule." },
-            "D": { "rec": "A vegan softgel, not a powder capsule.", "alt": "Softgel, not powder capsule." }
-          }
+            "A": {
+              "rec": "Vegan softgels, not powder capsules.",
+              "alt": "Softgels, not powder capsules."
+            },
+            "B": {
+              "rec": "Vegan softgels, not powder capsules.",
+              "alt": "Softgels, not powder capsules."
+            },
+            "C": {
+              "rec": "Softgels, not powder capsules.",
+              "alt": "A softgel, not a powder capsule."
+            },
+            "D": {
+              "rec": "A vegan softgel, not a powder capsule.",
+              "alt": "Softgel, not powder capsule."
+            }
+          },
+          "divs": [
+            {
+              "en": "A vegan softgel, not a powder capsule.",
+              "zh": "剂型差异"
+            },
+            {
+              "en": "Pressed powder needs binders.",
+              "zh": "点明压制片为何加辅料"
+            },
+            {
+              "en": "Liquid fill, plant shell.",
+              "zh": "形态白描"
+            }
+          ]
         },
         {
           "id": "M4-P",
@@ -332,15 +1076,48 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "Urolithin A is pre-dissolved in organic MCT oil, sealed in a vegan softgel. Ready to absorb.*",
-          "rects": [[3, 22, 52, 10]],
+          "rects": [
+            [
+              3,
+              22,
+              52,
+              10
+            ]
+          ],
           "values": {
-            "A": { "rec": "Urolithin A is dispersed in organic MCT oil and sealed inside a vegan softgel shell.", "alt": "The actives sit in an organic MCT oil base, inside a vegan softgel shell." },
-            "B": { "rec": "Urolithin A sits in organic MCT oil, sealed in a vegan softgel shell.", "alt": "An organic MCT oil base, in a vegan softgel shell." },
-            "C": { "rec": "We disperse Urolithin A in organic MCT oil and seal it in a vegan softgel.", "alt": "Organic MCT oil inside. Vegan softgel outside." },
-            "D": { "rec": "Urolithin A is dispersed in organic MCT oil within a vegan softgel shell of modified food starch, glycerin, purified water, and carrageenan.", "alt": "Organic MCT oil carries the actives; a vegan softgel shell of modified food starch, glycerin, purified water, and carrageenan seals them." }
+            "A": {
+              "rec": "Urolithin A is dispersed in organic MCT oil,\nsealed inside a vegan softgel shell.",
+              "alt": "The actives sit in organic MCT oil,\ninside a vegan softgel shell."
+            },
+            "B": {
+              "rec": "Urolithin A sits in organic MCT oil,\nsealed in a vegan softgel shell.",
+              "alt": "The actives sit in MCT oil,\nsealed in a vegan shell."
+            },
+            "C": {
+              "rec": "We disperse Urolithin A in MCT oil\nand seal it in a vegan softgel.",
+              "alt": "We put the actives in MCT oil,\nthen seal them in a vegan shell."
+            },
+            "D": {
+              "rec": "Urolithin A is dispersed in organic MCT oil,\nwithin a vegan softgel shell.",
+              "alt": "Organic MCT oil carries the actives;\na vegan softgel shell seals them."
+            }
           },
           "note": "删除原尾句「Ready to absorb.」——吸收主张无本品材料支撑。",
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "Urolithin A 250 mg rides in organic MCT oil,\nsealed inside a vegan softgel shell.",
+              "zh": "内外结构两行白描"
+            },
+            {
+              "en": "The shell is vegan: modified food starch,\nglycerin, purified water, carrageenan.",
+              "zh": "辅料全列+回到面板"
+            },
+            {
+              "en": "Liquid fill, plant shell —\nnothing about the delivery is hidden.",
+              "zh": "交付透明化"
+            }
+          ]
         },
         {
           "id": "M4-C",
@@ -348,12 +1125,43 @@
           "kind": "table",
           "judge": "推定槽位",
           "insp": "Third-Party Certified / Premium Softgel Shell / No Artificial Additives / cGMP-Certified Facility / Exceptional Purity",
-          "rects": [[9, 38, 82, 50]],
+          "rects": [
+            [
+              9,
+              38,
+              82,
+              50
+            ]
+          ],
           "rows": {
-            "A": ["Third-Party Tested", "Vegan softgel shell", "Organic MCT oil base", "Made in a cGMP facility", "No proprietary blends"],
-            "B": ["Third-Party Tested", "Vegan softgel shell", "Organic MCT oil base", "No proprietary blends", "Simple ingredient list"],
-            "C": ["Third-Party Tested", "Vegan softgel shell", "Organic MCT oil base", "No proprietary blends", "Doses on the label"],
-            "D": ["Third-Party Tested", "Vegan softgel shell (modified food starch, glycerin)", "Organic MCT oil base", "No proprietary blends", "Full ingredient disclosure"]
+            "A": [
+              "Third-Party Tested",
+              "Vegan softgel shell",
+              "Organic MCT oil base",
+              "Made in a cGMP facility",
+              "No proprietary blends"
+            ],
+            "B": [
+              "Third-Party Tested",
+              "Vegan softgel shell",
+              "Organic MCT oil base",
+              "No proprietary blends",
+              "Simple ingredient list"
+            ],
+            "C": [
+              "Third-Party Tested",
+              "Vegan softgel shell",
+              "Organic MCT oil base",
+              "No proprietary blends",
+              "Doses on the label"
+            ],
+            "D": [
+              "Third-Party Tested",
+              "Vegan softgel shell (modified food starch, glycerin)",
+              "Organic MCT oil base",
+              "No proprietary blends",
+              "Full ingredient disclosure"
+            ]
           },
           "note": "原 5 行中 4 项无本品材料支撑：Certified 无机构名 → 改 Third-Party Tested；Premium → Vegan softgel shell；No Artificial Additives 无依据 → No proprietary blends；Exceptional Purity 无依据 → Organic MCT oil base / Full ingredient disclosure。"
         },
@@ -363,14 +1171,117 @@
           "kind": "text",
           "judge": "疑似槽位·待确认",
           "insp": "（ZAB 图标）／ Others",
-          "rects": [[80, 27, 14, 6]],
+          "rects": [
+            [
+              80,
+              27,
+              14,
+              6
+            ]
+          ],
           "values": {
-            "A": { "rec": "Our formula ｜ Powder capsule", "alt": "This formula ｜ Powder capsule" },
-            "B": { "rec": "This formula ｜ Powder capsule", "alt": "Our formula ｜ Powder capsule" },
-            "C": { "rec": "This bottle ｜ Powder capsule", "alt": "Our formula ｜ Powder capsule" },
-            "D": { "rec": "This formula ｜ Powder capsule", "alt": "Our formula ｜ Powder capsule" }
+            "A": {
+              "rec": "Our formula ｜ Powder",
+              "alt": "This formula ｜ Powder"
+            },
+            "B": {
+              "rec": "This formula ｜ Powder",
+              "alt": "Our formula ｜ Powder"
+            },
+            "C": {
+              "rec": "This bottle ｜ Powder",
+              "alt": "Our formula ｜ Powder"
+            },
+            "D": {
+              "rec": "This formula ｜ Powder",
+              "alt": "Our formula ｜ Powder"
+            }
           },
-          "note": "「｜」分隔左右两列列头。原「Others」列打 ✗ 属无依据比较与贬低，改中性列头；或整列删除——需品牌确认（缺口 G9）。"
+          "note": "「｜」分隔左右两列列头。原「Others」列打 ✗ 属无依据比较与贬低，改中性列头；或整列删除——需品牌确认（缺口 G9）。",
+          "divs": [
+            {
+              "en": "Vegan softgel ｜ Powder",
+              "zh": "形态中立对照"
+            },
+            {
+              "en": "Liquid fill ｜ Dry powder",
+              "zh": "填充方式对照"
+            },
+            {
+              "en": "Stated doses ｜ Blends",
+              "zh": "透明度对照"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "大标题 + 斜体副标 + 说明段讲交付方式，下方 5 行对比表用 ✓/✗ 做对照，右侧瓶身与产品卡。原 ✗ 列属无依据贬低，已改中性列头。",
+        "angles": [
+          {
+            "name": "交付机制——剂型也是配方的一部分",
+            "why": "说明段写的是「Urolithin A 分散在有机 MCT 油中、封进纯素软胶囊」，这正是把剂型当机制讲的位置，而不是当卖点形容词。",
+            "copy": {
+              "headline": "Delivery matters\nas much as\nthe formula.",
+              "subhead": "A liquid fill inside a vegan softgel.",
+              "points": [
+                "Urolithin A 250 mg dispersed in organic MCT oil",
+                "Sealed inside a vegan softgel shell",
+                "A liquid fill rather than a pressed powder"
+              ],
+              "closer": "The format is part of the formula.*"
+            }
+          },
+          {
+            "name": "对照中立化——两种形态并列讲",
+            "why": "5 行表原以 ✗ 贬低竞品列，已改为中性列头。自由文案可以顺着改法，把对照写成「事实并列」而不是胜负判定。",
+            "copy": {
+              "headline": "Two ways\nto take calcium.",
+              "subhead": "One is a powder capsule. This is a softgel.",
+              "points": [
+                "Third-party tested in a cGMP facility",
+                "Vegan softgel shell on an organic MCT oil base",
+                "Doses stated on the panel, not hidden in a blend"
+              ],
+              "closer": "Same category, different delivery.*"
+            }
+          },
+          {
+            "name": "壳与油——把两个辅料讲清楚",
+            "why": "对比表里有两行（Vegan softgel shell / Organic MCT oil base）正好对应壳与油，可用「两个细节」的方式把配方辅料摊开讲。",
+            "copy": {
+              "headline": "The shell is vegan.\nThe oil is MCT.",
+              "subhead": "Both are listed on the panel.",
+              "points": [
+                "Shell: modified food starch, glycerin, purified water, carrageenan",
+                "Base: organic MCT oil with sunflower lecithin",
+                "Six actives at stated doses"
+              ],
+              "closer": "Nothing about the delivery is hidden.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "粉剂换软胶囊的理由",
+          "problem": "同样补钙，为什么这次要换剂型。",
+          "solution": "活性分散在有机 MCT 油里、封进纯素软胶囊，说明段一次讲清。",
+          "after": "她读完说明段，视线落到对比表第一行的勾，心里那句「所以不一样在哪」被回答了。",
+          "placement": "说明段 + 五行对比表"
+        },
+        {
+          "title": "看那张对比表",
+          "problem": "想知道这款和常见的压制粉胶囊差在哪。",
+          "solution": "五行事实并列：检测、壳、油、工厂、无暗腔配方。",
+          "after": "手指从第一行滑到第五行，在「Vegan softgel shell」停了一下。",
+          "placement": "五行对比表是这张图的主体"
+        },
+        {
+          "title": "成分表干净到什么程度",
+          "problem": "她习惯翻到配料表看壳和油，怕有看不懂的东西。",
+          "solution": "壳就四样、油就一样，全部列出来。",
+          "after": "她对照自己的知识边界逐项点头，没有出现陌生的化学名。",
+          "placement": "对比表下两行 + 说明段"
         }
       ]
     },
@@ -380,7 +1291,10 @@
       "img": "10.png",
       "task": "标签是否完整透明",
       "flags": [
-        { "level": "warn", "text": "右下 GLUTEN FREE 圆形徽章需供应链出具无交叉污染依据，否则删徽章（缺口 G3）" }
+        {
+          "level": "warn",
+          "text": "右下 GLUTEN FREE 圆形徽章需供应链出具无交叉污染依据，否则删徽章（缺口 G3）"
+        }
       ],
       "slots": [
         {
@@ -389,13 +1303,46 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*页面标题",
-          "rects": [[3, 15, 32, 8]],
+          "rects": [
+            [
+              3,
+              15,
+              32,
+              8
+            ]
+          ],
           "values": {
-            "A": { "rec": "The full label, up front.", "alt": "What the label says, exactly." },
-            "B": { "rec": "Read the label.", "alt": "The label, before the claims." },
-            "C": { "rec": "Check the numbers.", "alt": "Six actives. Here are the doses." },
-            "D": { "rec": "The complete label, up front.", "alt": "Six actives at stated doses." }
-          }
+            "A": {
+              "rec": "The full label, up front.",
+              "alt": "What the label says, exactly."
+            },
+            "B": {
+              "rec": "Read the label.",
+              "alt": "The label, before the claims."
+            },
+            "C": {
+              "rec": "Check the numbers.",
+              "alt": "Six actives. Here are the doses."
+            },
+            "D": {
+              "rec": "The complete label, up front.",
+              "alt": "Six actives at stated doses."
+            }
+          },
+          "divs": [
+            {
+              "en": "Read the dose, not the claim.",
+              "zh": "编辑器口吻指向证据"
+            },
+            {
+              "en": "Six numbers, one panel.",
+              "zh": "数字即证据"
+            },
+            {
+              "en": "Everything in, printed.",
+              "zh": "全量披露"
+            }
+          ]
         },
         {
           "id": "M5-ST",
@@ -403,13 +1350,46 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*页面副标题",
-          "rects": [[3, 24, 32, 7]],
+          "rects": [
+            [
+              3,
+              24,
+              32,
+              7
+            ]
+          ],
           "values": {
-            "A": { "rec": "Supplement Facts, as printed on the bottle.", "alt": "Six actives at stated doses, as printed." },
-            "B": { "rec": "Six actives. Stated doses. Nothing blended away.", "alt": "Every dose, printed." },
-            "C": { "rec": "Six actives. Every dose printed.", "alt": "Six doses. No blends." },
-            "D": { "rec": "Calcium 400 mg from an algae-derived mineral complex leads the formula.", "alt": "Six actives at stated doses." }
-          }
+            "A": {
+              "rec": "Supplement Facts, as printed on the bottle.",
+              "alt": "Six actives at stated doses, as printed."
+            },
+            "B": {
+              "rec": "Six actives. Stated doses. Nothing blended.",
+              "alt": "Every dose, printed."
+            },
+            "C": {
+              "rec": "Six actives. Every dose printed.",
+              "alt": "Six doses. No blends."
+            },
+            "D": {
+              "rec": "Calcium 400 mg leads the formula.",
+              "alt": "Six actives at stated doses."
+            }
+          },
+          "divs": [
+            {
+              "en": "The same panel that's on the bottle.",
+              "zh": "面板即实物"
+            },
+            {
+              "en": "If it's in the softgel, it's here.",
+              "zh": "充要条件可自证"
+            },
+            {
+              "en": "Doses stated, blends absent.",
+              "zh": "反暗腔"
+            }
+          ]
         },
         {
           "id": "M5-BT",
@@ -417,13 +1397,46 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*标题",
-          "rects": [[6, 65, 22, 7]],
+          "rects": [
+            [
+              6,
+              65,
+              22,
+              7
+            ]
+          ],
           "values": {
-            "A": { "rec": "What's inside", "alt": "Inside the formula" },
-            "B": { "rec": "Named, not blended", "alt": "Named and measured" },
-            "C": { "rec": "Dosed, not blended", "alt": "Stated, not blended" },
-            "D": { "rec": "Full disclosure", "alt": "Complete disclosure" }
-          }
+            "A": {
+              "rec": "What's inside",
+              "alt": "Inside the formula"
+            },
+            "B": {
+              "rec": "Named, not blended",
+              "alt": "Named and measured"
+            },
+            "C": {
+              "rec": "Dosed, not blended",
+              "alt": "Stated, not blended"
+            },
+            "D": {
+              "rec": "Full disclosure",
+              "alt": "Complete disclosure"
+            }
+          },
+          "divs": [
+            {
+              "en": "Dosed, not blended",
+              "zh": "剂量直给反暗腔"
+            },
+            {
+              "en": "Six, on record",
+              "zh": "每一项可查"
+            },
+            {
+              "en": "Every number shown",
+              "zh": "透明宣言"
+            }
+          ]
         },
         {
           "id": "M5-BD",
@@ -431,20 +1444,60 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*文案",
-          "rects": [[6, 71, 26, 8]],
+          "rects": [
+            [
+              6,
+              71,
+              26,
+              8
+            ]
+          ],
           "values": {
-            "A": { "rec": "Six actives with stated doses, plus a vegan softgel shell of modified food starch, glycerin, purified water, and carrageenan.", "alt": "Six actives, stated doses, and an MCT oil base — every ingredient named and measured." },
-            "B": { "rec": "Calcium 400 mg, D3 25 mcg, K2 90 mcg, astaxanthin 4 mg, Urolithin A 250 mg, NR Chloride 300 mg.", "alt": "Every active by name and amount — no proprietary blends." },
-            "C": { "rec": "Calcium 400 mg leads. D3, K2, astaxanthin, Urolithin A, and NR Chloride follow — each one stated.", "alt": "Six actives, six doses, one vegan softgel shell." },
-            "D": { "rec": "Every active and every dose: calcium 400 mg, D3 25 mcg (cholecalciferol), K2 90 mcg (menaquinone-7), astaxanthin 4 mg, Urolithin A 250 mg, NR Chloride 300 mg.", "alt": "Six actives at stated doses, a vegan softgel shell, and no proprietary blends." }
-          }
+            "A": {
+              "rec": "Six actives with stated doses,\nplus a vegan softgel shell\nof modified food starch and glycerin.",
+              "alt": "Six actives, stated doses,\nand an MCT oil base —\nevery ingredient named."
+            },
+            "B": {
+              "rec": "Calcium 400 mg, D3 25 mcg, K2 90 mcg,\nastaxanthin 4 mg, Urolithin A 250 mg,\nNR Chloride 300 mg.",
+              "alt": "Every active by name and amount —\nno proprietary blends."
+            },
+            "C": {
+              "rec": "Calcium 400 mg leads. D3, K2,\nastaxanthin and Urolithin A follow —\neach one stated.",
+              "alt": "Six actives, six doses,\none vegan softgel shell."
+            },
+            "D": {
+              "rec": "Every active and every dose:\ncalcium 400 mg, D3 25 mcg, K2 90 mcg,\nastaxanthin 4 mg, Urolithin A 250 mg.",
+              "alt": "Six actives at stated doses,\na vegan softgel shell,\nand no proprietary blends."
+            }
+          },
+          "divs": [
+            {
+              "en": "400 mg calcium. 25 mcg D3.\n90 mcg K2. 4 mg astaxanthin.\n250 mg Urolithin A. 300 mg NR Chloride.",
+              "zh": "六剂量短句三行"
+            },
+            {
+              "en": "Calcium 400 mg and NR Chloride 300 mg\nsit on the same panel.\nNothing blended away.",
+              "zh": "首尾锚点+反暗腔"
+            },
+            {
+              "en": "The panel reads like a receipt:\n400, 25, 90, 4, 250, 300.\nEach with its unit.",
+              "zh": "收据比喻"
+            }
+          ]
         },
         {
           "id": "M5-SF",
           "label": "Supplement Facts 面板",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[46, 3, 52, 72]],
+          "rects": [
+            [
+              46,
+              3,
+              52,
+              72
+            ]
+          ],
           "text": "面板为设计稿真实内容：45 Servings Per Container / Serving size: 2 Softgels / 90 Softgel / 六项活性与 %DV / Other Ingredients: Vegan Softgel (Modified Food Starch, Glycerin, Purified Water, Carrageenan), Organic MCT Oil, Sunflower Lecithin",
           "note": "真实标签内容，保留不改。"
         },
@@ -453,10 +1506,87 @@
           "label": "徽章组",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[57, 76, 42, 18]],
+          "rects": [
+            [
+              57,
+              76,
+              42,
+              18
+            ]
+          ],
           "text": "AMERICAN OWNED QUALITY CONTROL ／ Formulated in the United States with imported ingredients. ／ Non-GMO ／ GMP CERTIFIED FACILITY ／ GLUTEN FREE",
           "note": "徽章保留；GLUTEN FREE 需供应链依据（缺口 G3）。",
           "needs": "本图需上图 DSHEA 免责声明全文"
+        }
+      ],
+      "free": {
+        "read": "直接上真实 Supplement Facts 面板做证据，左侧深色块留给「怎么看这张表」的引导（含红色强调条），右下四组徽章补信任。",
+        "angles": [
+          {
+            "name": "全量披露——先给读表指引",
+            "why": "右边就是真面板，左边深色块最该放「读表指引」，让买家知道该看哪一列、比什么，而不是重复喊透明。",
+            "copy": {
+              "headline": "Read the panel,\nnot the promise.",
+              "subhead": "The same Supplement Facts printed on the bottle.",
+              "points": [
+                "Six actives, each with a stated amount",
+                "Calcium 400 mg, D3 25 mcg, K2 90 mcg",
+                "Urolithin A 250 mg, Nicotinamide Riboside Chloride 300 mg, astaxanthin 4 mg"
+              ],
+              "closer": "If it's in the softgel, it's on this panel."
+            }
+          },
+          {
+            "name": "剂量即证据——把 %DV 摆出来",
+            "why": "面板的 %Daily Value 列是全图最硬的证据（31% / 125% / 75%），用它做角度比任何形容词都有说服力。",
+            "copy": {
+              "headline": "Doses,\nnot adjectives.",
+              "subhead": "Percent Daily Value, printed beside each active.",
+              "points": [
+                "Calcium 400 mg — 31% DV",
+                "Vitamin D3 25 mcg — 125% DV",
+                "Vitamin K2 90 mcg — 75% DV"
+              ],
+              "closer": "The numbers do the talking."
+            }
+          },
+          {
+            "name": "检测与工厂——徽章转成句子",
+            "why": "右下四组徽章（American Owned / Non-GMO / GMP / Gluten Free）是现成的信任素材，直接转成可读句子比徽章堆叠更有力。",
+            "copy": {
+              "headline": "Made in a\ncGMP facility.",
+              "subhead": "Third-party tested. Non-GMO. Gluten free.",
+              "points": [
+                "Formulated in the United States with imported ingredients",
+                "American owned quality control",
+                "90 softgels, 45 servings per container"
+              ],
+              "closer": "Claims you can point to.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "认真读标签的人",
+          "problem": "被太多夸张宣传伤过，只看面板。",
+          "solution": "直接上真面板，并给出读表指引（该看哪一列）。",
+          "after": "她放大截图核对 31% / 125% / 75% 三行，截图存进相册。",
+          "placement": "左侧深色块放读表指引；右侧就是真面板"
+        },
+        {
+          "title": "两张表和得上吗",
+          "problem": "怕页面上的数字和瓶子上不一致。",
+          "solution": "页面上就是瓶上那张面板，同一份。",
+          "after": "她拿起瓶子对着屏幕比了一遍，两边一致，放心。",
+          "placement": "面板区 + 左上标题位"
+        },
+        {
+          "title": "徽章以外还要看什么",
+          "problem": "徽章大家都印，看不出差别。",
+          "solution": "把徽章翻成句子：第三方检测、cGMP 工厂、Non-GMO、无麸质。",
+          "after": "视线从面板移到右下徽章区，四个图标逐个点亮式掠过。",
+          "placement": "右下徽章组 + 左框文案位"
         }
       ]
     },
@@ -466,10 +1596,22 @@
       "img": "高级轮播1.png",
       "task": "配方里有什么，最大成分是什么",
       "flags": [
-        { "level": "error", "text": "主标题残留 C15:0（十五烷酸），非本品成分" },
-        { "level": "error", "text": "成分列表残留 Coenzyme Q10、Phosphatidylcholine，非本品成分" },
-        { "level": "error", "text": "收尾句「The Full Healthy Aging Cycle.」为不可支撑的整体承诺" },
-        { "level": "warn", "text": "列表仅 4 行，本品卫星为 5 项，需设计师增 1 行（缺口 G6）" }
+        {
+          "level": "error",
+          "text": "主标题残留 C15:0（十五烷酸），非本品成分"
+        },
+        {
+          "level": "error",
+          "text": "成分列表残留 Coenzyme Q10、Phosphatidylcholine，非本品成分"
+        },
+        {
+          "level": "error",
+          "text": "收尾句「The Full Healthy Aging Cycle.」为不可支撑的整体承诺"
+        },
+        {
+          "level": "warn",
+          "text": "列表仅 4 行，本品卫星为 5 项，需设计师增 1 行（缺口 G6）"
+        }
       ],
       "slots": [
         {
@@ -477,7 +1619,14 @@
           "label": "顶部剂型标签",
           "kind": "preserve",
           "judge": "推定槽位",
-          "rects": [[41, 1, 18, 7]],
+          "rects": [
+            [
+              41,
+              1,
+              18,
+              7
+            ]
+          ],
           "text": "Softgels",
           "note": "原为 Capsules，剂型已改 vegan softgel，须改为 Softgels。"
         },
@@ -487,14 +1636,47 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "*##*C15:0",
-          "rects": [[8, 15, 45, 11]],
+          "rects": [
+            [
+              8,
+              15,
+              45,
+              11
+            ]
+          ],
           "values": {
-            "A": { "rec": "Algae Calcium 400 mg", "alt": "Algae Calcium, 400 mg per serving" },
-            "B": { "rec": "Algae Calcium 400 mg", "alt": "Algae Calcium 400 mg per serving" },
-            "C": { "rec": "Calcium first. 400 mg.", "alt": "Algae Calcium 400 mg" },
-            "D": { "rec": "Calcium 400 mg — algae-derived mineral complex", "alt": "Algae calcium, 400 mg per serving" }
+            "A": {
+              "rec": "Algae Calcium 400 mg",
+              "alt": "Algae calcium, 400 mg"
+            },
+            "B": {
+              "rec": "Algae Calcium 400 mg",
+              "alt": "Calcium 400 mg, algae"
+            },
+            "C": {
+              "rec": "400 mg, from algae",
+              "alt": "Algae calcium 400 mg"
+            },
+            "D": {
+              "rec": "Calcium 400 mg, algae",
+              "alt": "Algae calcium, 400 mg"
+            }
           },
-          "note": "替换 C15:0，改为主星藻源钙以剂量直接上标题。"
+          "note": "替换 C15:0，改为主星藻源钙以剂量直接上标题。",
+          "divs": [
+            {
+              "en": "Algae Calcium 400 mg",
+              "zh": "主星定位"
+            },
+            {
+              "en": "400 mg, from algae",
+              "zh": "剂量+来源"
+            },
+            {
+              "en": "The lead active: 400 mg",
+              "zh": "主角身份"
+            }
+          ]
         },
         {
           "id": "M6-L",
@@ -502,21 +1684,61 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "- Urolithin A / - Coenzyme Q10 / - Astaxanthin / - Phosphatidylcholine",
-          "rects": [[6, 27, 45, 22]],
+          "rects": [
+            [
+              6,
+              27,
+              45,
+              22
+            ]
+          ],
           "values": {
-            "A": { "rec": "- Vitamin D3 25 mcg\n- Vitamin K2 (MK-7) 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg", "alt": "- Vitamin D3 25 mcg\n- Vitamin K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg" },
-            "B": { "rec": "- Vitamin D3 25 mcg\n- Vitamin K2 (MK-7) 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg", "alt": "- Vitamin D3 25 mcg\n- Vitamin K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg" },
-            "C": { "rec": "- Vitamin D3 25 mcg\n- Vitamin K2 (MK-7) 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg", "alt": "- Vitamin D3 25 mcg\n- Vitamin K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg" },
-            "D": { "rec": "- Vitamin D3 25 mcg (cholecalciferol)\n- Vitamin K2 90 mcg (menaquinone-7)\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg", "alt": "- Vitamin D3 25 mcg\n- Vitamin K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- Nicotinamide Riboside Chloride 300 mg" }
+            "A": {
+              "rec": "- Vitamin D3 25 mcg\n- Vitamin K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg",
+              "alt": "- D3 25 mcg\n- K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg"
+            },
+            "B": {
+              "rec": "- D3 25 mcg — absorption\n- K2 90 mcg — delivery\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg",
+              "alt": "- D3 25 mcg\n- K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg"
+            },
+            "C": {
+              "rec": "- Absorb with D3 25 mcg\n- Deliver with K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg",
+              "alt": "- D3 25 mcg\n- K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg"
+            },
+            "D": {
+              "rec": "- D3 25 mcg, cholecalciferol\n- K2 90 mcg, menaquinone-7\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg",
+              "alt": "- D3 25 mcg\n- K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg"
+            }
           },
-          "note": "替换 CoQ10 与 Phosphatidylcholine。设计列表仅 4 行，需增 1 行容纳 5 项卫星（缺口 G6）。"
+          "note": "替换 CoQ10 与 Phosphatidylcholine。设计列表仅 4 行，需增 1 行容纳 5 项卫星（缺口 G6）。",
+          "divs": [
+            {
+              "en": "- D3 25 mcg — absorption\n- K2 90 mcg — delivery\n- Astaxanthin — antioxidant\n- Urolithin A — renewal\n- NR Chloride — energy",
+              "zh": "五行作用，窄列友好"
+            },
+            {
+              "en": "- Vitamin D3 25 mcg\n- Vitamin K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg\n- NR Chloride 300 mg",
+              "zh": "纯清单，每行≤24"
+            },
+            {
+              "en": "- Calcium 400 mg\n- D3 25 mcg\n- K2 90 mcg\n- Astaxanthin 4 mg\n- Urolithin A 250 mg",
+              "zh": "五项剂量清单"
+            }
+          ]
         },
         {
           "id": "M6-K",
           "label": "固定短语",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[35, 61, 47, 10]],
+          "rects": [
+            [
+              35,
+              61,
+              47,
+              10
+            ]
+          ],
           "text": "One Formula",
           "note": "保留。"
         },
@@ -526,15 +1748,118 @@
           "kind": "text",
           "judge": "推定槽位",
           "insp": "*##*The Full Healthy Aging Cycle.*",
-          "rects": [[33, 72, 52, 22]],
+          "rects": [
+            [
+              33,
+              72,
+              52,
+              22
+            ]
+          ],
           "values": {
-            "A": { "rec": "Bone support and cellular support, in two daily softgels.*", "alt": "Two softgels. Bone support and cellular support.*" },
-            "B": { "rec": "One bottle, two jobs: bone support and cellular support.*", "alt": "Bone support and cellular support, daily.*" },
-            "C": { "rec": "Bones and cells. Two softgels.*", "alt": "Two jobs. Two softgels.*" },
-            "D": { "rec": "Algae-derived calcium with D3 and K2, plus Urolithin A, NR Chloride, and astaxanthin.*", "alt": "Six actives, two softgels per serving.*" }
+            "A": {
+              "rec": "Bone support and\ncellular support.*",
+              "alt": "Two softgels,\ntwo kinds of support.*"
+            },
+            "B": {
+              "rec": "One bottle,\ntwo jobs.*",
+              "alt": "Bone and cellular\nsupport, daily.*"
+            },
+            "C": {
+              "rec": "Bones and cells,\ntwo softgels.*",
+              "alt": "Two jobs,\ntwo softgels.*"
+            },
+            "D": {
+              "rec": "Calcium with D3 and K2,\nplus Urolithin A.*",
+              "alt": "Six actives,\ntwo softgels.*"
+            }
           },
           "note": "原句为整体承诺，不可支撑，替换为可支撑的双锚句式。",
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "Bones need calcium.\nCalcium needs K2.*",
+              "zh": "机制链收尾"
+            },
+            {
+              "en": "Six actives in two\nsoftgels. Both jobs.*",
+              "zh": "双需求不做取舍"
+            },
+            {
+              "en": "Bone support and\ncellular support.*",
+              "zh": "回到标签可查"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "人物大图带情绪，主标点名主星（原为 C15:0 残留），4 行列表铺开活性，One Formula 强调一瓶合成，收尾句做双锚。",
+        "angles": [
+          {
+            "name": "六活性总览——一张图交代全部",
+            "why": "列表是这张图的主体，直接把六项活性与剂量铺开最贴合版式，也接住人物图传达的「长期投入」。",
+            "copy": {
+              "headline": "Six actives.\nOne label.",
+              "subhead": "Every active and every dose, in one formula.",
+              "points": [
+                "Calcium 400 mg from an algae-derived mineral complex",
+                "Vitamin D3 25 mcg and vitamin K2 (MK-7) 90 mcg",
+                "Astaxanthin 4 mg, Urolithin A 250 mg, Nicotinamide Riboside Chloride 300 mg"
+              ],
+              "closer": "One bottle, six stated actives.*"
+            }
+          },
+          {
+            "name": "机制三段链——吸收、投递、成骨",
+            "why": "人物的奔跑意象适合配「一条链在运转」的讲法，把 D3 → K2 → 钙 的顺序讲成动作序列。",
+            "copy": {
+              "headline": "Absorb it.\nRoute it.\nBuild with it.",
+              "subhead": "D3 opens absorption. K2 directs delivery. Calcium is the material.",
+              "points": [
+                "D3 25 mcg for calcium absorption",
+                "K2 (MK-7) 90 mcg for calcium delivery to bone proteins",
+                "Calcium 400 mg, algae-derived"
+              ],
+              "closer": "The chain works in order.*"
+            }
+          },
+          {
+            "name": "双域——骨骼与细胞各一半",
+            "why": "配方一半管骨、一半管细胞，人物图传达「长期状态」，把双域讲成同一张图的两个主角最合适。",
+            "copy": {
+              "headline": "Bones and cells,\ncovered in\none formula.",
+              "subhead": "Two softgels a day for both sides of the formula.*",
+              "points": [
+                "Bone side: calcium, D3, K2",
+                "Cellular side: Urolithin A 250 mg and Nicotinamide Riboside Chloride 300 mg",
+                "Antioxidant support from astaxanthin 4 mg"
+              ],
+              "closer": "Both sides, stated on the panel.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "一张图看完配方",
+          "problem": "不想逐页翻，想先确认「里面到底有哪几样」。",
+          "solution": "主标点名主星，五行列表把六项活性与剂量铺开。",
+          "after": "她对着列表逐行读完，在 Urolithin A 那行停了最久。",
+          "placement": "主标 + 五行成分列表 + One Formula 固定短语"
+        },
+        {
+          "title": "给我一个长期理由",
+          "problem": "补钙是长期的事，她需要一个能坚持的理由。",
+          "solution": "把配方讲成一条每天都在运转的链。",
+          "after": "跑完步在路边抬手擦汗，呼吸还没平复，表情是松弛的。",
+          "placement": "人物大图的情绪 + 收尾句做双锚"
+        },
+        {
+          "title": "两件事能不能一起办",
+          "problem": "柜子里已经有钙、有抗氧化、还有一瓶细胞类产品。",
+          "solution": "骨骼侧与细胞侧各三项，合成一瓶每天两颗。",
+          "after": "她把三瓶收进抽屉，只留一瓶在台面上。",
+          "placement": "主标写双域；列表按「骨侧 / 细胞侧」分组呈现"
         }
       ]
     },
@@ -544,8 +1869,14 @@
       "img": "高级轮播2.png",
       "task": "每个成分是什么、多少剂量、做什么",
       "flags": [
-        { "level": "warn", "text": "设计指令写「五种成分」，而 SF 面板为六项活性——卡数待设计师确认（缺口 G5）" },
-        { "level": "warn", "text": "卡片两行说明原文为同文重复（Support synergy regeneration imuscle and brain.）" }
+        {
+          "level": "warn",
+          "text": "设计指令写「五种成分」，而 SF 面板为六项活性——卡数待设计师确认（缺口 G5）"
+        },
+        {
+          "level": "warn",
+          "text": "卡片两行说明原文为同文重复（Support synergy regeneration imuscle and brain.）"
+        }
       ],
       "slots": [
         {
@@ -554,14 +1885,47 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*五种成分的高级轮播卡片图主标题",
-          "rects": [[14, 17, 72, 10]],
+          "rects": [
+            [
+              14,
+              17,
+              72,
+              10
+            ]
+          ],
           "values": {
-            "A": { "rec": "Six actives, six stated doses.", "alt": "Every dose, on the label." },
-            "B": { "rec": "What's in each softgel, and how much.", "alt": "Six actives, line by line." },
-            "C": { "rec": "Six actives. Every dose on the label.", "alt": "Here's every dose." },
-            "D": { "rec": "Six actives, each with a stated dose.", "alt": "The role of each active." }
+            "A": {
+              "rec": "Six actives, six stated doses.",
+              "alt": "Every dose, on the label."
+            },
+            "B": {
+              "rec": "What's in each softgel, and how much.",
+              "alt": "Six actives, line by line."
+            },
+            "C": {
+              "rec": "Six actives. Every dose on the label.",
+              "alt": "Here's every dose."
+            },
+            "D": {
+              "rec": "Six actives, each with a stated dose.",
+              "alt": "The role of each active."
+            }
           },
-          "note": "设计指令「五种成分」与六项活性冲突；按六项给出。若版式锁定五卡，把卡 2／卡 3 合并为一张「Vitamin D3 + K2」（缺口 G5）。"
+          "note": "设计指令「五种成分」与六项活性冲突；按六项给出。若版式锁定五卡，把卡 2／卡 3 合并为一张「Vitamin D3 + K2」（缺口 G5）。",
+          "divs": [
+            {
+              "en": "Six actives, card by card.",
+              "zh": "逐卡目录感"
+            },
+            {
+              "en": "Six actives. Six doses.",
+              "zh": "双重对仗"
+            },
+            {
+              "en": "Every card carries a number.",
+              "zh": "剂量可查"
+            }
+          ]
         },
         {
           "id": "M7-C1",
@@ -569,13 +1933,54 @@
           "kind": "card",
           "judge": "槽位",
           "insp": "成分1 / xxx mg / Support synergy regeneration imuscle and brain.（重复两行）",
-          "rects": [[7, 29, 34, 58]],
+          "rects": [
+            [
+              7,
+              29,
+              34,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Algae Calcium", "dose": "400 mg", "line1": "From an algae-derived mineral complex.", "line2": "The formula's key ingredient.*" },
-            "B": { "name": "Algae Calcium", "dose": "400 mg", "line1": "From an algae-derived mineral complex.", "line2": "The main ingredient.*" },
-            "C": { "name": "Algae Calcium", "dose": "400 mg", "line1": "Leads the formula.", "line2": "From an algae-derived mineral complex.*" },
-            "D": { "name": "Calcium", "dose": "400 mg (31% DV)", "line1": "From an algae-derived mineral complex.", "line2": "The formula's key ingredient.*" }
-          }
+            "A": {
+              "name": "Algae Calcium",
+              "dose": "400 mg",
+              "line1": "From an algae-derived complex.",
+              "line2": "The formula's key ingredient.*"
+            },
+            "B": {
+              "name": "Algae Calcium",
+              "dose": "400 mg",
+              "line1": "Algae-derived calcium.",
+              "line2": "The lead active.*"
+            },
+            "C": {
+              "name": "Algae Calcium",
+              "dose": "400 mg",
+              "line1": "From algae, not limestone.",
+              "line2": "The lead active.*"
+            },
+            "D": {
+              "name": "Calcium",
+              "dose": "400 mg",
+              "line1": "Calcium 400 mg (31% DV).",
+              "line2": "From a mineral complex.*"
+            }
+          },
+          "divs": [
+            {
+              "en": "The lead active, 400 mg.*",
+              "zh": "身份+剂量"
+            },
+            {
+              "en": "Where the formula starts.*",
+              "zh": "起点叙事"
+            },
+            {
+              "en": "400 mg the rest builds on.*",
+              "zh": "以主星解释结构"
+            }
+          ]
         },
         {
           "id": "M7-C2",
@@ -583,13 +1988,54 @@
           "kind": "card",
           "judge": "槽位",
           "insp": "成分2 / xxx mg / Support synergy regeneration imuscle and brain.（重复两行）",
-          "rects": [[42, 29, 34, 58]],
+          "rects": [
+            [
+              42,
+              29,
+              34,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Vitamin D3", "dose": "25 mcg", "line1": "As cholecalciferol.", "line2": "Pairs with calcium for absorption support.*" },
-            "B": { "name": "Vitamin D3", "dose": "25 mcg", "line1": "As cholecalciferol.", "line2": "Works with calcium.*" },
-            "C": { "name": "Vitamin D3", "dose": "25 mcg", "line1": "Pairs with calcium.", "line2": "As cholecalciferol.*" },
-            "D": { "name": "Vitamin D3", "dose": "25 mcg (125% DV)", "line1": "As cholecalciferol.", "line2": "Supports calcium absorption.*" }
-          }
+            "A": {
+              "name": "Vitamin D3",
+              "dose": "25 mcg",
+              "line1": "As cholecalciferol.",
+              "line2": "For calcium absorption.*"
+            },
+            "B": {
+              "name": "Vitamin D3",
+              "dose": "25 mcg",
+              "line1": "Cholecalciferol.",
+              "line2": "Supports calcium absorption.*"
+            },
+            "C": {
+              "name": "Vitamin D3",
+              "dose": "25 mcg",
+              "line1": "As cholecalciferol.",
+              "line2": "Supports calcium absorption.*"
+            },
+            "D": {
+              "name": "Vitamin D3",
+              "dose": "25 mcg",
+              "line1": "D3 25 mcg (125% DV).",
+              "line2": "Absorption support.*"
+            }
+          },
+          "divs": [
+            {
+              "en": "Opens the door for calcium.*",
+              "zh": "开门机制"
+            },
+            {
+              "en": "Without D3, calcium waits.*",
+              "zh": "点名缺 D3 的失败解法"
+            },
+            {
+              "en": "The absorption half.*",
+              "zh": "机制前半段"
+            }
+          ]
         },
         {
           "id": "M7-C3",
@@ -597,14 +2043,125 @@
           "kind": "card",
           "judge": "槽位",
           "insp": "成分3 / xxx mg / Support synergy regeneration…（重复两行）",
-          "rects": [[76, 29, 24, 58]],
+          "rects": [
+            [
+              76,
+              29,
+              24,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Vitamin K2", "dose": "90 mcg", "line1": "As menaquinone-7 (MK-7).", "line2": "Pairs with calcium for bone support.*" },
-            "B": { "name": "Vitamin K2", "dose": "90 mcg", "line1": "As menaquinone-7 (MK-7).", "line2": "Works with calcium.*" },
-            "C": { "name": "Vitamin K2", "dose": "90 mcg", "line1": "Directs calcium to bone.", "line2": "As menaquinone-7 (MK-7).*" },
-            "D": { "name": "Vitamin K2", "dose": "90 mcg (75% DV)", "line1": "As menaquinone-7 (MK-7).", "line2": "Supports calcium delivery to bone.*" }
+            "A": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "As menaquinone-7 (MK-7).",
+              "line2": "Calcium delivery to bone.*"
+            },
+            "B": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "Menaquinone-7 (MK-7).",
+              "line2": "Calcium delivery to bone.*"
+            },
+            "C": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "As menaquinone-7 (MK-7).",
+              "line2": "Calcium delivery to bone.*"
+            },
+            "D": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "K2 90 mcg (75% DV), MK-7.",
+              "line2": "Bone protein support.*"
+            }
           },
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "Routes calcium toward bone.*",
+              "zh": "引路机制"
+            },
+            {
+              "en": "90 mcg of MK-7.*",
+              "zh": "剂量+形态名"
+            },
+            {
+              "en": "The delivery half.*",
+              "zh": "机制后半段，与 D3 成对"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "深色卡片区，每张成分卡是「名称 + 图 + 剂量 + 两行说明×2」，节奏是一张卡一个成分；第三张在右侧被画布裁切，属滚动中的正常状态。",
+        "angles": [
+          {
+            "name": "逐个成分——卡片即目录",
+            "why": "卡片自带编号位与剂量大字，用「第几个成分」的叙事最贴合版式，也最容易被设计师直接采用。",
+            "copy": {
+              "headline": "Active one,\nthen two,\nthen three.",
+              "subhead": "Card by card, the formula explains itself.",
+              "points": [
+                "Calcium 400 mg — the lead active",
+                "Vitamin D3 25 mcg — the absorption step",
+                "Vitamin K2 (MK-7) 90 mcg — the delivery step"
+              ],
+              "closer": "Six cards, six stated doses.*"
+            }
+          },
+          {
+            "name": "口径——每份两颗，不是每颗",
+            "why": "剂量大字下方的小字说明位适合讲清「每份 = 2 粒」的口径，避免把 400 mg 误读成单粒剂量。",
+            "copy": {
+              "headline": "Per serving,\nnot per softgel.",
+              "subhead": "Two softgels make one serving — the doses are stated that way.",
+              "points": [
+                "Serving size: 2 softgels",
+                "Calcium 400 mg per serving",
+                "D3 25 mcg and K2 90 mcg per serving"
+              ],
+              "closer": "The label and the bottle agree.*"
+            }
+          },
+          {
+            "name": "前三张卡讲同一件事：骨",
+            "why": "这三张卡（钙 / D3 / K2）恰好构成骨骼支持组，可以点明「前三张卡是一件事的三个环节」。",
+            "copy": {
+              "headline": "Three cards,\none job: bones.",
+              "subhead": "Calcium needs both D3 and K2 to be useful.",
+              "points": [
+                "Calcium 400 mg is the material",
+                "D3 25 mcg supports absorption",
+                "K2 (MK-7) 90 mcg supports delivery to bone proteins"
+              ],
+              "closer": "Three actives, one bone story.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "逐个成分看下去",
+          "problem": "她想知道每一项具体是多少、做什么，而不是笼统说「复合配方」。",
+          "solution": "一卡一个成分：名称、剂量、两行说明。",
+          "after": "手指在三张卡之间横向滑动，节奏像翻卡片。",
+          "placement": "三张成分卡就是浏览节奏本身"
+        },
+        {
+          "title": "每份还是每颗",
+          "problem": "怕把 400 mg 误读成单颗剂量。",
+          "solution": "明写 serving size: 2 softgels，剂量按每份给。",
+          "after": "她回头看了瓶身标签一眼，确认一致后继续往下。",
+          "placement": "剂量大字下方的小字说明位"
+        },
+        {
+          "title": "前三张卡是一件事",
+          "problem": "看不出钙、D3、K2 之间有什么关系。",
+          "solution": "点明三张卡是同一件事的三个环节。",
+          "after": "她「哦」了一声，把三张卡连起来又看了一遍。",
+          "placement": "三张卡的排列顺序本身就是叙事"
         }
       ]
     },
@@ -614,7 +2171,10 @@
       "img": "高级轮播3.png",
       "task": "每个成分是什么、多少剂量、做什么（接续）",
       "flags": [
-        { "level": "warn", "text": "设计指令写「五种成分」，而 SF 面板为六项活性——卡数待设计师确认（缺口 G5）" }
+        {
+          "level": "warn",
+          "text": "设计指令写「五种成分」，而 SF 面板为六项活性——卡数待设计师确认（缺口 G5）"
+        }
       ],
       "slots": [
         {
@@ -623,14 +2183,47 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "*##*五种成分的高级轮播卡片图",
-          "rects": [[11, 17, 76, 10]],
+          "rects": [
+            [
+              11,
+              17,
+              76,
+              10
+            ]
+          ],
           "values": {
-            "A": { "rec": "Six actives, six stated doses.", "alt": "Every dose, on the label." },
-            "B": { "rec": "What's in each softgel, and how much.", "alt": "Six actives, line by line." },
-            "C": { "rec": "Six actives. Every dose on the label.", "alt": "Here's every dose." },
-            "D": { "rec": "Six actives, each with a stated dose.", "alt": "The role of each active." }
+            "A": {
+              "rec": "Six actives, six stated doses.",
+              "alt": "Every dose, on the label."
+            },
+            "B": {
+              "rec": "What's in each softgel, and how much.",
+              "alt": "Six actives, line by line."
+            },
+            "C": {
+              "rec": "Six actives. Every dose on the label.",
+              "alt": "Here's every dose."
+            },
+            "D": {
+              "rec": "Six actives, each with a stated dose.",
+              "alt": "The role of each active."
+            }
           },
-          "note": "与 M7-T 为同一轮播序列，文案必须保持一致。"
+          "note": "与 M7-T 为同一轮播序列，文案必须保持一致。",
+          "divs": [
+            {
+              "en": "Six actives, card by card.",
+              "zh": "逐卡目录感（与 M7-T 一致）"
+            },
+            {
+              "en": "Six actives. Six doses.",
+              "zh": "双重对仗（与 M7-T 一致）"
+            },
+            {
+              "en": "Every card carries a number.",
+              "zh": "剂量可查（与 M7-T 一致）"
+            }
+          ]
         },
         {
           "id": "M8-C3",
@@ -638,14 +2231,55 @@
           "kind": "card",
           "judge": "槽位",
           "insp": "成分3 / xxx mg / Support synergy regeneration…（重复两行）",
-          "rects": [[0, 29, 23, 58]],
+          "rects": [
+            [
+              0,
+              29,
+              23,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Vitamin K2", "dose": "90 mcg", "line1": "As menaquinone-7 (MK-7).", "line2": "Pairs with calcium for bone support.*" },
-            "B": { "name": "Vitamin K2", "dose": "90 mcg", "line1": "As menaquinone-7 (MK-7).", "line2": "Works with calcium.*" },
-            "C": { "name": "Vitamin K2", "dose": "90 mcg", "line1": "Directs calcium to bone.", "line2": "As menaquinone-7 (MK-7).*" },
-            "D": { "name": "Vitamin K2", "dose": "90 mcg (75% DV)", "line1": "As menaquinone-7 (MK-7).", "line2": "Supports calcium delivery to bone.*" }
+            "A": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "As menaquinone-7 (MK-7).",
+              "line2": "Calcium delivery to bone.*"
+            },
+            "B": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "Menaquinone-7 (MK-7).",
+              "line2": "Calcium delivery to bone.*"
+            },
+            "C": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "As menaquinone-7 (MK-7).",
+              "line2": "Calcium delivery to bone.*"
+            },
+            "D": {
+              "name": "Vitamin K2",
+              "dose": "90 mcg",
+              "line1": "K2 90 mcg (75% DV), MK-7.",
+              "line2": "Bone protein support.*"
+            }
           },
-          "note": "M7-C3 与 M8-C3 是同一张卡在不同滚动态下的两次出现，内容必须一致。"
+          "note": "M7-C3 与 M8-C3 是同一张卡在不同滚动态下的两次出现，内容必须一致。",
+          "divs": [
+            {
+              "en": "Routes calcium toward bone.*",
+              "zh": "引路机制（与 M7-C3 一致）"
+            },
+            {
+              "en": "90 mcg of MK-7.*",
+              "zh": "剂量+形态名（与 M7-C3 一致）"
+            },
+            {
+              "en": "The delivery half.*",
+              "zh": "机制后半段（与 M7-C3 一致）"
+            }
+          ]
         },
         {
           "id": "M8-C4",
@@ -653,13 +2287,54 @@
           "kind": "card",
           "judge": "槽位",
           "insp": "成分4 / xxx mg / Support synergy regeneration imuscle and brain.（重复两行）",
-          "rects": [[25, 29, 34, 58]],
+          "rects": [
+            [
+              25,
+              29,
+              34,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Astaxanthin", "dose": "4 mg", "line1": "A carotenoid antioxidant.", "line2": "Included at a stated 4 mg.*" },
-            "B": { "name": "Astaxanthin", "dose": "4 mg", "line1": "A carotenoid antioxidant.", "line2": "4 mg, as stated.*" },
-            "C": { "name": "Astaxanthin", "dose": "4 mg", "line1": "Adds antioxidant support.", "line2": "A carotenoid.*" },
-            "D": { "name": "Astaxanthin", "dose": "4 mg", "line1": "A carotenoid; DV not established.", "line2": "Antioxidant support.*" }
-          }
+            "A": {
+              "name": "Astaxanthin",
+              "dose": "4 mg",
+              "line1": "A carotenoid antioxidant.",
+              "line2": "Stated at 4 mg.*"
+            },
+            "B": {
+              "name": "Astaxanthin",
+              "dose": "4 mg",
+              "line1": "A carotenoid.",
+              "line2": "Antioxidant support.*"
+            },
+            "C": {
+              "name": "Astaxanthin",
+              "dose": "4 mg",
+              "line1": "A carotenoid.",
+              "line2": "Antioxidant support.*"
+            },
+            "D": {
+              "name": "Astaxanthin",
+              "dose": "4 mg",
+              "line1": "Astaxanthin 4 mg.",
+              "line2": "Antioxidant support.*"
+            }
+          },
+          "divs": [
+            {
+              "en": "Antioxidant support, 4 mg.*",
+              "zh": "剂量直给"
+            },
+            {
+              "en": "A carotenoid at 4 mg.*",
+              "zh": "类别+剂量"
+            },
+            {
+              "en": "The antioxidant line.*",
+              "zh": "指向面板"
+            }
+          ]
         },
         {
           "id": "M8-C5",
@@ -667,15 +2342,56 @@
           "kind": "card",
           "judge": "槽位",
           "insp": "成分5 / xxx mg / Support synergy regeneration imuscle and brain.（重复两行）",
-          "rects": [[59, 29, 34, 58]],
+          "rects": [
+            [
+              59,
+              29,
+              34,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Urolithin A", "dose": "250 mg", "line1": "Also produced by gut bacteria.", "line2": "Included as a satellite active.*" },
-            "B": { "name": "Urolithin A", "dose": "250 mg", "line1": "Also made by gut bacteria.", "line2": "A satellite active.*" },
-            "C": { "name": "Urolithin A", "dose": "250 mg", "line1": "Covers the cellular side.", "line2": "A satellite active.*" },
-            "D": { "name": "Urolithin A", "dose": "250 mg", "line1": "DV not established.", "line2": "Supportive, not the lead ingredient.*" }
+            "A": {
+              "name": "Urolithin A",
+              "dose": "250 mg",
+              "line1": "Also made by gut bacteria.",
+              "line2": "A satellite active.*"
+            },
+            "B": {
+              "name": "Urolithin A",
+              "dose": "250 mg",
+              "line1": "A satellite active.",
+              "line2": "Cellular renewal support.*"
+            },
+            "C": {
+              "name": "Urolithin A",
+              "dose": "250 mg",
+              "line1": "A satellite active.",
+              "line2": "Cellular renewal support.*"
+            },
+            "D": {
+              "name": "Urolithin A",
+              "dose": "250 mg",
+              "line1": "Urolithin A 250 mg.",
+              "line2": "Cellular renewal support.*"
+            }
           },
           "note": "若采用六卡方案，第 6 卡「Nicotinamide Riboside Chloride / 300 mg」需新增卡位；见 M8 备注。六卡方案各风格文本见「六卡扩充方案」。",
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "Cellular renewal, 250 mg.*",
+              "zh": "剂量直给"
+            },
+            {
+              "en": "Where the cellular\nhalf starts.*",
+              "zh": "划分两半"
+            },
+            {
+              "en": "250 mg for the cellular side.*",
+              "zh": "分工定位"
+            }
+          ]
         },
         {
           "id": "M8-C6",
@@ -683,14 +2399,125 @@
           "kind": "card",
           "judge": "疑似槽位·待确认",
           "insp": "（设计稿无此卡，为六项活性方案的扩充位）",
-          "rects": [[93, 29, 7, 58]],
+          "rects": [
+            [
+              93,
+              29,
+              7,
+              58
+            ]
+          ],
           "cards": {
-            "A": { "name": "Nicotinamide Riboside Chloride", "dose": "300 mg", "line1": "Listed in full, including the chloride.", "line2": "A form of vitamin B3.*" },
-            "B": { "name": "Nicotinamide Riboside Chloride", "dose": "300 mg", "line1": "Chloride included, in full.", "line2": "A form of vitamin B3.*" },
-            "C": { "name": "Nicotinamide Riboside Chloride", "dose": "300 mg", "line1": "Stated in full.", "line2": "Including the chloride.*" },
-            "D": { "name": "Nicotinamide Riboside Chloride", "dose": "300 mg", "line1": "Chloride stated in full.", "line2": "A form of vitamin B3.*" }
+            "A": {
+              "name": "Nicotinamide Riboside Chloride",
+              "dose": "300 mg",
+              "line1": "Listed in full.",
+              "line2": "A form of vitamin B3.*"
+            },
+            "B": {
+              "name": "Nicotinamide Riboside Chloride",
+              "dose": "300 mg",
+              "line1": "The full name, spelled out.",
+              "line2": "A form of vitamin B3.*"
+            },
+            "C": {
+              "name": "Nicotinamide Riboside Chloride",
+              "dose": "300 mg",
+              "line1": "Spelled out in full.",
+              "line2": "A form of vitamin B3.*"
+            },
+            "D": {
+              "name": "Nicotinamide Riboside Chloride",
+              "dose": "300 mg",
+              "line1": "Nicotinamide Riboside\nChloride.",
+              "line2": "Cellular energy metabolism.*"
+            }
           },
-          "note": "坐标为估算占位（超出画布右侧），若设计师确认采用六卡方案，需重新标定。若采用五卡方案，本槽位标注为「不使用」。"
+          "note": "坐标为估算占位（超出画布右侧），若设计师确认采用六卡方案，需重新标定。若采用五卡方案，本槽位标注为「不使用」。",
+          "divs": [
+            {
+              "en": "Cellular energy metabolism.*",
+              "zh": "白名单表述"
+            },
+            {
+              "en": "300 mg of NR Chloride.*",
+              "zh": "剂量锚点"
+            },
+            {
+              "en": "The second cellular active.*",
+              "zh": "与 Urolithin A 成对"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "承接上一张的卡序列：K2（左侧被裁切）、虾青素、Urolithin A，以及 Nicotinamide Riboside Chloride 的第 6 张扩充卡位（仅右侧细边可见）。",
+        "angles": [
+          {
+            "name": "后半段换主角：细胞组登场",
+            "why": "这张图的卡片主要是细胞与抗氧化项，可以明说「从这张卡开始换主角」，把浏览节奏变成叙事节奏。",
+            "copy": {
+              "headline": "Now the\ncellular side.",
+              "subhead": "Urolithin A, Nicotinamide Riboside Chloride, astaxanthin.",
+              "points": [
+                "Urolithin A 250 mg for cellular renewal support",
+                "Nicotinamide Riboside Chloride 300 mg for cellular energy metabolism",
+                "Astaxanthin 4 mg for antioxidant support"
+              ],
+              "closer": "Two softgels carry both halves.*"
+            }
+          },
+          {
+            "name": "卫星成分也有名字和剂量",
+            "why": "图上小字原写 satellite active，可顺势把卫星成分讲成「不是陪衬」——每一项都有名字、有剂量、有位置。",
+            "copy": {
+              "headline": "Satellite actives\nwith stated doses.",
+              "subhead": "Nothing is in here as decoration.",
+              "points": [
+                "Urolithin A 250 mg, stated",
+                "Astaxanthin 4 mg, stated",
+                "Nicotinamide Riboside Chloride 300 mg, spelled out in full"
+              ],
+              "closer": "Every one is on the panel.*"
+            }
+          },
+          {
+            "name": "第六张卡——把设计动作写成主张",
+            "why": "设计留了第 6 张卡的扩充位（右侧细边可见），可以把「六项活性需要六张卡」变成文案主张，同时对上游的五卡方案缺口给出答案。",
+            "copy": {
+              "headline": "Six actives\nneed six cards.",
+              "subhead": "The sixth is Nicotinamide Riboside Chloride, 300 mg.",
+              "points": [
+                "Card 4: astaxanthin 4 mg",
+                "Card 5: Urolithin A 250 mg",
+                "Card 6: Nicotinamide Riboside Chloride 300 mg"
+              ],
+              "closer": "Six actives, no shortened list.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "后半段换主角",
+          "problem": "滑到这里，她想确认后面还剩什么没讲。",
+          "solution": "细胞组登场：Urolithin A、Nicotinamide Riboside Chloride、虾青素。",
+          "after": "滑动速度慢下来，开始在剂量数字上停留。",
+          "placement": "主标题承接上一张，卡片序列继续"
+        },
+        {
+          "title": "卫星成分也算数",
+          "problem": "她担心非主打成分只是凑数。",
+          "solution": "每一项都有名字、有剂量、有位置。",
+          "after": "她对着「300 mg」看了两秒，把这一条记进备忘录。",
+          "placement": "卡片剂量位 + 两行说明位"
+        },
+        {
+          "title": "第六张卡的疑问",
+          "problem": "数了数只有五张卡，但配方有六项活性。",
+          "solution": "第六张卡给 Nicotinamide Riboside Chloride，300 mg。",
+          "after": "她在心里把六项对齐了一遍，确认没有遗漏。",
+          "placement": "第 6 张卡扩充位（右侧细边）"
         }
       ]
     },
@@ -700,7 +2527,10 @@
       "img": "高级轮播4.png",
       "task": "每天支持什么",
       "flags": [
-        { "level": "warn", "text": "原三处标签均为同文 CELLULAR ENERGY（重复），须各给可辨别内容" }
+        {
+          "level": "warn",
+          "text": "原三处标签均为同文 CELLULAR ENERGY（重复），须各给可辨别内容"
+        }
       ],
       "slots": [
         {
@@ -709,15 +2539,130 @@
           "kind": "text",
           "judge": "槽位",
           "insp": "CELLULAR ENERGY（3 处同文重复）",
-          "rects": [[14, 15, 22, 10], [14, 28, 22, 10], [14, 41, 22, 10]],
+          "rects": [
+            [
+              14,
+              15,
+              22,
+              10
+            ],
+            [
+              14,
+              28,
+              22,
+              10
+            ],
+            [
+              14,
+              41,
+              22,
+              10
+            ]
+          ],
           "values": {
-            "A": { "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*", "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*" },
-            "B": { "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*", "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*" },
-            "C": { "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*", "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*" },
-            "D": { "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*", "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE FUNCTION*" }
+            "A": {
+              "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*",
+              "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*"
+            },
+            "B": {
+              "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*",
+              "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*"
+            },
+            "C": {
+              "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*",
+              "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*"
+            },
+            "D": {
+              "rec": "CELLULAR RENEWAL*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*",
+              "alt": "CELLULAR FUNCTION*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*"
+            }
           },
           "note": "「｜」为三条标签分隔符，依次填入上 / 中 / 下三处。三单元各管一件事，不得重复。",
-          "needs": "本图需上图 DSHEA 免责声明全文"
+          "needs": "本图需上图 DSHEA 免责声明全文",
+          "divs": [
+            {
+              "en": "BONE SUPPORT*  ｜  CELLULAR ENERGY*  ｜  ANTIOXIDANT*",
+              "zh": "三个白名单主张"
+            },
+            {
+              "en": "CALCIUM DELIVERY*  ｜  CELLULAR RENEWAL*  ｜  IMMUNE*",
+              "zh": "交付+新生+免疫"
+            },
+            {
+              "en": "BONE STRUCTURE*  ｜  MUSCLE STRENGTH*  ｜  IMMUNE*",
+              "zh": "结构+肌力+免疫"
+            }
+          ]
+        }
+      ],
+      "free": {
+        "read": "蓝天人物情绪图，左侧三个图标各配两行全大写标签（原为三处同文 CELLULAR ENERGY 重复），把配方价值压成三行短句。",
+        "angles": [
+          {
+            "name": "三利益并列——三个标签各给一条",
+            "why": "三处标签位本就是为并列准备的，正好对应配方可支撑的三条结构功能主张，且能修掉原稿三处同文重复的问题。",
+            "copy": {
+              "headline": "Three things\nthe formula does.",
+              "subhead": "Stated on the panel, not implied.",
+              "points": [
+                "CALCIUM DELIVERY*",
+                "CELLULAR RENEWAL*",
+                "IMMUNE FUNCTION*"
+              ],
+              "closer": "Three lines, three claims.*"
+            }
+          },
+          {
+            "name": "细胞主线——以细胞为中心重排",
+            "why": "原图三处标签同文，改为「一条主线 + 两条支撑」的叙事更集中，也与配方中 Urolithin A 与 Nicotinamide Riboside Chloride 的剂量（250 mg / 300 mg）相称。",
+            "copy": {
+              "headline": "Start with\nthe cells.",
+              "subhead": "Urolithin A 250 mg and Nicotinamide Riboside Chloride 300 mg lead the cellular side.*",
+              "points": [
+                "Cellular renewal support*",
+                "Cellular energy metabolism*",
+                "Antioxidant support from astaxanthin 4 mg*"
+              ],
+              "closer": "The cellular half, stated.*"
+            }
+          },
+          {
+            "name": "日常场景——每天两颗的节奏",
+            "why": "人物在户外、手举软胶囊，画面自带日常感，适合把「每天两颗、45 天一瓶」写成节奏句。",
+            "copy": {
+              "headline": "Two softgels,\nany time of day.",
+              "subhead": "With water, morning or night — 45 days per bottle.",
+              "points": [
+                "2 softgels per serving",
+                "90 softgels, 45 servings",
+                "Bone support and cellular support in the same two softgels*"
+              ],
+              "closer": "One habit, both sides.*"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "三个标签各说一件事",
+          "problem": "三处标签原来是同一句重复，读完没记住任何一条。",
+          "solution": "改成三个不同的利益标签，各占一行。",
+          "after": "视线从上到下扫过三个标签，每个停留不到一秒，但都记住了。",
+          "placement": "三个图标标签位是并列结构"
+        },
+        {
+          "title": "户外那一刻的状态",
+          "problem": "她想要的不只是补钙，是「还能这样自在地笑」。",
+          "solution": "用手举软胶囊 + 蓝天欢笑的人物状态承接情绪。",
+          "after": "仰头闭眼笑，手指间夹着那颗软胶囊，阳光从侧后方打过来。",
+          "placement": "人物大图与三个标签形成「情绪 + 事实」对照"
+        },
+        {
+          "title": "每天两颗的节奏",
+          "problem": "补钙最难的是记得吃、愿意吃。",
+          "solution": "把用量讲到最短：two softgels, any time of day。",
+          "after": "她把瓶子放在水杯旁边，顺手拧开盖子倒出两颗。",
+          "placement": "标签位写日常节奏；人物图提供场景氛围"
         }
       ]
     },
@@ -727,7 +2672,10 @@
       "img": "高级轮播4 (2).png",
       "task": "交付形式与每日用量",
       "flags": [
-        { "level": "info", "text": "本图原稿与新版剂型一致，基本可直接沿用；仅需把顶部剂型标签 Capsules 改为 Softgels" }
+        {
+          "level": "info",
+          "text": "本图原稿与新版剂型一致，基本可直接沿用；仅需把顶部剂型标签 Capsules 改为 Softgels"
+        }
       ],
       "slots": [
         {
@@ -735,7 +2683,14 @@
           "label": "顶部剂型标签",
           "kind": "preserve",
           "judge": "推定槽位",
-          "rects": [[41, 2, 18, 7]],
+          "rects": [
+            [
+              41,
+              2,
+              18,
+              7
+            ]
+          ],
           "text": "Softgels",
           "note": "原为 Capsules，剂型已改 vegan softgel。"
         },
@@ -744,7 +2699,14 @@
           "label": "标题",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[8, 39, 45, 9]],
+          "rects": [
+            [
+              8,
+              39,
+              45,
+              9
+            ]
+          ],
           "text": "Delivery Matters",
           "note": "保留。"
         },
@@ -754,24 +2716,302 @@
           "kind": "text",
           "judge": "真实内容·保留",
           "insp": "Softgels, not powder capsules.",
-          "rects": [[8, 48, 58, 8]],
+          "rects": [
+            [
+              8,
+              48,
+              58,
+              8
+            ]
+          ],
           "values": {
-            "A": { "rec": "Vegan softgels, not powder capsules.", "alt": "Softgels, not powder capsules." },
-            "B": { "rec": "Vegan softgels, not powder capsules.", "alt": "Softgels, not powder capsules." },
-            "C": { "rec": "Softgels, not powder capsules.", "alt": "A softgel, not a powder capsule." },
-            "D": { "rec": "A vegan softgel, not a powder capsule.", "alt": "Softgel, not powder capsule." }
-          }
+            "A": {
+              "rec": "Vegan softgels, not powder capsules.",
+              "alt": "Softgels, not powder capsules."
+            },
+            "B": {
+              "rec": "Vegan softgels, not powder capsules.",
+              "alt": "Softgels, not powder capsules."
+            },
+            "C": {
+              "rec": "Softgels, not powder capsules.",
+              "alt": "A softgel, not a powder capsule."
+            },
+            "D": {
+              "rec": "A vegan softgel, not a powder capsule.",
+              "alt": "Softgel, not powder capsule."
+            }
+          },
+          "divs": [
+            {
+              "en": "Two softgels a day,\nwith water, any time.",
+              "zh": "用法+自由度"
+            },
+            {
+              "en": "Two a day. Ninety per bottle. 45 days.",
+              "zh": "数字三连"
+            },
+            {
+              "en": "The routine is two softgels.",
+              "zh": "把习惯说到最低门槛"
+            }
+          ]
         },
         {
           "id": "M10-D",
           "label": "数字块",
           "kind": "preserve",
           "judge": "真实内容·保留",
-          "rects": [[8, 58, 36, 12]],
+          "rects": [
+            [
+              8,
+              58,
+              36,
+              12
+            ]
+          ],
           "text": "2 SOFTGELS DAILY",
           "note": "保留。建议在数字块下方补一行副行「90 softgels · 45 days」，属版式增补，需设计师确认。"
         }
+      ],
+      "free": {
+        "read": "轮播版的交付主题：大标题 + 斜体副标 + 「2 SOFTGELS DAILY」数字块，右侧瓶身特写。与 9.png 同主题、不同落点（用量优先）。",
+        "angles": [
+          {
+            "name": "用量极简——把剂量说到最短",
+            "why": "图上最醒目的就是 2 SOFTGELS DAILY，用量本身就是主张，适合用最短的句子占住大标题位。",
+            "copy": {
+              "headline": "Two softgels.\nThat's the dose.",
+              "subhead": "No scoops to count, no powder to mix.",
+              "points": [
+                "Serving size: 2 softgels",
+                "90 softgels per bottle",
+                "45 servings per container"
+              ],
+              "closer": "Two a day, 45 days."
+            }
+          },
+          {
+            "name": "交付形式——软胶囊不是粉剂",
+            "why": "副标写的是 softgels, not powder capsules，可把交付形式讲成选择理由，并与瓶身实物互相印证。",
+            "copy": {
+              "headline": "Softgels,\nnot powder capsules.",
+              "subhead": "A vegan shell around a liquid fill.",
+              "points": [
+                "Liquid fill in organic MCT oil",
+                "Vegan softgel shell",
+                "Six actives at stated doses"
+              ],
+              "closer": "The delivery is part of the formula."
+            }
+          },
+          {
+            "name": "习惯化——一瓶装下一个周期",
+            "why": "瓶身与数字块组合传达「一瓶就是一个周期」，把 45 天讲成习惯而不是库存，更贴合轮播图的收尾位置。",
+            "copy": {
+              "headline": "One bottle.\nForty-five days.",
+              "subhead": "A supply that fits the habit, not the other way around.",
+              "points": [
+                "90 softgels, 2 per day",
+                "45 servings per bottle",
+                "Take with water, any time"
+              ],
+              "closer": "45 days, one bottle, two softgels a day."
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "title": "柜台前的一分钟",
+          "problem": "早上赶时间，她需要一个不占脑容量的动作。",
+          "solution": "两颗软胶囊、一杯水、任意时间。",
+          "after": "厨房台面，一手举杯、一手放下瓶盖，目光已经看向门口，动作连贯不打断早晨。",
+          "placement": "2 SOFTGELS DAILY 数字块 + 右侧瓶身"
+        },
+        {
+          "title": "为什么不是粉",
+          "problem": "朋友推荐粉剂，她犹豫要不要换。",
+          "solution": "副标一句说清：softgels, not powder capsules。",
+          "after": "她把两种形态在脑子里对比了一下，把粉剂页面关掉。",
+          "placement": "斜体副标位承担这一句判断"
+        },
+        {
+          "title": "一瓶撑到什么时候",
+          "problem": "不想频繁复购，也不想忘记补货。",
+          "solution": "一瓶 90 颗、45 天，正好一个复购周期。",
+          "after": "她把空瓶拧上丢进回收袋，从柜子里拿出新的一瓶，动作像换牙膏。",
+          "placement": "数字块与瓶身特写的组合传达「一个周期」"
+        }
       ]
     }
-  ]
+  ],
+  "audience": {
+    "researchedAt": "2026-09-16",
+    "method": "以 Supplement Facts 为事实基线，联网检索各活性成分的人体研究 / 系统综述 / 消费市场报告后推理得出。属研究背景，不是上线文案；上线表述仍以白名单主张为准。",
+    "efficacy": [
+      {
+        "ingredient": "Calcium 400 mg（藻源矿物复合物）",
+        "whatScienceSays": "藻源钙在化学上仍以碳酸钙为主，另附带多种微量矿物。钙是骨基质的主要矿物成分，这一角色没有争议。",
+        "evidence": "成分必要性：强。但「藻源钙吸收更好」缺乏独立人体证据——现有骨密度人群试验多由厂商资助，且配方含锶会干扰 DEXA 读数。",
+        "sources": [
+          "Nutrition Journal 2011（PMID 21492428）",
+          "Int J Med Sci 2011（PMID 21448303）",
+          "J Am Coll Nutr 2016（DOI 10.1080/07315724.2015.1090357）"
+        ],
+        "copyImplication": "可讲「钙是骨结构的材料」；不可讲「吸收更好」「提升骨密度」。"
+      },
+      {
+        "ingredient": "Vitamin D3 25 mcg",
+        "whatScienceSays": "D3 促进肠道对钙的吸收，是钙利用的前置条件，机制明确。",
+        "evidence": "机制：强。这也是本品最容易被买家理解的环节。",
+        "sources": [
+          "骨代谢与钙吸收机制共识（内分泌 / 营养学教科书级结论）"
+        ],
+        "copyImplication": "适合做「机制第一环」，讲清「没有 D3，钙到不了该去的地方」。"
+      },
+      {
+        "ingredient": "Vitamin K2 90 mcg（MK-7）",
+        "whatScienceSays": "K2 通过激活骨钙素，把钙引导到骨基质，属于「决定钙去向」的环节。",
+        "evidence": "机制：中强。临床终点证据不如机制清楚，但作为机制叙述成立。",
+        "sources": [
+          "维生素 K 与骨钙素机制研究（MK-7 亚型长期使用安全性优于 MK-4 的常见结论）"
+        ],
+        "copyImplication": "适合做「机制第二环」，与 D3 组成「打开 + 引路」的双环叙事。"
+      },
+      {
+        "ingredient": "Urolithin A 250 mg",
+        "whatScienceSays": "由肠道菌群代谢鞣花单宁产生的后生元代谢物，作用于线粒体自噬（mitophagy），研究中关注肌肉力量、耐力与恢复。",
+        "evidence": "有希望但有限：2025 年两项系统综述纳入研究均只有 3–5 项、样本 174–236 人，仅个别终点达显著；结论是「证据不足，需更大规模 RCT」。",
+        "sources": [
+          "medRxiv 2025 系统综述（肌肉力量/质量/体能）",
+          "Frontiers in Nutrition 2025 荟萃分析（PROSPERO CRD420251270987）",
+          "Sports Medicine 2025（NCT04783207，降低了主观用力感与肌损标志物）",
+          "Nature Aging 2025（DOI 10.1038/s43587-025-00996-x，免疫细胞功能）"
+        ],
+        "copyImplication": "只可作为剂量事实呈现（250 mg），不可写 studied / clinically 类研究挂钩语；见下方定位风险。"
+      },
+      {
+        "ingredient": "Nicotinamide Riboside Chloride 300 mg",
+        "whatScienceSays": "NAD+ 前体。NAD+ 水平随年龄下降（40–60 岁间降幅常被引述为约一半），这是该成分吸引中高龄人群的生物学理由。",
+        "evidence": "补充可提升体内 NAD+ 水平较一致；但「提升 NAD+ 是否转化为可感知效果」尚无定论。",
+        "sources": [
+          "NAD+ 与衰老研究综述（NR/NMN 类前体的人体药代与安全性研究为主）"
+        ],
+        "copyImplication": "可讲 cellular energy metabolism（白名单）；不可讲 NAD+ 本体，也不做抗衰承诺。"
+      },
+      {
+        "ingredient": "Astaxanthin 4 mg",
+        "whatScienceSays": "类胡萝卜素类抗氧化剂，研究中关注抗氧化、皮肤与运动恢复方向。",
+        "evidence": "抗氧化机制：中。人群终点证据以美容与运动恢复小样本为主。",
+        "sources": [
+          "虾青素抗氧化与皮肤/运动恢复研究（小样本为主）"
+        ],
+        "copyImplication": "可讲 antioxidant support（白名单）；它是把受众从「长寿」扩到「内服美容」交叉人群的接口。"
+      },
+      {
+        "ingredient": "剂型与辅料（纯素软胶囊壳 + 有机 MCT 油 + 葵花卵磷脂）",
+        "whatScienceSays": "软胶囊为液态填充，壳成分为改性食品淀粉、甘油、纯净水、卡拉胶，不含明胶。",
+        "evidence": "剂型事实：强（标签可查）。这是本品最扎实、也最容易差异化的部分。",
+        "sources": [
+          "本品 Supplement Facts「Other Ingredients」栏"
+        ],
+        "copyImplication": "剂型与辅料可放心讲透，是「不喊功效也能建立信任」的主战场。"
+      }
+    ],
+    "segments": [
+      {
+        "tier": "核心",
+        "name": "45–70 岁女性｜已经在自己补钙，但不确认有没有用",
+        "why": "绝经后女性保健品使用率约 83%，而钙是其中购买率最高的一项——她们不缺「补钙」这个动作，缺的是「补对了吗」的答案。NAD+ 随龄下降、造骨代谢变化都发生在这个年龄段。",
+        "mindset": [
+          "「单吃钙片我肠胃受不了」——剂型耐受是真实的换购理由",
+          "「不知道有没有用……但现在不敢停」——不确定，却已形成依赖",
+          "「医生说要多补钙，可没说怎么补」——信任在医生，不在品牌"
+        ],
+        "copyHooks": [
+          "关键反差点：50 岁以上人群对「带功效宣称的产品」可信度与购买意愿显著低于年轻组——对这一人群要机制优先、零夸张，喊口号反而掉分。",
+          "把「补钙」升级成「补钙 + 让钙去对地方」：D3/K2 双环机制正好回答她「有没有用」的疑问。",
+          "用剂型做换购理由：软胶囊、随水吞服、不靠大颗粒压制片。",
+          "剂量全部印在标签上，回应她「不确定」的核心情绪——把决定权交回给她。"
+        ]
+      },
+      {
+        "tier": "次要",
+        "name": "40–60 岁主动型健康管理者｜为「状态」买单，不为「治病」买单",
+        "why": "Urolithin A 与 Nicotinamide Riboside Chloride 把产品接入「健康老龄化」叙事；该人群是长效订阅的主力（续订率常被引述为 65–75%），且更愿意为可感知状态付费。",
+        "mindset": [
+          "关注精力、恢复、睡眠这类日常可感指标",
+          "习惯先看成分表与剂量，再决定要不要看品牌",
+          "对「细胞层面」的说法有兴趣，但讨厌被当成不懂的人"
+        ],
+        "copyHooks": [
+          "以「骨骼 + 细胞」双域结构承接：一半是长期基础，一半是当下状态。",
+          "剂量直给（250 mg / 300 mg）比形容词有效——这个人群会自己核对。",
+          "讲清 mitophagy / NAD+ 的机制脉络要克制到「可验证的一句话」，不做抗衰承诺。",
+          "细胞组两个成分做成「二等星」，明说它们有名字、有剂量、有位置。"
+        ]
+      },
+      {
+        "tier": "机会",
+        "name": "两条交叉增量｜内服美容人群 & 为父母买单的子女",
+        "why": "虾青素的抗氧化属性把产品拉进「内服美容 / 抗氧化」交叉受众；而为 50–70 岁长辈选购的年轻子女，是礼品与首次试用场景的高频决策者。",
+        "mindset": [
+          "（美容向）「抗氧化」比「抗衰」更容易接受，也更愿意晒图",
+          "（子女向）自己不一定会吃，但愿意为父母挑一款能看懂标签的",
+          "两类人都把「成分表干净」作为第一道筛选门槛"
+        ],
+        "copyHooks": [
+          "美容向：以 antioxidant support 为锚，配「由内而外」的视觉语言，不碰皮肤疗效承诺。",
+          "子女向：用「2 softgels daily / 45 days」这类可代为判断的硬信息降低决策成本。",
+          "两类人都偏好「无暗腔配方、剂量可查」的表述方式。"
+        ]
+      }
+    ],
+    "cautions": [
+      "Urolithin A 剂量落差：本品 250 mg，而 2025 年系统综述纳入的人体试验多使用 500–1000 mg/天。因此该成分只宜作为「剂量事实」呈现，不能延伸出功效暗示，也不宜作为主打卖点单独放大。",
+      "藻源钙的吸收优势不可宣称：藻源钙在化学上仍以碳酸钙为主，「吸收更好 / 更易吸收」目前没有独立人体证据支撑。",
+      "自然钙源的铅含量争议：天然来源钙的铅残留曾被第三方检测机构质疑过；如品牌要做「更干净」方向的宣称，须先拿到本批次的第三方检测报告。",
+      "50+ 人群宣称敏感度更高：该人群对带功效宣称的产品可信度评分低于年轻组，因此「机制 + 剂量 + 标签透明」的路线比承诺式文案更适合本品。"
+    ],
+    "scenarioPool": [
+      {
+        "title": "体检报告之后的那一周",
+        "problem": "45–55 岁女性拿到体检报告，骨密度一项被标了提示，医生只说「注意补钙」，没说怎么补；她回家翻出柜子里那瓶吃了一半的钙片。",
+        "solution": "换成每天两颗软胶囊：D3 打开吸收、K2 引钙入骨，剂量印在标签上，不用再猜吃对了没有。",
+        "after": "她站在窗边把瓶子放回台面，双手向上舒展、肩背打开，神情是「这次我知道自己在做什么」的笃定；晨光斜切进来，桌上只有一杯水。"
+      },
+      {
+        "title": "单吃钙片胃里不舒服那一天",
+        "problem": "大颗粒压制片越吞越抗拒，胃里发胀，最后那瓶钙片被推到抽屉最里面。",
+        "solution": "同样的补钙目标，换成液态填充的纯素软胶囊，随水吞服，两颗完成一份剂量。",
+        "after": "她单手托着掌心那两颗软胶囊凑近看，光线下胶囊表面泛出温润的哑光，表情从抗拒变成「这个可以」。"
+      },
+      {
+        "title": "药盒里三瓶并成一瓶",
+        "problem": "钙片一瓶、D3 一瓶、K2 一瓶，早上要打开三个盖子，出差时索性哪个都不带。",
+        "solution": "六项活性在一瓶里，2 softgels daily，一瓶 45 天。",
+        "after": "出差前一分钟，她把一瓶放进化妆包侧袋，拉链一拉就出门；画面里没有药盒、没有分装袋。"
+      },
+      {
+        "title": "清晨出门前的两颗",
+        "problem": "早餐都来不及吃，更别说记得按时补钙；她需要一个不需要动脑的动作。",
+        "solution": "随水吞服、时间随意，早上或晚上都行。",
+        "after": "厨房台面，一杯水、两颗软胶囊、手机屏幕上的时间；她一手举杯仰头，动作利落，背景是刚亮起来的天光。"
+      },
+      {
+        "title": "爬完楼的第二天依然想动",
+        "problem": "过了四十，同样的楼梯第二天腿会更沉；她开始关心「恢复」而不只是「补充」。",
+        "solution": "Urolithin A 250 mg 与 Nicotinamide Riboside Chloride 300 mg 组成细胞组，与骨骼组一起每天两颗。",
+        "after": "楼梯间，她连续两级跨上去，呼吸平稳、回头笑了一下；镜头捕捉的是动作的轻快，不是用力。"
+      },
+      {
+        "title": "给妈妈挑的那一瓶",
+        "problem": "子女想给父母买补钙产品，但看不懂标签，也怕买到夸张宣传的东西，迟迟没下单。",
+        "solution": "剂量全部写在面板上、无暗腔配方、第三方检测与 cGMP 工厂，三行就能读完。",
+        "after": "年轻的手把瓶子递到年长的手里，两双手同时扶住瓶身；桌上放着那张 Supplement Facts 面板的截图。"
+      }
+    ],
+    "regenPrompt": "你是亚马逊膳食补充剂的人群研究员。请以我提供的 Supplement Facts（或配料表）为唯一事实基线，完成两件事：\n1）联网理解每个活性成分的功效与证据强度：逐个成分给出「科学界怎么说 / 证据强度（强·中·弱 + 为什么）/ 可引用的研究（作者+期刊+年份+PMID或DOI）」，并明确指出哪些宣称没有独立证据支撑。\n2）联网推理受众人群：按「核心 / 次要 / 机会」三层给出人群画像，每层包含：为什么是这群人（用可引用的数据或研究）、他们的心智原话（尽量找真实评价或调研里的说法）、以及对文案的启示（这个人群的卖点应该怎么打）。\n另外单独列出「定位风险」：剂量与研究所用剂量的落差、没有证据的功效方向、监管上不能说的表述。\n注意：不要出现任何竞品商标；不要编造研究；找不到证据就写「未找到」。输出中文。"
+  }
 }

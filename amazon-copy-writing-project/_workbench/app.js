@@ -16,6 +16,9 @@
     metaProduct: $('metaProduct'),
     metaSpec: $('metaSpec'),
     styleSeg: $('styleSeg'),
+    ddStyle: $('ddStyle'),
+    btnStyle: $('btnStyle'),
+    styleMenu: $('styleMenu'),
     viewSeg: $('viewSeg'),
     btnCalib: $('btnCalib'),
     btnCheck: $('btnCheck'),
@@ -37,6 +40,8 @@
     splitter: $('splitter'),
     cards: $('cards'),
     compare: $('compare'),
+    free: $('free'),
+    audience: $('audience'),
     moduleNav: $('moduleNav'),
     modal: $('modal'),
     modalTitle: $('modalTitle'),
@@ -158,6 +163,10 @@
       var rows = (slot.rows || {})[state.style] || [];
       return rows[Number(field.slice(4))] || '';
     }
+    if (field.indexOf('div:') === 0) {
+      var divList = slot.divs || [];
+      return (divList[Number(field.slice(4))] || {}).en || '';
+    }
     var card = (slot.cards || {})[state.style] || {};
     return card[field] || '';
   }
@@ -173,6 +182,13 @@
       if (!slot.rows) slot.rows = {};
       if (!slot.rows[state.style]) slot.rows[state.style] = [];
       slot.rows[state.style][Number(field.slice(4))] = value;
+      return;
+    }
+    if (field.indexOf('div:') === 0) {
+      if (!slot.divs) slot.divs = [];
+      var di = Number(field.slice(4));
+      if (!slot.divs[di]) slot.divs[di] = { en: '', zh: '' };
+      slot.divs[di].en = value;
       return;
     }
     if (!slot.cards) slot.cards = {};
@@ -466,6 +482,50 @@
     return box;
   }
 
+  function makeDivItem(slot, idx, dv) {
+    var field = 'div:' + idx;
+    var wrap = document.createElement('div');
+    wrap.className = 'div-item';
+
+    var lab = document.createElement('div');
+    lab.className = 'field-label';
+    var name = document.createElement('span');
+    name.textContent = '发散 ' + (idx + 1);
+    lab.appendChild(name);
+    var tag = document.createElement('span');
+    tag.className = 'div-zh';
+    tag.textContent = dv && dv.zh ? dv.zh : '';
+    tag.title = dv && dv.zh ? dv.zh : '';
+    lab.appendChild(tag);
+    var grow = document.createElement('span');
+    grow.className = 'grow';
+    lab.appendChild(grow);
+    var cp = document.createElement('button');
+    cp.type = 'button';
+    cp.className = 'mini';
+    cp.textContent = '复制';
+    cp.dataset.act = 'copy';
+    cp.dataset.slot = slot.id;
+    cp.dataset.field = field;
+    lab.appendChild(cp);
+    var use = document.createElement('button');
+    use.type = 'button';
+    use.className = 'mini';
+    use.textContent = '用此版';
+    use.dataset.act = 'promote';
+    use.dataset.slot = slot.id;
+    use.dataset.field = field;
+    lab.appendChild(use);
+    wrap.appendChild(lab);
+
+    var text = document.createElement('div');
+    text.className = 'text';
+    text.dataset.slot = slot.id;
+    text.dataset.field = field;
+    wrap.appendChild(text);
+    return wrap;
+  }
+
   function buildCard(slot) {
     var cls = judgeClass(slot.judge);
     var art = document.createElement('article');
@@ -506,7 +566,7 @@
       var alt = document.createElement('details');
       alt.className = 'sub';
       var sum = document.createElement('summary');
-      sum.textContent = '备选（点击展开）';
+      sum.textContent = '备选与发散（点击展开）';
       alt.appendChild(sum);
       var altBody = document.createElement('div');
       altBody.className = 'body';
@@ -517,8 +577,18 @@
       promote.textContent = '用此版';
       promote.dataset.act = 'promote';
       promote.dataset.slot = slot.id;
+      promote.dataset.field = 'alt';
       fld.querySelector('.field-label').appendChild(promote);
       altBody.appendChild(fld);
+      if (slot.divs && slot.divs.length) {
+        var divHead = document.createElement('div');
+        divHead.className = 'div-head';
+        divHead.textContent = '发散 ×' + slot.divs.length + '（角度创新，不分风格）';
+        altBody.appendChild(divHead);
+        slot.divs.forEach(function (dv, di) {
+          altBody.appendChild(makeDivItem(slot, di, dv));
+        });
+      }
       alt.appendChild(altBody);
       art.appendChild(alt);
     } else if (slot.kind === 'card') {
@@ -526,6 +596,20 @@
       art.appendChild(makeField(slot, 'dose', '剂量', false));
       art.appendChild(makeField(slot, 'line1', '说明 1', false));
       art.appendChild(makeField(slot, 'line2', '说明 2', false));
+      if (slot.divs && slot.divs.length) {
+        var cdet = document.createElement('details');
+        cdet.className = 'sub';
+        var csum = document.createElement('summary');
+        csum.textContent = '发散 ×' + slot.divs.length + '（说明 2 的角度创新，点击展开）';
+        cdet.appendChild(csum);
+        var cbody = document.createElement('div');
+        cbody.className = 'body';
+        slot.divs.forEach(function (dv, di) {
+          cbody.appendChild(makeDivItem(slot, di, dv));
+        });
+        cdet.appendChild(cbody);
+        art.appendChild(cdet);
+      }
     } else if (slot.kind === 'table') {
       var rows = (slot.rows || {})[state.style] || [];
       rows.forEach(function (row, ri) {
@@ -795,36 +879,372 @@
     els.compare.appendChild(table);
   }
 
+  /* ---------------------------------------------------------- 自由创作视图 */
+
+  var FREE_LAYERS = [
+    ['headline', '主标'],
+    ['subhead', '副标'],
+    ['points', '要点'],
+    ['closer', '收尾'],
+  ];
+
+  function freeCopyText(copy, key) {
+    var v = (copy || {})[key];
+    if (key === 'points') {
+      return (v || []).map(function (p) { return '· ' + p; }).join('\n');
+    }
+    return v || '';
+  }
+
+  function buildFreeAngle(mid, angle, ai) {
+    var card = document.createElement('article');
+    card.className = 'angle-card';
+    card.dataset.mid = mid;
+
+    var head = document.createElement('div');
+    head.className = 'angle-head';
+    head.innerHTML = '<span class="angle-no">角度 ' + ai + '</span>' +
+      '<span class="angle-name">' + esc(angle.name || '') + '</span>' +
+      '<span class="grow"></span>';
+    var cpAll = document.createElement('button');
+    cpAll.type = 'button';
+    cpAll.className = 'mini';
+    cpAll.textContent = '复制整套';
+    cpAll.dataset.act = 'copyfree';
+    cpAll.dataset.mid = mid;
+    cpAll.dataset.angle = String(ai - 1);
+    cpAll.dataset.key = 'all';
+    head.appendChild(cpAll);
+    card.appendChild(head);
+
+    if (angle.why) {
+      var why = document.createElement('div');
+      why.className = 'angle-why';
+      why.textContent = angle.why;
+      card.appendChild(why);
+    }
+
+    FREE_LAYERS.forEach(function (pair) {
+      var key = pair[0];
+      var text = freeCopyText(angle.copy, key);
+      var wrap = document.createElement('div');
+      wrap.className = 'field';
+      var lab = document.createElement('div');
+      lab.className = 'field-label';
+      var nm = document.createElement('span');
+      nm.textContent = pair[1];
+      lab.appendChild(nm);
+      var grow = document.createElement('span');
+      grow.className = 'grow';
+      lab.appendChild(grow);
+      var cp = document.createElement('button');
+      cp.type = 'button';
+      cp.className = 'mini';
+      cp.textContent = '复制';
+      cp.dataset.act = 'copyfree';
+      cp.dataset.mid = mid;
+      cp.dataset.angle = String(ai - 1);
+      cp.dataset.key = key;
+      lab.appendChild(cp);
+      wrap.appendChild(lab);
+
+      var box = document.createElement('div');
+      box.className = 'text' + (key === 'headline' ? ' free-headline' : '');
+      box.textContent = text;
+      wrap.appendChild(box);
+      card.appendChild(wrap);
+    });
+
+    return card;
+  }
+
+  function renderFree() {
+    if (state.view !== 'free') return;
+    var mod = curModule();
+    els.free.innerHTML = '';
+
+    var tip = document.createElement('div');
+    tip.className = 'cmp-tip';
+    tip.textContent = '模块 ' + mod.id + '｜' + mod.name +
+      '　·　自由创作不受图上槽位约束：先读图，再结合 Supplement Facts 事实自由发挥。' +
+      '每图 3 个创意角度，各含主标 / 副标 / 要点 / 收尾，可单独复制或整套复制。';
+    els.free.appendChild(tip);
+
+    var f = mod.free;
+    if (!f || !(f.angles || []).length) {
+      var empty = document.createElement('div');
+      empty.className = 'hint-p';
+      empty.textContent = '本模块暂无自由创作文案（copy.json 中 modules[].free 为空）。';
+      els.free.appendChild(empty);
+      return;
+    }
+
+    if (f.read) {
+      var rd = document.createElement('div');
+      rd.className = 'free-read';
+      rd.innerHTML = '<span class="k">读图结论</span>' + esc(f.read);
+      els.free.appendChild(rd);
+    }
+
+    (f.angles || []).forEach(function (a, i) {
+      els.free.appendChild(buildFreeAngle(mod.id, a, i + 1));
+    });
+  }
+
+  function freeAngleText(mod, idx, key) {
+    var a = ((mod.free || {}).angles || [])[idx];
+    if (!a) return '';
+    if (key === 'all') {
+      return ['【' + a.name + '】',
+        '主标：' + freeCopyText(a.copy, 'headline'),
+        '副标：' + freeCopyText(a.copy, 'subhead'),
+        '要点：\n' + freeCopyText(a.copy, 'points'),
+        '收尾：' + freeCopyText(a.copy, 'closer')].join('\n');
+    }
+    return freeCopyText(a.copy, key);
+  }
+
   function setView(view) {
     commitEditor();
     state.view = view;
     Array.prototype.forEach.call(els.viewSeg.querySelectorAll('button'), function (b) {
       b.classList.toggle('on', b.dataset.view === view);
     });
-    if (view === 'compare') {
-      els.cards.classList.add('hidden');
-      els.compare.classList.remove('hidden');
-      renderCompare();
-    } else {
-      els.compare.classList.add('hidden');
-      els.cards.classList.remove('hidden');
+    els.cards.classList.toggle('hidden', view !== 'work');
+    els.compare.classList.toggle('hidden', view !== 'compare');
+    els.free.classList.toggle('hidden', view !== 'free');
+    els.audience.classList.toggle('hidden', view !== 'audience');
+    if (view === 'compare') renderCompare();
+    if (view === 'free') renderFree();
+    if (view === 'audience') renderAudience();
+  }
+
+  var VIEW_CYCLE = ['work', 'compare', 'free', 'audience'];
+
+  /* ---------------------------------------------------------- 消费人群画像视图 */
+
+  function audienceCopyText(text) {
+    return String(text == null ? '' : text);
+  }
+
+  function sectionTitle(text, cls) {
+    var d = document.createElement('div');
+    d.className = 'aud-sec ' + (cls || '');
+    d.textContent = text;
+    return d;
+  }
+
+  function kvRow(node, text) {
+    var d = document.createElement('div');
+    d.className = 'aud-line';
+    d.textContent = text;
+    node.appendChild(d);
+  }
+
+  function buildEfficacyCard(e) {
+    var card = document.createElement('article');
+    card.className = 'aud-card';
+    var head = document.createElement('div');
+    head.className = 'aud-card-head';
+    head.innerHTML = '<span class="aud-ing">' + esc(e.ingredient || '') + '</span>';
+    card.appendChild(head);
+    var rows = [
+      ['科学界怎么说', e.whatScienceSays],
+      ['证据强度', e.evidence],
+      ['来源', (e.sources || []).join('；')],
+      ['对文案的启示', e.copyImplication],
+    ];
+    rows.forEach(function (pair) {
+      var line = document.createElement('div');
+      line.className = 'aud-line';
+      line.innerHTML = '<span class="k">' + esc(pair[0]) + '</span>' + esc(audienceCopyText(pair[1]));
+      card.appendChild(line);
+    });
+    return card;
+  }
+
+  function buildSegmentCard(s) {
+    var tiers = { '核心': 'tier-core', '次要': 'tier-second', '机会': 'tier-chance' };
+    var card = document.createElement('article');
+    card.className = 'aud-card ' + (tiers[s.tier] || '');
+    var head = document.createElement('div');
+    head.className = 'aud-card-head';
+    head.innerHTML = '<span class="tier-badge">' + esc(s.tier || '') + '</span>' +
+      '<span class="aud-seg-name">' + esc(s.name || '') + '</span>';
+    card.appendChild(head);
+    var why = document.createElement('div');
+    why.className = 'aud-line';
+    why.innerHTML = '<span class="k">为什么是这群人</span>' + esc(audienceCopyText(s.why));
+    card.appendChild(why);
+    if ((s.mindset || []).length) {
+      var mh = document.createElement('div');
+      mh.className = 'aud-sub';
+      mh.textContent = '心智原话';
+      card.appendChild(mh);
+      (s.mindset || []).forEach(function (m) { kvRow(card, '「' + m + '」'); });
+    }
+    if ((s.copyHooks || []).length) {
+      var ch = document.createElement('div');
+      ch.className = 'aud-sub';
+      ch.textContent = '对文案的启示';
+      card.appendChild(ch);
+      (s.copyHooks || []).forEach(function (h) {
+        var d = document.createElement('div');
+        d.className = 'aud-line hook';
+        d.textContent = h;
+        card.appendChild(d);
+      });
+    }
+    return card;
+  }
+
+  function buildScenarioCard(sc, extraKey) {
+    var card = document.createElement('article');
+    card.className = 'scene-card';
+    var head = document.createElement('div');
+    head.className = 'scene-head';
+    head.innerHTML = '<span class="scene-title">' + esc(sc.title || '') + '</span>' +
+      '<span class="grow"></span>';
+    var cp = document.createElement('button');
+    cp.type = 'button';
+    cp.className = 'mini';
+    cp.textContent = '复制';
+    cp.dataset.act = 'copyscene';
+    cp.dataset.scope = extraKey;
+    cp.dataset.idx = String(sc.__idx);
+    head.appendChild(cp);
+    card.appendChild(head);
+    [['问题', sc.problem], ['方案', sc.solution], ['解决后的状态', sc.after], ['落位建议', sc.placement]].forEach(function (pair) {
+      if (!pair[1]) return;
+      var line = document.createElement('div');
+      line.className = 'aud-line';
+      line.innerHTML = '<span class="k">' + esc(pair[0]) + '</span>' + esc(audienceCopyText(pair[1]));
+      card.appendChild(line);
+    });
+    return card;
+  }
+
+  function copySceneText(scope, idx) {
+    var list = scope === 'pool' ? ((state.data.audience || {}).scenarioPool || [])
+      : (curModule().scenarios || []);
+    var sc = list[idx];
+    if (!sc) return '';
+    return ['【' + sc.title + '】',
+      '问题：' + sc.problem,
+      '方案：' + sc.solution,
+      '解决后的状态：' + sc.after,
+      sc.placement ? '落位建议：' + sc.placement : ''].filter(Boolean).join('\n');
+  }
+
+  function renderAudience() {
+    if (state.view !== 'audience') return;
+    var mod = curModule();
+    var aud = state.data.audience;
+    els.audience.innerHTML = '';
+
+    if (!aud) {
+      var empty = document.createElement('div');
+      empty.className = 'hint-p';
+      empty.textContent = 'copy.json 中没有 audience 数据。';
+      els.audience.appendChild(empty);
+      return;
+    }
+
+    var tip = document.createElement('div');
+    tip.className = 'cmp-tip';
+    tip.textContent = '研究背景，非上线文案（不纳入禁词扫描）。研究日期：' + (aud.researchedAt || '—') +
+      '　·　' + (aud.method || '');
+    els.audience.appendChild(tip);
+
+    /* A. 产品人群基础研究 */
+    els.audience.appendChild(sectionTitle('产品人群基础研究', 'primary'));
+    if ((aud.efficacy || []).length) {
+      els.audience.appendChild(sectionTitle('① 功效理解（逐成分 · 联网所得）', 'sub'));
+      (aud.efficacy || []).forEach(function (e) { els.audience.appendChild(buildEfficacyCard(e)); });
+    }
+    if ((aud.segments || []).length) {
+      els.audience.appendChild(sectionTitle('② 受众人群分层', 'sub'));
+      (aud.segments || []).forEach(function (s) { els.audience.appendChild(buildSegmentCard(s)); });
+    }
+    if ((aud.cautions || []).length) {
+      els.audience.appendChild(sectionTitle('③ 定位风险提示', 'sub'));
+      var box = document.createElement('div');
+      box.className = 'aud-caution';
+      (aud.cautions || []).forEach(function (c) {
+        var d = document.createElement('div');
+        d.className = 'aud-line warn';
+        d.textContent = c;
+        box.appendChild(d);
+      });
+      els.audience.appendChild(box);
+    }
+
+    /* B. 场景切入 */
+    els.audience.appendChild(sectionTitle('场景切入', 'primary'));
+    if ((aud.scenarioPool || []).length) {
+      els.audience.appendChild(sectionTitle('产品级候选场景池（可跨图选用）', 'sub'));
+      (aud.scenarioPool || []).forEach(function (sc, i) {
+        sc.__idx = i;
+        els.audience.appendChild(buildScenarioCard(sc, 'pool'));
+      });
+    }
+    if ((mod.scenarios || []).length) {
+      els.audience.appendChild(sectionTitle('本图适配场景｜' + mod.id + ' ' + mod.name, 'sub'));
+      (mod.scenarios || []).forEach(function (sc, i) {
+        sc.__idx = i;
+        els.audience.appendChild(buildScenarioCard(sc, 'module'));
+      });
+    }
+
+    /* 重新生成指令 */
+    if (aud.regenPrompt) {
+      var det = document.createElement('details');
+      det.className = 'sub';
+      var sum = document.createElement('summary');
+      sum.textContent = '换产品时如何重新生成这套研究（可复制指令）';
+      det.appendChild(sum);
+      var body = document.createElement('div');
+      body.className = 'body';
+      var pre = document.createElement('div');
+      pre.className = 'text';
+      pre.textContent = aud.regenPrompt;
+      body.appendChild(pre);
+      var cp = document.createElement('button');
+      cp.type = 'button';
+      cp.className = 'mini';
+      cp.textContent = '复制指令';
+      cp.dataset.act = 'copyregen';
+      body.appendChild(cp);
+      det.appendChild(body);
+      els.audience.appendChild(det);
     }
   }
 
   /* ---------------------------------------------------------- 风格 */
 
   function renderStyleSeg() {
-    els.styleSeg.innerHTML = '';
+    els.styleMenu.innerHTML = '';
     state.data.styles.forEach(function (st) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.textContent = st.id + ' ' + st.name;
-      b.title = st.desc || '';
       b.dataset.style = st.id;
+      b.innerHTML = '<span class="opt-main">' + esc(st.id + ' · ' + st.name) + '</span>' +
+        (st.desc ? '<span class="opt-sub">' + esc(st.desc) + '</span>' : '');
       if (st.id === state.style) b.classList.add('on');
-      b.addEventListener('click', function () { setStyle(st.id); });
-      els.styleSeg.appendChild(b);
+      b.addEventListener('click', function () {
+        setStyle(st.id);
+        els.styleMenu.classList.remove('open');
+      });
+      els.styleMenu.appendChild(b);
     });
+    syncStyleButton();
+  }
+
+  function syncStyleButton() {
+    var cur = null;
+    (state.data.styles || []).forEach(function (st) { if (st.id === state.style) cur = st; });
+    els.btnStyle.textContent = cur ? (cur.id + ' ' + cur.name + ' ▾') : '风格 ▾';
+    els.btnStyle.title = cur && cur.desc ? cur.desc : '切换风格（快捷键 1 2 3 4）';
   }
 
   function setStyle(id) {
@@ -832,9 +1252,10 @@
     commitEditor();
     state.style = id;
     try { localStorage.setItem(LS_STYLE, id); } catch (e) { /* 忽略 */ }
-    Array.prototype.forEach.call(els.styleSeg.querySelectorAll('button'), function (b) {
+    Array.prototype.forEach.call(els.styleMenu.querySelectorAll('button'), function (b) {
       b.classList.toggle('on', b.dataset.style === id);
     });
+    syncStyleButton();
     /* 各风格的版式单元数一致，所以只重绘文案、不重建卡片，
        以保留右侧滚动位置与「备选」的展开状态；行数不一致时才重建。 */
     var needRebuild = (curModule().slots || []).some(function (slot) {
@@ -862,6 +1283,8 @@
     renderOverlay();
     renderCards();
     if (state.view === 'compare') renderCompare();
+    if (state.view === 'free') renderFree();
+    if (state.view === 'audience') renderAudience();
     els.cards.scrollTop = 0;
   }
 
@@ -991,6 +1414,25 @@
         if (row != null) out.push(['第' + (i + 1) + '行', row]);
       });
     }
+    (slot.divs || []).forEach(function (dv, i) {
+      if (dv && dv.en != null) out.push(['发散' + (i + 1), dv.en]);
+    });
+    return out;
+  }
+
+  /** 自由创作文案也纳入合规扫描（字段名：自由·角度N·层级） */
+  function freeFields(module) {
+    var out = [];
+    ((module.free || {}).angles || []).forEach(function (a, ai) {
+      var c = a.copy || {};
+      var tag = '自由·角度' + (ai + 1);
+      if (c.headline) out.push([tag + '·主标', c.headline]);
+      if (c.subhead) out.push([tag + '·副标', c.subhead]);
+      (c.points || []).forEach(function (p, pi) {
+        if (p) out.push([tag + '·要点' + (pi + 1), p]);
+      });
+      if (c.closer) out.push([tag + '·收尾', c.closer]);
+    });
     return out;
   }
 
@@ -1035,6 +1477,40 @@
           }
         }
       });
+
+      /* 自由创作文案：禁词扫描 + 脚注校验 */
+      var ff = freeFields(mod);
+      ff.forEach(function (pair) {
+        var label = pair[0];
+        var text = String(pair[1] || '');
+        var lower = text.toLowerCase();
+        banned.forEach(function (word) {
+          var needle = String(word).toLowerCase();
+          if (!needle) return;
+          var from = 0;
+          var at = lower.indexOf(needle, from);
+          while (at >= 0) {
+            hits.push({
+              mi: mi, modId: mod.id, slotId: mod.id + '（自由创作）', field: label, word: word,
+              ctx: text.slice(Math.max(0, at - 24), at + needle.length + 24),
+              pre: text.slice(Math.max(0, at - 24), at),
+              mid: text.slice(at, at + needle.length),
+              post: text.slice(at + needle.length, at + needle.length + 24)
+            });
+            from = at + needle.length;
+            at = lower.indexOf(needle, from);
+          }
+        });
+      });
+      if (!moduleHasNeeds) {
+        var fstar = ff.filter(function (pair) { return hasFootnoteMark(pair[1]); });
+        if (fstar.length) {
+          reminders.push({
+            mi: mi, modId: mod.id, slotId: mod.id + '（自由创作）',
+            field: fstar.map(function (p) { return p[0]; }).join('、')
+          });
+        }
+      }
     });
 
     /* 渲染浮层 */
@@ -1046,7 +1522,8 @@
 
     var scannedNote = document.createElement('p');
     scannedNote.className = 'hint-p';
-    scannedNote.textContent = '扫描范围：当前风格下全部槽位的「产出英文 / 备选 / 名称 / 剂量 / 说明1 / 说明2 / 表格行」。' +
+    scannedNote.textContent = '扫描范围：当前风格下全部槽位的「产出英文 / 备选 / 发散 / 名称 / 剂量 / 说明1 / 说明2 / 表格行」，' +
+      '以及全部模块的「自由创作」文案（主标 / 副标 / 要点 / 收尾）。' +
       '不扫描 note、insp、text 与 DSHEA 声明本身（这些字段会引用已被删除的原文，属正常内容）。' +
       '匹配方式：对 meta.banned 共 ' + banned.length + ' 个词做大小写不敏感子串匹配。';
     els.modalBody.appendChild(scannedNote);
@@ -1127,7 +1604,7 @@
       '<tr><td><span class="key">←</span> <span class="key">→</span></td><td>上一个 / 下一个模块（M1…M10）</td></tr>' +
       '<tr><td><span class="key">↑</span> <span class="key">↓</span></td><td>上一个 / 下一个槽位</td></tr>' +
       '<tr><td><span class="key">1</span> <span class="key">2</span> <span class="key">3</span> <span class="key">4</span></td><td>切换风格 A / B / C / D</td></tr>' +
-      '<tr><td><span class="key">Tab</span></td><td>在「工作台 / 四风格对比」视图间切换</td></tr>' +
+      '<tr><td><span class="key">Tab</span></td><td>循环切换「工作台 → 四风格对比 → 自由创作 → 消费人群画像」</td></tr>' +
       '<tr><td><span class="key">Ctrl</span>+<span class="key">S</span></td><td>保存（写回 copy.json，自动备份）</td></tr>' +
       '<tr><td><span class="key">Ctrl</span>+<span class="key">Enter</span></td><td>编辑态提交</td></tr>' +
       '<tr><td><span class="key">Esc</span></td><td>退出标定模式 / 取消编辑态 / 关闭浮层</td></tr>' +
@@ -1138,7 +1615,13 @@
       '也可在卡片「详情 → 当前坐标」里手工输入 4 个数字（精度 0.5%），保存后写回 <code>copy.json</code>。</p>' +
       '<p class="hint-p">「完成」勾选按产品保存在浏览器 localStorage（<code>copywb.done.*</code>），<b>不会</b>写入 copy.json；换产品后自动重新计数。</p>' +
       '<p class="hint-p">顶栏 <code>☀️ / 🌙</code> 按钮切换日间 / 夜间主题（默认夜间，选择记忆在浏览器）。' +
-      '点击图上高亮框或槽位正文，右侧对应卡片会以高亮色整卡显示当前选中的槽位。</p>';
+      '点击图上高亮框或槽位正文，右侧对应卡片会以高亮色整卡显示当前选中的槽位。</p>' +
+      '<p class="hint-p"><b>自由创作</b>视图不受图上槽位约束：每张图 3 个创意角度，各含主标 / 副标 / 要点 / 收尾。' +
+      '它跳出版式与声线限制、用于挑方向，不替代「工作台」里逐槽位的落版文案；两处文案都会进入合规检查与导出。</p>' +
+      '<p class="hint-p"><b>消费人群画像</b>视图是<b>研究背景</b>（不纳入禁词扫描）：上半是「产品人群基础研究」——' +
+      '逐成分的功效与证据强度、受众三层画像、定位风险；下半是「场景切入」——产品级候选场景池与本图适配场景，' +
+      '每条按「问题 + 方案 + 解决后的状态」写，末句带画面感描述，可直接用于生图构思。' +
+      '换产品时展开底部的「重新生成指令」，复制到任意 agent 里即可重跑同一套研究。</p>';
     openModal();
   }
 
@@ -1264,6 +1747,15 @@
       b.addEventListener('click', function () { setView(b.dataset.view); });
     });
 
+    /* 风格下拉 */
+    els.btnStyle.addEventListener('click', function (ev) {
+      ev.stopPropagation();
+      els.styleMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', function (ev) {
+      if (!els.ddStyle.contains(ev.target)) els.styleMenu.classList.remove('open');
+    });
+
     /* 导出下拉 */
     els.btnExport.addEventListener('click', function (ev) {
       ev.stopPropagation();
@@ -1338,7 +1830,7 @@
         }
         if (btn.dataset.act === 'promote') {
           var fs = slotById(btn.dataset.slot);
-          if (fs) promoteAlt(fs.slot);
+          if (fs) promoteFrom(fs.slot, btn.dataset.field || 'alt');
           return;
         }
       }
@@ -1385,6 +1877,27 @@
         if (rects[ri]) inp.value = rects[ri][ai];
       }
     }, true);
+
+    /* 消费人群画像视图：场景复制 + 重生指令复制 */
+    els.audience.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('button');
+      if (!btn) return;
+      if (btn.dataset.act === 'copyscene') {
+        copyText(copySceneText(btn.dataset.scope, Number(btn.dataset.idx)), '场景 · ' + btn.dataset.scope);
+      } else if (btn.dataset.act === 'copyregen') {
+        copyText((state.data.audience || {}).regenPrompt || '', '重新生成指令');
+      }
+    });
+
+    /* 自由创作视图复制 */
+    els.free.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('button');
+      if (!btn || btn.dataset.act !== 'copyfree') return;
+      var mod = curModule();
+      var txt = freeAngleText(mod, Number(btn.dataset.angle), btn.dataset.key);
+      var label = btn.dataset.key === 'all' ? (mod.id + ' · 整套') : (mod.id + ' · ' + btn.dataset.key);
+      copyText(txt, label);
+    });
 
     /* 对比视图复制 */
     els.compare.addEventListener('click', function (ev) {
@@ -1433,18 +1946,21 @@
     document.addEventListener('keydown', onKeyDown);
   }
 
-  function promoteAlt(slot) {
-    if (slot.kind !== 'text') return;
-    var v = (slot.values || {})[state.style];
-    if (!v) return;
-    var old = v.rec;
-    v.rec = v.alt;
-    v.alt = old;
+  function promoteFrom(slot, srcField) {
+    if (!slot || (slot.kind !== 'text' && slot.kind !== 'card')) return;
+    var isText = slot.kind === 'text';
+    var base = isText ? (slot.values || {})[state.style] : (slot.cards || {})[state.style];
+    if (!base) return;
+    var recKey = isText ? 'rec' : 'line2';
+    var incoming = fieldValue(slot, srcField);
+    if (!incoming) return;
+    setField(slot, srcField, base[recKey]);
+    base[recKey] = incoming;
     markDirty();
     markCardDirty(slot.id);
     paintCards();
     if (state.view === 'compare') renderCompare();
-    toast('已把「备选」提升为产出英文，原产出英文转为备选（尚未保存）。');
+    toast('已把「' + (srcField === 'alt' ? '备选' : '发散') + '」换入产出位，原内容落到原位（尚未保存）。');
   }
 
   function onKeyDown(ev) {
@@ -1471,7 +1987,12 @@
     if (key === 'ArrowRight') { ev.preventDefault(); gotoModule(state.modIdx + 1); return; }
     if (key === 'ArrowUp') { ev.preventDefault(); goSlot(-1); return; }
     if (key === 'ArrowDown') { ev.preventDefault(); goSlot(1); return; }
-    if (key === 'Tab') { ev.preventDefault(); setView(state.view === 'work' ? 'compare' : 'work'); return; }
+    if (key === 'Tab') {
+      ev.preventDefault();
+      var vi = VIEW_CYCLE.indexOf(state.view);
+      setView(VIEW_CYCLE[(vi + 1) % VIEW_CYCLE.length]);
+      return;
+    }
     if (key === '?' || (key === '/' && ev.shiftKey)) { ev.preventDefault(); showHelp(); return; }
     if (key >= '1' && key <= '4') {
       var ids = state.data.styles.map(function (s) { return s.id; });

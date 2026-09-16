@@ -1,0 +1,10 @@
+# 运行时自动生成，不入库
+_workbench/.backup/*.json
+_workbench/copy.json.tmp
+_workbench/server.log
+__pycache__/
+*.pyc
+
+# 说明：_workbench/导出/ 下的导出件是交付物，纳入版本管理；
+# 如需忽略后续批量导出，取消下一行注释。
+# _workbench/导出/*.md
