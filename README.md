@@ -23,7 +23,7 @@
 |---|---|---|
 | 根据 Amazon 产品写主图、辅图、A+ 页面结构、设计 brief、生图 prompt | [`amazon-supplement-visual-content`](./amazon-supplement-visual-content/) | Codex/OpenAI 原版，适合正式出图前做内容与合规总控 |
 | 在 WorkBuddy 里做补充剂图片/A+ 内容 | [`amazon-supplement-visual-content-WB`](./amazon-supplement-visual-content-WB/) | WorkBuddy 版目录，目前用于和原版区分管理 |
-| 在可视化工作台里为详情页 / A+ 设计稿写四风格合规文案，看图定位槽位、改稿、合规检查、导出 | [`amazon-copy-writing-project`](./amazon-copy-writing-project/) | 本地 Python 工作台（离线运行），附资料目录规范与换新产品流程 |
+| 在可视化工作台里为详情页 / A+ 设计稿写四风格合规文案，看图定位槽位、改稿、合规检查、导出 | [`amazon-copy-writing-project`](./amazon-copy-writing-project/) | 本地 Python 工作台（离线运行），四视图 + 逐槽位文案 + 发散备选 + 人群研究与场景切入 |
 | 快速生成 7 张图和 A+ 图片英文文案 | [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/) | 偏文案生成，适合已有 SFP 和卖点时快速出稿 |
 | 采集 Amazon US 搜索框下拉词 | [`amazon-dropdown-expander`](./amazon-dropdown-expander/) | 轻量 Python 工具，输出 CSV |
 | 搭建新品关键词库、P0/P1/P2、Search Term 和广告词基础 | [`amazon-new-listing-keyword-library`](./amazon-new-listing-keyword-library/) | 输入 ABA、Sif、下拉词、产品信息图，输出 Excel + 策略报告 |
@@ -151,6 +151,8 @@
 
 [`amazon-copy-writing-project`](./amazon-copy-writing-project/)  
 可复用的本地「文案工作台」项目：为产品详情页 / A+ / 轮播设计稿撰写四风格合规文案。单页工作台左边看设计稿、右边改槽位文案，内置黑名单合规检查、高亮框坐标标定、日/夜主题与按风格导出 Markdown；配套「资料/」产品材料目录规范和换新产品标准流程。
+
+四个视图（`Tab` 键循环）：**工作台**（逐槽位落版文案，按设计稿文本块容量收口，每槽位含 3 条发散备选可一键换入）、**四风格对比**、**自由创作**（每图 3 个不受槽位约束的创意角度）、**消费人群画像**（逐成分功效与证据强度 + 受众三层画像 + 定位风险 + 场景切入，附换产品时的重新生成指令）。
 偏“图片文案生成”，适合根据 Supplement Facts 和卖点快速产出 7 张图和 A+ 模块文案。
 
 ### 5. 成分合规、IP 风险与配方研发

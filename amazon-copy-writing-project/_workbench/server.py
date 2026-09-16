@@ -82,6 +82,139 @@ def with_pct(value):
 
 
 # ----------------------------------------------------------------- 导出 Markdown
+def div_markdown(slot):
+    """发散备选小节（text 与 card 槽位）。"""
+    divs = slot.get('divs') or []
+    if not divs:
+        return []
+    out = []
+    out.append('- 发散备选（角度创新，不分风格）：')
+    for idx, dv in enumerate(divs, 1):
+        out.append('  %d. 角度：%s' % (idx, dv.get('zh', '')))
+        out.append('  ```')
+        for line in str(dv.get('en', '')).split('\n'):
+            out.append('  ' + line)
+        out.append('  ```')
+    return out
+
+
+def free_markdown(module):
+    """自由创作小节（不受槽位约束的创意提案）。"""
+    free = module.get('free') or {}
+    angles = free.get('angles') or []
+    if not angles:
+        return []
+    out = []
+    out.append('### 自由创作（不受槽位约束）')
+    out.append('')
+    if free.get('read'):
+        out.append('- 读图结论：%s' % free['read'])
+        out.append('')
+    for idx, angle in enumerate(angles, 1):
+        out.append('#### 角度 %d｜%s' % (idx, angle.get('name', '')))
+        out.append('')
+        if angle.get('why'):
+            out.append('- 角度理由：%s' % angle['why'])
+            out.append('')
+        copy = angle.get('copy') or {}
+        for title, key in (('主标', 'headline'), ('副标', 'subhead'), ('收尾', 'closer')):
+            out.append('- %s：' % title)
+            out.append('  ```')
+            for line in str(copy.get(key, '')).split('\n'):
+                out.append('  ' + line)
+            out.append('  ```')
+        points = copy.get('points') or []
+        if points:
+            out.append('- 要点：')
+            for p in points:
+                out.append('  - %s' % p)
+        out.append('')
+    return out
+
+
+def scenario_markdown(module):
+    """本图适配场景（研究背景）。"""
+    scs = module.get('scenarios') or []
+    if not scs:
+        return []
+    out = ['**本图适配场景（研究背景，非上线文案）**：', '']
+    for idx, sc in enumerate(scs, 1):
+        out.append('- %d. %s' % (idx, sc.get('title', '')))
+        for label, key in (('问题', 'problem'), ('方案', 'solution'),
+                           ('解决后的状态', 'after'), ('落位建议', 'placement')):
+            if sc.get(key):
+                out.append('  - %s：%s' % (label, sc[key]))
+    out.append('')
+    return out
+
+
+def audience_markdown(data):
+    """导出附录：产品人群基础研究与场景切入。"""
+    aud = data.get('audience') or {}
+    if not aud:
+        return []
+    out = []
+    out.append('---')
+    out.append('')
+    out.append('## 附录：产品人群基础研究与场景切入')
+    out.append('')
+    out.append('> 研究背景，**非上线文案**（不参与禁词扫描；上线表述仍以白名单主张为准）。')
+    out.append('> 研究日期：%s' % aud.get('researchedAt', '—'))
+    out.append('> 方法：%s' % aud.get('method', ''))
+    out.append('')
+
+    out.append('### 一、功效理解（逐成分 · 联网所得）')
+    out.append('')
+    for e in aud.get('efficacy', []):
+        out.append('#### %s' % e.get('ingredient', ''))
+        out.append('')
+        out.append('- 科学界怎么说：%s' % e.get('whatScienceSays', ''))
+        out.append('- 证据强度：%s' % e.get('evidence', ''))
+        out.append('- 来源：%s' % '；'.join(e.get('sources') or []))
+        out.append('- 对文案的启示：%s' % e.get('copyImplication', ''))
+        out.append('')
+
+    out.append('### 二、受众人群分层')
+    out.append('')
+    for s in aud.get('segments', []):
+        out.append('#### [%s] %s' % (s.get('tier', ''), s.get('name', '')))
+        out.append('')
+        out.append('- 为什么是这群人：%s' % s.get('why', ''))
+        for m in s.get('mindset') or []:
+            out.append('- 心智原话：「%s」' % m)
+        for h in s.get('copyHooks') or []:
+            out.append('- 对文案的启示：%s' % h)
+        out.append('')
+
+    cautions = aud.get('cautions') or []
+    if cautions:
+        out.append('### 三、定位风险提示')
+        out.append('')
+        for c in cautions:
+            out.append('- %s' % c)
+        out.append('')
+
+    pool = aud.get('scenarioPool') or []
+    if pool:
+        out.append('### 四、产品级候选场景池')
+        out.append('')
+        for idx, sc in enumerate(pool, 1):
+            out.append('- %d. %s' % (idx, sc.get('title', '')))
+            for label, key in (('问题', 'problem'), ('方案', 'solution'), ('解决后的状态', 'after')):
+                if sc.get(key):
+                    out.append('  - %s：%s' % (label, sc[key]))
+        out.append('')
+
+    if aud.get('regenPrompt'):
+        out.append('### 五、换产品时如何重新生成（可复制指令）')
+        out.append('')
+        out.append('```text')
+        out.append(aud['regenPrompt'])
+        out.append('```')
+        out.append('')
+    return out
+
+
 def slot_markdown(slot, style):
     """按 §5.4 的导出格式生成单个槽位的 Markdown 片段。"""
     out = []
@@ -97,12 +230,14 @@ def slot_markdown(slot, style):
             for line in str(values.get(key, '')).split('\n'):
                 out.append('  ' + line)
             out.append('  ```')
+        out.extend(div_markdown(slot))
     elif kind == 'card':
         card = (slot.get('cards') or {}).get(style) or {}
         out.append('- 名称：%s' % card.get('name', ''))
         out.append('- 剂量：%s' % card.get('dose', ''))
         out.append('- 说明1：%s' % card.get('line1', ''))
         out.append('- 说明2：%s' % card.get('line2', ''))
+        out.extend(div_markdown(slot))
     elif kind == 'table':
         rows = (slot.get('rows') or {}).get(style) or []
         out.append('- 表格共 %d 行：' % len(rows))
@@ -137,6 +272,7 @@ def build_markdown(data, style, pending=None):
     lines.append('')
     lines.append('> 产品：%s　|　规格：%s' % (meta.get('product', ''), meta.get('spec', '')))
     lines.append('> 导出时间：%s' % stamp.strftime('%Y-%m-%d %H:%M'))
+    lines.append('> 说明：正文为逐槽位落版文案（按风格 %s）；各模块另附「自由创作」与「本图适配场景」，文末附「产品人群基础研究」。' % style)
     lines.append('')
 
     disclaimer_mods = []
@@ -164,6 +300,11 @@ def build_markdown(data, style, pending=None):
             lines.extend(slot_markdown(slot, style))
             lines.append('')
 
+        lines.extend(free_markdown(module))
+        lines.append('')
+
+        lines.extend(scenario_markdown(module))
+
     lines.append('---')
     lines.append('')
     lines.append('## DSHEA 免责声明（必须上图，全文照抄）')
@@ -181,6 +322,8 @@ def build_markdown(data, style, pending=None):
     else:
         lines.append('无。')
         lines.append('')
+
+    lines.extend(audience_markdown(data))
 
     lines.append('---')
     lines.append('')
