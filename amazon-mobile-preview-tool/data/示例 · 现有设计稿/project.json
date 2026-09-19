@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "9c46c5c8a32941169b1734456fcb5e6e",
+  "name": "示例 · 现有设计稿",
+  "revision": 65,
+  "createdAt": "2026-09-19T13:16:10.390Z",
+  "updatedAt": "2026-09-19T15:39:29.438Z",
+  "product": {
+    "brand": "LOCAL DESIGN PREVIEW",
+    "title": "12312",
+    "price": ""
+  },
+  "gallery": [
+    {
+      "id": "cf1a1fa6-b884-420e-bc0a-d86a6907ed00",
+      "assetId": "39edc44bcc1447b99657fde5a48e51ea"
+    },
+    {
+      "id": "74651a1f-fd2e-4270-ab6a-d6b7057d7e13",
+      "assetId": "9637771659ae4ee0a41829e2b446acd1"
+    },
+    {
+      "id": "29744f27-fa39-4e7c-a284-920e70659931",
+      "assetId": "55e186bf049f4b028e25e510e8554948"
+    },
+    {
+      "id": "192332a2-56df-4a84-b193-8f120899afca",
+      "assetId": "baf24fd6e72e49e493d1005a3c4fc5ec"
+    }
+  ],
+  "modules": [
+    {
+      "id": "3f3bb598-03ff-4291-a512-5bf499a8da52",
+      "type": "image",
+      "title": "",
+      "body": "",
+      "assetId": "89d61581cc9c4dbeb739c14b6b0015b2"
+    },
+    {
+      "id": "1b853628-e242-4f91-9f3c-5c36be96a2a0",
+      "type": "image",
+      "title": "",
+      "body": "",
+      "assetId": "5395ed0b72bd4233b3c9c435f1920cc0"
+    },
+    {
+      "id": "3c57db16-b913-4e63-899f-9a4b234854e2",
+      "type": "carousel",
+      "title": "",
+      "body": "",
+      "slides": [
+        {
+          "id": "d3bba7c8-3e26-4b29-a5a4-7826bffcc8ba",
+          "assetId": "9f8ea82fb12b4ac59050932e736ae4ec",
+          "label": "Overview",
+          "title": "",
+          "body": ""
+        },
+        {
+          "id": "c90ee171-75e8-4eed-857c-dd760005d448",
+          "assetId": "1bb4c8b3ac574b51a03183990d155be3",
+          "label": "Ingredients",
+          "title": "",
+          "body": ""
+        },
+        {
+          "id": "0d11c036-813e-4d89-b2be-a7a8d850112c",
+          "assetId": "b1def0889d5e4458aae22981277f156c",
+          "label": "Daily routine",
+          "title": "",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "id": "53c1c6a8-4e2a-41dc-8bb0-19937af8bb51",
+      "type": "video",
+      "title": "",
+      "body": "",
+      "videoAssetId": "769395389b074e57b16d10bfb0031ed6",
+      "posterAssetId": "54efbfe867ee4ed28690831bf81eb484"
+    }
+  ],
+  "assets": {},
+  "settings": {
+    "viewport": "360x780",
+    "zoom": 0.85,
+    "shell": true,
+    "editorCollapsed": false
+  },
+  "view": {
+    "galleryIndex": 2,
+    "carouselIndices": {
+      "3c57db16-b913-4e63-899f-9a4b234854e2": 1
+    },
+    "scrollTop": 724
+  }
+}

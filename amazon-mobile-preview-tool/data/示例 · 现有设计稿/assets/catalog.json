@@ -1,0 +1,142 @@
+{
+  "39edc44bcc1447b99657fde5a48e51ea": {
+    "id": "39edc44bcc1447b99657fde5a48e51ea",
+    "name": "1.png",
+    "mime": "image/png",
+    "size": 968592,
+    "width": 1800,
+    "height": 1350,
+    "category": "main"
+  },
+  "9637771659ae4ee0a41829e2b446acd1": {
+    "id": "9637771659ae4ee0a41829e2b446acd1",
+    "name": "2.png",
+    "mime": "image/png",
+    "size": 489257,
+    "width": 1800,
+    "height": 1350,
+    "category": "main"
+  },
+  "55e186bf049f4b028e25e510e8554948": {
+    "id": "55e186bf049f4b028e25e510e8554948",
+    "name": "3.png",
+    "mime": "image/png",
+    "size": 2938476,
+    "width": 1800,
+    "height": 1350,
+    "category": "main"
+  },
+  "5395ed0b72bd4233b3c9c435f1920cc0": {
+    "id": "5395ed0b72bd4233b3c9c435f1920cc0",
+    "name": "9.png",
+    "mime": "image/png",
+    "size": 178902,
+    "width": 1800,
+    "height": 1350,
+    "category": "aplus"
+  },
+  "89d61581cc9c4dbeb739c14b6b0015b2": {
+    "id": "89d61581cc9c4dbeb739c14b6b0015b2",
+    "name": "10.png",
+    "mime": "image/png",
+    "size": 691640,
+    "width": 1800,
+    "height": 1350,
+    "category": "aplus"
+  },
+  "9f8ea82fb12b4ac59050932e736ae4ec": {
+    "id": "9f8ea82fb12b4ac59050932e736ae4ec",
+    "name": "高级轮播1.png",
+    "mime": "image/png",
+    "size": 2490861,
+    "width": 1800,
+    "height": 1350,
+    "category": "aplus"
+  },
+  "f9e6e0e874094d8fb2e497619cf4be0c": {
+    "id": "f9e6e0e874094d8fb2e497619cf4be0c",
+    "name": "高级轮播2.png",
+    "mime": "image/png",
+    "size": 691312,
+    "width": 1800,
+    "height": 1350
+  },
+  "619b0b821b5e40da89b8f01454b32156": {
+    "id": "619b0b821b5e40da89b8f01454b32156",
+    "name": "高级轮播3.png",
+    "mime": "image/png",
+    "size": 786000,
+    "width": 1800,
+    "height": 1350
+  },
+  "14a541380b4c4e79bc8047e7b4d2347a": {
+    "id": "14a541380b4c4e79bc8047e7b4d2347a",
+    "name": "clipboard.png",
+    "mime": "image/png",
+    "size": 178902,
+    "width": 1800,
+    "height": 1350
+  },
+  "1bb4c8b3ac574b51a03183990d155be3": {
+    "id": "1bb4c8b3ac574b51a03183990d155be3",
+    "name": "高级轮播2.png",
+    "mime": "image/png",
+    "size": 691312,
+    "width": 1800,
+    "height": 1350,
+    "category": "aplus"
+  },
+  "769395389b074e57b16d10bfb0031ed6": {
+    "id": "769395389b074e57b16d10bfb0031ed6",
+    "name": "preview-test.mp4",
+    "mime": "video/mp4",
+    "size": 965880,
+    "width": 1280,
+    "height": 720,
+    "duration": 4.010646,
+    "category": "aplus"
+  },
+  "5b73f3d98445444eae691e4fb74ed742": {
+    "id": "5b73f3d98445444eae691e4fb74ed742",
+    "name": "ratio-test.jpg",
+    "mime": "image/jpeg",
+    "size": 33612,
+    "width": 1200,
+    "height": 600
+  },
+  "23db08c5353948a09df25bbf28747bdb": {
+    "id": "23db08c5353948a09df25bbf28747bdb",
+    "name": "ratio-test.webp",
+    "mime": "image/webp",
+    "size": 7842,
+    "width": 1200,
+    "height": 600
+  },
+  "b1def0889d5e4458aae22981277f156c": {
+    "id": "b1def0889d5e4458aae22981277f156c",
+    "name": "高级轮播3.png",
+    "mime": "image/png",
+    "size": 786000,
+    "width": 1800,
+    "height": 1350,
+    "category": "aplus"
+  },
+  "54efbfe867ee4ed28690831bf81eb484": {
+    "id": "54efbfe867ee4ed28690831bf81eb484",
+    "name": "1.png",
+    "mime": "image/png",
+    "size": 968592,
+    "width": 1800,
+    "height": 1350,
+    "category": "aplus"
+  },
+  "baf24fd6e72e49e493d1005a3c4fc5ec": {
+    "id": "baf24fd6e72e49e493d1005a3c4fc5ec",
+    "name": "1bb4c8b3ac574b51a03183990d155be3.png",
+    "mime": "image/png",
+    "size": 691312,
+    "width": 1800,
+    "height": 1350,
+    "category": "main"
+  }
+}

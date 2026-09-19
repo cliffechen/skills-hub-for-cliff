@@ -1,0 +1,15 @@
+# Local recovery copies and Python/runtime files.
+/backups/
+__pycache__/
+*.py[cod]
+*.log
+.preview.lock
+.saving-*.tmp
+.upload-*.tmp
+.migrating-*.tmp
+.DS_Store
+Thumbs.db
+
+# Keep the bundled example; new personal projects stay local by default.
+/data/*
+!/data/示例 · 现有设计稿/
