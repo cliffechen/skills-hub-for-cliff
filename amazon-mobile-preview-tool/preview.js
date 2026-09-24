@@ -150,7 +150,8 @@ export class PhonePreview {
     this._syncDots();
 
     const wanted = new Set();
-    for (const module of project.modules || []) {
+    const orderedModules = [...(project.modules || []).filter(module => module.type === 'brand-story'), ...(project.modules || []).filter(module => module.type !== 'brand-story')];
+    for (const module of orderedModules) {
       wanted.add(module.id);
       let record = this.modules.get(module.id);
       if (record && record.type !== module.type) {
@@ -177,11 +178,18 @@ export class PhonePreview {
     });
     // insertBefore only moves nodes whose order actually changed, preserving video playback.
     let sibling = this.moduleList.firstChild;
-    for (const module of project.modules || []) {
+    if (sibling === this.aplusHeading) sibling = sibling.nextSibling;
+    for (const module of orderedModules) {
       const node = this.modules.get(module.id).node;
       if (node !== sibling) this.moduleList.insertBefore(node, sibling);
       sibling = node.nextSibling;
+      if (sibling === this.aplusHeading) sibling = sibling.nextSibling;
     }
+    // Match the editor groups: brand stories first, followed by the product description.
+    const firstDescription = orderedModules.find(module => module.type !== 'brand-story');
+    this.aplusHeading.hidden = !firstDescription && Boolean(project.modules?.length);
+    if (firstDescription) this.moduleList.insertBefore(this.aplusHeading, this.modules.get(firstDescription.id).node);
+    else this.aplus.insertBefore(this.aplusHeading, this.moduleList);
     this.emptyAplus.hidden = Boolean(project.modules?.length);
     this._layoutAll();
     if (changedProject || !preservePosition) {
@@ -204,7 +212,22 @@ export class PhonePreview {
     const body = el('p', 'preview-module-body');
     const record = { node, title, body, id: module.id, type: module.type };
     node.append(title);
-    if (module.type === 'carousel') {
+    if (module.type === 'brand-story') {
+      record.heading = el('h2', 'preview-brand-story-heading', 'From the brand');
+      record.stage = el('div', 'preview-brand-story-stage');
+      record.background = this._makeMedia({ kind: 'brand-background', moduleId: module.id }, { selectable: true, placeholderText: '添加背景图（可选）' });
+      record.background.node.classList.add('preview-brand-story-background');
+      record.header = el('div', 'preview-brand-story-header');
+      record.logo = this._makeMedia({ kind: 'brand-logo', moduleId: module.id }, { selectable: true, placeholderText: '添加品牌 Logo（可选）' });
+      record.logo.node.classList.add('preview-brand-story-logo');
+      record.header.append(record.logo.node);
+      record.slider = this._makeSlider('brand-story', () => {
+        this.carouselIndices[module.id] = record.slider.index;
+        this._emitView();
+      });
+      record.stage.append(record.background.node, record.header, record.slider.viewport);
+      node.replaceChildren(record.heading, title, record.stage);
+    } else if (module.type === 'carousel') {
       record.tabs = el('div', 'preview-carousel-tabs');
       record.tabs.setAttribute('role', 'tablist');
       record.tabs.setAttribute('aria-label', 'A+ 轮播导航');
@@ -254,7 +277,14 @@ export class PhonePreview {
   _updateModule(record, module) {
     text(record.title, module.title);
     text(record.body, module.body);
-    if (module.type === 'carousel') {
+    if (module.type === 'brand-story' || module.type === 'carousel') {
+      if (module.type === 'brand-story') {
+        this._setMedia(record.background, module.backgroundAssetId);
+        record.logo.placeholderText = module.brandName || '添加品牌 Logo（可选）';
+        record.logo.node.classList.toggle('has-brand-name', Boolean(module.brandName));
+        this._setMedia(record.logo, module.logoAssetId);
+        if (!module.logoAssetId) record.logo.placeholder.lastChild.textContent = record.logo.placeholderText;
+      }
       const oldId = record.slider.items[record.slider.index]?.id;
       this._syncSlides(record.slider, module.slides || [], slide => ({ kind: 'slide', moduleId: module.id, slideId: slide.id }));
       const movedIndex = oldId ? record.slider.items.findIndex(item => item.id === oldId) : -1;
@@ -296,15 +326,29 @@ export class PhonePreview {
     return node;
   }
 
-  _makeMedia(target) {
+  _makeMedia(target, { selectable = false, placeholderText = '图片预览' } = {}) {
     const node = el('div', 'preview-media');
     const image = el('img', 'preview-image');
     image.draggable = false;
     image.decoding = 'async';
     image.hidden = true;
     const placeholder = this._makePlaceholder();
-    const record = { node, image, placeholder, target, assetId: null };
+    const record = { node, image, placeholder, target, assetId: null, placeholderText };
+    placeholder.lastChild.textContent = placeholderText;
     placeholder.addEventListener('click', () => this.callbacks.onSelectAsset?.(record.target));
+    if (selectable) {
+      image.tabIndex = 0;
+      image.setAttribute('role', 'button');
+      const targetLabel = target.kind === 'brand-background' ? '选择品牌故事背景图' : target.kind === 'brand-logo' ? '选择品牌 Logo' : '选择品牌故事卡片';
+      image.setAttribute('aria-label', targetLabel);
+      placeholder.setAttribute('aria-label', targetLabel);
+      image.addEventListener('click', () => this.callbacks.onSelectAsset?.(record.target));
+      image.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        this.callbacks.onSelectAsset?.(record.target);
+      });
+    }
     image.addEventListener('load', () => {
       image.hidden = false;
       placeholder.hidden = true;
@@ -332,7 +376,7 @@ export class PhonePreview {
     if ((record.image.getAttribute('src') || '') !== source) {
       record.image.hidden = true;
       record.placeholder.hidden = false;
-      record.placeholder.lastChild.textContent = '图片预览';
+      record.placeholder.lastChild.textContent = record.placeholderText;
       if (source) record.image.src = source;
       else record.image.removeAttribute('src');
     }
@@ -353,7 +397,7 @@ export class PhonePreview {
     const viewport = el('div', `preview-slider preview-slider-${kind}`);
     const track = el('div', 'preview-slider-track');
     viewport.tabIndex = 0;
-    viewport.setAttribute('aria-label', kind === 'gallery' ? '左右拖动查看商品图片' : '左右拖动查看 A+ 轮播');
+    viewport.setAttribute('aria-label', kind === 'gallery' ? '左右拖动查看商品图片' : kind === 'brand-story' ? '左右拖动查看品牌故事卡片' : '左右拖动查看 A+ 轮播');
     viewport.setAttribute('aria-roledescription', 'carousel');
     viewport.append(track);
     const record = { kind, viewport, track, items: [], index: 0, onChange, drag: null, suppressClickUntil: 0 };
@@ -419,7 +463,7 @@ export class PhonePreview {
       let entry = old.get(item.id);
       if (!entry) {
         const node = el('div', 'preview-slide');
-        const media = this._makeMedia(targetFor(item));
+        const media = this._makeMedia(targetFor(item), { selectable: slider.kind === 'brand-story', placeholderText: slider.kind === 'brand-story' ? '品牌故事卡片' : '图片预览' });
         const title = el('h4', 'preview-slide-title');
         const body = el('p', 'preview-slide-body');
         node.append(media.node, title, body);
@@ -444,7 +488,7 @@ export class PhonePreview {
     }
     if (!slider.empty) {
       slider.empty = el('div', 'preview-slider-empty');
-      slider.empty.append(el('span', 'preview-placeholder-icon', '▧'), el('span', '', slider.kind === 'gallery' ? '主副图预览' : '轮播图片预览'));
+      slider.empty.append(el('span', 'preview-placeholder-icon', '▧'), el('span', '', slider.kind === 'gallery' ? '主副图预览' : slider.kind === 'brand-story' ? '品牌故事卡片将在这里显示' : '轮播图片预览'));
       slider.viewport.append(slider.empty);
     }
     slider.empty.hidden = Boolean(items.length);
@@ -458,6 +502,7 @@ export class PhonePreview {
     slider.items.forEach((item, itemIndex) => {
       item.node.setAttribute('aria-hidden', String(itemIndex !== slider.index));
       item.media.placeholder.tabIndex = itemIndex === slider.index ? 0 : -1;
+      if (item.media.image.getAttribute('role') === 'button') item.media.image.tabIndex = itemIndex === slider.index ? 0 : -1;
     });
     if (slider.kind === 'gallery') {
       this.galleryIndex = slider.index;
@@ -485,6 +530,7 @@ export class PhonePreview {
   }
 
   _syncTabs(record) {
+    if (!record.tabs) return;
     const ids = new Set();
     let sibling = record.tabs.firstChild;
     record.slider.items.forEach((item, index) => {
@@ -526,19 +572,20 @@ export class PhonePreview {
   _layoutSlider(slider) {
     const width = slider.viewport.clientWidth;
     if (!width) return;
-    const slideWidth = slider.kind === 'gallery' ? Math.max(1, width - 40) : width;
+    const slideWidth = slider.kind === 'gallery' ? Math.max(1, width - 40) : slider.kind === 'brand-story' ? width * 0.76 : width;
     for (const item of slider.items) item.node.style.width = `${slideWidth}px`;
     slider.slideWidth = slideWidth;
     const active = slider.items[slider.index];
     let height = active?.node.offsetHeight || (slider.kind === 'gallery' ? slideWidth : width * 0.75);
     if (slider.kind === 'gallery' && active) height = slideWidth;
+    if (slider.kind === 'brand-story') height = Math.max(slideWidth * 1.25, ...slider.items.map(item => item.node.offsetHeight));
     const nextHeight = `${Math.ceil(height)}px`;
     if (slider.viewport.style.height !== nextHeight) slider.viewport.style.height = nextHeight;
     this._positionSlider(slider, slider.drag?.direction === 'x' ? slider.drag.dx : 0);
   }
 
   _positionSlider(slider, dragOffset = 0) {
-    const gap = slider.kind === 'gallery' ? 8 : 0;
+    const gap = slider.kind === 'gallery' ? 8 : slider.kind === 'brand-story' ? 12 : 0;
     const inset = slider.kind === 'gallery' ? 20 : 0;
     const x = inset - slider.index * ((slider.slideWidth || 0) + gap) + dragOffset;
     slider.track.style.transform = `translate3d(${x}px, 0, 0)`;
