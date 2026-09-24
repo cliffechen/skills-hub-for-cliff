@@ -84,7 +84,11 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(project["revision"], 0)
         self.assertEqual(project["modules"], [])
         self.assertEqual(project["settings"]["viewport"], "390x844")
-        project["modules"] = [{"id": "empty-image", "type": "image", "assetId": "", "title": "半成品", "body": ""}, {"id": "empty-carousel", "type": "carousel", "slides": []}]
+        project["modules"] = [
+            {"id": "empty-image", "type": "image", "assetId": "", "title": "半成品", "body": ""},
+            {"id": "empty-carousel", "type": "carousel", "slides": []},
+            {"id": "empty-brand", "type": "brand-story", "title": "", "body": "", "brandName": "", "backgroundAssetId": "", "logoAssetId": "", "slides": []},
+        ]
         status, _, saved = self.request("PUT", f"/api/projects/{project['id']}", project)
         self.assertEqual(status, 200)
         self.assertEqual(saved["revision"], 1)
@@ -93,6 +97,77 @@ class ServerTests(unittest.TestCase):
         status, _, listing = self.request("GET", "/api/projects")
         self.assertEqual(status, 200)
         self.assertEqual(listing["projects"][0]["name"], "草稿产品")
+
+    def test_brand_story_round_trip_preserves_existing_product_and_modules(self):
+        project = self.create()
+        main = self.upload(project, category="main")[2]
+        background, logo, card = [self.upload(project, category="aplus")[2] for _ in range(3)]
+        video = self.upload(project, mp4(), "video/mp4", category="aplus")[2]
+        project["product"] = {"brand": "原商品品牌", "title": "原商品标题", "price": "$19.99"}
+        project["gallery"] = [{"id": "main-slot", "assetId": main["id"]}]
+        project["modules"] = [
+            {"id": "image", "type": "image", "assetId": card["id"], "title": "原单图", "body": "原说明"},
+            {"id": "carousel", "type": "carousel", "slides": [{"id": "original-slide", "assetId": card["id"], "label": "原标签"}]},
+            {"id": "video", "type": "video", "videoAssetId": video["id"], "posterAssetId": card["id"]},
+        ]
+        original = self.store.save(project["id"], project)
+        project = copy.deepcopy(original)
+        brand_story = {
+            "id": "brand-story", "type": "brand-story", "title": "From the brand", "body": "品牌介绍",
+            "brandName": "OLENPHOGY", "backgroundAssetId": background["id"], "logoAssetId": logo["id"],
+            "slides": [
+                {"id": "brand-mission", "assetId": card["id"], "label": "Our Mission", "title": "Our Mission", "body": "Something that works."},
+                {"id": "brand-draft", "assetId": "", "label": "", "title": "下一张草稿", "body": ""},
+            ],
+        }
+        project["modules"].append(brand_story)
+        project["view"]["carouselIndices"][brand_story["id"]] = 1
+        status, _, saved = self.request("PUT", f"/api/projects/{project['id']}", project)
+        self.assertEqual(status, 200)
+        reopened = server.ProjectStore(Path(self.temporary.name)).get(project["id"])
+        self.assertEqual(reopened, saved)
+        self.assertEqual(reopened["modules"][-1], brand_story)
+        self.assertEqual(reopened["modules"][:-1], original["modules"])
+        for key in ("product", "gallery", "assets", "settings", "createdAt"):
+            self.assertEqual(reopened[key], original[key])
+        self.assertEqual(reopened["view"]["carouselIndices"][brand_story["id"]], 1)
+        for asset in (background, logo, card):
+            self.assertEqual(self.store.asset(project["id"], asset["id"])[0].parent.name, "aplus")
+
+    def test_brand_story_rejects_missing_or_non_image_assets_without_changing_project(self):
+        project = self.create()
+        video = self.upload(project, mp4(), "video/mp4", category="aplus")[2]
+        original = self.store.get(project["id"])
+        for field in ("backgroundAssetId", "logoAssetId", "slide"):
+            for asset_id in ("a" * 32, video["id"]):
+                with self.subTest(field=field, asset_id=asset_id):
+                    module = {"id": "brand-story", "type": "brand-story", "brandName": "Example", "slides": []}
+                    if field == "slide":
+                        module["slides"] = [{"id": "brand-card", "assetId": asset_id}]
+                    else:
+                        module[field] = asset_id
+                    project["modules"] = [module]
+                    self.assertEqual(self.request("PUT", f"/api/projects/{project['id']}", project)[0], 400)
+                    self.assertEqual(self.store.get(project["id"]), original)
+
+    def test_brand_story_rejects_invalid_text_slides_and_duplicate_ids(self):
+        project = self.create()
+        project["gallery"] = [{"id": "main-slot", "assetId": ""}]
+        invalid_fields = [
+            {"brandName": 42}, {"brandName": "a" * 20001}, {"slides": {}}, {"slides": [None]},
+            {"slides": [{"id": "card", "title": []}]},
+            {"slides": [{"id": "card", "label": False}]},
+            {"slides": [{"id": "card", "body": 42}]},
+            {"slides": [{"assetId": ""}]},
+            {"slides": [{"id": "card"}, {"id": "card"}]},
+            {"slides": [{"id": "brand-story"}]},
+            {"slides": [{"id": "main-slot"}]},
+        ]
+        for fields in invalid_fields:
+            with self.subTest(fields=repr(fields)[:120]):
+                project["modules"] = [{"id": "brand-story", "type": "brand-story", "brandName": "", "slides": [], **fields}]
+                self.assertEqual(self.request("PUT", f"/api/projects/{project['id']}", project)[0], 400)
+                self.assertEqual(self.store.get(project["id"])["revision"], 0)
 
     def test_same_filename_is_independent_and_stale_assets_cannot_erase_uploads(self):
         project = self.create()
@@ -286,6 +361,27 @@ class ServerTests(unittest.TestCase):
         self.assertEqual((directory / "aplus" / (shared["id"] + ".png")).read_bytes(), png())
         self.assertEqual(self.store.asset(project["id"], unused["id"])[0].parent, directory)
         self.assertEqual(self.store.migrate_assets(), {"migrated": 0, "unassigned": 1, "errors": []})
+
+    def test_migration_classifies_brand_story_background_logo_and_cards_as_aplus(self):
+        project = self.create()
+        background, logo, card = [self.upload(project)[2] for _ in range(3)]
+        project["modules"] = [{
+            "id": "brand-story", "type": "brand-story", "brandName": "Example",
+            "backgroundAssetId": background["id"], "logoAssetId": logo["id"],
+            "slides": [{"id": "brand-card", "assetId": card["id"]}],
+        }]
+        self.store.save(project["id"], project)
+        directory = self.make_legacy(project, background, logo, card)
+        original_project = (directory.parent / "project.json").read_bytes()
+        self.assertEqual(self.store.migrate_assets(), {"migrated": 3, "unassigned": 0, "errors": []})
+        self.assertEqual((directory.parent / "project.json").read_bytes(), original_project)
+        for asset in (background, logo, card):
+            path, metadata = self.store.asset(project["id"], asset["id"])
+            self.assertEqual(path.parent, directory / "aplus")
+            self.assertEqual(metadata["category"], "aplus")
+            self.assertEqual(path.read_bytes(), png())
+            self.assertFalse((directory / path.name).exists())
+        self.assertEqual(self.store.migrate_assets(), {"migrated": 0, "unassigned": 0, "errors": []})
 
     def test_interrupted_migration_preserves_legacy_files_and_can_be_retried(self):
         project = self.create()

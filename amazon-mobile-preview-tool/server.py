@@ -384,7 +384,7 @@ class ProjectStore:
                     for item in project.get("gallery", []):
                         uses["main"].add(item.get("assetId"))
                     for module in project.get("modules", []):
-                        for key in ("assetId", "videoAssetId", "posterAssetId"):
+                        for key in ("assetId", "videoAssetId", "posterAssetId", "backgroundAssetId", "logoAssetId"):
                             uses["aplus"].add(module.get(key))
                         for slide in module.get("slides", []):
                             uses["aplus"].add(slide.get("assetId"))
@@ -527,7 +527,7 @@ class ProjectStore:
         if not isinstance(modules, list) or len(modules) > 200:
             raise APIError(400, "A+ 模块列表无效或过长。")
         for module in modules:
-            if not isinstance(module, dict) or module.get("type") not in ("image", "carousel", "video"):
+            if not isinstance(module, dict) or module.get("type") not in ("image", "carousel", "video", "brand-story"):
                 raise APIError(400, "不支持的 A+ 模块。")
             item_id(module)
             for key in ("title", "body"):
@@ -538,6 +538,10 @@ class ProjectStore:
                 asset_ref(module, "videoAssetId", "video/")
                 asset_ref(module, "posterAssetId", "image/")
             else:
+                if module["type"] == "brand-story":
+                    text_field(module.get("brandName", ""), "品牌名称")
+                    asset_ref(module, "backgroundAssetId", "image/")
+                    asset_ref(module, "logoAssetId", "image/")
                 slides = module.get("slides", [])
                 if not isinstance(slides, list) or len(slides) > 200:
                     raise APIError(400, "轮播项列表无效或过长。")

@@ -43,7 +43,7 @@ function setSaveStatus() {
   $('projectSelect').disabled = busy || !state.projects.length;
   $('newProject').disabled = busy;
   $('retrySave').disabled = busy;
-  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'viewportSelect', 'zoomSelect', 'shellToggle', 'toggleEditor']) $(id).disabled = busy || !state.project;
+  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'viewportSelect', 'zoomSelect', 'shellToggle', 'toggleEditor']) $(id).disabled = busy || !state.project;
 }
 
 function markChanged({ preview = true, editor = false, delay = 650 } = {}) {
@@ -190,7 +190,8 @@ async function retrySave() {
     project.gallery = original.gallery.map((item) => ({ ...item, assetId: remap(item.assetId) }));
     project.modules = original.modules.map((mod) => ({ ...mod,
       ...(mod.type === 'image' ? { assetId: remap(mod.assetId) } : {}),
-      ...(mod.type === 'carousel' ? { slides: mod.slides.map((s) => ({ ...s, assetId: remap(s.assetId) })) } : {}),
+      ...(['carousel', 'brand-story'].includes(mod.type) ? { slides: mod.slides.map((s) => ({ ...s, assetId: remap(s.assetId) })) } : {}),
+      ...(mod.type === 'brand-story' ? { backgroundAssetId: remap(mod.backgroundAssetId), logoAssetId: remap(mod.logoAssetId) } : {}),
       ...(mod.type === 'video' ? { videoAssetId: remap(mod.videoAssetId), posterAssetId: remap(mod.posterAssetId) } : {}) }));
     const saved = await request(`/api/projects/${project.id}`, { method: 'PUT', body: JSON.stringify(project) });
     state.project = saved; state.saveError = null; state.version = state.savedVersion = 0;
@@ -209,7 +210,7 @@ function currentAsset(target) {
   if (target.kind === 'slide') return mod?.slides?.find((item) => item.id === target.slideId);
   return mod;
 }
-function assetKey(target) { return target.kind === 'video' ? 'videoAssetId' : target.kind === 'poster' ? 'posterAssetId' : 'assetId'; }
+function assetKey(target) { return { video: 'videoAssetId', poster: 'posterAssetId', 'brand-background': 'backgroundAssetId', 'brand-logo': 'logoAssetId' }[target.kind] || 'assetId'; }
 function sameTarget(a, b) { return a && b && JSON.stringify(a) === JSON.stringify(b); }
 function selectTarget(target, focus = true) {
   state.selected = target;
@@ -226,7 +227,8 @@ function assetSlot(target, caption) {
   const asset = state.project.assets[item?.[assetKey(target)]];
   const video = target.kind === 'video';
   let warning = '';
-  if (asset && !video && ['image', 'slide'].includes(target.kind) && asset.width && asset.height && Math.abs(asset.width / asset.height - 4 / 3) > 0.025) warning = '比例与 4:3 预设不同，将完整显示';
+  const brandCard = target.kind === 'slide' && state.project.modules.find((mod) => mod.id === target.moduleId)?.type === 'brand-story';
+  if (asset && !video && !brandCard && ['image', 'slide'].includes(target.kind) && asset.width && asset.height && Math.abs(asset.width / asset.height - 4 / 3) > 0.025) warning = '比例与 4:3 预设不同，将完整显示';
   const media = asset ? (video ? '<span class="video-file-icon" aria-hidden="true">▶</span>' : `<img class="slot-thumb" src="${assetURL(asset.id)}" alt="" loading="lazy">`) : `<span class="slot-plus" aria-hidden="true">${video ? '▶' : '+'}</span>`;
   return `<div class="asset-cell"><button type="button" class="asset-slot ${asset ? '' : 'empty'} ${sameTarget(state.selected, target) ? 'selected' : ''}" data-target="${targetJSON(target)}" aria-pressed="${!!sameTarget(state.selected, target)}" title="点击选中后粘贴，双击选择文件；也可拖入文件">${media}<span class="slot-caption">${esc(asset?.name || caption)}</span><span class="slot-details">${asset ? esc(video ? `${asset.width || '—'}×${asset.height || '—'} · MP4` : `${asset.width}×${asset.height}`) : video ? '拖入 MP4 / 双击选择' : '选中后粘贴 / 拖入图片'}</span></button><div class="slot-actions"><button class="button compact" type="button" data-action="choose" data-target-ref="${targetJSON(target)}">${asset ? '替换' : '选择文件'}</button>${asset ? `<button class="icon-button" type="button" data-action="clear-asset" data-target-ref="${targetJSON(target)}" title="清空素材，保留位置" aria-label="清空素材">×</button>` : ''}</div>${warning ? `<p class="warning">${warning}</p>` : ''}</div>`;
 }
@@ -240,34 +242,43 @@ function sortButtons(kind, id, index, length, moduleId = '') {
 function renderEditor() {
   const p = state.project;
   const disabled = !p;
-  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'viewportSelect', 'zoomSelect', 'shellToggle', 'jumpGallery', 'jumpAplus']) $(id).disabled = disabled;
-  if (!p) { $('productFields').innerHTML = ''; $('galleryEditor').innerHTML = ''; $('moduleList').innerHTML = ''; return; }
+  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'viewportSelect', 'zoomSelect', 'shellToggle', 'jumpGallery', 'jumpAplus']) $(id).disabled = disabled;
+  if (!p) { $('productFields').innerHTML = ''; $('galleryEditor').innerHTML = ''; $('brandStoryList').innerHTML = ''; $('moduleList').innerHTML = ''; return; }
   $('productFields').innerHTML = field('品牌', p.product.brand, 'product.brand', false, '品牌名称（可留空）') + field('商品标题', p.product.title, 'product.title', true, '添加标题，感受主图在商品页里的效果') + field('价格', p.product.price, 'product.price', false, '例如 $39.99');
   $('galleryEditor').innerHTML = `<div class="asset-grid">${p.gallery.map((item, index) => `<div class="gallery-item" data-sort-drop="gallery" data-sort-id="${item.id}"><div class="slide-header"><span class="badge">${index === 0 ? '主图' : `副图 ${index}`}</span>${sortButtons('gallery', item.id, index, p.gallery.length)}</div>${assetSlot({ kind: 'gallery', itemId: item.id }, index === 0 ? '主图' : `副图 ${index}`)}</div>`).join('')}</div><button class="button full-width" data-action="add-gallery" type="button">＋ 添加主副图 · 可多选</button>${!p.gallery.length ? '<p class="hint">也可直接粘贴一张截图，开始预览。</p>' : ''}`;
-  $('moduleList').innerHTML = p.modules.map((mod, index) => {
-    const typeLabel = { image: '整张图片', carousel: '导航轮播', video: '全宽视频' }[mod.type];
-    const english = { image: 'PREMIUM FULL IMAGE', carousel: 'PREMIUM NAVIGATION CAROUSEL', video: 'PREMIUM FULL VIDEO' }[mod.type];
+  const renderModule = (mod, index, modules) => {
+    const typeLabel = { image: '整张图片', carousel: '导航轮播', video: '全宽视频', 'brand-story': '品牌故事' }[mod.type];
+    const english = { image: 'PREMIUM FULL IMAGE', carousel: 'PREMIUM NAVIGATION CAROUSEL', video: 'PREMIUM FULL VIDEO', 'brand-story': 'FROM THE BRAND' }[mod.type];
     let content = '';
     if (mod.type === 'image') content = assetSlot({ kind: 'image', moduleId: mod.id }, '手机图片 · 4:3');
     if (mod.type === 'carousel') {
       content = `<p class="hint">每项单独导入手机图 · 4:3 · 官方基准 2–5 项，草稿不限</p>${mod.slides.map((slide, i) => `<div class="slide-editor" data-sort-drop="slide" data-sort-id="${slide.id}" data-module-id="${mod.id}"><div class="slide-header"><span class="badge">第 ${i + 1} 项</span>${sortButtons('slide', slide.id, i, mod.slides.length, mod.id)}</div>${field('导航标签', slide.label, `slide:${mod.id}:${slide.id}:label`, false, `标签 ${i + 1}`)}${assetSlot({ kind: 'slide', moduleId: mod.id, slideId: slide.id }, '轮播手机图 · 4:3')}<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', slide.title, `slide:${mod.id}:${slide.id}:title`)}${field('正文', slide.body, `slide:${mod.id}:${slide.id}:body`, true)}</details></div>`).join('')}<button class="button full-width" data-action="add-slide" data-module-id="${mod.id}" type="button">＋ 添加轮播项</button><button class="button full-width compact" data-action="batch-slides" data-module-id="${mod.id}" type="button">批量导入轮播图片</button>${mod.slides.length < 2 || mod.slides.length > 5 ? '<p class="warning">当前为草稿：该模块的官方基准为 2–5 项。</p>' : ''}`;
     }
     if (mod.type === 'video') content = `<div class="video-assets">${assetSlot({ kind: 'video', moduleId: mod.id }, '视频文件 · MP4')}${assetSlot({ kind: 'poster', moduleId: mod.id }, '独立封面 · 可选')}</div><p class="hint">视频按自身比例播放；封面与视频分别处理。</p>`;
-    return `<section class="module-card" data-module-id="${mod.id}" data-sort-drop="module" data-sort-id="${mod.id}"><div class="module-head"><button type="button" class="module-title" data-action="reveal-module" data-module-id="${mod.id}" aria-label="定位 A+ 模块 ${index + 1}：${typeLabel}" title="点击定位右侧模块"><span class="module-number">${String(index + 1).padStart(2, '0')}</span><span><strong>${typeLabel}</strong><small>${english}</small></span></button>${sortButtons('module', mod.id, index, p.modules.length)}</div><div class="module-fields">${content}${mod.type !== 'carousel' ? `<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', mod.title, `module:${mod.id}:title`)}${field('正文', mod.body, `module:${mod.id}:body`, true)}</details>` : ''}</div></section>`;
-  }).join('') || '<div class="section-empty"><strong>从一个模块开始</strong><p>选择下方模块，把你的 Canva 设计放进手机页面。</p></div>';
+    if (mod.type === 'brand-story') {
+      const brandAssets = `<div class="brand-assets"><div><p class="hint">背景图 · 可选</p>${assetSlot({ kind: 'brand-background', moduleId: mod.id }, '品牌背景图')}</div><div><p class="hint">品牌 Logo · 可选</p>${assetSlot({ kind: 'brand-logo', moduleId: mod.id }, '透明 Logo')}</div></div>`;
+      const cards = mod.slides.map((slide, i) => `<div class="slide-editor" data-sort-drop="slide" data-sort-id="${slide.id}" data-module-id="${mod.id}"><div class="slide-header"><span class="badge">品牌卡片 ${i + 1}</span>${sortButtons('slide', slide.id, i, mod.slides.length, mod.id)}</div>${assetSlot({ kind: 'slide', moduleId: mod.id, slideId: slide.id }, '品牌故事卡片 · 竖图')}<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', slide.title, `slide:${mod.id}:${slide.id}:title`)}${field('正文', slide.body, `slide:${mod.id}:${slide.id}:body`, true)}</details></div>`).join('');
+      content = `${field('品牌名称', mod.brandName, `module:${mod.id}:brandName`, false, '例如：YOUR BRAND')}${brandAssets}<p class="hint">背景铺满品牌区域；Logo 优先于品牌名称显示。每张卡片独立导入，按约 4:5 竖卡完整显示，左右滑动查看。</p>${cards}<button class="button full-width" data-action="add-slide" data-module-id="${mod.id}" type="button">＋ 添加品牌卡片</button><button class="button full-width compact" data-action="batch-slides" data-module-id="${mod.id}" type="button">批量导入品牌卡片</button>`;
+    }
+    return `<section class="module-card" data-module-id="${mod.id}" data-sort-drop="module" data-sort-id="${mod.id}"><div class="module-head"><button type="button" class="module-title" data-action="reveal-module" data-module-id="${mod.id}" aria-label="定位${mod.type === 'brand-story' ? '品牌故事' : ' A+ 模块'} ${index + 1}：${typeLabel}" title="点击定位右侧模块"><span class="module-number">${String(index + 1).padStart(2, '0')}</span><span><strong>${typeLabel}</strong><small>${english}</small></span></button>${sortButtons('module', mod.id, index, modules.length)}</div><div class="module-fields">${content}${!['carousel', 'brand-story'].includes(mod.type) ? `<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', mod.title, `module:${mod.id}:title`)}${field('正文', mod.body, `module:${mod.id}:body`, true)}</details>` : ''}</div></section>`;
+  };
+  $('brandStoryList').innerHTML = p.modules.filter((mod) => mod.type === 'brand-story').map(renderModule).join('') || '<div class="section-empty"><strong>From the brand</strong><p>添加品牌故事，展示品牌背景与横滑卡片。</p></div>';
+  $('moduleList').innerHTML = p.modules.filter((mod) => mod.type !== 'brand-story').map(renderModule).join('') || '<div class="section-empty"><strong>从一个模块开始</strong><p>选择下方模块，把你的 Canva 设计放进手机页面。</p></div>';
 }
 
 function addModule(type) {
   if (!state.project) { toast('请先新建一个产品项目。'); return; }
   const mod = { id: uid(), type, title: '', body: '' };
   if (type === 'image') mod.assetId = '';
-  if (type === 'carousel') mod.slides = [{ id: uid(), assetId: '', label: '', title: '', body: '' }];
+  if (['carousel', 'brand-story'].includes(type)) mod.slides = Array.from({ length: type === 'brand-story' ? 2 : 1 }, () => ({ id: uid(), assetId: '', label: '', title: '', body: '' }));
+  if (type === 'brand-story') Object.assign(mod, { brandName: state.project.product.brand || '', backgroundAssetId: '', logoAssetId: '' });
   if (type === 'video') Object.assign(mod, { videoAssetId: '', posterAssetId: '' });
-  state.project.modules.push(mod);
-  state.selected = type === 'image' ? { kind: 'image', moduleId: mod.id } : type === 'carousel' ? { kind: 'slide', moduleId: mod.id, slideId: mod.slides[0].id } : { kind: 'video', moduleId: mod.id };
+  if (type === 'brand-story') state.project.modules.unshift(mod);
+  else state.project.modules.push(mod);
+  state.selected = type === 'image' ? { kind: 'image', moduleId: mod.id } : ['carousel', 'brand-story'].includes(type) ? { kind: 'slide', moduleId: mod.id, slideId: mod.slides[0].id } : { kind: 'video', moduleId: mod.id };
   markChanged({ editor: true });
-  $('moduleList').querySelector(`[data-module-id="${mod.id}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  phone.jumpTo('aplus');
+  $(type === 'brand-story' ? 'brandStoryList' : 'moduleList').querySelector(`[data-module-id="${mod.id}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  phone.revealTarget(state.selected);
   selectTarget(state.selected);
 }
 
@@ -303,7 +314,7 @@ function openFiles(intent, video = false) {
   if (!state.project || state.importing || state.loading) return;
   state.fileIntent = intent;
   const input = video ? $('videoInput') : $('assetInput');
-  input.value = ''; input.multiple = !video;
+  input.value = ''; input.multiple = !video && !['poster', 'brand-background', 'brand-logo'].includes(intent.target?.kind);
   input.click();
 }
 
@@ -358,7 +369,7 @@ function placeAsset(asset, intent, index) {
     return { kind: 'slide', moduleId: mod.id, slideId: slide.id };
   }
   const target = intent.target;
-  if (index === 0 || ['video', 'poster'].includes(target.kind)) {
+  if (index === 0 || ['video', 'poster', 'brand-background', 'brand-logo'].includes(target.kind)) {
     const item = currentAsset(target);
     if (!item) throw new Error('选中的位置已删除，请重新选择。');
     item[assetKey(target)] = asset.id;
@@ -391,7 +402,7 @@ async function importFiles(files, intent) {
   const expectedVideo = intent?.target?.kind === 'video';
   const list = Array.from(files).filter((f) => expectedVideo ? mimeOf(f) === 'video/mp4' : imageTypes.has(mimeOf(f)));
   if (!list.length) { toast(expectedVideo ? '这个位置需要 MP4 视频。' : '这个位置支持 PNG、JPG 或 WebP 图片。', true); return; }
-  if (expectedVideo || intent?.target?.kind === 'poster') list.splice(1);
+  if (expectedVideo || ['poster', 'brand-background', 'brand-logo'].includes(intent?.target?.kind)) list.splice(1);
   state.importing = true; setSaveStatus();
   let success = 0;
   const errors = [];
@@ -427,12 +438,23 @@ async function importFiles(files, intent) {
 function getList(kind, moduleId) {
   return kind === 'gallery' ? state.project.gallery : kind === 'module' ? state.project.modules : state.project.modules.find((m) => m.id === moduleId)?.slides;
 }
-function reorder(kind, id, destination, moduleId) {
+function getSortList(kind, moduleId, id) {
   const list = getList(kind, moduleId);
+  if (kind !== 'module' || !list) return list;
+  const module = list.find((item) => item.id === id);
+  if (!module) return [];
+  return list.filter((item) => (item.type === 'brand-story') === (module.type === 'brand-story'));
+}
+function reorder(kind, id, destination, moduleId) {
+  const list = getSortList(kind, moduleId, id);
   if (!list) return;
   const index = list.findIndex((item) => item.id === id);
   if (index < 0 || destination < 0 || destination >= list.length || index === destination) return;
   const [item] = list.splice(index, 1); list.splice(destination, 0, item);
+  if (kind === 'module') {
+    let groupIndex = 0;
+    state.project.modules = state.project.modules.map((module) => (module.type === 'brand-story') === (item.type === 'brand-story') ? list[groupIndex++] : module);
+  }
   markChanged({ editor: true });
 }
 
@@ -468,7 +490,7 @@ $('editorPanel').addEventListener('click', async (event) => {
     mod.slides.push(slide); state.selected = { kind: 'slide', moduleId, slideId: slide.id };
     markChanged({ editor: true }); selectTarget(state.selected);
   }
-  if (action === 'move') { const list = getList(kind, moduleId); reorder(kind, id, list.findIndex((item) => item.id === id) + Number(button.dataset.direction), moduleId); }
+  if (action === 'move') { const list = getSortList(kind, moduleId, id); if (list) reorder(kind, id, list.findIndex((item) => item.id === id) + Number(button.dataset.direction), moduleId); }
   if (action === 'remove') {
     const list = getList(kind, moduleId); const at = list.findIndex((item) => item.id === id);
     if (at >= 0) list.splice(at, 1);
@@ -529,7 +551,8 @@ document.addEventListener('drop', (event) => {
     const source = JSON.parse(raw);
     const dest = event.target.closest(`[data-sort-drop="${source.kind}"]`);
     if (!dest || (source.kind === 'slide' && dest.dataset.moduleId !== source.moduleId)) return;
-    const list = getList(source.kind, source.moduleId);
+    const list = getSortList(source.kind, source.moduleId, source.id);
+    if (!list) return;
     reorder(source.kind, source.id, list.findIndex((item) => item.id === dest.dataset.sortId), source.moduleId);
   } catch { /* Ignore unrelated drag payloads. */ }
 });
@@ -549,6 +572,7 @@ $('retrySave').addEventListener('click', retrySave);
 $('addImageModule').addEventListener('click', () => addModule('image'));
 $('addCarouselModule').addEventListener('click', () => addModule('carousel'));
 $('addVideoModule').addEventListener('click', () => addModule('video'));
+$('addBrandStoryModule').addEventListener('click', () => addModule('brand-story'));
 $('toggleEditor').addEventListener('click', () => {
   if (state.project) { state.project.settings.editorCollapsed = !state.project.settings.editorCollapsed; applySettings(); markChanged({ preview: false }); }
 });
