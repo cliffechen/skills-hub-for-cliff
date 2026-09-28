@@ -1,0 +1,206 @@
+[
+  {
+    "id": "P01-M01",
+    "page": "products--magnesium-8-pro",
+    "name": "图库与产品身份",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P01-M02",
+    "page": "products--magnesium-8-pro",
+    "name": "标题与辅助成分行",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P01-M03",
+    "page": "products--magnesium-8-pro",
+    "name": "利益短行与配方简介",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P01-M04",
+    "page": "products--magnesium-8-pro",
+    "name": "购买、订阅、CTA",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P01-M05",
+    "page": "products--magnesium-8-pro",
+    "name": "搭配推荐",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P01-FAQ01",
+    "page": "products--magnesium-8-pro",
+    "name": "肠胃不适",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P01-FAQ02",
+    "page": "products--magnesium-8-pro",
+    "name": "零辅料",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P01-FAQ03",
+    "page": "products--magnesium-8-pro",
+    "name": "能感觉到什么",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P01-FAQ04",
+    "page": "products--magnesium-8-pro",
+    "name": "为何五种形态",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P01-FAQ05",
+    "page": "products--magnesium-8-pro",
+    "name": "为何加三辅助项",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P01-FAQ06",
+    "page": "products--magnesium-8-pro",
+    "name": "何时服用",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P01-M06",
+    "page": "products--magnesium-8-pro",
+    "name": "评价组件",
+    "status": "浏览器已观察"
+  },
+  {
+    "id": "P02-M01",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "图库与产品身份",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P02-M02",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "标题与辅助成分行",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P02-M03",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "利益短行与配方简介",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P02-M04",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "购买、订阅、CTA",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P02-M05",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "搭配推荐",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P02-FAQ01",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "周期与情绪",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P02-FAQ02",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "南非醉茄与铬",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P02-FAQ03",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "活性叶酸",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P02-FAQ04",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "服用时间与持续性",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P02-FAQ05",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "孕哺使用",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P02-M06",
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "name": "评价组件",
+    "status": "浏览器已观察"
+  },
+  {
+    "id": "P03-M01",
+    "page": "products--triphasic-berberine",
+    "name": "图库与产品身份",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P03-M02",
+    "page": "products--triphasic-berberine",
+    "name": "标题与辅助成分行",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P03-M03",
+    "page": "products--triphasic-berberine",
+    "name": "利益短行与配方简介",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P03-M04",
+    "page": "products--triphasic-berberine",
+    "name": "购买、订阅、CTA",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P03-M05",
+    "page": "products--triphasic-berberine",
+    "name": "搭配推荐",
+    "status": "HTML及页面结构检查"
+  },
+  {
+    "id": "P03-FAQ01",
+    "page": "products--triphasic-berberine",
+    "name": "高剂量肠胃不适",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P03-FAQ02",
+    "page": "products--triphasic-berberine",
+    "name": "吸收率多少",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P03-FAQ03",
+    "page": "products--triphasic-berberine",
+    "name": "为何三阶段",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P03-FAQ04",
+    "page": "products--triphasic-berberine",
+    "name": "服用时机",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P03-FAQ05",
+    "page": "products--triphasic-berberine",
+    "name": "为何苯磷硫胺",
+    "status": "答案HTML完整；交互状态见验收记录"
+  },
+  {
+    "id": "P03-M06",
+    "page": "products--triphasic-berberine",
+    "name": "评价组件",
+    "status": "浏览器已观察"
+  }
+]

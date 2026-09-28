@@ -1,0 +1,394 @@
+[
+  {
+    "page": "home",
+    "id": "home-F01",
+    "question": "What do we mean by \"Smarter Formula\"?",
+    "answer_chars": 512,
+    "source": "https://olenphogy.com/",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "home",
+    "id": "home-F02",
+    "question": "How can I trust Olenphogy's quality and safety?",
+    "answer_chars": 457,
+    "source": "https://olenphogy.com/",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "home",
+    "id": "home-F03",
+    "question": "Are Olenphogy products FDA approved?",
+    "answer_chars": 714,
+    "source": "https://olenphogy.com/",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "home",
+    "id": "home-F04",
+    "question": "How long will it take to see results?",
+    "answer_chars": 847,
+    "source": "https://olenphogy.com/",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "home",
+    "id": "home-F05",
+    "question": "What is your satisfaction guarantee?",
+    "answer_chars": 550,
+    "source": "https://olenphogy.com/",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--magnesium-8-pro",
+    "id": "products--magnesium-8-pro-F01",
+    "question": "Will this Magnesium product cause stomach discomfort or diarrhea?",
+    "answer_chars": 616,
+    "source": "https://olenphogy.com/products/magnesium-8-pro",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--magnesium-8-pro",
+    "id": "products--magnesium-8-pro-F02",
+    "question": "Does this product contain zero excipients in each capsule?",
+    "answer_chars": 557,
+    "source": "https://olenphogy.com/products/magnesium-8-pro",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--magnesium-8-pro",
+    "id": "products--magnesium-8-pro-F03",
+    "question": "What differences will I feel with this Magnesium?",
+    "answer_chars": 635,
+    "source": "https://olenphogy.com/products/magnesium-8-pro",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--magnesium-8-pro",
+    "id": "products--magnesium-8-pro-F04",
+    "question": "Why does Olenphogy use 5 Forms of Magnesium?",
+    "answer_chars": 610,
+    "source": "https://olenphogy.com/products/magnesium-8-pro",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--magnesium-8-pro",
+    "id": "products--magnesium-8-pro-F05",
+    "question": "Why are P5P, Zinc, and Piperine included in the formula?",
+    "answer_chars": 666,
+    "source": "https://olenphogy.com/products/magnesium-8-pro",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--magnesium-8-pro",
+    "id": "products--magnesium-8-pro-F06",
+    "question": "When is the best time to take Magnesium-8 Pro for optimal effect?",
+    "answer_chars": 514,
+    "source": "https://olenphogy.com/products/magnesium-8-pro",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "id": "products--myo-d-chiro-inositol-40-1-F01",
+    "question": "How can this Inositol product help improve my cycle discomfort and mood swings?",
+    "answer_chars": 545,
+    "source": "https://olenphogy.com/products/myo-d-chiro-inositol-40-1",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "id": "products--myo-d-chiro-inositol-40-1-F02",
+    "question": "Why are Ashwagandha and Chromium included in the formula?",
+    "answer_chars": 486,
+    "source": "https://olenphogy.com/products/myo-d-chiro-inositol-40-1",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "id": "products--myo-d-chiro-inositol-40-1-F03",
+    "question": "What is the benefit of using active Folate as you claim?",
+    "answer_chars": 447,
+    "source": "https://olenphogy.com/products/myo-d-chiro-inositol-40-1",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "id": "products--myo-d-chiro-inositol-40-1-F04",
+    "question": "When is the best time to take this Inositol for optimal effect?",
+    "answer_chars": 456,
+    "source": "https://olenphogy.com/products/myo-d-chiro-inositol-40-1",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--myo-d-chiro-inositol-40-1",
+    "id": "products--myo-d-chiro-inositol-40-1-F05",
+    "question": "Can pregnant and breastfeeding women use this Inositol product?",
+    "answer_chars": 573,
+    "source": "https://olenphogy.com/products/myo-d-chiro-inositol-40-1",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--triphasic-berberine",
+    "id": "products--triphasic-berberine-F01",
+    "question": "Will high-dose Berberine cause gastrointestinal discomfort?",
+    "answer_chars": 650,
+    "source": "https://olenphogy.com/products/triphasic-berberine",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--triphasic-berberine",
+    "id": "products--triphasic-berberine-F02",
+    "question": "What is the absorption rate of this Tri-Phase Berberine?",
+    "answer_chars": 592,
+    "source": "https://olenphogy.com/products/triphasic-berberine",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--triphasic-berberine",
+    "id": "products--triphasic-berberine-F03",
+    "question": "Why choose a Tri-Phasic formulation over single-phase Berberine?",
+    "answer_chars": 661,
+    "source": "https://olenphogy.com/products/triphasic-berberine",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--triphasic-berberine",
+    "id": "products--triphasic-berberine-F04",
+    "question": "When is the best time to take Tri-Phasic Berberine for optimal effect?",
+    "answer_chars": 432,
+    "source": "https://olenphogy.com/products/triphasic-berberine",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "products--triphasic-berberine",
+    "id": "products--triphasic-berberine-F05",
+    "question": "Why was Benfotiamine included in the metabolic formula? What is its role?",
+    "answer_chars": 596,
+    "source": "https://olenphogy.com/products/triphasic-berberine",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--about-olenphogy",
+    "id": "pages--about-olenphogy-F01",
+    "question": "What inspired the founding of Olenphogy?",
+    "answer_chars": 480,
+    "source": "https://olenphogy.com/pages/about-olenphogy",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--about-olenphogy",
+    "id": "pages--about-olenphogy-F02",
+    "question": "What does Olenphogy's brand philosophy represent?",
+    "answer_chars": 390,
+    "source": "https://olenphogy.com/pages/about-olenphogy",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--about-olenphogy",
+    "id": "pages--about-olenphogy-F03",
+    "question": "How does Olenphogy ensure sustainable and ethical sourcing?",
+    "answer_chars": 428,
+    "source": "https://olenphogy.com/pages/about-olenphogy",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--about-olenphogy",
+    "id": "pages--about-olenphogy-F04",
+    "question": "How can I get support choosing the right product?",
+    "answer_chars": 411,
+    "source": "https://olenphogy.com/pages/about-olenphogy",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--about-olenphogy",
+    "id": "pages--about-olenphogy-F05",
+    "question": "What is Olenphogy's long-term vision?",
+    "answer_chars": 435,
+    "source": "https://olenphogy.com/pages/about-olenphogy",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--ingredients",
+    "id": "pages--ingredients-F01",
+    "question": "What does \"High Bioavailability\" actually mean?",
+    "answer_chars": 387,
+    "source": "https://olenphogy.com/pages/ingredients",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--ingredients",
+    "id": "pages--ingredients-F02",
+    "question": "Why do you focus on \"Ingredient Form\" rather than just \"High Dosage\"?",
+    "answer_chars": 344,
+    "source": "https://olenphogy.com/pages/ingredients",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--ingredients",
+    "id": "pages--ingredients-F03",
+    "question": "What are your standards for sourcing and quality?",
+    "answer_chars": 529,
+    "source": "https://olenphogy.com/pages/ingredients",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--ingredients",
+    "id": "pages--ingredients-F04",
+    "question": "What is your approach to fillers and additives?",
+    "answer_chars": 517,
+    "source": "https://olenphogy.com/pages/ingredients",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--ingredients",
+    "id": "pages--ingredients-F05",
+    "question": "Why do some ingredient dosages exceed 100% of the daily value (DV)?",
+    "answer_chars": 438,
+    "source": "https://olenphogy.com/pages/ingredients",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F01",
+    "question": "Magnesium-8 Pro",
+    "answer_chars": 1650,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F02",
+    "question": "Myo & D-Chiro Inositol",
+    "answer_chars": 1927,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F03",
+    "question": "TriPhasic Berberine",
+    "answer_chars": 3388,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F04",
+    "question": "How do you prevent ingredient interactions?",
+    "answer_chars": 614,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F05",
+    "question": "Who conducted these studies-and are they unbiased?",
+    "answer_chars": 524,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F06",
+    "question": "Do these study results apply to Olenphogy's formulas?",
+    "answer_chars": 323,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F07",
+    "question": "How does Olenphogy turn scientific data into daily benefits?",
+    "answer_chars": 669,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F08",
+    "question": "Why do \"p-Value\" and \"Double-Blind\" matter?",
+    "answer_chars": 434,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F09",
+    "question": "Are Olenphogy's formulas based on the latest research?",
+    "answer_chars": 355,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--research",
+    "id": "pages--research-F10",
+    "question": "Why are some daily values (DV) over 100%?",
+    "answer_chars": 680,
+    "source": "https://olenphogy.com/pages/research",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F01",
+    "question": "How does using my HSA/FSA account save me money?",
+    "answer_chars": 675,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F02",
+    "question": "Are there fees associated with using Truemed's services?",
+    "answer_chars": 85,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F03",
+    "question": "What are FSA and HSA accounts?",
+    "answer_chars": 279,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F04",
+    "question": "When should I use my FSA/HSA dollars?",
+    "answer_chars": 264,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F05",
+    "question": "How can I track my order?",
+    "answer_chars": 91,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F06",
+    "question": "Can I use my HSA/FSA at Olenphogy?",
+    "answer_chars": 356,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F07",
+    "question": "How long does it take for me to receive my Letter of Medical Necessity?",
+    "answer_chars": 322,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  },
+  {
+    "page": "pages--pay-with-hsa-fsa",
+    "id": "pages--pay-with-hsa-fsa-F08",
+    "question": "Can I use my regular credit card at checkout?",
+    "answer_chars": 226,
+    "source": "https://olenphogy.com/pages/pay-with-hsa-fsa",
+    "status": "答案HTML可读"
+  }
+]

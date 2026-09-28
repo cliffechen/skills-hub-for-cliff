@@ -20,9 +20,13 @@ amazon-aplus-copywriter-skill/
 │   ├── aplus-specs.md              # A+ / 品牌故事模块尺寸与 alt 文本
 │   ├── listing-images.md           # Listing 主图/副图规格与写法差异
 │   └── manual-facts-template.md    # 手动产品事实填空模板
-└── scripts/
-    ├── build_xlsx.py               # JSON → 4 sheet Excel（说明/文案总表/设计修改清单/事实依据）
-    └── scan_copy.py                # 合规与冲突扫描（禁用词、星号声明、alt 长度、副图标题）
+├── scripts/
+│   ├── build_xlsx.py               # JSON → 4 sheet Excel（说明/文案总表/设计修改清单/事实依据）
+│   └── scan_copy.py                # 合规与冲突扫描（禁用词、星号声明、alt 长度、副图标题）
+└── examples/                       # 示例输入：UA700 项目的真实设计稿与对标库
+    ├── 01-示例构图-A+与品牌故事/    # 6 张 4:3 构图（Canva 导出，图上文字为占位符）
+    ├── 02-示例构图-副图/            # 8 张 1600×1600 副图
+    └── 03-对标品牌文案库-OLENPHOGY/ # 对标库样例：markdown 方法库 + assets（229 个文件）
 ```
 
 ## 输入
@@ -52,6 +56,16 @@ Excel 里的字符数用 LEN 公式计算；需要写入真实数值时先用 Li
 ```bash
 soffice --headless --convert-to xlsx --outdir /tmp 待重算的文件.xlsx
 ```
+
+## 示例输入
+
+`examples/` 是 UA700 项目（B0H1CZ8NLF，ZAB Urolithin A 700mg）的实际输入，用来跑通完整流程：
+
+- `01-示例构图-A+与品牌故事/`：6 张 4:3 构图，对应 4 张 A+ 模块图（含一组连图）和 2 张品牌故事轮播图。
+- `02-示例构图-副图/`：8 张 1600×1600 副图，文件名沿用地稿编号副图 2–9。
+- `03-对标品牌文案库-OLENPHOGY/`：一份完整的对标库样例（README + 7 个方法目录 + `assets/`）。第 2 步会从这类库提炼“规则卡”，只借结构与写法，不迁移对方的事实主张。
+
+两点提醒：构图里是设计占位文字，其中的品牌名、剂量、剂型、徽章都不能当事实；对标库是对第三方品牌公开页面的调研整理，素材版权归原品牌，仅作方法参考。
 
 ## 依赖
 
