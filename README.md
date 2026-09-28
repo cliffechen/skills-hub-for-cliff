@@ -31,6 +31,7 @@
 | 根据 Amazon 产品写主图、辅图、A+ 页面结构、设计 brief、生图 prompt | [`amazon-supplement-visual-content`](./amazon-supplement-visual-content/) | Codex/OpenAI 原版，适合正式出图前做内容与合规总控 |
 | 在 WorkBuddy 里做补充剂图片/A+ 内容 | [`amazon-supplement-visual-content-WB`](./amazon-supplement-visual-content-WB/) | WorkBuddy 版目录，目前用于和原版区分管理 |
 | 快速生成 7 张图和 A+ 图片英文文案 | [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/) | 偏文案生成，适合已有 SFP 和卖点时快速出稿 |
+| 为 Canva 设计稿逐个文字位写英文文案（A+、品牌故事、Listing 主副图），出可直接复制给美工的 Excel | [`amazon-aplus-copywriter-skill`](./amazon-aplus-copywriter-skill/) | 先出 plan 待确认；事实来自 ASIN 或手动填写，对标品牌 md 库可随时更换；含补剂合规包与扫描脚本 |
 
 ### 关键词与 Listing 运营
 
@@ -71,6 +72,7 @@
 ├── ABAKeywords-tracker-for-workbuddy/
 ├── GinvSkill-market-entry-report/
 ├── US_Sup_Product_Research_for_Qoderwork/
+├── amazon-aplus-copywriter-skill/
 ├── amazon-copy-writing-project/
 ├── amazon-dropdown-expander/
 ├── amazon-mobile-preview-tool/
@@ -183,6 +185,9 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 
 [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/)  
 偏“图片文案生成”，适合根据 Supplement Facts 和卖点快速产出 7 张图和 A+ 模块文案。
+
+[`amazon-aplus-copywriter-skill`](./amazon-aplus-copywriter-skill/)  
+把设计稿里的每个文字位替换成以产品事实为依据的英文文案，交付美工可直接复制的 Excel（英文新文案 + 备选句 + 中文释义 + 事实编号 + 字符数/差值公式 + 设计修改清单）。覆盖 A+ 模块图、品牌故事、Listing 主副图三类；产品事实可来自 ASIN 抓取或手动填写，对标品牌 markdown 库可随时更换；写作前先出 plan 等用户确认，写完后用脚本扫描禁用词、星号声明和残留占位。
 
 [`amazon-copy-writing-project`](./amazon-copy-writing-project/)  
 可复用的本地「文案工作台」项目：为产品详情页 / A+ / 轮播设计稿撰写四风格合规文案。单页工作台左边看设计稿、右边改槽位文案，内置黑名单合规检查、高亮框坐标标定、日/夜主题与按风格导出 Markdown；配套「资料/」产品材料目录规范和换新产品标准流程。
