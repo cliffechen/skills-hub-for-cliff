@@ -1,24 +1,34 @@
-# skills-hub-for-cliff
+<div align="center">
+  <h1>Skills Hub for Cliff</h1>
+  <p><strong>把 Amazon US 膳食补充剂的实战经验，沉淀成可复用的 Agent Skills。</strong></p>
+  <p>从选品调研、关键词库、Listing 图片与 A+ 文案，到手机预览、成分合规与配方重建，这里把反复出现的运营动作整理成能直接交给 AI Agent 使用的工作流与本地工具。</p>
+  <p>
+    <a href="#技能目录"><img src="https://img.shields.io/badge/Skills-34-00a8e1?style=for-the-badge" alt="34 个 Skill 入口" /></a>
+    <img src="https://img.shields.io/badge/Platform-Amazon_US-ff9900?style=for-the-badge" alt="Amazon US" />
+    <img src="https://img.shields.io/badge/Python-3.10%2B-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
+    <img src="https://img.shields.io/badge/Status-Continuously_Updated-22c55e?style=for-the-badge" alt="持续更新中" />
+    <a href="https://github.com/cliffechen/skills-hub-for-cliff/stargazers"><img src="https://img.shields.io/github/stars/cliffechen/skills-hub-for-cliff?style=for-the-badge&logo=github" alt="GitHub stars" /></a>
+  </p>
+  <p><a href="#项目目标">项目目标</a> · <a href="#快速选择">快速选择</a> · <a href="#技能目录">技能目录</a> · <a href="#主要业务模块">主要业务模块</a> · <a href="#开始使用">开始使用</a> · <a href="#仓库结构">仓库结构</a> · <a href="#维护流程">维护流程</a> · <a href="#关于">关于</a></p>
+</div>
 
-这是一个面向 **Amazon US 膳食补充剂业务** 的 Agent Skills 与本地工具仓库。
+## 项目目标
 
-它收纳可复用的 AI 工作流与设计工作台：选品调研、关键词库、Listing 图片/A+ 内容、文案编写与手机预览、成分合规/IP 风险、配方重建，以及 Codex / WorkBuddy / Obsidian 的 skill 索引管理。
+**把分散的 Amazon US 补充剂运营经验，整理成一个能持续生长的 Agent Skill 库与本地工具集。**
 
-## 这个仓库解决什么问题
+收录与整理的范围：
 
-如果你经常在 Codex、Claude Code、QoderWork、WorkBuddy 等 agent 工具里重复做这些事：
+- **选品与市场调研**：类目扫描、多维度关键词对比、Top100 产品结构、竞品差评归类、站外信号采集、Go / No-Go 评分。
+- **关键词与 Listing 运营**：下拉词采集、新品词库与 Search Term 基础、SP 搜索词报告分析、Listing QA 批量生成。
+- **图片与 A+ 内容**：主图合规判断、辅图文案、A+ 页面结构、品牌故事、四风格合规文案、手机端浏览预览。
+- **成分合规与配方研发**：成分堆栈拆解、品牌成分与 IP 风险、安全重建、配方升级、成分流量边界。
+- **Skill 管理与索引**：扫描仓库、识别各客户端结构、维护 Obsidian 索引、回答「我现在该用哪个 skill」。
 
-- 调研 Amazon US 补充剂产品机会
-- 拓展关键词、整理新品关键词库
-- 根据 Supplement Facts 写主图、辅图和 A+ 图片文案
-- 在本地工作台编写设计稿文案，预览主副图、A+ 图片、轮播和视频的手机浏览效果
-- 检查竞品成分、商标、专利和 Amazon/FDA 风险
-- 基于竞品做安全重建和差异化配方
-- 维护一份 Obsidian skill 索引，并查询“我现在该用哪个 skill”
+覆盖 Codex、Claude Code、QoderWork、WorkBuddy 等 agent 工具；仓库里既有可直接运行的本地项目，也有可复制安装的 Agent Skills。
 
-这个仓库就是这些流程的集中入口。
+## 快速选择
 
-## 快速选择：我该用哪个 skill？
+按你要做的事找入口，每一行都能直接打开对应目录。装法和启动方式见[开始使用](#开始使用)。
 
 ### Amazon Design · 图片、文案与手机预览
 
@@ -40,6 +50,15 @@
 | 采集 Amazon US 搜索框下拉词 | [`amazon-dropdown-expander`](./amazon-dropdown-expander/) | 轻量 Python 工具，输出 CSV |
 | 搭建新品关键词库、P0/P1/P2、Search Term 和广告词基础 | [`amazon-new-listing-keyword-library`](./amazon-new-listing-keyword-library/) | 输入 ABA、Sif、下拉词、产品信息图，输出 Excel + 策略报告 |
 | 批量生成亚马逊 Listing QA（默认200组，埋词/品牌词/语义痕迹） | [`amz-qa-creator`](./amz-qa-creator/) | 上游接 `amazon-new-listing-keyword-library` 的词库 Excel，配 ASIN/Sorftime VOC，输出 xlsx/csv/txt + 质检报告 |
+
+### 关键词监控、搜索词与情报蒸馏
+
+| 你要做什么 | 推荐 skill | 说明 |
+|---|---|---|
+| 每周监控 Amazon US 补充剂爆发型关键词，分级机会词并产出中文 HTML 报告 | [`ABAKeywords-tracker-for-codex`](./ABAKeywords-tracker-for-codex/) | Codex 版；ABA/SFR 排名 → 成分词分类与翻译 → Tier 1/2 用 Sorftime 补趋势与 CPC → 维护周度历史 |
+| 在 WorkBuddy 里跑同一套周度关键词监控 | [`ABAKeywords-tracker-for-workbuddy`](./ABAKeywords-tracker-for-workbuddy/) | WorkBuddy 标准包形态（`README_WORKBUDDY.md` + `SKILL/SKILL.md`）；与 Codex 版逻辑一致，择一使用 |
+| 把 Amazon Ads SP 搜索词报告变成可读的多标签页 Excel，并给出每个词的操作建议 | [`amazon-search-term-advisor`](./amazon-search-term-advisor/) | 中英文表头都能识别；输出 Spend/Sales/Orders 占比、CTR、CVR、CPC、ACOS，以及 harvest / negate / scale 建议 |
+| 输入任意行业、品牌、网站或话题，产出一套「全域认知系统」 | [`marketing-distiller`](./marketing-distiller/) | 全域蒸馏器分享包；含数据库、竞品拆解、内容生态、知识地图与情报系统，自带 Google 高级搜索语法库 |
 
 ### 选品、市场调研与出海战略
 
@@ -64,45 +83,26 @@
 |---|---|---|
 | 扫描本仓库、更新 Obsidian 索引、查询该用哪个 skill | [`ob-skill-github-organizer`](./ob-skill-github-organizer/) | 本仓库的“索引维护员 + skill 路由员” |
 
-## 顶层目录
+## 技能目录
 
-```text
-.
-├── ABAKeywords-tracker-for-codex/
-├── ABAKeywords-tracker-for-workbuddy/
-├── GinvSkill-market-entry-report/
-├── US_Sup_Product_Research_for_Qoderwork/
-├── amazon-aplus-copywriter-skill/
-├── amazon-copy-writing-project/
-├── amazon-dropdown-expander/
-├── amazon-mobile-preview-tool/
-├── amazon-new-listing-keyword-library/
-├── amz-qa-creator/
-├── amazon-search-term-advisor/
-├── amazon-sorftime-mcp-with-serpapi-tavily/
-├── amazon-supplement-visual-content/
-├── amazon-supplement-visual-content-WB/
-├── marketing-distiller/
-├── ob-skill-github-organizer/
-├── ingredients-breakdown-compliance-check/
-├── spf-products-advances-to-image-copy/
-├── supplement-formula-pipeline/
-└── zoodata-amz-marketing-skill/
-```
+截至 **2026-09-30**，仓库包含 **34 个 `SKILL.md` 入口**，分布在 **20 个顶层目录**中。本地应用项目（`amazon-mobile-preview-tool`）不提供 `SKILL.md`，按项目 README 启动。
 
-## 平台区分
+| 集合 | Skills | 内容方向 | 入口 |
+|---|---:|---|---|
+| Amazon Design | 5 | 主副图、品牌故事、A+ 与轮播的设计稿文案、手机端预览 | [amazon-mobile-preview-tool](./amazon-mobile-preview-tool/) · [amazon-copy-writing-project](./amazon-copy-writing-project/) · [amazon-aplus-copywriter-skill](./amazon-aplus-copywriter-skill/) · [amazon-supplement-visual-content](./amazon-supplement-visual-content/) · [amazon-supplement-visual-content-WB](./amazon-supplement-visual-content-WB/) · [spf-products-advances-to-image-copy](./spf-products-advances-to-image-copy/) |
+| 关键词与 Listing 运营 | 3 | 下拉词拓词、新品词库、Search Term 与广告词基础、Listing QA | [amazon-dropdown-expander](./amazon-dropdown-expander/) · [amazon-new-listing-keyword-library](./amazon-new-listing-keyword-library/) · [amz-qa-creator](./amz-qa-creator/) |
+| 关键词监控、搜索词与情报蒸馏 | 4 | 周度爆发词监控、SP 搜索词报告分析、全域情报蒸馏 | [ABAKeywords-tracker-for-codex](./ABAKeywords-tracker-for-codex/) · [ABAKeywords-tracker-for-workbuddy](./ABAKeywords-tracker-for-workbuddy/) · [amazon-search-term-advisor](./amazon-search-term-advisor/) · [marketing-distiller](./marketing-distiller/) |
+| 选品、市场调研与出海战略 | 14 | 市场与竞品数据、机会与定价、市场进入判断、GTM 战略报告 | [US_Sup_Product_Research_for_Qoderwork](./US_Sup_Product_Research_for_Qoderwork/) · [amazon-sorftime-mcp-with-serpapi-tavily](./amazon-sorftime-mcp-with-serpapi-tavily/) · [zoodata-amz-marketing-skill](./zoodata-amz-marketing-skill/) · [GinvSkill-market-entry-report](./GinvSkill-market-entry-report/) |
+| 成分合规与配方研发 | 7 | 成分与 IP 风险、安全重建、配方升级、成分流量边界、受众收口 | [ingredients-breakdown-compliance-check](./ingredients-breakdown-compliance-check/) · [supplement-formula-pipeline](./supplement-formula-pipeline/) |
+| Skill 管理与索引 | 1 | 扫描仓库、识别客户端结构、维护 Obsidian 索引与 skill 路由 | [ob-skill-github-organizer](./ob-skill-github-organizer/) |
+| **合计** | **34** | **持续更新中** | 20 个顶层目录 |
 
-这个仓库同时包含 Agent Skills 和独立运行的本地项目。
+关于这张表的几点说明：
 
-| 类型 | 怎么判断 | 怎么使用 |
-|---|---|---|
-| 本地应用项目 | 例如 `amazon-mobile-preview-tool`、`amazon-copy-writing-project`，包含源码、启动入口和项目 README | 下载或克隆后按项目 README 在本机启动；不要求有 `SKILL.md`，无需复制到 skills 目录 |
-| Codex/OpenAI 原版 | 通常有根目录 `SKILL.md`，可能有 `agents/openai.yaml` | 适合 Codex / OpenAI 侧直接使用或安装 |
-| Claude Code / QoderWork 兼容 | 根目录 `SKILL.md` + `README.md` + `references/` | 多数可作为普通 Agent Skill 使用 |
-| WorkBuddy 版目录 | 目录名带 `-WB`，例如 `amazon-supplement-visual-content-WB` | 用于和 Codex 原版分开管理；如需标准分享包，可再整理成 WorkBuddy 包结构 |
-| WorkBuddy 标准包 | `README_WORKBUDDY.md` + `SKILL/SKILL.md` | 可作为 WorkBuddy 分享包形态使用 |
-
-> 注意：目录名带 `-WB` 不等于已经是完整 WorkBuddy 标准包。是否标准，要看里面有没有 `README_WORKBUDDY.md` 和 `SKILL/SKILL.md`。
+- **同名入口变体**：`supplement-keyword-monitor` 在 `ABAKeywords-tracker-for-codex` 与 `ABAKeywords-tracker-for-workbuddy` 下各有一份，逻辑一致、目标客户端不同，**择一安装到同一命名空间，不要两份都装**。
+- **`zoodata-amz-marketing-skill` 内含 11 个入口**：`zoodata` 共享数据层加 10 个 `amazon-*` 分析技能，默认优先走 Sorftime MCP，需要时显式指定 ZooData。
+- **`supplement-formula-pipeline` 内含 6 个入口**：主 skill 加 `skills/` 下的 5 个子技能，属于同一条链路，建议整体保留。
+- **`-WB` 目录不等于完整 WorkBuddy 标准包**：是否标准，要看目录里有没有 `README_WORKBUDDY.md` 和 `SKILL/SKILL.md`。`ABAKeywords-tracker-for-workbuddy/supplement-keyword-monitor` 与 `marketing-distiller/全域蒸馏器Skill分享包` 目前是标准包形态；`amazon-supplement-visual-content-WB` 只有根目录 `SKILL.md`，还不是标准分享包。
 
 ## 主要业务模块
 
@@ -143,6 +143,7 @@
 - [`amazon-daily-market-radar`](./zoodata-amz-marketing-skill/amazon-daily-market-radar/)：每日市场监控
 - [`amazon-market-trend-scanner`](./zoodata-amz-marketing-skill/amazon-market-trend-scanner/)：品类趋势扫描
 - [`amazon-keywords`](./zoodata-amz-marketing-skill/amazon-keywords/)：关键词拓词、搜索结果和 ASIN 流量词分析
+- [`amazon-listing-audit-pro`](./zoodata-amz-marketing-skill/amazon-listing-audit-pro/)：Listing 审计
 
 默认优先使用已配置的 `sorftime-mcp`；需要 ZooData 时可显式指定 `--provider zoodata`。
 
@@ -169,6 +170,9 @@
 [`amz-qa-creator`](./amz-qa-creator/)  
 `amazon-new-listing-keyword-library` 的下游：消费词库 Excel（P0/P1/P2 + 品牌词否定清单接力复用），结合 ASIN/Listing 信息（Sorftime MCP + 竞品 VOC）批量生成 200 组亚马逊 QA；含敏感词双层过滤、事实锚点校验、断点续跑，输出 xlsx/csv/txt 三件套 + 质检报告。
 
+[`amazon-search-term-advisor`](./amazon-search-term-advisor/)  
+把 Amazon Ads「Sponsored Products 搜索词报告」转成多标签页 Excel，逐词给出 Spend / Sales / Orders 占比、CTR、CVR、CPC 与 ACOS，并附 harvest / negate / scale up / scale down / observe 的动作建议和理由；中英文表头都能识别，输出语言跟随输入报告。
+
 ### 4. Amazon Design · 图片、文案与手机预览
 
 [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/)
@@ -184,7 +188,7 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 上一个 skill 的 WorkBuddy 版目录。
 
 [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/)  
-偏“图片文案生成”，适合根据 Supplement Facts 和卖点快速产出 7 张图和 A+ 模块文案。
+偏“图片文案生成”，适合根据 Supplement Facts 和卖点快速产出 7 张图和 A+ 模块文案，内置 FDA/Amazon 合规检查和 Alexa AI 抽取优化。
 
 [`amazon-aplus-copywriter-skill`](./amazon-aplus-copywriter-skill/)  
 把设计稿里的每个文字位替换成以产品事实为依据的英文文案，交付美工可直接复制的 Excel（英文新文案 + 备选句 + 中文释义 + 事实编号 + 字符数/差值公式 + 设计修改清单）。覆盖 A+ 模块图、品牌故事、Listing 主副图三类；产品事实可来自 ASIN 抓取或手动填写，对标品牌 markdown 库可随时更换；写作前先出 plan 等用户确认，写完后用脚本扫描禁用词、星号声明和残留占位。
@@ -218,7 +222,18 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 → 实验室沟通简报
 ```
 
-### 6. Skill 管理与 Obsidian 索引
+### 6. 关键词监控与情报蒸馏
+
+[`ABAKeywords-tracker-for-codex`](./ABAKeywords-tracker-for-codex/)  
+从 AMZ123 的 ABA/SFR 排名抓取 Amazon US 补充剂爆发型关键词，做成分词分类与翻译、机会词分级，Tier 1/2 用 Sorftime 补趋势 / CPC / 拓词，维护周度历史并产出中文 HTML 机会报告。Codex 版。
+
+[`ABAKeywords-tracker-for-workbuddy`](./ABAKeywords-tracker-for-workbuddy/)  
+同一套监控逻辑的 WorkBuddy 标准包形态，入口在 `supplement-keyword-monitor/SKILL/SKILL.md`。
+
+[`marketing-distiller`](./marketing-distiller/)  
+「全域蒸馏器」分享包：输入任意行业、品牌、网站或话题，产出完整的全域认知系统——数据库、竞品拆解、内容生态、知识地图与情报系统，自带 Google 高级搜索语法武器库与 URL 验证机制。标准包位于 `全域蒸馏器Skill分享包/`。
+
+### 7. Skill 管理与 Obsidian 索引
 
 [`ob-skill-github-organizer`](./ob-skill-github-organizer/)
 
@@ -242,7 +257,26 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 我想根据 Amazon 产品写图片文案，应该用哪个 skill？
 ```
 
-## 安装与使用方式
+## 开始使用
+
+克隆仓库：
+
+```bash
+git clone https://github.com/cliffechen/skills-hub-for-cliff.git
+cd skills-hub-for-cliff
+```
+
+在上方[技能目录](#技能目录)或[快速选择](#快速选择)里找到要用的目录，读取它的 `SKILL.md`，或把整个目录复制到你使用的 Agent 所支持的 skills 目录。保留目录里的 `references/`、`assets/`、`scripts/`，以便使用配套材料。
+
+例如：
+
+```text
+使用 amazon-aplus-copywriter-skill。
+设计稿：A+ 模块图 6 张 + 品牌故事 4 张（图中文字为占位符）
+产品事实来源：ASIN B0XXXXXXXX
+对标品牌文案库：examples/03-对标品牌文案库-OLENPHOGY
+目标：为每个文字位写英文文案，先出 plan 等我确认，确认后再写，最后交付 Excel。
+```
 
 ### 本地应用项目
 
@@ -251,7 +285,7 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 - **手机预览工具**：进入 [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/)，安装 Python 3.10+ 后双击 `启动预览工具.bat`。也可在该目录运行 `python server.py`，浏览器默认打开 `http://127.0.0.1:8877`；端口占用时自动顺延。关闭启动窗口即停止服务。
 - **文案工作台**：进入 [`amazon-copy-writing-project`](./amazon-copy-writing-project/)，按其[工作台 README](./amazon-copy-writing-project/_workbench/README.md)准备资料，双击 `_workbench/启动工作台.bat` 启动。
 
-这些项目直接在本机运行。下面的 skills 目录安装方式适用于提供 `SKILL.md` 的 Agent Skills。
+这两个项目直接在本机运行，不要求 `SKILL.md`，无需复制到 skills 目录。下面的安装方式适用于提供 `SKILL.md` 的 Agent Skills。
 
 ### Codex / OpenAI
 
@@ -291,16 +325,67 @@ skill-package/
 
 当前 `amazon-supplement-visual-content-WB` 是 WorkBuddy 版目录，但还不是完整标准分享包。后续如果要正式分发，可以再补 `README_WORKBUDDY.md` 并调整入口到 `SKILL/SKILL.md`。
 
+### 平台与包形态区分
+
+这个仓库同时包含 Agent Skills 和独立运行的本地项目，按下表判断你拿到的是哪一种：
+
+| 类型 | 怎么判断 | 怎么使用 |
+|---|---|---|
+| 本地应用项目 | 例如 `amazon-mobile-preview-tool`、`amazon-copy-writing-project`，包含源码、启动入口和项目 README | 下载或克隆后按项目 README 在本机启动；不要求有 `SKILL.md`，无需复制到 skills 目录 |
+| Codex/OpenAI 原版 | 通常有根目录 `SKILL.md`，可能有 `agents/openai.yaml` | 适合 Codex / OpenAI 侧直接使用或安装 |
+| Claude Code / QoderWork 兼容 | 根目录 `SKILL.md` + `README.md` + `references/` | 多数可作为普通 Agent Skill 使用 |
+| WorkBuddy 版目录 | 目录名带 `-WB`，例如 `amazon-supplement-visual-content-WB` | 用于和 Codex 原版分开管理；如需标准分享包，可再整理成 WorkBuddy 包结构 |
+| WorkBuddy 标准包 | `README_WORKBUDDY.md` + `SKILL/SKILL.md` | 可作为 WorkBuddy 分享包形态使用 |
+
+> 注意：目录名带 `-WB` 不等于已经是完整 WorkBuddy 标准包。是否标准，要看里面有没有 `README_WORKBUDDY.md` 和 `SKILL/SKILL.md`。
+
+## 整理原则
+
+- **提炼可复用的工作流**：保留能改变判断或指导操作的方法，整理成可独立使用的 Skill，而不是转载原文。
+- **区分事实、案例与推断**：当前事实、历史案例、估算值和假设分别标注；无法核实的内容明确标记，不靠猜测补全数据。
+- **不提交私有与临时内容**：缓存、日志、运行输出、本机路径、凭证和客户数据不进入仓库；示例素材需脱敏后保留。
+- **尊重第三方权利**：收录他人作品时保留其授权声明，例如 `GinvSkill-market-entry-report` 自带 `LICENSE.txt`、`zoodata-amz-marketing-skill` 由 SerendipityOneInc 维护；品牌名、商标和成分名按各自权利人主张使用。
+- **诊断与线上执行分开**：分析和方案可以离线复现；涉及账户、预算、Listing、广告或标签的线上变更，先核对授权并保留执行与回读记录。
+
+## 仓库结构
+
+```text
+skills-hub-for-cliff/
+├── amazon-mobile-preview-tool/                 # 本地项目：主副图 / 品牌故事 / A+ 手机预览
+├── amazon-copy-writing-project/                # 本地项目：四风格合规文案工作台
+├── amazon-aplus-copywriter-skill/              # A+ / 品牌故事 / Listing 主副图文案 → Excel
+├── amazon-supplement-visual-content/           # 主图合规判断 + 辅图 / A+ 文案与设计 brief
+├── amazon-supplement-visual-content-WB/        # 上者的 WorkBuddy 版目录
+├── spf-products-advances-to-image-copy/        # Supplement Facts → 7 张图 + A+ 英文文案
+├── amazon-dropdown-expander/                   # Amazon US 下拉框拓词 → CSV
+├── amazon-new-listing-keyword-library/         # 新品关键词词库 + 选词策略报告
+├── amz-qa-creator/                             # Listing QA 批量生成（默认 200 组）
+├── ABAKeywords-tracker-for-codex/              # 补充剂爆发词周度监控（Codex 版）
+├── ABAKeywords-tracker-for-workbuddy/          # 同上（WorkBuddy 标准包）
+├── amazon-search-term-advisor/                 # SP 搜索词报告 → 多标签页 Excel + 动作建议
+├── marketing-distiller/                        # 全域蒸馏器分享包（WorkBuddy 标准包）
+├── US_Sup_Product_Research_for_Qoderwork/      # 补充剂选品调研套件（Sorftime + xCrawl）
+├── amazon-sorftime-mcp-with-serpapi-tavily/    # 种子词选品调研（Sorftime + SerpApi + Tavily）
+├── zoodata-amz-marketing-skill/                # ZooData 数据层 + 10 个 amazon-* 分析技能
+├── GinvSkill-market-entry-report/              # 市场进入 / GTM 战略报告（作者 Ginv）
+├── ingredients-breakdown-compliance-check/     # 成分拆解、IP 与合规风险报告
+├── supplement-formula-pipeline/                # 配方研发链路（含 5 个子技能）
+└── ob-skill-github-organizer/                  # Skill 索引维护与路由（元 skill）
+```
+
+这是带注释的阅读视图；仓库实际是平铺结构，20 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
+
 ## 维护流程
 
 新增或修改 skill / 本地项目后，建议按这个顺序维护：
 
-1. 更新或新增对应文件夹，并同步本 README 的分类入口与顶层目录。
+1. 更新或新增对应文件夹，并同步本 README 的[快速选择](#快速选择)、[技能目录](#技能目录)、[主要业务模块](#主要业务模块)与[仓库结构](#仓库结构)。
 2. Agent Skill 至少提供 `SKILL.md`；本地应用提供 README、启动入口和运行所需源码 / 示例资源，并验证可以启动。不要提交缓存、日志和本机私有数据。
 3. 使用 `ob-skill-github-organizer` 扫描仓库。
 4. 更新 Obsidian 索引。
 5. 如果新增 WorkBuddy 版本，确认是否只是 `-WB` 目录，还是完整 WorkBuddy 标准包。
-6. 提交并推送到 GitHub。
+6. 回到[技能目录](#技能目录)，核对 Skills 计数与总入口数是否同步更新。
+7. 提交并推送到 GitHub。
 
 扫描命令示例：
 
@@ -313,3 +398,16 @@ python ob-skill-github-organizer/scripts/scan_skill_repo.py --repo-path .
 本仓库中的成分、合规、FDA/Amazon、商标和专利相关 skill 用于 **业务研究和风险初筛**。
 
 正式上架、标签、广告、专利、商标和 FDA/FTC 风险，请结合专业人士或官方政策进行最终确认。
+
+## 关于
+
+本仓库由 **cliffechen** 维护，面向 Amazon US 膳食补充剂的运营与内容生产场景，把反复出现的调研、写作、合规与配方工作沉淀成可复用的 Skills。仓库持续更新中。
+
+欢迎提交新的 skill、失效链接修复或工作流改进；提交 Issue 或 Pull Request 时，请只描述业务问题与提炼后的方法，并先脱敏具体品牌、客户与账户数据。
+
+如果这个仓库对你有帮助，欢迎 [Star](https://github.com/cliffechen/skills-hub-for-cliff/stargazers)。
+
+<div align="center">
+  <p><strong>经验持续沉淀，工作流持续复用。</strong></p>
+  <p><a href="#技能目录">浏览技能目录</a> · <a href="https://github.com/cliffechen/skills-hub-for-cliff">查看仓库</a></p>
+</div>
