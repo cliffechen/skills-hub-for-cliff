@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GinvAds 广告智库</title>
+<meta content="GinvAds 广告智库汇总亚马逊 PPC 实战方法论,覆盖新品推广、广告架构与匹配方式、竞价预算、否词精准化、关键词调研、ASIN 投放、老品维护、断货恢复、数据报表分析、Listing 转化率优化等 13 大主题, 竞价/预算/转化率计算工具。" name="description"/>
+<meta content="亚马逊广告,亚马逊PPC,Amazon Advertising,广告架构,竞价策略,否词优化,关键词调研,ASIN定位,数据报表分析,Listing优化,广告投放SOP" name="keywords"/>
+<link href="https://sellerhelp.top/projects/Ginv-Ads广告智库/" rel="canonical"/>
+<meta content="index,follow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="GinvAds 广告智库 · 亚马逊 PPC 实战方法论" property="og:title"/>
+<meta content="13大主题、20+概念卡、5个实战计算工具,系统化的亚马逊广告投放方法论。" property="og:description"/>
+<meta content="https://sellerhelp.top/projects/Ginv-Ads广告智库/" property="og:url"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "GinvAds 广告智库 · 亚马逊 PPC 实战方法论",
+  "description": "汇总亚马逊广告投放的13大实战方法论主题,含新品推广、竞价预算、否词精准化、数据报表分析等内容。",
+  "url": "https://sellerhelp.top/projects/Ginv-Ads广告智库/",
+  "inLanguage": "zh-CN"
+}
+</script>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet"/>
+<style>
+:root{
+  --primary:#33415c; --primary-2:#27334a; --ink:#232a36; --muted:#7a8494; --line:#e7eaef;
+  --bg:#f2f4f8; --surface:#ffffff; --soft:#f7f9fb;
+  --sop:#3d6b5a; --decide:#8a6d3b; --radius:14px; --shadow:0 1px 2px rgba(15,23,42,.05),0 6px 18px -8px rgba(15,23,42,.08);
+  --shadow-lg:0 10px 34px -10px rgba(15,23,42,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Helvetica Neue",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.qa-text-break,.q-text,.a-text,.brief,.dec-para,.dup-item,.tool p{padding:0;}
+/* 阅读进度条 */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--primary);width:0;z-index:100;}
+/* 顶栏 */
+header{position:relative;background:linear-gradient(160deg,#0a0f1e 0%,#131c30 45%,#1b3052 100%);color:#e8edf5;padding:40px 24px 46px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.07);text-align:center;}
+header::before{content:"";position:absolute;top:-45%;right:-10%;width:460px;height:460px;background:radial-gradient(circle,rgba(56,189,248,.12) 0%,transparent 68%);pointer-events:none;}
+header::after{content:"";position:absolute;bottom:-55%;left:-8%;width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,.09) 0%,transparent 68%);pointer-events:none;}
+header .brand{display:flex;align-items:center;gap:14px;justify-content:center;position:relative;z-index:1;}
+header .logo{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,#38bdf8 0%,#6366f1 100%);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 20px -3px rgba(56,189,248,.45);color:#fff;}
+header h1{font-size:26px;letter-spacing:.5px;font-weight:800;color:#fff;display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,#f8fafc 0%,#94a3b8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+header h1 .en{font-size:15px;font-weight:600;color:#64748b;letter-spacing:.6px;-webkit-text-fill-color:#8b9bb4;text-fill-color:#8b9bb4;}
+header .tagline{position:relative;z-index:1;margin-top:8px;font-size:13.5px;color:#94a3b8;letter-spacing:.3px;}
+header .stats{position:relative;z-index:1;display:flex;gap:12px;justify-content:center;margin-top:22px;}
+header .stat{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(4px);}
+header .stat i{font-size:15px;color:#38bdf8;}
+header .stat-num{font-size:19px;font-weight:800;color:#fff;line-height:1;}
+header .stat-lbl{font-size:12px;color:#94a3b8;}
+  .visitor-float{position:fixed;right:20px;bottom:20px;z-index:50;display:flex;flex-direction:column;gap:8px;}
+.visitor-float .stat{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-lg);}
+.visitor-float .stat i{font-size:13px;color:var(--muted);}
+.visitor-float .stat-num{font-size:15px;font-weight:600;color:var(--ink);line-height:1;}
+.visitor-float .stat-lbl{font-size:11px;color:var(--muted);}
+@media (max-width:640px){.visitor-float{right:12px;bottom:12px;}.visitor-float .stat{padding:6px 10px;}}
+/* 工具条 */
+.toolbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;gap:10px;align-items:center;justify-content:center;box-shadow:0 1px 6px rgba(15,23,42,.04);}
+.search-wrap{flex:1;min-width:200px;max-width:560px;position:relative;}
+.search-wrap > i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:14px;}
+.search-wrap input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--line);border-radius:10px;font-size:14px;color:var(--ink);outline:none;background:#fff;transition:border-color .2s,box-shadow .2s;}
+.search-wrap input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.14);}
+/* 布局 */
+.layout{max-width:1180px;margin:0 auto;padding:22px 18px 70px;display:grid;grid-template-columns:250px 1fr;gap:26px;align-items:start;}
+/* 侧栏 */
+.sidebar{position:sticky;top:74px;display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--shadow);max-height:calc(100vh - 96px);overflow-y:auto;}
+.sidebar-title{padding:6px 8px 10px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.4px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:9px;text-decoration:none;color:var(--ink);font-size:13.5px;transition:background .15s,border-radius .15s;min-width:0;}
+.nav-txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;}
+.nav-item:hover{background:var(--soft-active,#f1f5f9);}
+.nav-item.active{background:#eef1f6;color:var(--primary);font-weight:600;}
+.nav-ico{flex-shrink:0;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;}
+.nav-cnt{margin-left:auto;font-size:11px;color:var(--muted);background:var(--bg);border-radius:20px;padding:1px 7px;}
+.nav-item.active .nav-cnt{background:#e3e8f0;color:var(--primary);}
+/* 主体/卡片通用 */
+.panel-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;}
+.panel-head h2{font-size:20px;color:var(--ink);display:inline-flex;align-items:center;gap:10px;}
+.panel-head .sub{font-size:13px;color:var(--muted);}
+/* 工具 */
+.tools{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:6px;}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:14px;}
+.tool{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--soft,#f8fafc);transition:transform .18s,box-shadow .18s,border-color .18s;}
+.tool:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d7dde6;}
+.tool h3{font-size:14px;margin-bottom:8px;color:var(--ink);display:flex;align-items:center;gap:8px;}
+.tool h3 i{color:var(--primary);}
+.tool p{font-size:12.5px;color:var(--muted);margin-bottom:10px;line-height:1.55;}
+.tool label{display:block;font-size:12.5px;color:#334155;margin:7px 0 3px;font-weight:500;}
+.tool input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;outline:none;transition:border-color .18s,box-shadow .18s;background:#fff;}
+.tool input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12);}
+.tool button{margin-top:11px;width:100%;padding:9px;background:var(--primary);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13.5px;font-weight:600;transition:background .18s;font-family:inherit;}
+.tool button:hover{background:var(--primary-2);}
+.tool-out{margin-top:10px;font-size:13.5px;color:var(--sop);font-weight:700;min-height:20px;background:#f0f4f1;border-radius:8px;padding:8px 10px;}
+/* 主题 */
+.tabs{display:flex;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:var(--shadow);margin-bottom:16px;position:sticky;top:64px;z-index:30;}
+.tab{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border:none;border-radius:9px;background:transparent;color:var(--muted);font-size:14px;font-weight:600;cursor:pointer;transition:all .18s;font-family:inherit;}
+.tab:hover{color:var(--primary);background:var(--soft);}
+.tab.active{background:var(--primary);color:#fff;box-shadow:0 4px 12px -4px rgba(51,65,92,.5);}
+.tab i{font-size:14px;}
+.pane{display:none;margin-bottom:44px;scroll-margin-top:120px;}
+.pane.active{display:block;}
+.zone{margin-bottom:44px;scroll-margin-top:74px;}
+.zone-head{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:16px;}
+.zone-head .zone-ico{flex-shrink:0;width:40px;height:40px;border-radius:11px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.zone-head h2{font-size:18px;font-weight:700;color:var(--ink);}
+.zone-head .zone-sub{font-size:12.5px;color:var(--muted);display:block;margin-top:2px;}
+.zone-body .tools{margin-bottom:0;}
+.nav-sep{height:1px;background:var(--line);margin:8px 4px;}
+.topic{scroll-margin-top:74px;margin-bottom:34px;}
+.topic-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.topic-ico{flex-shrink:0;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;box-shadow:0 4px 10px -3px rgba(15,23,42,.3);}
+.topic-head h2{font-size:22px;font-weight:700;}
+.topic-cnt{margin-left:auto;font-size:12.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:4px 11px;border-radius:20px;}
+.cards{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
+/* 方法论区 */
+.sec-title{display:flex;align-items:center;gap:9px;font-size:16px;color:var(--ink);margin:8px 0 14px;font-weight:700;}
+.sec-title i{color:var(--primary);}
+.method-sec{margin-bottom:20px;display:flex;flex-direction:column;gap:10px;}
+.method-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;}
+.method-head{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;cursor:pointer;transition:background .18s;}
+.method-head:hover{background:var(--soft);}
+.method-num{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.method-q{flex:1;min-width:0;font-weight:650;font-size:15px;color:var(--ink);overflow-wrap:break-word;word-break:break-word;line-height:1.5;}
+.method-ico{flex-shrink:0;color:#94a3b8;margin-top:5px;transition:transform .25s;}
+.method-card.open .method-ico{transform:rotate(90deg);}
+.method-body{display:none;border-top:1px solid var(--line);padding:16px 18px 18px;background:var(--soft);}
+.method-card.open .method-body{display:block;}
+.method-body .det{display:flex;gap:9px;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:10px;background:var(--surface);font-size:13.5px;color:#334155;line-height:1.65;margin-bottom:12px;}
+.method-body .det i{color:var(--primary);margin-top:2px;}
+.blk{margin-bottom:12px;}
+.blk-t{font-size:12.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+.blk-t i{color:var(--primary);}
+.dot-li{list-style:none;padding:0;margin:0;}
+.dot-li li{position:relative;padding:0 0 6px 16px;font-size:13.5px;color:#334155;line-height:1.6;}
+.dot-li li::before{content:"·";position:absolute;left:2px;color:var(--primary);font-weight:800;font-size:16px;line-height:1;}
+.steps{list-style:none;counter-reset:msop;padding:0;margin:0;}
+.steps li{position:relative;padding:0 0 8px 26px;counter-increment:msop;font-size:13.5px;color:#334155;line-height:1.6;}
+.steps li::before{content:counter(msop);position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:#eef1f6;color:var(--primary);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.dotgrid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:3px;}
+.dotgrid li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:#334155;line-height:1.6;padding:2px 0;}
+.dotgrid .chk{color:var(--primary);flex-shrink:0;margin-top:3px;}
+.sig{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;}
+.sig i{color:var(--muted);font-size:12px;margin-right:2px;}
+.tag{font-size:11.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2px 9px;}
+/* 概念卡 */
+.concepts{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.concept-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;}
+.concept-card .c-name{font-size:17px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;}
+.concept-card .c-name .en{font-size:11px;color:var(--muted);font-weight:600;}
+.concept-card .c-full{font-size:11.5px;color:var(--muted);}
+.concept-card .c-formula{background:var(--soft);border:1px dashed var(--line);border-radius:8px;padding:6px 10px;font-size:12.5px;color:var(--primary);font-family:'SFMono-Regular',Consolas,monospace;line-height:1.5;}
+.concept-card .c-meaning{font-size:13.5px;color:#334155;line-height:1.6;}
+.concept-card .c-use,.concept-card .c-tips{font-size:13px;color:#334155;line-height:1.65;}
+.concept-card .c-lbl{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.3px;}
+/* SOP / 决策 / 提示卡片 */
+.sop-card{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--sop);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);}
+.sop-card h4{color:var(--sop);font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.sop-card .brief{margin-bottom:10px;font-weight:600;color:#2f4a40;font-size:14px;}
+.sop-card ol{margin:0;padding:0;list-style:none;counter-reset:step;}
+.sop-card ol li{position:relative;padding:0 0 7px 26px;counter-increment:step;font-size:13.5px;color:#334155;word-wrap:break-word;overflow-wrap:break-word;}
+.sop-card ol li::before{content:counter(step);position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:#eef3f0;color:var(--sop);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.dec-card{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--decide);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow);}
+.dec-card .dec-title{color:var(--decide);font-weight:700;margin-bottom:10px;font-size:14px;display:flex;align-items:center;gap:8px;}
+.dec-card .d-line{padding:6px 0 6px 14px;border-left:2px solid #efe7de;margin:3px 0;font-size:13.5px;color:#5c554c;}
+.dec-card .dec-para{padding:6px 0 6px 14px;border-left:2px solid #efe7de;margin:3px 0;font-size:13.5px;color:#5c554c;display:flex;align-items:flex-start;gap:7px;}
+.dec-card .dec-para i{color:#9c8266;margin-top:1px;font-size:12px;}
+.dec-card .dec-para[data-arrow="true"]{border-left-color:#e4dcd0;}
+.tips{background:#f2f6f8;border:1px solid #dce3e8;color:#2f4654;border-radius:12px;padding:11px 16px;font-size:13px;display:flex;align-items:flex-start;gap:8px;}
+.tips-ico{color:#5a7a8c;font-size:15px;margin-top:1px;}
+.tips{box-shadow:var(--shadow);}
+/* 问答折叠（平滑） */
+.qa{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s;}
+.qa:hover{border-color:#d7dde6;}
+.qa .q{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;transition:background .18s;}
+.qa .q:hover{background:var(--soft,#f8fafc);}
+.q-num{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.qa .q-main{flex:1;min-width:0;}
+.q-text{font-weight:600;font-size:14.5px;color:var(--ink);overflow-wrap:break-word;word-break:break-word;}
+.q-src{display:flex;align-items:center;gap:5px;margin-top:4px;font-size:12px;color:var(--muted);}
+.q-ico{flex-shrink:0;color:#94a3b8;transition:transform .25s;margin-top:4px;}
+.qa.open .q-ico{transform:rotate(90deg);}
+.qa .a{display:none;max-height:0;overflow:hidden;padding:0 16px 0 54px;border-top:1px dashed var(--line);font-size:14px;color:#334155;transition:max-height .28s ease;}
+.qa.open .a{display:block;}
+.qa .a-text{line-height:1.75;padding-top:12px;overflow-wrap:break-word;word-break:break-word;}
+.qa .a-label{color:var(--sop);font-weight:700;margin-right:8px;padding:2px 7px;border-radius:6px;background:#eef3f0;font-size:12px;vertical-align:2px;}
+.qa.has-dup .a{padding-left:54px;}
+.dup{background:var(--soft);border:1px solid #ece6db;border-radius:9px;padding:8px 12px;margin:0 16px 10px 52px;font-size:12.5px;color:#5c554a;line-height:1.7;}
+.dup>b{font-size:12.5px;margin-bottom:4px;display:inline-flex;align-items:center;gap:6px;}
+.dup-item{margin:3px 0;}
+.badge{background:#f0ece2;color:#6b6253;font-size:11px;padding:1px 6px;border-radius:5px;margin-left:4px;}
+/* 无内容 */
+.hidden{display:none!important;}
+.no-result{display:none;text-align:center;color:var(--muted);padding:44px 0;}
+.no-result i{font-size:34px;color:#cbd5e1;margin-bottom:10px;display:block;}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:26px 18px 30px;border-top:1px solid var(--line);margin-top:10px;}
+footer a{color:var(--primary);text-decoration:none;}
+/* 响应式 */
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{position:static;max-height:none;overflow:visible;}
+  .toolbar{flex-wrap:wrap;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+<div class="brand"><div class="logo"><i class="fa-solid fa-bolt"></i></div><h1>GinvAds<span class="en">广告智库</span></h1></div>
+<p class="tagline">亚马逊 PPC 常见问题方法论 · 经验复用 · PPC 高频问题扫盲</p>
+<div class="stats">
+<div class="stat"><i class="fa-solid fa-layer-group"></i><span class="stat-num">13</span><span class="stat-lbl">主题</span></div>
+<div class="stat"><i class="fa-solid fa-lightbulb"></i><span class="stat-num">20</span><span class="stat-lbl">概念卡</span></div>
+<div class="stat"><i class="fa-solid fa-calculator"></i><span class="stat-num">5</span><span class="stat-lbl">计算工具</span></div>
+</div>
+</header>
+<div class="toolbar">
+<div class="search-wrap"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="搜索问题 / 关键词，如：ACoS / 新品 / 竞价 / 否定" type="text"/></div>
+</div>
+<div class="layout">
+<nav aria-label="主题目录" class="sidebar">
+<h3><i class="fa-solid fa-sitemap"></i> 目录</h3>
+<a class="nav-item" data-tabnav="content" href="#zoneContent"><span class="nav-ico" style="background:#33415c"><i class="fa-solid fa-book-open"></i></span><span class="nav-txt">内容 · 方法论</span><span class="nav-cnt">13</span></a>
+<a class="nav-item" data-tabnav="tools" href="#zoneTools"><span class="nav-ico" style="background:#3d5a4c"><i class="fa-solid fa-calculator"></i></span><span class="nav-txt">工具 · 计算</span><span class="nav-cnt">5</span></a>
+<a class="nav-item" data-tabnav="concepts" href="#zoneConcepts"><span class="nav-ico" style="background:#41557a"><i class="fa-solid fa-lightbulb"></i></span><span class="nav-txt">概念卡</span><span class="nav-cnt">20</span></a>
+<div class="nav-sep"></div>
+<a class="nav-item" data-topic="new_product" href="#new_product"><span class="nav-ico" style="background:#33415c"><i class="fa-solid fa-rocket"></i></span><span class="nav-txt">新品推广打法</span><span class="nav-cnt">3</span></a><a class="nav-item" data-topic="ad_structure" href="#ad_structure"><span class="nav-ico" style="background:#41557a"><i class="fa-solid fa-diagram-project"></i></span><span class="nav-txt">广告架构与匹配方式</span><span class="nav-cnt">4</span></a><a class="nav-item" data-topic="bid_budget" href="#bid_budget"><span class="nav-ico" style="background:#6b5a3a"><i class="fa-solid fa-sliders"></i></span><span class="nav-txt">竞价与预算</span><span class="nav-cnt">4</span></a><a class="nav-item" data-topic="negative" href="#negative"><span class="nav-ico" style="background:#5c4a46"><i class="fa-solid fa-ban"></i></span><span class="nav-txt">否词与精准化</span><span class="nav-cnt">4</span></a><a class="nav-item" data-topic="keyword" href="#keyword"><span class="nav-ico" style="background:#3c5a52"><i class="fa-solid fa-key"></i></span><span class="nav-txt">关键词调研与布局</span><span class="nav-cnt">5</span></a><a class="nav-item" data-topic="asin_traffic" href="#asin_traffic"><span class="nav-ico" style="background:#4c4a6e"><i class="fa-solid fa-link"></i></span><span class="nav-txt">ASIN 投放与关联流量</span><span class="nav-cnt">5</span></a><a class="nav-item" data-topic="video_brand" href="#video_brand"><span class="nav-ico" style="background:#62504f"><i class="fa-solid fa-video"></i></span><span class="nav-txt">视频与品牌广告</span><span class="nav-cnt">2</span></a><a class="nav-item" data-topic="mature" href="#mature"><span class="nav-ico" style="background:#3a5a4c"><i class="fa-solid fa-seedling"></i></span><span class="nav-txt">老品维护与稳定期</span><span class="nav-cnt">6</span></a><a class="nav-item" data-topic="stockout" href="#stockout"><span class="nav-ico" style="background:#6e5c40"><i class="fa-solid fa-box-open"></i></span><span class="nav-txt">断货与恢复推广</span><span class="nav-cnt">3</span></a><a class="nav-item" data-topic="season" href="#season"><span class="nav-ico" style="background:#3d5a6e"><i class="fa-solid fa-calendar-days"></i></span><span class="nav-txt">淡旺季与大促</span><span class="nav-cnt">4</span></a><a class="nav-item" data-topic="report" href="#report"><span class="nav-ico" style="background:#56606e"><i class="fa-solid fa-chart-line"></i></span><span class="nav-txt">数据报表与指标分析</span><span class="nav-cnt">5</span></a><a class="nav-item" data-topic="listing_conv" href="#listing_conv"><span class="nav-ico" style="background:#3f5a56"><i class="fa-solid fa-image"></i></span><span class="nav-txt">转化率与 Listing</span><span class="nav-cnt">5</span></a><a class="nav-item" data-topic="profit" href="#profit"><span class="nav-ico" style="background:#6a5f3c"><i class="fa-solid fa-coins"></i></span><span class="nav-txt">成本利润与产品定位</span><span class="nav-cnt">4</span></a>
+</nav>
+<main>
+<!-- 内容区 -->
+<section class="zone pane active" data-pane="content" id="zoneContent">
+<div class="zone-head"><span class="zone-ico"><i class="fa-solid fa-book-open"></i></span><div><h2>内容 · 方法论</h2><span class="zone-sub">按主题整理 · 从左侧选择主题</span></div></div>
+<div class="zone-body">
+<section class="topic" data-title="新品推广打法" id="new_product">
+<div class="topic-head">
+<span class="topic-ico" style="background:#33415c"><i class="fa-solid fa-rocket"></i></span>
+<h2>新品推广打法</h2><span class="topic-cnt">3 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">新品期核心是“流量爆发”，不是 ACoS。</p>
+<ol><li>广告目的：先要曝光与点击，ACoS 目标放宽，销量优先。</li><li>选 5-10 个高流量、高相关词，用单词单组单活动(SKAG) 打精准，集中烧预算冲排名。</li><li>竞价用固定竞价(fixed)拉曝光测转化，出价参考建议竞价中高位。</li><li>自动广告建议开 3 组（高/中/低）瀑布式跑词，或与手动精准配合测词。</li><li>测词节奏：新品每 3 天看一次数据并迭代补词，不要频繁调整竞价。</li><li>前期长尾词作用有限，先把核心流量打开再拓词。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 产品是否稳定出单？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 否：按新品打法集中烧</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 是：转入老品/稳定期优化</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>新品期不要死磕 ACoS；转化率低时优先检查投放词精准性与 listing。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">新品上架后预算与流量都有限，如何设计广告开局才能在短时间把曝光和单量快速拉起来，从而冲进排名？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>新品期以流量爆发为核心目标，优先保曝光和点击积累，不要死磕 ACoS；集中预算投放少数高流量、高相关大词，用固定竞价先打开曝光、积累数据，再考虑优化转化。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>新品的关键是盯曝光和点击的累积，而不是过度在意 ACos，尤其前期数据积累不足时不宜频繁做精细分析。</li><li>优先选 3-5 个高搜索量、高相关同赛道核心词做单词单组精准投放，集中预算定点。</li><li>新品无数据积累无竞争力，多用固定竞价赢取更多曝光；结果不好宁可重开测试也不随意堆数据。</li><li>已出单词可以直接单开保护，未出单或高点击不出单的词缩短观察周期快速迭代掉。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>先用商机探测器或竞品反查筛出高流量、高相关的核心大词。</li><li>选 3-5 个核心词按单词单组的精准架构开启，集中给竞价和预算。</li><li>采用固定竞价拉开曝光，竞价参考建议竞价的高位。</li><li>关注单品出单词、稳定出单的投放先保护起来。</li><li>约 3-5 天一个周期迭代一次：补充新词、逐步去掉不达标词。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否只聚焦少量核心词，而不是把词铺得又散又全？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在起量阶段优先保证曝光与点击，暂不苛求 ACoS？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否为新品用了固定竞价以争取更多曝光？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按固定周期复核一次广告数据而不是一天多变？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否有把能稳定出单的词单独保护起来？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">新品期集中预算</span><span class="tag">起量拉曝光</span><span class="tag">单词单组开启</span><span class="tag">固定竞价冲曝光</span><span class="tag">3天/5天迭代换词</span><span class="tag">先有曝光再优化转化</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">新品有曝光有点击但就是不出单（或广告不出单但自然能出单），该如何定位问题是出在投放本身还是链接本身？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>先把自然转化率和广告转化率分开测算：两者整体都低就优先做链接审查（图片、价格、评论、描述）；广告转化率明显低于自然转化率，则大概率是投放精确度问题，需要重新审视客户搜索词与产品是否真正的相关。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>广告只能改变产品能否被看到且提升点击，却替换不了产品自身转化能力。</li><li>产品整体转化率用来判断产品与链接质量，关键词转化率用来判断投放精确度，两者是不同维度。</li><li>自然转化率高而广告转化低，通常指向词的精确性或与竞品的相对竞争力不足。</li><li>同质类目转化差可归因于客单价、星级、评论数量与问答，不一定全是广告的问题。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>分别拉取自然单和广告单的转化率，算出两者差距。</li><li>若整体转化率都很低，排查图片、价格、评论、描述等链接要素，判断是否需做链接审查。</li><li>若仅广告转化率低，下载客户搜索词报告，核验出单词与产品是否真正相关。</li><li>对不相关的高点击词做否定；对相关但低转化的词评估是否换词或调整方式。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已分别计算产品自然转化率与广告转化率的差值？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否有足够的点击样本支撑转化结论，而不是只看个位数？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已排查出单词与产品的相关性，而不单是怪广告？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在忽视广告的同时也排除了评论区、星级、客单价等因素？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">没转化</span><span class="tag">广告不出单</span><span class="tag">转化率低</span><span class="tag">自然转化和广告转化</span><span class="tag">listing审查</span><span class="tag">词不准不相关</span><span class="tag">差评低星级影响转化</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">新品推广期的预算、竞价与关键词布局节奏该如何安排？以及断货重开后如何重新把流量找回来？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>新品预算按目标转化率倒推、给到能跑到出单点击的下入门槛，不能过低；竞价不足就没曝光、溢出就透支利润，因此以跑出稳定出单点击数为预算底线，重开后按断货前出单数据重新激活流量。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>预算按类目或自身转化率倒推，保证预算能支撑跑出足够的出单点击数。</li><li>新品前期关键词挖掘与筛选速度要快于老品，通常较短周期就要迭代换词。</li><li>断货重开后出单历史缺失、权重下滑，需要用更高竞价或重启更亮的活动重新争取曝光。</li><li>找不到付费稳定出单别死挺，按出单数据和当前目标及时止损，转移预算去测新内容。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>用预计转化率（缺数据时用类目加权平均转化率）反推出单点击数，换算出一单所需预算并分配。</li><li>新品优先保证自动/手动能跑满预算积累数据，预算不够优先留给已出单词的。</li><li>每 3-5 天拉取数据，把稳定出单的投放保护起来，把不达标的快速换掉。</li><li>断货重开后拉取断货前出单历史数据，用精准投放重新激活曝光。</li><li>若持续无法突破单量，重新审视目标（换品或换增长动作）并做止损。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否给到了足够覆盖出单点击所需的预算，而不是临扭则？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按确定的抓词节奏迭代，而不是无限容忍不出单的词？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>对断货重开来的是急是否用断货前的有效数据先重启？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>预算被提前跑完或预算花不完时，是否先看清转化再决定加还是减？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">预算不够算预算倒推</span><span class="tag">预算烧完</span><span class="tag">预算花不完</span><span class="tag">断货重开</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="广告架构与匹配方式" id="ad_structure">
+<div class="topic-head">
+<span class="topic-ico" style="background:#41557a"><i class="fa-solid fa-diagram-project"></i></span>
+<h2>广告架构与匹配方式</h2><span class="topic-cnt">4 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">架构决定流量可控性：测词用广泛/词组，出单词拉精准并单流量控制。</p>
+<ol><li>测词阶段(RES)：用广泛或词组匹配，测新词与拓流量。</li><li>出单稳定后转移到精准(PER/SKAG)：单词单组单活动，便于单独控竞价与预算。</li><li>同一词不要在同类型广告(SP)下同时开广泛+词组抢流量；转移后原组做精否保单一流量入口。</li><li>流量按 HT/LT（高/低流量词）分组，避免大词吃光预算导致小词无曝光。</li><li>一个组放词数量取决于词流量：大词单词单组；中部词 5-10 个；长尾词可多个一组，不建议超过30个。</li><li>SKAG 用固定竞价，出价建议竞价 1.2-1.5 倍，优先冲流量。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 目的：测词还是保护出单词？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 测词：RES 广泛/词组，多词一组</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 保词/控价：SKAG 单词单组精准</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>架构最优不是“最多活动”，而是让每个投放的表现可衡量、预算可控。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">自动、广泛、词整、精准这些匹配方式分别该在什么场景用，测词与保护出单词怎么分工？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>先用词组/广泛的匹配方式扩张近似、拓流、测词，待稳定出单后再转移到精准的单词单组去保护这些词；关键词匹配方式同时按词形与要表达意图选，不让同一词在同类广告下同时重复匹配抢曝光。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>手动广告自己选词投、自动广告靠系统推；匹配度决定何时机器的词与自己的词。</li><li>测词（拓展、探查流量）用广泛/词组，加大基数量；保护/控价词用精准。</li><li>同一词不要在同一类型广告里同时开广泛+词组抢曝，容易互相分流量。</li><li>出单后再从用词卷里精准时，一般比之前广泛价高，拉动单一流量。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>先界定本次目标是测词拓流还是保护出单词。</li><li>测词用广泛/词组多词一组投放，扩流量。</li><li>待出单词稳定后再用单词单组的精准架构保护，控价控预算。</li><li>同一词提新组出单稳定后，再去原组做否定保证单一流量入口。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按测词与保护两个不同目的选匹配方式？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免同一词在同一匹配类型下竞争曝光？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否确认出单词稳定出单后再去原组做否定？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否清楚各匹配方式的暴露逻辑（广泛含整词、词组保序、精准限定完全）？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">自动广告手动广告介于</span><span class="tag">广泛词组</span><span class="tag">任匹配词</span><span class="tag">词语匹配</span><span class="tag">测词</span><span class="tag">保护出单词</span><span class="tag">单词单组</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">一个广告活动/广告组里应该放几个词、关键词要按什么原则分组，才能让每个词都得到曝光而不互相抢预算？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>按关键词流量大小决定广告组内的词数：大词单独分组控制，中部词组建小规模词组，长尾词每组可容纳较多词；同时按流量高低（HT/LT）分层，避免大词提前消耗光预算导致其他词无曝光。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>词在选词中一定要查词流量大小再分组，避免大小混组时小词被大词挤打不到预算。</li><li>大词/出单词做单词分组，重点可控价可控预算。</li><li>中部节奏词小口径 5-10 一组，长尾小流量词（两三天没一次点击）可以几十个一组。</li><li>低流量词如果每组放太多，会分摊点击且无法准确判断表现，需控制单次测试的词汇量。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>先把词按流量大小、强弱分层（拉大/中部/长尾）。</li><li>分组容量依据流量：大词单词分组，中词 5-10 个一组，长尾可多词一组。</li><li>流量大的组和流量小的组分开投放，避免互相抢预算。</li><li>当测试词数量较多时，单组一次只测两三个词，保证各组都能积累到足够点击样本以判断优劣。</li><li>对于已出单且能稳定跑数据的组，将表现偏差的词抽出，单独建立广告组控制。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先判断了每个词的流量大小再做分组？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否大词单词分组，没有和大量小词混放？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按 HT/LT 流量分层避免互相抢预算？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否限定一次测词的词汇量，保证所有词都能积累点击样本？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">HT/LT 高流量低流量</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">把自动广告/广泛里的出单词拿出来打精准或扩大投放时，该如何处理原组关系，才能防止流量中冲并保持数据可控？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>对出单词进行架构重构或新建独立活动，可能会影响原广告的表现及计费逻辑，具体需视稳定性再作决定；只有在新的精准广告组里出单稳定后，再对原广告进行词否定或调整竞价，以避免流量重合，确保单一流量入口</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>词从原广告移到新广告活动，表现存在差异变化（并非一定优于原活动），受市场、竞价、新广告历史影响。</li><li>不要一提取就立刻在原组否定，等新组稳定出单后再否定，或先别动只在原组控价。</li><li>精准、广泛、词组不要放在同一广告组/活动合并投放，产生流量互相抢夺。</li><li>同词在 SP/SB 等不同广告类型上投放，广告位不同，可不互相抢预算。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>把需要保护的出单词单独提出来，新建广告活动以观察出单情况（通常按出单词≥2单来筛选）。</li><li>在新组里，首先要确保该词能不受干扰地出单，以便灵活分配竞价和预算。</li><li>等新组稳定出单后，在原组做否定或用竞价低于新组来控制流量入口。</li><li>否定之后若该词仍持续出现，请检查数据报表的时间差，以及否定关键词是否在广告组级别成功生效。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否等到新广告组稳定出单后才去原组做否定？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了同一关键词在同一个广告活动的3种匹配方式下同时开启抢曝光？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否将同一个推广词及其变体转移到新广告活动后，在原组妥善处理避免了重复投放？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否存在两个不同SKU使用相同关键词，导致互相抢曝光的情况？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">出单词转精准</span><span class="tag">单流量分配控制</span><span class="tag">实现原组否定</span><span class="tag">互相抢流量</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">同类词在多种变体的情况下应如何匹配其匹配方式。相似的词、变体，是否要绑在一起还是拆分开来投放？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>对于小体量的变体，初期可合并投放以集中权重，依靠多产品共同起量；待积累一定数据后，再筛选出转化表现更好的 SKU 作为主推。同时，需避免将使用相同预算或相同关键词的不同产品链接混在同一广告组内，以免互相抢夺曝光并消耗彼此的预算。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>先合并在同一组，更大范围起量，有数据后再选转化较好的 SKU 主推。</li><li>变体之间若流量入口相同可合并投放，避免各自重新建组的浪费。</li><li>多款产品共用同一预算池且无明确分摊，若不加以拆分会造成部分产品吃不到预算而无法观察优化。</li><li>品牌未锁定的时候，让变体之间互相在商品页面投放，形成内部流量闭环。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>新品或数据不足时，先要把同类、可变体一起投广告来稳定起量。</li><li>观察一段时间后，根据广告表现数据筛选出 2-3 个转化好的 SKU 设置主推。</li><li>对于导致其他 SKU 吃不到预算的广告组，按需拆分并分配预算。</li><li>在不同子体之间做关联流量抢占，避免部分变体互相争夺同一块流量。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在数据不足时先把同类、变体一起投放以保证起量？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在积累了数据后，再筛选出表现好的变体主推？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了预算相同的不同产品/关键词互相抢曝光，导致一方分不到预算？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否为多变体的流量互补建立了互投闭环？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">多变体多色多尺码</span><span class="tag">变体抢预算</span><span class="tag">拆开投放</span><span class="tag">互投ASIN</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="竞价与预算" id="bid_budget">
+<div class="topic-head">
+<span class="topic-ico" style="background:#6b5a3a"><i class="fa-solid fa-sliders"></i></span>
+<h2>竞价与预算</h2><span class="topic-cnt">4 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">bid 底价决定曝光机会，bid+ 决定位置占比；预算以能跑到出单点击数为底线。</p>
+<ol><li>曝光不足：先抬底 bid，或对搜索结果顶部(TOS)加 bid+；不要一味只降 bid。</li><li>广告位调整：底 bid + 位置百分比组合测试，找到转化最好的“水域”。</li><li>预算底线：按转化率倒推（如转化率10%则至少给 ~1/转化率 的点击预算）。</li><li>不建议分时调价/预算，以 7 天为周期看整体趋势调整。</li><li>预算跑不完：检查词流量与相关性；预算提前烧完：先看转化再决定是否加。</li><li>不建议一天多次调价，频繁调整影响数据积累。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 问题：没曝光还是没点击？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 没曝光：抬 bid / 加 TOS% / 换流量更大的词</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 有点击没转化：查词精准性 / listing</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>广告费“烧完”不等于坏事，关键看预算对应的点击够不够出单。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">针对一个关键词：如何确定初始出价？如何判断当前出价高低？当曝光不足时，如何结合提高竞价与广告位竞争（如卡位）来进行调整操作？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>底竞价决定曝光机会，而加价决定位置占比；先用建议竞价中高位起步，曝光不足优先抬底竞价，若还需首页顶部再在位置出来做竞价加成，而不是单纯反复提高出价。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>底出价决定能否拿到曝光机会，Bid+（如 TOS 百分比）决定曝光分配在哪些广告位。</li><li>参照建议竞价，以建议竞价区间的中高位作为起点，避免一开始出价过低导致没曝光。</li><li>针对竞争激烈或 CPC 较高的词，可通过提高底出价或设置商品页/首页广告位溢价来抢占曝光，不能指望首次设置就能完全控制。</li><li>竞价逻辑：高竞价更容易抢占优质广告位（如首页顶部、搜索结果顶部），从而获得更高转化。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>新加词先按建议竞价（中高位）完成出价设置。</li><li>观察初始广告曝光量，若曝光较差，先尝试提高出价来获取曝光。</li><li>若希望多出现在首页/顶部，在相应广告位上设置溢价。</li><li>当出价足够但位置仍不理想时，尝试调整底出价与广告位溢价的组合进行测试。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先确认了曝光不足的根因是出价不够，还是关键词本身搜索流量太小？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否理解了底出价决定曝光、Bid+ 决定广告位展现的区别？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否优先解决了关键词本身的相关性与流量问题，而不是只死磕单次高竞价？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否采用相对稳定的方式（避免一天内频繁调整）来调整出价？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">建议竞价</span><span class="tag">参考建议竞价</span><span class="tag">曝光不足</span><span class="tag">提高 Bid 提曝光</span><span class="tag">首页/搜索顶部位置</span><span class="tag">底 Bid 与 Bid+</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">如何选择不同竞价策略（固定、仅降低、动态提高或降低）？如何结合官方建议来决定动态竞价的使用取舍？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>新品期用固定竞价保证曝光；老品用只降低更利于控成本；动态加价适合在特定广告目标下配合广告位加成来提量，但前期花费与波动较高。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>固定竞价能保持曝光更完整，适合新品期拉升流量，缺点是转化可能略差（花费较高）。</li><li>“只降低”容易把曝光压得过低，适合需要控制成本的老品。</li><li>动态竞价（提高和降低）初期花费与波动较大，但能快速起量，需结合目标与广告位溢价使用。</li><li>不建议在新品期使用“只降低”，因为系统会持续压低竞价导致丢失曝光。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>明确当前目的：冲量/拓曝光→固定竞价；收缩成本→主动降低（只降低）。</li><li>新品起量期建议选择固定竞价；除非预算极度紧张，否则不建议初期使用只降低策略。</li><li>需要快速拉量或稳住排名的场景可使用动态竞价，并建议与广告位溢价搭配。</li><li>校验新品的转化与曝光数据，若表现无好转，回调策略并重新调整。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否依据当前阶段（新品期拓宽曝光、老品期控制花费）选择竞价策略？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免在新品期使用“只降低”压制曝光？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了过于频繁切换竞价策略而引起数据震荡？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>使用动态竞价时，是否配套了广告位溢价并控制整体支出？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">固定竞价</span><span class="tag">只降低 / 动态竞价</span><span class="tag">高 bid 提曝光</span><span class="tag">动态竞价快速起量</span><span class="tag">新品避免只降低</span><span class="tag">建议竞价的使用</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">广告预算怎么构成才算合理，预算老被提前用完或反之花不完却不出单，该加预算还是该先优化，以及预算只够分时怎么办？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>预算要以当前转化率反推“跑出出单所需点击数”作为底线；钱花得快本身不算坏，关键看是否跑出出单；提前用完只靠加预算并非最优，应优先砍掉无效花费；系统自动调预算并非万能，统一以 7 天周期看趋势更稳妥。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>预算应按照转化率反推出单所需点击次数，确保足以跑出有效数据，否则很难出单。</li><li>预算跑得快未必是坏事，重点看实际转化率能否支撑出单；预算花不完且转化差时，应先优化花费结构（否词/降低无效词竞价），而不是盲目加预算。</li><li>一般情况下不建议每天频繁调整预算，建议以 7 天整体趋势为参考。</li><li>新品期要尽量持续跑满预算以拉取数据、快速积累出单权重。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>先用转化率倒推出单所需点击次数，确保日预算至少能覆盖这些点击量。</li><li>预算提前跑完时不要马上加预算，先查看搜索词报告，找出高点击但不出单的词，再对这部分无效花费进行否词或降价。</li><li>预算花不完也可能是关键词流量不足或相关性匹配问题，需重新评估词的流量与相关性。</li><li>不建议每天多次调整预算，按 7 天为一个周期进行对比后再调整。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按转化率倒推出了预算底线？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>预算提前用完时，是直接加预算还是先看转化再决定？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>预算花不出去时，是否先检查了关键词流量与相关性？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了按天频繁调整预算，而是采用固定周期进行复核？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">预算烧完</span><span class="tag">预算不够</span><span class="tag">预算花不完</span><span class="tag">加预算</span><span class="tag">预算按转化率倒推</span><span class="tag">7天观察周期</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">同一关键词上有哪些可控制广告位的手段，如何把曝光往首页/搜索顶部等好位置转移，或者避免某个位置？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>不同广告位只能通过调整竞价的高低与在特定位置上的溢价来控制展现概率，且由于搜索页顶部只能靠加百分比被动提升，若压低底出价会整体减少曝光。因此控制逻辑是：先保底出价，再通过广告位溢价来增加目标位置的展现占比。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>商品详情页位置曝光天生最多，占比大属于正常；若要增加目标位置曝光，只能通过设置溢价来抢占位置。</li><li>底出价决定总曝光规模，广告位溢价决定在具体位置的占比，两者需配合调整。</li><li>若某位置与其余位置 CPC 相近，往往无法做到完全独立控制该广告位（只能通过逐步降低底出价来调整）。</li><li>成交量最大的位置往往集中在首页顶部；其余位置的转化与曝光通常有限。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>复盘广告位报告，查看各广告位的曝光与转化占比。</li><li>针对转化好的目标位置（如首页顶部），若当前曝光不足，可提高该位置的广告位溢价。</li><li>想减少某位置（不想要的）的曝光，应先逐步降低底出价或采取保守策略观察数据。</li><li>采用微调出价的方式，避免只在单一的底出价维度上来回调整。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否理解了广告位曝光不能完全按主观意愿精准控制的特性？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否依据广告位报告数据做决策，而不是跟着直觉随意调整？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>针对多关键词投放，是否将位置控制在性价比合适的水平，而非盲目抢占首页？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了在转化不匹配的情况下强行用高出价卡位？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">首页/顶部/首位</span><span class="tag">TOS 广告位</span><span class="tag">商品页面曝光过多</span><span class="tag">低底出价+首页溢价</span><span class="tag">广告位报告</span><span class="tag">bid+ 广告位溢价</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="否词与精准化" id="negative">
+<div class="topic-head">
+<span class="topic-ico" style="background:#5c4a46"><i class="fa-solid fa-ban"></i></span>
+<h2>否词与精准化</h2><span class="topic-cnt">4 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">否词是把无效花费挡在门外，自动广告的优化核心之一。在广泛匹配和词组匹配广告中，同样需要依靠否词来约束流量边界，避免预算浪费。</p>
+<ol><li>不相关搜索词 → 直接精否或词组否，阻断无效花费。</li><li>高点击不出单的词 → 若属不相关赛道，直接精否；若属相关词，可通过降低竞价或单独拆分到精准组控制花费。</li><li>自动广告可做预否词：预先否定不同属性/不相关词根。</li><li>出单词转移到精准后，等新组稳定出单再回原组做精否。</li><li>单复数、介词等会被亚马逊视为同一词，否定单数会影响复数。</li><li>否词过多可能压掉曝光：只否真正不相关或确定无转化的词，保留长尾词的探索潜力。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 词的相关性？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 不相关：直接否定</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 相关但不出单：换词测试 / 预算控制</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>自动广告中做否词效果最直接；别怕否错，因为系统支持随时解除否定。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">自动/手动广告跑出一大堆搜索词，如何判断哪些该否定、哪些该保留？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>只有与产品明确不相关的词根才需否定；相关但当下不出单的词，说明产品现阶段不适合强推该词，应转向测试其他词，而不是盲目否定。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>不相关搜索词直接否定，阻断无效预算消耗。</li><li>相关但不出单的词不要否定，说明投放时机或词路有偏差，应转向测试其他词。</li><li>判定相关性要看搜索词与产品是否真正匹配。</li><li>从源头控制：选择精准度更高的匹配方式，减少不相关流量进入。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>定期导出并查看搜索词报表。</li><li>逐一比对搜索词与产品的相关性，分为相关、不相关、待观察三类。</li><li>对明确不相关的词根进行精准否定或词组否定。</li><li>对于相关但暂未转化的词，保留继续观察，或调整竞价策略以积累数据。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否只否掉了真正不相关的词？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>有没有将无转化的相关词误判为不相关而错误否定？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否有按词根维度做整体否定的机制？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>匹配方式是否倾向于高精准度以控制无效流量？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">不相关搜索词</span><span class="tag">高点击不出单</span><span class="tag">无转化</span><span class="tag">词根</span><span class="tag">否定</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">同一关键词的不同形态（单数/复数/带介词）表现差异大，想否掉差的却连带影响好的，如何处理？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>单复数、for 等介词在亚马逊关键词匹配中被视作同一个词，否定任一形态会连带影响其他形态；只能用精准匹配拆开分别出价，不能用否定做形态隔离。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>单复数、for 等介词会被亚马逊默认为同一个关键词</li><li>否定复数会连带否定单数，反之亦然</li><li>想隔离形态时，把好的与差的形态拆开各开精准匹配</li><li>好的形态给高出价、差的形态给低出价，分别承接</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>拉出同一词各形态（单复数）的绩效差异</li><li>把表现好的形态单独做精准投放并给高价位</li><li>表现差的形态继续做精准但降低出价/收紧预算</li><li>避免用否定词组处理形态差异</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否没有直接用否定去隔离形态</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>差的形态是否用降低出价而非否定处理</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>好形态出价是否高于差形态</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>形态拆分后与原有投放是否冲突</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">单数</span><span class="tag">复数</span><span class="tag">介词</span><span class="tag">精准匹配</span><span class="tag">高出价</span><span class="tag">低出价</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">前置否了太多词后，广告反而跑不出词或曝光骤降，怎么判断和补救？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>否词不是越多越好——词组否定范围更广易误伤；无曝光也要考虑出价是否过低，需拆开归因，并用只否无关词的对照组复核。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>词组否定范围比精确否定更广，容易误伤大量词</li><li>无曝光除了否词，还要排查出价是否过低</li><li>可开一组只否定完全不相关词的自动广告，用于验证否词是否过宽</li><li>前置否定应只针对确定不相关的词根/型号</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>先排查是否出价过低，偏低先上调</li><li>再定位哪些否词范围过宽</li><li>收窄否词到确定不相关的范围</li><li>开一组只否无关词的对照组验证</li><li>按对照结果调整否词与出价，恢复曝光</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否把出价因素与否词因素分开归因</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>词组否定范围是否过宽</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否保留了只否无关词的验证组</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>调整后曝光是否恢复</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">前置否定</span><span class="tag">跑不出词</span><span class="tag">曝光</span><span class="tag">出价太低</span><span class="tag">对照组</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">多属性/多变体产品（不同颜色、尺寸、型号），如何判断按属性拆出的搜索词是否要否定？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>关键看该搜索属性是否已写在 listing 里：listing 含该属性则保留，不含才做词组否定。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>按属性词否定，判断依据是 listing 是否包含该属性</li><li>搜到 listing 中不存在的属性属不相关，可词组否定</li><li>listing 里存在的属性不能当作不相关否定</li><li>属性词否定通常用词组否，统一口径</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>列出产品实际提供的属性清单（颜色/尺寸/型号）</li><li>把出现的搜索属性逐一对照清单</li><li>listing 内含的属性保留投放</li><li>listing 内不存在的属性用词组否排除</li><li>复盘否定口径是否与 listing 一致</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先核对该属性在 listing 中是否存在</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否用词组否而非精否做属性排除</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>否定范围与产品实际属性是否一致</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>多变体是否统一了否定口径</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">颜色</span><span class="tag">变体</span><span class="tag">属性</span><span class="tag">型号</span><span class="tag">listing 相符</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="关键词调研与布局" id="keyword">
+<div class="topic-head">
+<span class="topic-ico" style="background:#3c5a52"><i class="fa-solid fa-key"></i></span>
+<h2>关键词调研与布局</h2><span class="topic-cnt">5 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">词是广告的根基：选词看流量+相关度，布局按流量分层。</p>
+<ol><li>反查竞品流量词(ABA/第三方)，选取同赛道、高流量、高相关词。</li><li>大词/核心词：5-10 个，SKAG 精准投放冲排名。</li><li>长尾词：转化好、竞争小，适合做盈利增量或捡漏(低 bid)。</li><li>词按流量分层(HT 高流量 / LT 低流量)分组，避免互相抢预算。</li><li>listing 埋词要包含投放大词，否则前台搜不到。</li><li>分类目平均转化率：用商机探测器取 top80% 流量词加权估算。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 流量大还是小？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 大词：SKAG 精准，集中预算</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 长尾：低 bid 捡漏 / 词组测词</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>出单的客户搜索词才是真正能拉排名的词，抓搜索词报告。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">如何收集、反查并筛选出值得投放的关键词？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>用反查竞品（ABA/三方）+ 前台验证 + 客户搜索词报告交叉选词，兼顾流量与相关两个维度，先与既有投放去重再投入。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>利用品牌分析工具（ABA）或第三方软件反查直接竞品的关键词作为投放参考</li><li>反查得到的词要到亚马逊前台搜索复核相关性</li><li>真正能拉排名的词是客户搜索词里实际出单的那些</li><li>调研的词先与已有投放去重，剔除重复低质词</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>反查同赛道高流量竞品的关键词</li><li>在前台搜索复核词与产品的贴合度</li><li>与既有投放词库去重，剔除无关或低质重复词</li><li>按搜索量级与相关性分层建立词库</li><li>持续从客户搜索词报表补充新出单词</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否兼顾流量与相关两个维度</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>词类是否经过前台验证</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否与既有投放去重</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否遗漏了真实出单词</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">反查</span><span class="tag">ABA</span><span class="tag">第三方</span><span class="tag">去重</span><span class="tag">前台验证</span><span class="tag">搜索词报告</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">大词、长尾词、核心词怎么归类、怎么选、怎么分组投放？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>词按流量高低分层分组；新品专注最精准核心词冲量，老品才在基础上拓长尾与捡漏，通过低出价策略 + 控制 ACoS，实现利润型增量。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>把关键词按流量降序排列，明显断层则切开分段</li><li>核心词采用“单词单组”精准匹配模式，集中预算抢占流量与排位</li><li>长尾词流量小、竞争小、转化好，适合以较低出价获取利润增量</li><li>新品期不宜过分押注长尾，先聚焦最可能转化的核心词</li><li>不同流量层的词分开预算，避免大词吃掉小词曝光</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>将选好的词按流量降序并观察断层</li><li>按断层划分流量分层（HT/LT）</li><li>新品期聚焦核心词做精准投放</li><li>老品对新词按分层测试，拓长尾与检漏</li><li>长尾/捡漏词采用低出价策略布局，确保各流量层预算严格隔离</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>流量断层是否切分</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>新品是否误投过多长尾</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>长尾词是否采取了低出价捡漏策略</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>不同流量层预算是否隔离</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">大词</span><span class="tag">长尾</span><span class="tag">核心词</span><span class="tag">HT</span><span class="tag">LT</span><span class="tag">流量分层</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">如何用广告词提升关键词的自然排名与自然流量？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>关键词排名主要与产品在该词下的出单速度相关；用核心大词高预算精准、搭配定投该词自然位靠前的竞品 ASIN 补相关，并校正广告位与自然位差异（还有动态调整广告位与自然位布局以实现利润最大化）。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>关键词排名主要与产品在该词下的出单相关，即该词下的历史出单权重与近期转化速度</li><li>除大词高预算精准外，可定投该词自然位靠前的 ASIN 补相关性</li><li>推词排名的前提是 Listing 已系统埋入该词，否则系统无法建立自然索引</li><li>优先集中资源冲击少数核心词的头部排位，稳定后再横向拓展其他长尾词</li><li>广告位高于自然位时会截流自然流量导致自然单减少，需综合核算整体投入产出比</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>确定要冲守的自然词位，listing 先埋入该词</li><li>对目标核心词开启高预算精准匹配，拉升该词的出单权重</li><li>定投该词自然位靠前的相关竞品补充相关</li><li>以 7 天为周期监控并对比广告位与自然位的排位变化</li><li>排名稳定后逐步降低广告出价，让自然位反超广告位，降低广告依赖</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否只有广告出单而自然没起来</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>listing 是否埋了要冲的词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>广告位与自然位是否对比过</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否集中资源在少数核心词而非分散</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">自然排名</span><span class="tag">卡位</span><span class="tag">自然位</span><span class="tag">广告位</span><span class="tag">相关性</span><span class="tag">自然流量</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">listing 该怎么埋词、后台关键词怎么填，才能让系统收录更多词？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>收录初期限制在 listing 埋词，后续靠点击/出单的搜索词补给；要打的词先埋进 listing 否则前台搜不到；后台词不重复、填有搜索量的词，避开敏感词。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>词最开始收录与 listing 相关，后期靠点击与出单的搜索词补给</li><li>要打/要冲的词要先埋入 listing，否则前台搜不到</li><li>后台 Search Terms 无需与标题/五点重复，且不建议填入搜索量极低的长尾词，避免浪费字符空间</li><li>敏感词被删除会同时破坏现有收录与自然排名</li><li>前期先埋精准且流量大的词，有历史数据后低迷再做补埋</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>明确要冲量的词并写入标题/五点/描述</li><li>后台关键词按不重复、高价值原则填写</li><li>排查敏感词，避免被降权/删词</li><li>通过广告多投与新增投放扩充收录词</li><li>定期提取搜索词报告中新冒出的高转化词，反向补充至 Listing 文案中</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>投放的核心大词是否都已埋入 listing</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>后台词是否无重复且排除低量词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否排查处理了敏感词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>改词后是否监控了排名与收录变化</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">埋词</span><span class="tag">收录</span><span class="tag">后台关键词</span><span class="tag">敏感词</span><span class="tag">search term</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">05</span>
+<div class="method-q">关键词 CPC 高、预算有限、大词红海烧不动时，资源怎么分、测试节奏怎么把握？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>以产品实际表现分配资源：表现好的词倾斜预算，表现差减少；红海大词可用低出价起步再逐步抬高；整体按 7 天周期节奏测试与迭代。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>预算以产品真实表现导出，不按感受平均分配</li><li>大词只点不出单先低出价起步，再慢慢抬到有曝光</li><li>用客单价与转化率倒算理论出单点击数判断预算是否够</li><li>高点击不出单的词先调整再取舍</li><li>优先将预算倾斜至性价比最高的核心词，稳定后再横向拓展；随着产品权重积累，高产出词的实际 CPC 扣费会逐渐回落</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>筛选高产出、高转化的优质投放词，并对其进行标记</li><li>把预算倾斜到出单达标的投放</li><li>红海大词先低出价起步拉通曝光</li><li>用理论出单点击数对比预算判断加/减</li><li>遇到高点击不出单的词，先降低出价控制损耗，再优化Listing或考虑换词/否词</li><li>按 7 天周期回补进新词测试</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>预算是否匹配理论出单点击数</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>大词红海是否低出价起步而非硬怼</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>预算是否按表现而非平均分配</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>新词是否按周期节奏在测试</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">出价</span><span class="tag">预算</span><span class="tag">理论出单数</span><span class="tag">高点击不出单</span><span class="tag">7 天周期</span><span class="tag">红海</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="ASIN 投放与关联流量" id="asin_traffic">
+<div class="topic-head">
+<span class="topic-ico" style="background:#4c4a6e"><i class="fa-solid fa-link"></i></span>
+<h2>ASIN 投放与关联流量</h2><span class="topic-cnt">5 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">当 SP 关键词竞价太贵或竞争激烈时，ASIN 投放是低成本的增量入口。</p>
+<ol><li>选同赛道、销量好的竞品 ASIN(TP)与长尾/低流量 ASIN(LR)分组投放。</li><li>变体之间可互投 ASIN，占据商品页广告位形成流量闭环。</li><li>自动/手动跑出的优质 ASIN 单独开活动、单独控预算再测试。</li><li>关键词没优势时优先布局 ASIN 流量(SD、SP-ASIN、SBV)。</li><li>ASIN 投放出单同样能拉产品销量与排名，属关联流量补充。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> SP 关键词贵且竞争大？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 是：加 ASIN 投放 / SD / SBV 分流</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 否：继续优化关键词</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>ASIN定投同赛道竞品时，曝光占比高但点击率偏低属正常现象，考核重心应放在实际转化率与绝对单量上</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">什么时候值得把 ASIN 投放/存在关联是纳入主力打法？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>关键词竞价太贵、竞争激烈、红海、淡季流量下滑、产品无核心词时，商品定位/存在关联是低成本增量的补充入口，与关键词投放搭配使用。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>词竞价贵、竞争激烈时优先布局商品定位/视频/展示广告分流</li><li>淡季类目整体流量下跌时要补流量，可以依托关联流量与商品定位补充曝光缺口</li><li>针对无核心词的小众/长尾产品，利用商品定位补齐类目相关性，截流竞品受众</li><li>流量入口有限时，商品定位出单同样能拉销量与词排名</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>诊断当前流量瓶颈：评估是关键词CPC过高，还是搜索流量见顶</li><li>若关键词投放遇阻，切入商品定位投放（定投强关联竞品/互补品）</li><li>在淡季或流量下行期，提前部署关联流量防线以稳住单量</li><li>以7-14天为周期观察ACOS与转化率，决定是否继续追加预算</li><li>缺什么补什么、什么表现好补什么，持续倾斜至高转化的定投目标</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>词投放是否已接近成本边界</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>淡季流量是否已补足</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>商品定位对总量与转化的贡献是否有数据</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按目的（保量/保利润）分层决策</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">竞价贵</span><span class="tag">红海</span><span class="tag">淡季</span><span class="tag">流量下滑</span><span class="tag">关联流量</span><span class="tag">商品定位</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">商品定位投放应选哪些 ASIN、怎么分组？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>将同赛道高销量竞品（高流量组）与低流量相关 ASIN（捡漏组）隔离分组投放；多变体做好自我 ASIN 互投形成流量闭环；核心目标为多维截流竞品受众与强化类目、关键词关联权重</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>同赛道销量好竞品与低流量/长尾 ASIN 分开分组投放</li><li>多变体产品应以主推变体为核心，子变体间相互定投形成流量闭环</li><li>选出流量与销量最高的变体做主打，其余变体作为商品定位的补充防守对象</li><li>商品定投不仅抢占竞品详情页，更能基于目标 ASIN 的词权重，在搜索结果页实现跨位截流</li><li>只想蹭大卖流量可以低位出价贴投其详情页</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>筛选同赛道高销量/强关联竞品 ASIN，组建“高流量抢位组”</li><li>补充高相关性的长尾/低单量 ASIN，组建“低成本捡漏组”</li><li>针对多变体产品，确立主推变体并执行其余子变体互投策略</li><li>通过出价优化，在搜索结果页与详情页多维触达并截流目标竞品</li><li>以 7-14 天为周期分析各 ASIN 的 BSR 贡献与转化率，剔除低效目标并精简分组</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>高流量抢位组与低流量捡漏组是否分开</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>多变体是否已建立子 ASIN 互投闭环以防御竞品</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已明确流量与销量最高的主推变体</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在搜索页与详情页多维场景实现了有效截流</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按单 ASIN 粒度测数并评估了其对整体 BSR 的贡献</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">竞品 ASIN</span><span class="tag">多维截流</span><span class="tag">低流量 ASIN</span><span class="tag">变体互投</span><span class="tag">流量护城河</span><span class="tag">BSR 权重</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">商品定位的出价一开始定多少、后面怎么调？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>初测阶段用建议竞价起手，没曝光再逐步上调；跑出过出单的 ASIN 用相对高价，只想蹭流量的用低出价。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>商品定位推荐先用建议竞价起测</li><li>没有曝光再逐步往上加价</li><li>验证过能出单的 ASIN ，可适当提高出价放量</li><li>只蹭大卖流量时用低出价投</li><li>没曝光先低出价起步，别一把定到高位</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>按目的（初测/已出单）定初始出价</li><li>初测用建议竞价看流量</li><li>无曝光逐步上调出价</li><li>有出单记录的 ASIN 提高竞价</li><li>持续看曝光/CTR 判断微调</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否从建议出价起测</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按出单记录差异调价</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>蹭流量是否用了低出价</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>无曝光是否已逐步加价</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">建议竞价</span><span class="tag">起测</span><span class="tag">加价 bid</span><span class="tag">已出单</span><span class="tag">蹭流量</span><span class="tag">低出价</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">自动广告跑出的 ASIN 想单独投产，一堆 ASIN 塞一组，怎么分测、防互相抢流量、控预算？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>自动出单的 ASIN 有偶然性，需单独测才知好坏；每组尽量少放，每组尽量只放单个 ASIN，最具可比性；只有投同一个 ASIN 的不同广告活动才会互相争夺流量。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>自动跑出的 ASIN 出单具有偶然性，需单独测试以判断优劣。</li><li>将多个 ASIN 放在同一组无法准确判断各自的贡献。</li><li>不同广告活动若投放的不是同一个 ASIN，几乎不会互相抢夺流量。</li><li>只有同一 ASIN 在多个活动中重复投放，才会产生内部竞争。</li><li>当单一 ASIN 花费过多时，应先看 ACoS 是否可接受，再决定是否控制预算。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>将自动广告跑出的 ASIN 单独提取出来进行独立测试。</li><li>每个广告组尽量只投放单个 ASIN，以确保数据纯净。</li><li>通过分组方式对比测试不同来源的 ASIN 表现。</li><li>检查并确认没有多个广告活动同时投放同一 ASIN 而互相抢夺流量。</li><li>针对花费较大的 ASIN，先核算 ACoS，再决定是否限制预算。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否将单个 ASIN 分开独立测试？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>各分组之间 ASIN 的来源是否清晰？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否存在同一 ASIN 重复投放导致互相抢夺流量的情况？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>针对大花费 ASIN，是否做到先评估 ACoS 再控制预算？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">自动出单</span><span class="tag">单个 ASIN</span><span class="tag">分组测试</span><span class="tag">互相抢流量</span><span class="tag">对比</span><span class="tag">ACoS</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">05</span>
+<div class="method-q">展示型/覆盖自然订单的 ASIN 投放到底带来多少效益、怎么判断这类广告好坏？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>ASIN/展示投放既能拉动销量，也能提升关键词相关性；覆盖自然订单的投放要通过对比TACoS 与总销售额来评估，并按各投放目标的出单转化率排序进行取舍。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>商品投放（ASIN投放）出单对关键词排名与销量有正面帮助。</li><li>针对覆盖自然订单的展示型投放，通过对比总 ACoS 与总销售额来拆分效益。</li><li>以各投放目标的出单转化率与占比作为优化依据。</li><li>评估数据好坏应看实际表现，而非单纯看投放数量。</li><li>对出单位置（搜索页/详情页）做归因区分。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>针对覆盖自然订单的投放类型，对比总 ACoS 与总销售额。</li><li>逐一核算每个 ASIN 的出单转化率与花费占比，排列优先级。</li><li>对 ASIN 出单与关键词出单进行归因拆分。</li><li>结合 ACoS 表现判断增加或减少投入。</li><li>针对关联出单好的投放，把资源向该广告类型追加。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否通过总 ACoS 拆分出了 ASIN 投放效益？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>各 ASIN 的出单转化率是否单独核算并排序？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否根据广告目的（保量/保利润）进行评估？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>归因时是否分清了付费流量与自然流量？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否持续观察并优化迭代？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">VCPM</span><span class="tag">总 ACoS</span><span class="tag">总销售额</span><span class="tag">转化率</span><span class="tag">出单 ASIN</span><span class="tag">归因</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="视频与品牌广告" id="video_brand">
+<div class="topic-head">
+<span class="topic-ico" style="background:#62504f"><i class="fa-solid fa-video"></i></span>
+<h2>视频与品牌广告</h2><span class="topic-cnt">2 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">SBV 转化好且对排名有帮助，是关键词之外的优质补充流量。</p>
+<ol><li>新品也建议开视频广告，与关键词广告配合。</li><li>SBV 出单同样助力关键词自然排名(帮助小于 SP，但有用)。</li><li>SB 品牌广告需注意：关键词广泛需加修饰符 +。</li><li>SD 展示广告是锦上添花，需 SP/SB 数据做基础，无曝光先查投放目标与竞价。</li><li>SBV/SB/SD 与 SP 投放位置不同，同一词可重复投放不抢流量。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 目标是提量还是控 ACoS？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 提量：加 SBV/SB/SD 多种广告类型</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 控 ACoS：主攻精准词 + 否词</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>视频出单不会稀释词排名，而是通过积累搜索词权重与整体销量，视频广告出单好就加大投入</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">视频/品牌/展示等非关键词广告出单，是否有助于关键词自然排名？中前期预算怎么分？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>影响关键词自然排名的核心是点击率与出单量，其中 SP 广告作用最强；SBV/SB/SD 在该词下出单同样有帮助。中前期以“单词单组”的 SP 广告为主进行控制，其余类型作为补充流量入口。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>自然排名提升依靠关键词的点击率与出单量，且不限于广告类型。</li><li>SP 广告定向最精准，中前期优先采用“单词单组”进行控制。</li><li>SBV/SB 出单同样有助于提升排名，因其展示位置与 SP 不同，可补充同一关键词的流量。</li><li>视频广告（SBV）效果好则加预算放大，效果差则收缩。</li><li>SD 广告属于锦上添花，需建立在 SP/SB 已有数据基础之上。</li><li>SB 广泛匹配需添加修饰符（加号）。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>中前期优先采用“单词单组”进行 SP 精准投放，集中控制关键词以拉升自然排名。</li><li>同步布局 SBV/SB/SD，作为补充流量入口。</li><li>视频广告效果好则增加预算，效果差则收缩。</li><li>按转化率高低调整各关键词的广告位置。</li><li>非标品旺季可尝试 SD 浏览再营销（回溯 14 天）。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>SP 广告是否做到了“单词单组”？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>SB 广泛匹配是否添加了修饰符（加号）？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>视频广告预算是否随效果增减？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>SD 投放是否建立在 SP/SB 的数据基础之上？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否利用不同广告类型补充同一关键词的流量？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">视频广告</span><span class="tag">SBV</span><span class="tag">品牌广告</span><span class="tag">自然排名</span><span class="tag">SD</span><span class="tag">单词单组</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">视频/品牌广告突然恶化（ACoS 飙升或曝光骤降），如何处置？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>面对广告突变，算法与市场波动不可干预，先核查 Listing 前端状态与竞品动作，排除自身因素后，用预算先止损，快速补新投放稀释高 ACoS；同时排查类目 CPC 变化与违规限流。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>算法与市场波动不可控，接受后用策略对冲</li><li>ACoS 突然飙高先用预算干预止损</li><li>快速补充新投放，用新流量稀释高 ACoS</li><li>曝光骤降需优先排查是否丢失购物车、类目 CPC 与建议竞价变化或竞品大促截流</li><li>排查是否有违规操作导致限流，同步核查 Listing 健康度（差评/断货）</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>排查 Listing 前端状态：确认是否丢购物车、提价、断货或突增差评</li><li>对比核心竞品：核查竞品是否大幅降价或设置高 coupon 导致流量被截</li><li>对比类目 CPC 与系统建议竞价，判断是否受大盘流量成本上涨波及</li><li>对高 ACoS 组先用预算收缩干预</li><li>开启或补充高转化新投放，用新流量数据稀释恶化的 ACoS</li><li>采取干预措施后，以 7 天为周期观察趋势再决定下一步调整</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否排除了自身操作因素</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>类目 CPC 是否变高</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>预算是否及时干预</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>新投放是否在补</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否等到 7 天周期再下判断</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">突然变差</span><span class="tag">ACoS 飙升</span><span class="tag">曝光减少</span><span class="tag">算法</span><span class="tag">预算干预</span><span class="tag">稀释</span></div>
+</div>
+</article>
+</div>
+</section>
+<section class="topic hidden" data-title="老品维护与稳定期" id="mature">
+<div class="topic-head">
+<span class="topic-ico" style="background:#3a5a4c"><i class="fa-solid fa-seedling"></i></span>
+<h2>老品维护与稳定期</h2><span class="topic-cnt">6 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">老品看 7 天数据，目标是稳定出单、拓量、提自然单、降 ACoS。</p>
+<ol><li>以 7 天为周期分析，不要天天改价。</li><li>稳定出单后拓词拓流量：按出单词向下深挖新词、增加 ASIN 投放与广告类型。</li><li>提升自然单：SP 大词卡位拉升自然位，或补长尾盈利流量。</li><li>降 ACoS：先砍高点击不出单的无效花费，再调整出单词。</li><li>判定产品阶段以“是否跨越新品期且能维持 7 天稳定出单”为准，而不是上架时长。</li><li>单量下滑应优先排查市场大盘、竞品动作与 Listing 健康度（差评等），最后才调整广告。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 7 天能否稳定出单？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 能：老品策略，拓词拓流量</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 不能：退回新品打法重新推</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>老品别“为了调整而调整”，先定义目标：保量、拓量还是保利润。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">老品已有自然出单，是否还有必要做广告？稳定期/翻量期的目标怎么定？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>老品打广告的核心在于防御竞品截流与维持词权重。先明确目标（保量/拓量/保利润），倒算盈亏平衡 ACoS，再匹配相应的出价与预算策略</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>老品广告并非可选项，而是防御竞品抢占份额、维持自然排名权重的必要手段</li><li>优化前必须先定义核心目标：保单量、拓流量还是保利润</li><li>拓量前需倒算盈亏平衡 ACoS、CPC，以此划定出价上限与预算池</li><li>建立广告单与自然单的动态平衡预期，避免陷入广告依赖症</li><li>以 7-14 天为周期分析，不频繁天天改价</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>诊断单量结构，明确当前阶段的核心目标（保量/拓量/保利润）</li><li>结合客单价与毛利率，计算理论 ACoS 与盈亏平衡点</li><li>按目标选策略：拓量走扩词与多类型投放，保利润走精简否词与低出价捡漏、砍无效花费</li><li>执行后以 7 天为周期复盘核心指标，动态微调出价与预算</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>阶段目标是否明确（保量/拓量/保利润）</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>盈亏平衡 ACoS 是否已测算并指导出价</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>投放策略是否与当前目标严格匹配</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>数据复盘是否遵循 7 天周期，避免了主观日调</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">老品防御</span><span class="tag">放量期</span><span class="tag">自然单占比</span><span class="tag">盈亏平衡 ACoS</span><span class="tag">7天周期</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">老品排名下滑或广告表现剧烈波动，如何归因与应对？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>下滑先排查市场/竞品/差评/季节性等外部因素再动广告；产品阶段用能否稳定出单与大词转化率曲线判断，而非上架时长。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>单量下滑先查市场、竞品、差评，再动广告</li><li>季节性淡季要保本为旺季蓄力</li><li>产品阶段看大词转化率曲线与是否稳定出单</li><li>出单词需在前期建立保护机制，避免排名或单量波动后再被动补救</li><li>稳定期别为了调整而调整</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>排查外部因素：市场/竞品/差评/季节性</li><li>确认是否属于大促前观望等周期因素</li><li>淡季保本：高点击不出单词优化出价或否词、提高主出单词出价、布局竞品关联流量</li><li>波动过大时按新品节奏重新激活出单词</li><li>以 7 天为单位观察整体趋势</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先排除了外部因素</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否误动了前期出单词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>淡季是否在做保本布局</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否以 7 天趋势而非单日判断</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">排名下滑</span><span class="tag">淡季</span><span class="tag">保本</span><span class="tag">出单词</span><span class="tag">剧烈波动</span><span class="tag">转化率曲线</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">老品流量与转化变差，如何拓量？拓词的流程与流量结构怎么设计？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>未稳定出单先用单词单组固定竞价集中烧；已稳定出单用出单大词拓词，按 HT/LT 流量分组投放。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>先确认是否稳定出单，再决定打法</li><li>未稳定：单词单组固定竞价、建议竞价高出价，每天 3-5 组集中投</li><li>已稳定：用过往出单大词到第三方工具拓词</li><li>拓出的词按 HT/LT 流量高低分组投放</li><li>可加投商品定位与其他广告类型补流量</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>检查产品是否每天稳定出单</li><li>未稳定开单词单组固定竞价，高出价投 3-5 组</li><li>已稳定用出单大词第三方工具拓词</li><li>按 HT/LT 分组新建投放</li><li>监控数据迭代，避免频繁调价</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先确认了出单稳定性</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>拓词是否基于真实出单大词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按 HT/LT 分组</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>竞价与预算是否与组匹配</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">老品推广</span><span class="tag">流量转化差</span><span class="tag">拓词</span><span class="tag">第三方软件</span><span class="tag">HT/LT</span><span class="tag">单词单组</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">稳定期想优化 listing 或降低广告费，如何不伤既有排名？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>稳定期避免对 listing 大改，确有空间要循序渐进；已上首页的关键词通过只开首页与卡位控制成本。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>listing 稳定后不建议大改，易掉排名与单量</li><li>确有优化空间就一点点循序渐进地改</li><li>已到首页的关键词可尝试只开首页并卡位</li><li>降本靠结构调整而非直接大幅降出价</li><li>改动后密切监控排名与出单变化</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>评估优化必要性与风险</li><li>若必要，分次小步修改而非一次性大改</li><li>对已上首页的关键词做卡位操作</li><li>观察 7 天排名与出单变化，决定继续或回滚</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了一次性大改</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>修改是否分步小步进行</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>首页关键词是否做了卡位</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>改动后的排名与单量是否被监控</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">稳定</span><span class="tag">大改</span><span class="tag">排名下跌</span><span class="tag">循序渐进</span><span class="tag">首页</span><span class="tag">卡位</span><span class="tag">降低广告费</span></div>
+</div>
+</article>
+<article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">05</span>
+<div class="method-q">曾经表现好的老品广告因疏于管理而下滑，如何重新推起？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>市场有时效性，旧词旧 ASIN 可能已不匹配当前市场；重新做市场调研、审视投放结构是第一步。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>广告长期不管表现变差属正常</li><li>市场有时效性，过往有效的词/ASIN 可能失效</li><li>重新做关键词与竞品 ASIN 调研</li><li>审视并重构现有投放结构</li><li>按新品节奏重新激活，不能指望自动恢复</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>复盘历史好数据对应的时间窗口与投放组合</li><li>重新做市场调研，更新词与竞品 ASIN 清单</li><li>重构投放结构与预算分配</li><li>以新品激活节奏重新拉流量</li><li>以 7 天周期复盘再迭代</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否重新做了市场调研</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>旧出单词是否验证仍有效</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>投放结构是否更新</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否给了足够关注与预算</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">表现下滑</span><span class="tag">疏于管理</span><span class="tag">市场时效性</span><span class="tag">重新调研</span><span class="tag">重新审视</span></div>
+</div>
+</article>
+<article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">06</span>
+<div class="method-q">老品自然排名靠前，但订单高度依赖广告、自然单占比低，如何调整？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>自然单占比低多因广告位（如首页顶部）截流了自然位曝光。调整需分层施治：对自然位已居首页的词逐步降低广告位溢价以释放自然流；对自然位在次页的潜力词，则通过广告增量冲刺自然前排，最终实现广告与自然流量的健康解耦。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>首页顶部广告位常挤压自然位点击空间，导致广告单远大于自然单</li><li>需通过“搜索词表现报告”与业务报告交叉比对，精准定位自然单的真实来源词</li><li>分层施治：自然位已靠前的词降广告出价让位自然流；自然位在次页的词补广告增量冲排</li><li>盲目收缩广告会连带牺牲总销量与整体权重，需谨慎权衡盈亏平衡点</li><li>出价与预算调整须遵循“渐进式卡位”原则，严禁直接关停或断崖式降价</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>调取“搜索词表现报告”与业务报告，盘点自然出单的真实来源词</li><li>借助第三方工具反查 ASIN，导出这些核心词的当前自然排位</li><li>词库分层：将词分为“自然位已居首页（Top 3）”与“自然位在次页及以后”</li><li>对“自然位靠前”的词逐步降低广告位溢价，让自然位反超以承接流量；对“自然位靠后”的潜力词集中预算冲刺前排</li><li>以 7-14 天为周期微调出价卡位，监控总单量与自然单占比的动态平衡</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已精准定位自然单的真实来源词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否对关键词按“自然位靠前”与“自然位靠后”进行了分层处理</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>对自然位已靠前的词，是否执行了渐进降出价以释放自然流量</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>对自然位靠后的潜力词，是否给予了精准的广告增量支持</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>整体预算与出价调整是否循序渐进，未引发总销量大幅下滑</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">自然单占比</span><span class="tag">流量解耦</span><span class="tag">搜索词表现报告</span><span class="tag">分层施治</span><span class="tag">渐进卡位</span><span class="tag">广告截流</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="断货与恢复推广" id="stockout">
+<div class="topic-head">
+<span class="topic-ico" style="background:#6e5c40"><i class="fa-solid fa-box-open"></i></span>
+<h2>断货与恢复推广</h2><span class="topic-cnt">3 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">断货会掉质量得分，重启要按新品节奏快速拉流量。</p>
+<ol><li>拉断货前 30 天客户搜索词报告，找出稳定出单的关键词。</li><li>用 SKAG 精准投放 3-5 个高频出单词，竞价给到较高位。</li><li>老广告可先抬价 50% + 加预算测试；无曝光则转新品打法。</li><li>可新开一个自动广告，出价建议竞价上浮 35-50% 拉流量。</li><li>断货期间不建议直接暂停广告：对于短暂断货的情况，下调预算即可，库存恢复后将预算调回原位</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 断货时间多长？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 短：降预算保利润，到货调回</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 长：按新品/断货重开流程拉流量</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>断货后转化差是正常的，目标是先用流量激活广告再谈 ACoS。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">产品断货后，广告质量分随出单信息缺失而下滑，重新开启后曝光、点击、转化全面下降，如何恢复广告表现？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>断货期间出单信息缺失导致质量得分下降，需要以更高竞价才能换回同等曝光，恢复期目标先是激活出单与排名，之后再谈 ACoS。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>断货时间越长，老广告二次激活越难，需先评估是恢复老广告还是转新品打法。</li><li>恢复初期转化偏差属正常，先保出单和流量，再逐步优化 ACoS。</li><li>重启不靠盲目调价，而要以断货前的稳定出单数据为锚点。</li><li>老广告抬价加预算后仍无曝光无点击，及时切换推新品思路，避免继续消耗。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>拉取断货前 30 天的客户搜索词与广告活动数据，找出稳定出单的关键词或 ASIN 投放。</li><li>对老广告活动提高出价（参考上浮 50%）并同步拉高预算观察效果。</li><li>新增一个自动广告，出价设为建议出价上浮 35%-50%，快速拉曝光。</li><li>无曝光无点击且断货时间较长时，转用单词单组按新品节奏重新推广。</li><li>有条件时配合站外 Deal 与优惠券加速激活。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已用断货前 30 天出单数据选词，而非凭印象投放？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否给了高于原出价的竞价来弥补质量分损失？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在老广告无曝光时及时转入新品打法，而非继续死磕？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先接受了激活期的低转化，没有过早苛责 ACoS？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否同时新增了自动广告拓宽流量入口？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">质量得分</span><span class="tag">断货前30天</span><span class="tag">建议出价上浮</span><span class="tag">提价50%</span><span class="tag">自动广告</span><span class="tag">二次激活</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">断货期间广告是关是留，到货后如何无缝衔接投放，避免权重与历史数据流失？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>短暂断货应以降预算替代关停以保权重，到货后调回即可；断货过长则需按重启流程处理，避免硬性关停丢历史数据。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>广告质量分与出单信息挂钩，断货即损失历史出单权重。</li><li>短暂断货用降低预算代替直接关停，保留广告结构与历史数据。</li><li>补货衔接的目标是“快速激活”，需适度上调竞价抢占曝光，缩短算法冷启动期</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>判断断货周期长短，短断货将广告预算调低维持存在。</li><li>到货后第一时间把预算与竞价调回，恢复常规投放。</li><li>长时间断货的老广告按重启流程评估二次激活可行性。</li><li>跟卖补货场景确认购物车归属与广告账户一致，避免广告无曝光。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了断货期直接关停广告导致权重丢失？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在到货后第一时间恢复了预算与竞价？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否确认了购物车归属不影响广告投放？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否保留了可复用历史出单数据的原广告结构？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">降预算</span><span class="tag">到货调回</span><span class="tag">购物车</span><span class="tag">断货期</span><span class="tag">历史权重</span><span class="tag">补货</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">断货后如何选词、用什么广告结构，才能把排名和销量快速拉回？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>用断货前稳定出单的关键词做单词单组精准投放并给高竞价抢占位置，再逐词扩展，是快速拉回排名的通用路径。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>选词锚定历史出单数据，并参考第三方工具的流量大小。</li><li>单词单组便于控预算、逐词评估与按表现扩展。</li><li>先小范围测试出单，稳定后再放大到更多词。</li><li>结构上以精准投放为主，稳定后逐步扩词拓流量。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>用断货前 30 天客户搜索词报表找出经常出单的关键词。</li><li>通过品牌分析或找词软件核实这些词的流量与搜索量。</li><li>采用单词单组精准匹配，竞价给到较高位。</li><li>先投放 3-5 个精准词，视表现分配预算，再扩展更多词。</li><li>按出单表现逐步把更多词拉成单词单组活动。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否用工具核对了所选词的流量情况？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否采用单词单组便于精准控制与扩展？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先小批量测试再逐词扩展？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按出单表现动态分配预算？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">单词单组</span><span class="tag">精准匹配</span><span class="tag">高竞价</span><span class="tag">出单词</span><span class="tag">客户搜索词</span><span class="tag">品牌分析</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="淡旺季与大促" id="season">
+<div class="topic-head">
+<span class="topic-ico" style="background:#3d5a6e"><i class="fa-solid fa-calendar-days"></i></span>
+<h2>淡旺季与大促</h2><span class="topic-cnt">4 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">旺季全力冲量，淡季保本稳排名，大促需分清是“货足型”还是“陪跑型”。</p>
+<ol><li>旺季：加大广告预算，拉曝光冲销量与排名。</li><li>淡季：将 ACoS 控制在盈亏平衡点以内，提高主出单词竞价+布局关联流量。</li><li>大促(Prime/黑五/LD)：库存充足且有 Deal 可加投，陪跑型则不要盲目增加广告预算。</li><li>秒杀期间：单独设立预算，主打出单词的 TOS 曝光位。</li><li>大促前转化率下滑是用户观望所致，属正常现象，可适时收缩预算控制花费。</li><li>清库存：配合秒杀/降价与广告曝光，避免使用高竞价硬冲。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 当前是旺季还是淡季？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 旺季：扩预算冲量</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 淡季：保本、保出单词、布局关联</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>大促期间不直接关闭广告，通过调整预算控制即可。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">进入淡季后流量与转化双降、ACoS 上升，广告该如何调整才能避免亏损并稳住排名？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>旺季要冲量扩预算，淡季以保本为目标，把资源集中在主出单词并布局关联流量，不盲目拓词。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>旺季加大广告预算拉曝光冲销量与排名，淡季目标转为保本。</li><li>淡季市场流量与转化双降是普遍现象，销量下滑与 ACoS 上升属正常。</li><li>淡季守住主出单词出价，用关联流量补充订单。</li><li>淡季不适合大面积拓展关键词，可多开自动广告增加互补与替代匹配的出价。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>识别当前是旺季还是淡季，明确目标是冲量还是保本。</li><li>淡季把 ACoS 控制在盈亏平衡之下即可，不追求利润最大化。</li><li>提高主出单词出价，围绕竞品布局 ASIN、类目、展示型关联流量。</li><li>多开自动广告，提高替代与互补匹配方式的出价。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已明确当前阶段目标是冲量还是保本？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在淡季还在盲目扩词加预算？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否保住了主出单词的投放力度？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否布局了关联流量与自动广告补充订单？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">淡季</span><span class="tag">旺季</span><span class="tag">保本</span><span class="tag">流量下降</span><span class="tag">转化率下降</span><span class="tag">主出单词</span><span class="tag">关联流量</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">大促或秒杀前销量与转化下滑、用户观望，广告还要不要投、怎么控制？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>大促前转化下滑多为用户提前加购观望所致，属正常现象；按预算收缩止损即可，不宜盲目追加，也不宜直接关停丢历史权重。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>大促前买家倾向加购观望，转化率下滑是平台普遍现象。</li><li>大促别关广告以免丢失历史权重，用预算控制代替开关。</li><li>大促前及时止损收缩预算，而非继续加大无效投入。</li><li>秒杀期间配合更多广告投放对销量有正面影响。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>大促前观察转化下滑是否伴随观望行为，识别为正常波动。</li><li>用预算而非开关控制大促前广告花费，保留历史权重。</li><li>确认冲排名目的时，单独给大促配预算主打曝光与出单词顶部位置。</li><li>大促后复盘销量与 ACoS 变化，判断是否回归常规投放。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否把大促前转化下滑误判为广告问题而乱调？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否用预算控制而非关停广告？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在大促前盲目追加广告预算？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否根据目标（冲排名或保利润）决定大促加投与否？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">大促</span><span class="tag">秒杀</span><span class="tag">观望</span><span class="tag">加购</span><span class="tag">预算收缩</span><span class="tag">会员日</span><span class="tag">黑五</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">季节性产品在旺季末期或淡季库存积压，降价仍滞销，如何尽快清库存回笼资金？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>清库存靠降价、广告曝光、平台清库渠道与站外组合推进，快速回笼资金优先于利润率。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>旺季末期流量骤减，清库要以快速回笼资金为长线考虑。</li><li>降价虽压利润，但带来价格优势使转化上升，ACoS 可做得更低。</li><li>广告加大曝光需围绕出单词提价与关联流量投放。</li><li>可组合平台清库渠道与站外 deal 共同推进。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>对季节性产品在旺季末期果断降价制造价格优势。</li><li>广告侧提升出单词出价、加大曝光，配合降价加速转化。</li><li>报名平台 Outlet Deal、联盟促销等官方清库渠道。</li><li>必要时做站外 deal 加速清理。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否已形成降价与广告的组合，而非单靠降价？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否同时尝试了平台官方清库渠道？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否以回笼资金为优先级、避免惜售积压？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否衡量了降价后转化与 ACoS 变化而非只看利润率？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">清库存</span><span class="tag">降价</span><span class="tag">Outlet Deal</span><span class="tag">站外</span><span class="tag">旺季末期</span><span class="tag">回笼资金</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">大促期间销量突然下滑或广告表现变差，如何判断调整而不盲目折腾？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>销量突降先分算关键词与 ASIN 两个维度的出单转化率，再集中资源打表现好的流量，不靠反复调价打折硬撑。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>大促期间销量下滑多为市场波动或观望，先识别原因再动手。</li><li>分别计算关键词与 ASIN 的出单转化率，找出强势流量。</li><li>把预算与投放向表现好的流量维度倾斜。</li><li>对反复调价、乱打折等动作持谨慎态度，避免越调越差。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>分别计算关键词投放与 ASIN 投放的出单转化率。</li><li>转化好的维度优先布局，如 ASIN 投放、商品定位、展示型广告。</li><li>针对表现差的广告收缩预算，把资源转向出单入口。</li><li>持续观察市场与竞品动作，识别季节性回落或大促观望。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先分算关键词与 ASIN 转化再决策？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否向表现好的流量维度集中预算？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免了在市场波动时反复瞎调广告？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否结合市场与竞品信息判断下滑原因？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">销量下滑</span><span class="tag">ASIN转化</span><span class="tag">出单词</span><span class="tag">展示型广告</span><span class="tag">市场波动</span><span class="tag">竞品</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="数据报表与指标分析" id="report">
+<div class="topic-head">
+<span class="topic-ico" style="background:#56606e"><i class="fa-solid fa-chart-line"></i></span>
+<h2>数据报表与指标分析</h2><span class="topic-cnt">5 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">会看数据才知道改哪：曝光/点击/转化三板斧，对照广告 vs 自然转化率。</p>
+<ol><li>业务报告=整体转化；如果广告转化率远低于它一半以上 → 投放精准性问题。</li><li>曝光：看词流量、竞价、类目趋势；点击率低 → 看相关性、广告位、主图。</li><li>转化率低 → 查词精准性 + listing/review/价格。</li><li>用 7 天批量操作报表算各词/各 ASIN 的出单转化率。</li><li>归因：SP 7 天、SB/SD 14 天，数据有延迟，别当天急调。</li><li>高点击不出单阈值 = 平均出单点击数的 1.5-2 倍。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 先看哪个指标？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 无曝光：查 bid/词流量</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 无点击：查相关性/位置/主图</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 无转化：查词精准/listing</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>对比“广告转化率 vs 自然转化率”，差距 30%+ 基本是投放不精准。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">广告出问题时，如何快速定位是曝光、点击还是转化环节，并找到对应解法？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>按漏斗定位：无曝光查竞价与词流量，无点击查相关性、广告位与主图，无转化查词精准性与页面，再沿指标公式逆向拆解定位。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>不是每次都要看曝光、点击、转化三点，要先锁定出问题的指标，再沿公式逆向拆解。</li><li>曝光不足看词的流量、竞价与类目趋势。</li><li>曝光成倍增加导致点击率下降属正常，重点看销售额与 ACoS。</li><li>有曝光有点击但无转化，优先核查投放词精准性与页面转化因素。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>确定当前最异常的指标，并找出它的计算公式。</li><li>无曝光时检查出价、词流量与类目趋势，必要时高竞价配合优惠券打开曝光。</li><li>无点击或点击率低时检查投放相关性、广告位与主图前端表现。</li><li>无转化时核查词精准性、listing、评分与价格，并对比自然转化率判断。</li><li>数据量小时拉长观察周期（如 14 天）再判断，避免误判。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先锁定异常指标再找对应环节，而非三板斧乱套？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否用公式逆向拆解定位到具体因子？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在数据量小时拉长观察周期？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否区分了词的问题与页面转化的问题？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">曝光</span><span class="tag">点击率</span><span class="tag">转化率</span><span class="tag">无曝光</span><span class="tag">无点击</span><span class="tag">逆向拆解</span><span class="tag">广告位</span><span class="tag">主图</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">广告出单低于自然出单、ACoS 高企，如何判断是投放精准性问题还是产品与页面问题？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>以业务报告整体转化率为基准，广告转化率明显偏低（与自然转化相差一倍开外）即为投放不精准；两者都低则指向 listing 与产品竞争力。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>业务报告转化率是整体转化（含自然与广告），广告转化率只含广告流量。</li><li>广告转化率远低于自然转化率（相差一倍开外）指向投放精准性问题。</li><li>两者都低时更多指向 listing、评分、价格等页面问题。</li><li>广告转化率高于自然转化率说明广告大有可为，可加大投放。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>下载业务报告得到整体转化率，同时计算广告出单转化率。</li><li>对比两者差距，判断是否在一倍开外或明显悬殊。</li><li>差距大时逐词验证投放词、ASIN 的相关性及搜索结果页竞争力。</li><li>差距小时排查价格、评分、差评与 listing 优化空间。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否分别计算了广告与自然转化率并做了对比？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否将大差距归结到投放精准性并去前台验证？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在小差距时把重心放回 listing 与产品？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否避免用业务报告数据直接否定广告本身？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">业务报告</span><span class="tag">自然转化率</span><span class="tag">广告转化率</span><span class="tag">相差一倍</span><span class="tag">投放精准性</span><span class="tag">验证</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">ACoS、TACoS、CPC 怎么算、怎么用？业务报告、广告报表、会话与点击等数据口径如何区分？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>ACoS 为广告花费与广告销售额之比，CPC 为花费与点击之比，TACoS 为广告花费与总销售额之比，用于观察长期增长；业务报告是整体数据，广告报表仅广告数据，会话与广告点击相互独立。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>ACoS 衡量广告支出与其产生销售之比，TACoS 衡量广告支出与整体销售之比。</li><li>业务报告含自然与广告的整体数据，广告数据需下载对应广告报表。</li><li>业务报告中的会话量是包含自然与广告的总流量，不能直接与广告报告的点击量做简单对比或相减；需结合‘广告销售额/总销售额’的比例来倒推自然占比。</li><li>转化率按订单数量计算，而非按销售件数。</li><li>数据存在延迟，统计与归因周期要留足，勿当天急调。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>统计多活动 ACoS、CPC 时取总量之比，避免简单平均。</li><li>用业务报告看整体转化，用广告报表看广告维度数据。</li><li>区分会话与广告点击，避免混淆自然与广告流量占比。</li><li>按订单数量口径计算转化率，并结合延迟周期观察。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否清楚 ACoS、CPC、TACoS 各自的分子分母？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否混淆了业务报告与广告报表的数据口径？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否把自然会话误当成广告流量分析？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在数据延迟期内过早下结论调整广告？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">ACoS</span><span class="tag">CPC</span><span class="tag">TACoS</span><span class="tag">业务报告</span><span class="tag">广告报表</span><span class="tag">会话</span><span class="tag">归因</span><span class="tag">数据延迟</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">面对搜索词报表数据多、出单词分散、无效点击多，如何筛选出值得投放的词和应当否定的词？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>分析服务于目的：找可投词或找需否词要用数据透视筛选；数据量少时拉长周期并用二轮匹配做漏斗测试，用词根否定隔绝大量无效搜索词。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>分析前先明确目标，是挖可投的新词还是找需否的无效词。</li><li>出单词分散且数据少时，拉长时间周期降低偶然性。</li><li>高点击不出单要先区分是关键词层面还是客户搜索词层面，再分别处理。</li><li>对大量无效客户搜索词归纳共同词根做否定，效率高于逐词处理。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>导出客户搜索词报表，后台可追溯 60 天，必要时设置定期留存数据。</li><li>用数据透视表按花费、出单、转化筛选出可投词与需否词。</li><li>对分散出单词拉长周期后拉出，用广泛或词组匹配二次测试做漏斗筛选。</li><li>对大量无出单客户搜索词归纳共同词根，做词根否定。</li><li>对个别高花费不出单投放降价或否定处理。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先明确了报表分析的目的？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在数据量小时拉长观察周期再决策？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否用词根归纳而非逐词处理海量无效搜索词？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否区分了关键词层面与客户搜索词层面的处理方式？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">客户搜索词报表</span><span class="tag">数据透视</span><span class="tag">否词</span><span class="tag">词根</span><span class="tag">高点击不出单</span><span class="tag">二层漏斗</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">05</span>
+<div class="method-q">ACoS 长期降不下来，广告怎么加价都没效果，如何系统诊断并优化？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>先判断有效投放是否充足：有效投放不足时先新增高预期转化投放而非硬降 ACoS，充足时才通过降竞价、控预算与否词来压低 ACoS。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>ACoS 高企先排查有效投放是否充足。</li><li>有效投放不足时，优先新增转化词的再投放、转化 ASIN 的展示型广告、低竞争视频广告等。</li><li>有效投放充足时，通过降低竞价、优化预算与否定低效词来压 ACoS。</li><li>不同类目与产品阶段的目标 ACoS 不同，新品期可容忍较高 ACoS 换曝光。</li><li>表现已满意的广告不必强行调整，先动不满意的广告。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>拆解当前广告的有效投放（出单词、出单 ASIN）占比。</li><li>投放不足则补充新增投放方向，暂不急于压价。</li><li>投放充足则逐活动降竞价、调预算、做否词，压低 ACoS。</li><li>对照类目与阶段设定合理目标 ACoS，而非统一指标。</li><li>以整体趋势（如 7 天周期）复盘，避免单日波动误判。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先判断了有效投放是否充足？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在投放不足时误用降价来降 ACoS？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否结合产品阶段设定差异化的目标 ACoS？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否对表现满意的广告保持不动？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">有效投放</span><span class="tag">新增投放</span><span class="tag">降竞价</span><span class="tag">控预算</span><span class="tag">ACoS</span><span class="tag">目标ACoS</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="转化率与 Listing" id="listing_conv">
+<div class="topic-head">
+<span class="topic-ico" style="background:#3f5a56"><i class="fa-solid fa-image"></i></span>
+<h2>转化率与 Listing</h2><span class="topic-cnt">5 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">广告推不动转化时，先回到产品与页面本身：价格、评分、主图、详情。</p>
+<ol><li>自然转化率高、广告转化低 → 投放精准性问题；两者都低 → listing/产品问题。</li><li>优化方向：主图、标题(埋核心词)、五点、A+、价格、review/rating。</li><li>低客单价对价格敏感，高客单价更看图文与评分。</li><li>新品无 review 转化低正常，靠曝光点击积累。</li><li>差评/掉星会直接砍转化率，先解决评价问题再谈广告。</li><li>埋词：后台关键词不用重复词，搜索量少的词不必填。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 自然 vs 广告转化率</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → 广告低：优化投放精准性</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → 两者都低：优化 listing/产品</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>广告能买来点击，但买不来转化率——转化率归产品与页面管。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">广告转化率低，如何判断是投放不精准还是 listing/产品问题？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>对比自然与广告转化率：广告转化率低而自然转化率高，多为投放精准性问题；若两者都低，则多为 Listing 或产品本身的问题。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>自然转化率高、广告转化率低，优先排查投放精准性（关键词/否词/匹配方式）。</li><li>若两者都低，优先进行 Listing 诊断。</li><li>查看搜索词报告判断相关性，核实埋词是否准确。</li><li>使用商机探测器对比类目平均转化率。</li><li>广告买不来转化率，转化的核心在于产品与页面。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>拉取自然与广告转化率数据进行对比。</li><li>若差距明显，排查投放精准性：检查词相关性、否词情况及搜索词报告。</li><li>若两者都低，进行 Listing 全面诊断。</li><li>使用商机探测器对比类目平均转化率，寻找差距。</li><li>针对具体问题，对广告投放或 Listing 页面执行优化。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否计算并对比了自然与广告转化率？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否分析了搜索词报告的相关性？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否与类目平均转化率进行了对比？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否明确了优化方向是调整关键词还是优化 Listing？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">广告转化率低</span><span class="tag">自然转化率</span><span class="tag">Listing问题</span><span class="tag">搜索词报告</span><span class="tag">Listing诊断</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">影响 listing 转化率的要素有哪些？优化优先级如何排？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>转化受客单价、星级/评论、图文、Q&amp;A 等综合影响；客单价越低同质化越高越依赖评论，高价产品更看图文与产品性能。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>同质化产品归因客单价/星级/评论数/Q&amp;A</li><li>客单价越低同质化越高，对星级评论依赖越大</li><li>高价产品对评论要求低，图文/性能/Q&amp;A 影响更大</li><li>listing 写得好未必销量好，销量是综合因素</li><li>评论只是转化因素之一，不能决定转化</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>判断产品属性：新品/同质化/客单价档位</li><li>低客单价优先补评论与星级</li><li>高客单价优化图文/A+/产品性能/Q&amp;A</li><li>与竞品做综合对比分析</li><li>多用AI排查文案流畅度和本土化程度，是否符合母语者阅读习惯（兼顾AI收录）</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否判断了客单价与同质化档位</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>优化优先级是否匹配产品属性</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否与竞品做对比</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否忽略 Q&amp;A 与 A+</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否确认 listing 未被跟卖篡改</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">客单价</span><span class="tag">星级</span><span class="tag">评论数</span><span class="tag">同质化</span><span class="tag">Q&amp;A</span><span class="tag">高价</span><span class="tag">竞品对比</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">产品原本出单稳定，突然转化/订单下滑（且无差评），如何排查与应对？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>先查内部变化（价格/库存/到货/广告曝光位置）与外部变化（竞品价格/促销/详情、大促观望、断货），再动广告。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>无差评下滑先查本品与竞品两侧变化</li><li>广告动态波动，词的曝光与市场有关，词会过期</li><li>只靠单一出单词极不稳定，市场波动冲击大</li><li>大促前转化下滑多为用户观望，属正常</li><li>高价客单价存在转换延迟，分析周期要拉长</li><li>断货后质量分下降，需更高竞价重拉</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>检查本品价格/库存/到货/广告曝光与位置</li><li>检查竞品价格/促销/详情页/广告位变化</li><li>排除恶意点击与违规限流因素</li><li>判断是否大促前观望或季节性周期</li><li>持续变差则收缩预算并找新投放</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否查了本品变化</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否查了竞品动作</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否误把大促观望当问题</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否过度依赖单一出单词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>分析周期是否足够长</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">突然不出单</span><span class="tag">无差评</span><span class="tag">订单下滑</span><span class="tag">竞品降价</span><span class="tag">大促</span><span class="tag">观望</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">新品/评论少、甚至类目无同款的产品转化低，如何推进？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>新品无评论转化低属正常，先靠曝光点击积累；不急着调价，按当前流量是否满足目标决定测词或冲排名。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>新品期不急着调价，先评估流量/排名是否达预期</li><li>流量满足→测新词、开自动与手动广泛</li><li>流量不满足→核心词精确高出价冲排名</li><li>无同类型商品，可用高价测组合词让系统收录判定相关</li><li>埋词优先埋正在投的词</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>评估当前流量/排名是否达到目标</li><li>达到→开启测词：自动/广泛拓流量</li><li>未达到→选大词精确高出价冲排名</li><li>特殊品用组合词测试并观察收录</li><li>积累数据后再考虑调价与拓词</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否过早调整了价格</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>当前流量是否达到目标</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>埋词是否用了已收录/在投的词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否与类目平均情况对比</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">新品</span><span class="tag">无评论</span><span class="tag">测词</span><span class="tag">冲排名</span><span class="tag">高单价</span><span class="tag">收录</span><span class="tag">相关性</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">05</span>
+<div class="method-q">出单词转移投放后表现变差、或广告流量/点获取不足，如何在结构上优化？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>出单词从自动转手动初期常因匹配方式变化导致表现波动，需动态调整出价寻找最佳转化价位；结构上坚持“单一流量控制”原则，杜绝同词多组重复投放导致预算碎片化与数据归因混乱</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>从自动/广泛转入精准匹配初期，流量波动属正常现象，需通过微调出价寻找新的转化阈值</li><li>坚持“单一流量控制”原则：自动测词→手动精准承接→原组精准否定，确保流量入口唯一</li><li>老品卡位看曝光而非 ACoS</li><li>自动广告表现差先做否词与预否词</li><li>同账号多组投放相同词虽不会直接抬高 CPC，但极易导致预算碎片化与数据稀释，大词应合并至单组集中优化</li><li>商品投放（ASIN定位）组花费高时，以 ACoS 是否可接受为导向。</li><li>出单词转移后若点击获取不足，需检查原组是否过早否定导致流量断层，或新组竞价是否低于流量阈值</li><li>结构优化的核心是数据归因清晰，切忌为凑结构而将同词分散至多个广告活动</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>确认出单词在原组（如自动广告）已连续 3-7 天稳定出单，具备转移价值</li><li>出单词在自动稳定出单后拉出打准确，给足预算竞价</li><li>观察新组 3-5 天：若曝光点击不足则逐步提价，若花费快但不出单则排查 Listing 相关性</li><li>新组稳定后再回原组做精确否定，保住单一流量入口</li><li>老品用 3-5 个词单词单组卡位，重点看曝光</li><li>自动广告先否词/预否词再考虑调价</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>出单词是否稳定后才转移</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否做到单流量控制</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>老品卡位是否以曝光为指标</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>自动广告是否先做了否词</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否误解同词投放会互相竞争</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">出单词</span><span class="tag">手动表现不好</span><span class="tag">单流量控制</span><span class="tag">精确否定</span><span class="tag">卡位</span><span class="tag">曝光</span></div>
+</div>
+</article></div>
+</section><section class="topic hidden" data-title="成本利润与产品定位" id="profit">
+<div class="topic-head">
+<span class="topic-ico" style="background:#6a5f3c"><i class="fa-solid fa-coins"></i></span>
+<h2>成本利润与产品定位</h2><span class="topic-cnt">4 套方法论</span>
+</div>
+<div class="cards">
+<div class="sop-card">
+<h4><i class="fa-solid fa-list-check" style="color:var(--sop)"></i> 核心方法与标准流程</h4>
+<p class="brief">先算盈亏平衡 ACoS 与获客成本，再决定打多猛。</p>
+<ol><li>盈亏平衡 ACoS = 毛利/销售额；广告 ACoS 高于它则亏。</li><li>获客成本 = CPC / 转化率，若高于客单价则回选品/产品层面。</li><li>高客单价产品转化率天然低，放类目里看是否正常。</li><li>低利润产品：精准为主、控预算、减少无效曝光。</li><li>高 CPC 类目(红海)：避大词硬卷，转 ASIN/长尾/其他广告类型。</li><li>不赚钱的广告别硬撑：先砍无效花费，再决定要不要停。</li></ol>
+</div>
+<div class="dec-card"><div class="dec-title"><i class="fa-solid fa-compass"></i> 快速判断</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> 广告 ACoS 与毛利的关系？</div><div class="dec-para" data-arrow="true"><i class="fa-solid fa-circle-arrow-right"></i> → ACoS&gt;毛利：先降无效花费/换打法</div><div class="dec-para"><i class="fa-solid fa-circle-arrow-right"></i> → ACoS&lt;毛利：可扩量</div></div>
+<div class="tips"><span class="tips-ico"><i class="fa-solid fa-lightbulb"></i></span>“出单多但亏钱”= ACoS 超毛利，要控的是花费结构不是出单。</div>
+</div>
+<div class="method-sec"><h3 class="sec-title"><i class="fa-solid fa-diagram-project"></i> 方法论 · 通用问题拆解</h3><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">01</span>
+<div class="method-q">广告出单不少却算下来亏钱，怎么判断广告是否在盈亏平衡点内、要不要继续？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>出单多但亏钱本质是 ACoS 超过毛利，核心是控制花费结构而非停止出单，目标 ACoS 应不高于毛利水平。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>衡量广告盈利看广告 ACoS 与毛利的关系，ACoS 高于毛利即为亏。</li><li>TACoS 比单一广告占比更能反映长期利润与广告效率。</li><li>不盈利的投放要控制住，而非简单停掉全部广告。</li><li>低利润产品以盈亏平衡线为界控制投入，减少无效花费。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>计算毛利与盈亏平衡 ACoS，作为投放上限参考。</li><li>逐投放核算 ACoS，识别出单但不盈利的投放。</li><li>通过降竞价、否定不相关流量，把 ACoS 压回盈亏平衡点内。</li><li>用 TACoS 判断广告对整体销售的带动是否健康。</li><li>以结果为准则分配预算，向表现好的产品倾斜。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先算了毛利与盈亏平衡 ACoS？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否分清盈利投放与亏损投放，而非一刀切？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否把不盈利部分通过否词与降竞价压回平衡点？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否用 TACoS 而非广告占比来判断整体健康度？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">ACoS</span><span class="tag">毛利</span><span class="tag">盈亏平衡</span><span class="tag">TACoS</span><span class="tag">不盈利</span><span class="tag">花费结构</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">02</span>
+<div class="method-q">广告一直在亏钱，应不应该停广告？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>先拆解是整体亏还是部分亏：整体亏多为转化率问题需解决页面与 listing，部分亏则否定或降价处理，保留出单词继续投放。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>亏损要拆到词与广告活动层面，别整体下结论。</li><li>整体都亏时优先解决转化率低的根本原因。</li><li>部分词亏则做否定或降价，保留出单的词继续投放。</li><li>不赚钱的广告先砍无效花费再决定是否停止，而非立即关停。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>拆解亏损来源：整体亏还是部分词或活动亏。</li><li>整体亏时排查转化率，并对比自然转化率定位问题。</li><li>部分亏时对亏损词降价或否定，保留盈利出单词。</li><li>持续核算并控制无效花费后，再考虑缩减或停止。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否把亏损拆到了词和活动层面？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否在整体亏损时先查了转化率？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否保留了出单词，仅处理亏损词？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先控无效花费再决定停不停？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">亏损</span><span class="tag">停广告</span><span class="tag">否词</span><span class="tag">降bid</span><span class="tag">出单词</span><span class="tag">转化率</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">03</span>
+<div class="method-q">不同客单价与竞争强度（红海、低利润、高客单）下，广告预算与打法应如何匹配？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>低利润产品靠精准控预算、减无效曝光；红海高竞价类目避大词硬卷，转 ASIN 投放、长尾词与其他广告类型；高客单价转化天然偏低，需放类目对照判断。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>低利润产品以精准为主、控预算、减少无效曝光，用自然与关联流量补单。</li><li>红海高 CPC 类目避开大词硬卷，转 ASIN 投放、长尾词与其他广告类型。</li><li>高客单价产品转化率天然偏低，放进类目对照判断是否正常。</li><li>红海产品要持续做 listing 优化并累积 review 与 rating 提升竞争力。</li><li>新品阶段目标先提销量、后控 ACoS，不以低价硬冲。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>按客单价与竞争强度确定打法定调，是精准控本还是多类型组合。</li><li>低利润产品控预算、打转化好的核心词，压缩无效曝光。</li><li>红海产品优先补充 ASIN 投放、展示型广告与长尾流量。</li><li>高客单价产品对照类目转化水平，并结合评分评价优化页面。</li><li>用自然流量与关联流量降低对广告的依赖。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否根据客单价与竞争强度选择匹配打法？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否低利润产品还在大词上硬耗？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否红海产品布局了 ASIN 与其他广告类型？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否高客单价产品结合了评分与图文竞争力判断转化？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">红海</span><span class="tag">客单价</span><span class="tag">低利润</span><span class="tag">ASIN投放</span><span class="tag">长尾</span><span class="tag">CPC</span><span class="tag">review</span></div>
+</div>
+</article><article class="method-card">
+<div class="method-head" onclick="toggleMethod(this)">
+<span class="method-num">04</span>
+<div class="method-q">广告既想保排名又要提利润，如何控制花费而不伤自然排名？</div>
+<span class="method-ico"><i class="fa-solid fa-chevron-right"></i></span>
+</div>
+<div class="method-body">
+<div class="det"><i class="fa-solid fa-clipboard-check"></i><span>降竞价、控预算可直接提利润，但排名取决于出单、点击与转化；是否缩投取决于目标是保利润还是保份额，需先明确取舍。</span></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-lightbulb"></i>要点</div><ul class="dot-li"><li>降竞价、控预算能直接提升利润，但可能因单量下降影响排名。</li><li>自然排名与关键词出单、点击、转化相关，缩投有排名波动风险。</li><li>目标不明确时先定目标：保份额需要广告托底，保利润则压缩投入。</li><li>降 TACoS 应从降低广告花费与提升整体转化两个方面入手。</li><li>广告花费占比高不等于差，核心看 TACoS 与利润率关系。</li></ul></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-list-ol"></i>SOP 步骤</div><ol class="steps"><li>明确当前诉求是保份额还是保利润。</li><li>对首页出单词或高 ACoS 部分做预算缩减与竞价优化。</li><li>从广告整体分析出单大头与无效花费，重新分配预算。</li><li>观察缩投后单量与自然排名变化，必要时动态回补。</li></ol></div>
+<div class="blk"><div class="blk-t"><i class="fa-solid fa-magnifying-glass"></i>自查清单</div><ul class="dotgrid"><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否先明确了保份额还是保利润？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否评估了缩投对单量与排名的连带影响？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否围绕 TACoS 与利润率而非单一广告占比决策？</li><li><span class="chk"><i class="fa-regular fa-square"></i></span>是否按出单表现重新分配了预算？</li></ul></div>
+<div class="sig"><i class="fa-solid fa-tags"></i><span class="tag">保份额</span><span class="tag">保利润</span><span class="tag">TACoS</span><span class="tag">降bid</span><span class="tag">预算分配</span><span class="tag">自然排名</span></div>
+</div>
+</article></div>
+</section>
+</div>
+</section>
+<!-- 工具区 -->
+<section class="zone pane" data-pane="tools" id="zoneTools">
+<div class="zone-head"><span class="zone-ico"><i class="fa-solid fa-calculator"></i></span><div><h2>工具 · 常用计算</h2><span class="zone-sub">填入数值快速反推，省去手动换算</span></div></div>
+<div class="zone-body">
+<div class="tools" id="tools">
+<div class="panel-head"><div class="ht"><i class="fa-solid fa-calculator"></i><h2>常用计算工具</h2></div><span class="sub">手动反推，直接输入即可，省去表格换算</span></div>
+<div class="tool-grid">
+<div class="tool">
+<h3><i class="fa-solid fa-scale-balanced"></i> 盈亏平衡 ACoS</h3>
+<p>毛利 ÷ 售价，即该广告可承受的最高 ACoS 上限。</p>
+<label>售价 (USD)<input id="t1p" type="number" value="29.99"/></label>
+<label>单件毛利 (USD)<input id="t1m" type="number" value="9"/></label>
+<button onclick="calBeAc()">计算</button>
+<div class="tool-out" id="t1o"></div>
+</div>
+<div class="tool">
+<h3><i class="fa-solid fa-chart-line"></i> 单点击期望价值 EV</h3>
+<p>EV = 转化率 × 单件毛利；EV &gt; CPC 才值得投，可反推最高可接受出价。</p>
+<label>转化率 (%)<input id="t0c" type="number" value="10"/></label>
+<label>单件毛利 (USD)<input id="t0m" type="number" value="9"/></label>
+<label>当前 CPC (USD)<input id="t0p" type="number" value="1"/></label>
+<button onclick="calEv()">计算</button>
+<div class="tool-out" id="t0o"></div>
+</div>
+<div class="tool">
+<h3><i class="fa-solid fa-arrow-up-wide-short"></i> 反推保本 CPC</h3>
+<p>CPC = 目标ACoS × 转化率 × 客单价，超过则无盈利空间。</p>
+<label>目标 ACoS (%)<input id="t2a" type="number" value="25"/></label>
+<label>转化率 (%)<input id="t2c" type="number" value="10"/></label>
+<label>客单价 (USD)<input id="t2p" type="number" value="30"/></label>
+<button onclick="calCpc()">计算</button>
+<div class="tool-out" id="t2o"></div>
+</div>
+<div class="tool">
+<h3><i class="fa-solid fa-wallet"></i> 保底日预算</h3>
+<p>按转化率倒推“出 1 单所需点击数”，再乘出价即最低预算。</p>
+<label>转化率 (%)<input id="t3c" type="number" value="10"/></label>
+<label>单次出价 CPC (USD)<input id="t3p" type="number" value="1"/></label>
+<button onclick="calBud()">计算</button>
+<div class="tool-out" id="t3o"></div>
+</div>
+<div class="tool">
+<h3><i class="fa-solid fa-crosshairs"></i> 高点击阈值</h3>
+<p>超过平均出单点击数 1.5-2 倍仍不出单，就应考虑降价或换词。</p>
+<label>平均转化率 (%)<input id="t4c" type="number" value="10"/></label>
+<button onclick="calHc()">计算</button>
+<div class="tool-out" id="t4o"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 概念卡区 -->
+<section class="zone pane" data-pane="concepts" id="zoneConcepts">
+<div class="zone-head"><span class="zone-ico"><i class="fa-solid fa-lightbulb"></i></span><div><h2>概念卡 · 术语速查</h2><span class="zone-sub">常用指标与策略名词的含义、公式与用法</span></div></div>
+<div class="zone-body">
+<section class="topic" data-title="概念卡" id="concepts">
+<div class="topic-head">
+<span class="topic-ico" style="background:#41557a"><i class="fa-solid fa-graduation-cap"></i></span>
+<h2>概念卡</h2><span class="topic-cnt">20 个术语</span>
+</div>
+<div class="concepts"><div class="concept-card">
+<div class="c-name">ACoS<span class="en">广告销售成本（Advertising Cost of Sales）</span></div>
+<div class="c-formula">ACoS = 广告花费 ÷ 广告带来的销售额</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">衡量广告每赚 1 元销售额要花多少广告费；越低越高效。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">与毛利率对比判断盈利：ACoS 超过毛利率即为亏损，控制在盈亏平衡线内。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">不同阶段标准不同（新品期求量可放宽，老品期求利要收紧）；单个投放的 ACoS 比总体更能定位问题。</div></div>
+</div><div class="concept-card">
+<div class="c-name">TACoS<span class="en">总广告销售成本（Total ACoS）</span></div>
+<div class="c-formula">TACoS = 广告花费 ÷ 总销售额（含自然单）</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">衡量广告花费占整体销售（含自然流量）的比例，反映广告长期拉动作用。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">比单一 ACoS 更能判断广告效率与长期利润；覆盖自然订单的投放用总 ACoS 评估。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">只看 ACoS 会高估广告负担，TACoS 越低说明自然单占比在提升。</div></div>
+</div><div class="concept-card">
+<div class="c-name">CTR<span class="en">点击率（Click Through Rate）</span></div>
+<div class="c-formula">CTR = 点击次数 ÷ 曝光次数</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">衡量广告吸引点击的能力，反映词的相关性与创意吸引力。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">CTR 低看两维：广告（词与广告位）和 listing（标题/图片/评论/价格）。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">CTR 与转化同时提升，亚马逊才提高该词排名。</div></div>
+</div><div class="concept-card">
+<div class="c-name">CVR<span class="en">转化率（Conversion Rate）</span></div>
+<div class="c-formula">CVR = 订单数 ÷ 点击次数</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">衡量点击转化为订单的能力，反映产品与页面的成交力。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">广告转化低而自然转化高→投放不精准；两者都低→listing/产品问题。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">转化归产品与页面管，广告买不来转化率；与类目平均对比才有意义。</div></div>
+</div><div class="concept-card">
+<div class="c-name">CPC<span class="en">单次点击成本（Cost Per Click）</span></div>
+<div class="c-formula">CPC = 广告总花费 ÷ 点击数</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">平均每次点击支付的成本，与出价相关但受竞价环境影响。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">反推保本 CPC：CPC = 目标 ACoS × 转化率 × 客单价；超过则无盈利空间。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">红海大词 CPC 高可先低出价起步再逐步抬高。</div></div>
+</div><div class="concept-card">
+<div class="c-name">CPA<span class="en">单次订单成本 / 保本竞价</span></div>
+<div class="c-formula">CPA = CPC ÷ 转化率</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">平均产生一单要花的广告钱，是判断单次出单成本的依据。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">保利价：对比毛利判断是否可承受；预算按转化率倒算出所需点击数。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">CPA 用来设定出价上限与预算底线。</div></div>
+</div><div class="concept-card">
+<div class="c-name">ROAS<span class="en">广告支出回报（Return On Ad Spend）</span></div>
+<div class="c-formula">ROAS = 广告销售额 ÷ 广告花费</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">每花 1 元广告费赚回多少销售额，数值越高越好。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">ROAS 高则 ACoS 低，本质是 ACoS 的倒数，用于快速判断投放效益。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">ROAS 与 ACoS 可互相换算，避免重复口径。</div></div>
+</div><div class="concept-card">
+<div class="c-name">SKAG<span class="en">单词单组单活动策略（Single Keyword Ad Group）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">一个广告组只放一个精准关键词，出价与预算完全独立控制。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">新品集中烧核心大词冲排名；老品卡位；便于精确衡量每个词的独立表现。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">适合主打核心词，避免一组多词互相稀释数据与预算。</div></div>
+</div><div class="concept-card">
+<div class="c-name">SKU<span class="en">库存计费单元（Stock Keeping Unit）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">一个具体的产品变体/商品（颜色尺寸组合），商品定位中投放对象之一。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">多变体需选出流量销量最高的主 SKU 做主打，其余作商品定位互投。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">广告投放面对变体，SNU 是数据单元。</div></div>
+</div><div class="concept-card">
+<div class="c-name">HT / LT<span class="en">高流量词 / 低流量词（High / Low Traffic）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">按搜索流量高低对关键词分层的方法。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">拓词后按流量分段投放：HT 用高预算精准扩量，LT 用低出价捡漏。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">按流量降序观察断层切分，避免大词吃掉小词曝光。</div></div>
+</div><div class="concept-card">
+<div class="c-name">ABA / 商机探测器<span class="en">品牌分析 / 商品机会探测器</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">亚马逊后台（ABA 品牌分析中的搜索词表现报告）与商机探测器用于反查竞品流量、看类目平均转化率。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">反查直接竞品关键词、定位自然单来源词、对比类目平均转化。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">反查词需到前台验证相关性，不能直接照搬。</div></div>
+</div><div class="concept-card">
+<div class="c-name">VCPM<span class="en">可见千次展示付费（Viewable Cost Per Mille）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">展示型广告的一种计费方式，按可见次数付费。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">覆盖自然订单，需用总 ACoS 与总销售额比对拆出真实效益。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">单看 VCPM 面板看不到覆盖自然的广告回报。</div></div>
+</div><div class="concept-card">
+<div class="c-name">EV<span class="en">期望价值 / 期望利润（Expected Value）</span></div>
+<div class="c-formula">单点击 EV = 转化率 × 单件毛利；点击期望利润 = EV − CPC</div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">每个点击平均能带来的价值与利润，是判断“值不值得出价”的根本依据。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">EV &gt; CPC 则点一点有正期望、值得投；EV &lt; CPC 则每点必亏，应降低出价、换词或用否词止损。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">EV 是保本出价的上限：最高可出价 = 转化率 × 毛利。</div></div>
+</div><div class="concept-card">
+<div class="c-name">匹配方式<span class="en">广泛 / 词组 / 精准（Broad / Phrase / Exact）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">关键词匹配的三种放量口径，决定一个搜索词能否命中你的关键词。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">广泛流量大但不精准；精准最准但流量小；同为最折中。新品先用精准冲量，再拓宽匹配测词。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">匹配越宽，曝光越多、相关性越易稀释；匹配越窄，数据越干净。</div></div>
+</div><div class="concept-card">
+<div class="c-name">竞价策略<span class="en">固定 / 只降低 / 动态升降（Fixed / Down Only / Up and Down）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">亚马逊对出价进行调整的三种引擎策略。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">新品起量、冲排名用固定保住曝光；老品控成本用只降低；动态上下适合放量阶段配合广告位加成。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">新品期忌用只降低，系统会不断压价丢曝光。</div></div>
+</div><div class="concept-card">
+<div class="c-name">广告位<span class="en">搜索顶部 / 商品页面 / 其余位置</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">广告在页面中的展示位，影响曝光与转化。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">不同位置可通过出价百分比加成调整；出单好的位置重点加投。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">广告位出单比自然位靠前时自然单少属正常，按利润算账。</div></div>
+</div><div class="concept-card">
+<div class="c-name">否定词<span class="en">精确否 / 词组否（Negative Exact / Phrase）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">把不想要的搜索词从投放中排除。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">否定对象只针对与产品明确不相关的词；注意否复数会连带否单数。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">词组否范围更广易误伤，前置否太多会导致跑不出词。</div></div>
+</div><div class="concept-card">
+<div class="c-name">自然单占比<span class="en">自然流量 / 自然订单占比</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">不靠广告产生的订单占整体销售的比例，反映对广告的依赖度。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">占比低说明依赖广告抢量，需提升与关键词的相关度与排名，才能让自然流量更多。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">只看广告 ACoS 会高估负担，结合自然单占比看总体健康。</div></div>
+</div><div class="concept-card">
+<div class="c-name">盈亏平衡 ACoS<span class="en">保本 ACoS（Break-even ACoS）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">毛利 ÷ 售价，是该广告可承受的最高 ACoS 上限。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">ACoS 高于它就亏损；作为投放与预算的目标参考上限。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">保本 ACoS 是 EV 与 CPC 之外的简化盈亏判断。</div></div>
+</div><div class="concept-card">
+<div class="c-name">TOS<span class="en">搜索顶部出单占比（Top Of Search）</span></div>
+<div><div class="c-lbl">含义</div><div class="c-meaning">广告在搜索结果首页顶部的展示出单情况，通常转化与流量最佳。</div></div>
+<div><div class="c-lbl">怎么用</div><div class="c-use">测得 TOS 表现最好时可把核心大词单独成组控预算出价，放大该位置。</div></div>
+<div><div class="c-lbl">提示</div><div class="c-tips">高点击不出单时可拉广告位报告定位表现最好的水域。</div></div>
+</div></div>
+</section>
+</div>
+</section>
+<div class="no-result" id="noResult"><i class="fa-solid fa-magnifying-glass-minus"></i>未找到相关方法论，换个关键词试试。</div>
+</main>
+</div>
+<div class="visitor-float">
+<div class="stat"><i class="fa-solid fa-user"></i><span class="stat-num" id="statUv">-</span><span class="stat-lbl">个运营</span></div>
+<div class="stat"><i class="fa-solid fa-eye"></i><span class="stat-num" id="statPv">-</span><span class="stat-lbl">次学习</span></div>
+</div>
+<footer>GinvAds 广告智库 · 基于经验 · 仅供参考，以亚马逊最新政策为准</footer>
+<script>
+const topics=Array.from(document.querySelectorAll('#zoneContent .topic'));
+const search=document.getElementById('search');
+const progress=document.getElementById('progress');
+const navItems=Array.from(document.querySelectorAll('.nav-item'));
+const tabs=Array.from(document.querySelectorAll('.tab'));
+const panes=Array.from(document.querySelectorAll('.pane'));
+
+// ---------- Tab 切换 ----------
+let currentTab='content';
+function switchTab(name){
+  currentTab=name;
+  tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
+  panes.forEach(p=>p.classList.toggle('active',p.dataset.pane===name));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+tabs.forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.tab)));
+document.querySelectorAll('[data-tabnav]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  switchTab(a.dataset.tabnav);
+}));
+
+// ---------- 主题切换（默认一次只看一个主题）----------
+function showTopic(id){
+  topics.forEach(function(s){s.classList.toggle('hidden',s.id!==id);});
+  navItems.forEach(n=>n.classList.toggle('active',n.dataset.topic===id));
+  if(currentTab!=='content')switchTab('content');
+}
+navItems.forEach(n=>{if(n.dataset.topic){n.addEventListener('click',function(e){e.preventDefault();showTopic(n.dataset.topic);});}});
+showTopic(topics[0].id);
+
+// 卡片展开/收起
+window.toggleMethod=function(el){el.closest('.method-card').classList.toggle('open');};
+
+// 搜索：命中主题全部同时展示，未命中隐藏
+search.addEventListener('input',function(){
+  const kw=search.value.trim().toLowerCase();
+  if(!kw){showTopic(topics[0].id);return;}
+  let first=null;
+  topics.forEach(function(s){
+    const ok=s.textContent.toLowerCase().includes(kw);
+    s.classList.toggle('hidden',!ok);
+    if(ok&&!first)first=s.id;
+  });
+  navItems.forEach(n=>n.classList.remove('active'));
+  if(first){
+    const nav=document.querySelector('.nav-item[data-topic="'+first+'"]');
+    if(nav)nav.classList.add('active');
+  }
+});
+
+// 顶部进度 + 返回顶部
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  progress.style.width=pct+'%';
+});
+
+// 计算器
+function num(id){return parseFloat(document.getElementById(id).value)||0;}
+function calEv(){
+  const cv=num('t0c')/100,m=num('t0m'),c=num('t0p');
+  if(!cv||!m){document.getElementById('t0o').innerHTML='请填写参数';return;}
+  const ev=cv*m;
+  const diff=ev-c;
+  document.getElementById('t0o').innerHTML='单点击期望价值 EV ≈ $'+ev.toFixed(2)+'；当前 CPC $'+c.toFixed(2)+' → '+(diff>=0?'正期望，值得投，每点击可赚约 $'+diff.toFixed(2):'负期望，每点击约亏 $'+Math.abs(diff).toFixed(2)+'，应降出价/换词/否定');
+}
+function calBeAc(){const p=num('t1p'),m=num('t1m');const v=(p>0?m/p:0)*100;document.getElementById('t1o').innerHTML='可承受最高 ACoS ≈ '+v.toFixed(1)+'%'+(v>0?'（即每个点击的保本 EV 上限占比）':'');}
+function calCpc(){const ac=num('t2a')/100,cv=num('t2c')/100,p=num('t2p');const v=ac*cv*p;const ev=cv*p;document.getElementById('t2o').innerHTML=v>0?('保本 CPC ≈ $'+v.toFixed(2)+'；若目标 ACoS 设满即为盈亏平衡，实际出价应 ≤ 该值'):'请填写完整参数';}
+function calBud(){const cv=num('t3c')/100,c=num('t3p');if(!cv||!c){document.getElementById('t3o').innerHTML='请填写参数';return;}const need=Math.ceil(1/cv);const ev=cv*1;document.getElementById('t3o').innerHTML='至少 '+need+' 次点击出 1 单 → 保底预算 ≈ $'+(need*c).toFixed(0)+(ev>0?'；若 CPC 超过单点 EV 则跑再多也是亏，优先降出价':'');}
+function calHc(){const c=num('t4c')/100;if(!c){document.getElementById('t4o').innerHTML='请填写参数';return;}const avg=1/c;document.getElementById('t4o').innerHTML='平均 '+avg.toFixed(1)+' 点击出 1 单；超过 '+(avg*1.5).toFixed(0)+' 点击仍不出单 → 考虑降价 / 换词';}
+
+// ---------- 访客 / 访问量统计 ----------
+// 每次页面加载调用一次 /api/track：
+// - 访问量(PV)：每次加载都 +1
+// - 访客(UV)：同一 IP 同一天只计一次
+(function(){
+  const statUv=document.getElementById('statUv');
+  const statPv=document.getElementById('statPv');
+  fetch('/api/track',{cache:'no-store'})
+    .then(r=>{if(!r.ok)throw new Error('track failed');return r.json();})
+    .then(d=>{
+      if(statUv&&typeof d.siteUv==='number')statUv.textContent=d.siteUv.toLocaleString('zh-CN');
+      if(statPv&&typeof d.sitePv==='number')statPv.textContent=d.sitePv.toLocaleString('zh-CN');
+    })
+    .catch(()=>{
+      // 接口不可用时（例如本地直接打开 HTML、KV 未绑定等）静默隐藏，不影响页面其余功能
+      if(statUv)statUv.textContent='—';
+      if(statPv)statPv.textContent='—';
+    });
+})();
+
+</script>
+<!-- NEXUS_INJECT_START -->
+<script src="/libs/an-in.js"></script>
+<script src="/libs/fl-side.js"></script>
+<script src="/libs/wmark.js"></script>
+<!-- NEXUS_INJECT_END -->
+</body>
+</html>

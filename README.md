@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Skills Hub for Cliff</h1>
   <p><strong>把 Amazon US 膳食补充剂的实战经验，沉淀成可复用的 Agent Skills。</strong></p>
-  <p>从选品调研、关键词库、Listing 图片与 A+ 文案，到手机预览、成分合规与配方重建，这里把反复出现的运营动作整理成能直接交给 AI Agent 使用的工作流与本地工具。</p>
+  <p>从选品调研、关键词库、Listing 图片与 A+ 文案，到手机预览、广告知识与计算、成分合规与配方重建，这里把反复出现的运营动作整理成能直接交给 AI Agent 使用的工作流与本地工具。</p>
   <p>
     <a href="#技能目录"><img src="https://img.shields.io/badge/Skills-34-00a8e1?style=for-the-badge" alt="34 个 Skill 入口" /></a>
     <img src="https://img.shields.io/badge/Platform-Amazon_US-ff9900?style=for-the-badge" alt="Amazon US" />
@@ -21,6 +21,7 @@
 - **选品与市场调研**：类目扫描、多维度关键词对比、Top100 产品结构、竞品差评归类、站外信号采集、Go / No-Go 评分。
 - **关键词与 Listing 运营**：下拉词采集、新品词库与 Search Term 基础、SP 搜索词报告分析、Listing QA 批量生成。
 - **图片与 A+ 内容**：主图合规判断、辅图文案、A+ 页面结构、品牌故事、四风格合规文案、手机端浏览预览。
+- **广告运营与知识工具**：广告主题与概念阅读、全文搜索、ACoS / CPC / 点击预算计算、本地内容归档与审计。
 - **成分合规与配方研发**：成分堆栈拆解、品牌成分与 IP 风险、安全重建、配方升级、成分流量边界。
 - **Skill 管理与索引**：扫描仓库、识别各客户端结构、维护 Obsidian 索引、回答「我现在该用哪个 skill」。
 
@@ -77,6 +78,12 @@
 | 检查成分、商标、专利、FDA/Amazon 和商业化风险 | [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/) | 适合上架、换标、仿制、改配方前先跑风险报告 |
 | 做完整保健品配方研发链路 | [`supplement-formula-pipeline`](./supplement-formula-pipeline/) | 包含风险查验、安全重建、配方优化、流量边界和最终收口 |
 
+### 广告运营与知识工具
+
+| 你要做什么 | 推荐项目 | 说明 |
+|---|---|---|
+| 查阅广告知识、搜索操作流程，计算 ACoS、CPC、首单预算与 0 单点击阈值 | [`ginv-ads-workbench`](./ginv-ads-workbench/) | 本地离线工作台；13 个主题、54 篇正文、20 张概念卡、5 个计算工具；Node.js，无需安装第三方包；Windows 双击启动 |
+
 ### Skill 管理与索引
 
 | 你要做什么 | 推荐 skill | 说明 |
@@ -85,7 +92,7 @@
 
 ## 技能目录
 
-截至 **2026-09-30**，仓库包含 **34 个 `SKILL.md` 入口**，分布在 **20 个顶层目录**中。本地应用项目（`amazon-mobile-preview-tool`）不提供 `SKILL.md`，按项目 README 启动。
+截至 **2026-09-30**，仓库包含 **34 个 `SKILL.md` 入口**，以及本地应用项目，共 **21 个顶层目录**。`amazon-mobile-preview-tool` 与 `ginv-ads-workbench` 不提供 `SKILL.md`，按项目 README 启动，不计入 Skills 数量。
 
 | 集合 | Skills | 内容方向 | 入口 |
 |---|---:|---|---|
@@ -94,8 +101,9 @@
 | 关键词监控、搜索词与情报蒸馏 | 4 | 周度爆发词监控、SP 搜索词报告分析、全域情报蒸馏 | [ABAKeywords-tracker-for-codex](./ABAKeywords-tracker-for-codex/) · [ABAKeywords-tracker-for-workbuddy](./ABAKeywords-tracker-for-workbuddy/) · [amazon-search-term-advisor](./amazon-search-term-advisor/) · [marketing-distiller](./marketing-distiller/) |
 | 选品、市场调研与出海战略 | 14 | 市场与竞品数据、机会与定价、市场进入判断、GTM 战略报告 | [US_Sup_Product_Research_for_Qoderwork](./US_Sup_Product_Research_for_Qoderwork/) · [amazon-sorftime-mcp-with-serpapi-tavily](./amazon-sorftime-mcp-with-serpapi-tavily/) · [zoodata-amz-marketing-skill](./zoodata-amz-marketing-skill/) · [GinvSkill-market-entry-report](./GinvSkill-market-entry-report/) |
 | 成分合规与配方研发 | 7 | 成分与 IP 风险、安全重建、配方升级、成分流量边界、受众收口 | [ingredients-breakdown-compliance-check](./ingredients-breakdown-compliance-check/) · [supplement-formula-pipeline](./supplement-formula-pipeline/) |
+| 广告运营与知识工具 | 0 | 本地广告知识工作台、全文搜索、五个计算工具、内容归档与审计 | [ginv-ads-workbench](./ginv-ads-workbench/) |
 | Skill 管理与索引 | 1 | 扫描仓库、识别客户端结构、维护 Obsidian 索引与 skill 路由 | [ob-skill-github-organizer](./ob-skill-github-organizer/) |
-| **合计** | **34** | **持续更新中** | 20 个顶层目录 |
+| **合计** | **34** | **持续更新中** | 21 个顶层目录 |
 
 关于这张表的几点说明：
 
@@ -257,6 +265,16 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 我想根据 Amazon 产品写图片文案，应该用哪个 skill？
 ```
 
+### 8. 广告运营与知识工具
+
+[`ginv-ads-workbench`](./ginv-ads-workbench/)
+
+GinvAds 广告智库的本地工作台，内容快照日期为 **2026-09-30**。白色与钴蓝界面收录 **13 个主题、54 篇正文、20 张概念卡、5 个计算工具**，支持全文搜索、文章阅读与打印，以及手机、平板和桌面访问。
+
+五个工具用于计算 ACoS 盈亏平衡、点击期望值、目标 ACoS 对应 CPC、首单测试预算与 0 单点击阈值。完整采集归档、来源核对记录、工具公式审计和工作台源码均随项目保留；17 项测试与 105 项独立计算案例已通过。
+
+默认在本机离线使用，安装 Node.js（建议 22 或以上）即可启动，**无需 `npm install`**。Windows 进入项目目录双击 `启动工作台.cmd`；也可运行 `npm start` 后在浏览器打开 `http://127.0.0.1:4173`。启动、验证与更新快照的方法见[项目 README](./ginv-ads-workbench/README.md)。
+
 ## 开始使用
 
 克隆仓库：
@@ -284,8 +302,9 @@ cd skills-hub-for-cliff
 
 - **手机预览工具**：进入 [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/)，安装 Python 3.10+ 后双击 `启动预览工具.bat`。也可在该目录运行 `python server.py`，浏览器默认打开 `http://127.0.0.1:8877`；端口占用时自动顺延。关闭启动窗口即停止服务。
 - **文案工作台**：进入 [`amazon-copy-writing-project`](./amazon-copy-writing-project/)，按其[工作台 README](./amazon-copy-writing-project/_workbench/README.md)准备资料，双击 `_workbench/启动工作台.bat` 启动。
+- **广告知识工作台**：进入 [`ginv-ads-workbench`](./ginv-ads-workbench/)，安装 Node.js（建议 22 或以上）后双击 `启动工作台.cmd`。也可在该目录运行 `npm start`，浏览器打开 `http://127.0.0.1:4173`；无需 `npm install`，默认离线使用。详细操作见[项目 README](./ginv-ads-workbench/README.md)。
 
-这两个项目直接在本机运行，不要求 `SKILL.md`，无需复制到 skills 目录。下面的安装方式适用于提供 `SKILL.md` 的 Agent Skills。
+这三个项目直接在本机运行，不要求 `SKILL.md`，无需复制到 skills 目录。下面的安装方式适用于提供 `SKILL.md` 的 Agent Skills。
 
 ### Codex / OpenAI
 
@@ -331,7 +350,7 @@ skill-package/
 
 | 类型 | 怎么判断 | 怎么使用 |
 |---|---|---|
-| 本地应用项目 | 例如 `amazon-mobile-preview-tool`、`amazon-copy-writing-project`，包含源码、启动入口和项目 README | 下载或克隆后按项目 README 在本机启动；不要求有 `SKILL.md`，无需复制到 skills 目录 |
+| 本地应用项目 | 例如 `amazon-mobile-preview-tool`、`amazon-copy-writing-project`、`ginv-ads-workbench`，包含源码、启动入口和项目 README | 下载或克隆后按项目 README 在本机启动；不要求有 `SKILL.md`，无需复制到 skills 目录 |
 | Codex/OpenAI 原版 | 通常有根目录 `SKILL.md`，可能有 `agents/openai.yaml` | 适合 Codex / OpenAI 侧直接使用或安装 |
 | Claude Code / QoderWork 兼容 | 根目录 `SKILL.md` + `README.md` + `references/` | 多数可作为普通 Agent Skill 使用 |
 | WorkBuddy 版目录 | 目录名带 `-WB`，例如 `amazon-supplement-visual-content-WB` | 用于和 Codex 原版分开管理；如需标准分享包，可再整理成 WorkBuddy 包结构 |
@@ -363,6 +382,7 @@ skills-hub-for-cliff/
 ├── ABAKeywords-tracker-for-codex/              # 补充剂爆发词周度监控（Codex 版）
 ├── ABAKeywords-tracker-for-workbuddy/          # 同上（WorkBuddy 标准包）
 ├── amazon-search-term-advisor/                 # SP 搜索词报告 → 多标签页 Excel + 动作建议
+├── ginv-ads-workbench/                         # 本地项目：广告知识、全文搜索与五个计算工具
 ├── marketing-distiller/                        # 全域蒸馏器分享包（WorkBuddy 标准包）
 ├── US_Sup_Product_Research_for_Qoderwork/      # 补充剂选品调研套件（Sorftime + xCrawl）
 ├── amazon-sorftime-mcp-with-serpapi-tavily/    # 种子词选品调研（Sorftime + SerpApi + Tavily）
@@ -373,7 +393,7 @@ skills-hub-for-cliff/
 └── ob-skill-github-organizer/                  # Skill 索引维护与路由（元 skill）
 ```
 
-这是带注释的阅读视图；仓库实际是平铺结构，20 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
+这是带注释的阅读视图；仓库实际是平铺结构，21 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
 
 ## 维护流程
 

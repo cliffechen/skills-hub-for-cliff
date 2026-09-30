@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ginv-Ads广告智库</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #f4f6f8; }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
+        .loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999; transition: opacity 0.3s;
+        }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid #e5e7eb; border-top-color: #111827;
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: #6b7280; font-size: 0.9rem; font-family: "Manrope", "Noto Sans SC", sans-serif; }
+    </style>
+</head>
+<body>
+<div class="loading-overlay" id="loadingOverlay">
+<div class="spinner"></div>
+<div class="loading-text">内容加载中...</div>
+</div>
+<iframe allowfullscreen="" id="projectFrame" src="?render=direct&amp;t=1790756832812"></iframe>
+<script>
+        const iframe = document.getElementById('projectFrame');
+        const overlay = document.getElementById('loadingOverlay');
+        const projectBase = '/projects/Ginv-Ads广告智库/';
+
+        // 超时自动隐藏，防止加载失败导致一直显示
+        const timeout = setTimeout(() => {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }, 5000);
+
+        iframe.onload = function() {
+            clearTimeout(timeout);
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 300);
+
+            try {
+                   const iframeUrl = iframe.contentWindow.location.href;
+                   const url = new URL(iframeUrl);
+                   const iframePath = url.pathname;
+
+                   // 1. 如果 iframe 导航到了非当前项目的路径
+                   // 或者导航到了非项目页面，则让父窗口同步跳转
+                   if (!iframePath.startsWith(projectBase) && !url.searchParams.has('render')) {
+                       window.top.location.href = url.pathname + url.search;
+                       return;
+                   }
+
+               } catch (e) {
+                 // 忽略跨域报错
+             }
+        };
+    </script>
+</body>
+</html>
