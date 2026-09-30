@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.png binary
+# Preserve captured source and assets byte-for-byte for SHA256 verification.
+archive/** -text

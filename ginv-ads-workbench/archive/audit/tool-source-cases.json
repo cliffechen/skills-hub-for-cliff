@@ -1,0 +1,282 @@
+{
+  "source": "archive/source/app.html",
+  "verifiedCases": 27,
+  "results": [
+    {
+      "name": "ACoS-default",
+      "function": "calBeAc",
+      "inputs": {
+        "t1p": "29.99",
+        "t1m": "9"
+      },
+      "actual": "可承受最高 ACoS ≈ 30.0%（即每个点击的保本 EV 上限占比）",
+      "passed": true
+    },
+    {
+      "name": "ACoS-custom",
+      "function": "calBeAc",
+      "inputs": {
+        "t1p": "40",
+        "t1m": "12"
+      },
+      "actual": "可承受最高 ACoS ≈ 30.0%（即每个点击的保本 EV 上限占比）",
+      "passed": true
+    },
+    {
+      "name": "ACoS-zero-price",
+      "function": "calBeAc",
+      "inputs": {
+        "t1p": "0",
+        "t1m": "9"
+      },
+      "actual": "可承受最高 ACoS ≈ 0.0%",
+      "passed": true
+    },
+    {
+      "name": "ACoS-empty-price",
+      "function": "calBeAc",
+      "inputs": {
+        "t1p": "",
+        "t1m": "9"
+      },
+      "actual": "可承受最高 ACoS ≈ 0.0%",
+      "passed": true
+    },
+    {
+      "name": "ACoS-negative-margin",
+      "function": "calBeAc",
+      "inputs": {
+        "t1p": "30",
+        "t1m": "-9"
+      },
+      "actual": "可承受最高 ACoS ≈ -30.0%",
+      "passed": true
+    },
+    {
+      "name": "ACoS-over100",
+      "function": "calBeAc",
+      "inputs": {
+        "t1p": "30",
+        "t1m": "45"
+      },
+      "actual": "可承受最高 ACoS ≈ 150.0%（即每个点击的保本 EV 上限占比）",
+      "passed": true
+    },
+    {
+      "name": "EV-default",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "10",
+        "t0m": "9",
+        "t0p": "1"
+      },
+      "actual": "单点击期望价值 EV ≈ $0.90；当前 CPC $1.00 → 负期望，每点击约亏 $0.10，应降出价/换词/否定",
+      "passed": true
+    },
+    {
+      "name": "EV-positive",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "20",
+        "t0m": "10",
+        "t0p": "1.25"
+      },
+      "actual": "单点击期望价值 EV ≈ $2.00；当前 CPC $1.25 → 正期望，值得投，每点击可赚约 $0.75",
+      "passed": true
+    },
+    {
+      "name": "EV-equal",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "10",
+        "t0m": "9",
+        "t0p": "0.9"
+      },
+      "actual": "单点击期望价值 EV ≈ $0.90；当前 CPC $0.90 → 正期望，值得投，每点击可赚约 $0.00",
+      "passed": true
+    },
+    {
+      "name": "EV-empty-cpc",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "10",
+        "t0m": "9",
+        "t0p": ""
+      },
+      "actual": "单点击期望价值 EV ≈ $0.90；当前 CPC $0.00 → 正期望，值得投，每点击可赚约 $0.90",
+      "passed": true
+    },
+    {
+      "name": "EV-zero-margin",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "10",
+        "t0m": "0",
+        "t0p": "1"
+      },
+      "actual": "请填写参数",
+      "passed": true
+    },
+    {
+      "name": "EV-zero-conversion",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "0",
+        "t0m": "9",
+        "t0p": "1"
+      },
+      "actual": "请填写参数",
+      "passed": true
+    },
+    {
+      "name": "EV-negative-conversion",
+      "function": "calEv",
+      "inputs": {
+        "t0c": "-10",
+        "t0m": "9",
+        "t0p": "1"
+      },
+      "actual": "单点击期望价值 EV ≈ $-0.90；当前 CPC $1.00 → 负期望，每点击约亏 $1.90，应降出价/换词/否定",
+      "passed": true
+    },
+    {
+      "name": "CPC-default",
+      "function": "calCpc",
+      "inputs": {
+        "t2a": "25",
+        "t2c": "10",
+        "t2p": "30"
+      },
+      "actual": "保本 CPC ≈ $0.75；若目标 ACoS 设满即为盈亏平衡，实际出价应 ≤ 该值",
+      "passed": true
+    },
+    {
+      "name": "CPC-custom",
+      "function": "calCpc",
+      "inputs": {
+        "t2a": "30",
+        "t2c": "12.5",
+        "t2p": "40"
+      },
+      "actual": "保本 CPC ≈ $1.50；若目标 ACoS 设满即为盈亏平衡，实际出价应 ≤ 该值",
+      "passed": true
+    },
+    {
+      "name": "CPC-zero-target",
+      "function": "calCpc",
+      "inputs": {
+        "t2a": "0",
+        "t2c": "10",
+        "t2p": "30"
+      },
+      "actual": "请填写完整参数",
+      "passed": true
+    },
+    {
+      "name": "CPC-two-negatives",
+      "function": "calCpc",
+      "inputs": {
+        "t2a": "-25",
+        "t2c": "-10",
+        "t2p": "30"
+      },
+      "actual": "保本 CPC ≈ $0.75；若目标 ACoS 设满即为盈亏平衡，实际出价应 ≤ 该值",
+      "passed": true
+    },
+    {
+      "name": "Budget-default",
+      "function": "calBud",
+      "inputs": {
+        "t3c": "10",
+        "t3p": "1"
+      },
+      "actual": "至少 10 次点击出 1 单 → 保底预算 ≈ $10；若 CPC 超过单点 EV 则跑再多也是亏，优先降出价",
+      "passed": true
+    },
+    {
+      "name": "Budget-ceil-and-round",
+      "function": "calBud",
+      "inputs": {
+        "t3c": "7",
+        "t3p": "0.9"
+      },
+      "actual": "至少 15 次点击出 1 单 → 保底预算 ≈ $14；若 CPC 超过单点 EV 则跑再多也是亏，优先降出价",
+      "passed": true
+    },
+    {
+      "name": "Budget-zero-cpc",
+      "function": "calBud",
+      "inputs": {
+        "t3c": "10",
+        "t3p": "0"
+      },
+      "actual": "请填写参数",
+      "passed": true
+    },
+    {
+      "name": "Budget-negative-conversion",
+      "function": "calBud",
+      "inputs": {
+        "t3c": "-10",
+        "t3p": "1"
+      },
+      "actual": "至少 -10 次点击出 1 单 → 保底预算 ≈ $-10",
+      "passed": true
+    },
+    {
+      "name": "Budget-sub-dollar-rounded-zero",
+      "function": "calBud",
+      "inputs": {
+        "t3c": "100",
+        "t3p": "0.3"
+      },
+      "actual": "至少 1 次点击出 1 单 → 保底预算 ≈ $0；若 CPC 超过单点 EV 则跑再多也是亏，优先降出价",
+      "passed": true
+    },
+    {
+      "name": "High-click-default",
+      "function": "calHc",
+      "inputs": {
+        "t4c": "10"
+      },
+      "actual": "平均 10.0 点击出 1 单；超过 15 点击仍不出单 → 考虑降价 / 换词",
+      "passed": true
+    },
+    {
+      "name": "High-click-rounding",
+      "function": "calHc",
+      "inputs": {
+        "t4c": "12"
+      },
+      "actual": "平均 8.3 点击出 1 单；超过 13 点击仍不出单 → 考虑降价 / 换词",
+      "passed": true
+    },
+    {
+      "name": "High-click-zero",
+      "function": "calHc",
+      "inputs": {
+        "t4c": "0"
+      },
+      "actual": "请填写参数",
+      "passed": true
+    },
+    {
+      "name": "High-click-negative",
+      "function": "calHc",
+      "inputs": {
+        "t4c": "-10"
+      },
+      "actual": "平均 -10.0 点击出 1 单；超过 -15 点击仍不出单 → 考虑降价 / 换词",
+      "passed": true
+    },
+    {
+      "name": "High-click-over100",
+      "function": "calHc",
+      "inputs": {
+        "t4c": "200"
+      },
+      "actual": "平均 0.5 点击出 1 单；超过 1 点击仍不出单 → 考虑降价 / 换词",
+      "passed": true
+    }
+  ]
+}

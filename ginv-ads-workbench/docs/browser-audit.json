@@ -1,0 +1,425 @@
+{
+  "topics": [
+    {
+      "id": "new_product",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 3,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "ad_structure",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 4,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "bid_budget",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 4,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "negative",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 4,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "keyword",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 5,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "asin_traffic",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 5,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "video_brand",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 2,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "mature",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 6,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "stockout",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 3,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "season",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 4,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "report",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 5,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "listing_conv",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 5,
+      "sopMatch": true,
+      "tipMatch": true
+    },
+    {
+      "id": "profit",
+      "allArticlesMatch": true,
+      "decisionMatch": true,
+      "renderedArticles": 4,
+      "sopMatch": true,
+      "tipMatch": true
+    }
+  ],
+  "concepts": [
+    {
+      "id": "acos",
+      "match": true
+    },
+    {
+      "id": "tacos",
+      "match": true
+    },
+    {
+      "id": "ctr",
+      "match": true
+    },
+    {
+      "id": "cvr",
+      "match": true
+    },
+    {
+      "id": "cpc",
+      "match": true
+    },
+    {
+      "id": "cpa",
+      "match": true
+    },
+    {
+      "id": "roas",
+      "match": true
+    },
+    {
+      "id": "skag",
+      "match": true
+    },
+    {
+      "id": "sku",
+      "match": true
+    },
+    {
+      "id": "ht-lt",
+      "match": true
+    },
+    {
+      "id": "aba",
+      "match": true
+    },
+    {
+      "id": "vcpm",
+      "match": true
+    },
+    {
+      "id": "ev",
+      "match": true
+    },
+    {
+      "id": "concept-14",
+      "match": true
+    },
+    {
+      "id": "concept-15",
+      "match": true
+    },
+    {
+      "id": "concept-16",
+      "match": true
+    },
+    {
+      "id": "concept-17",
+      "match": true
+    },
+    {
+      "id": "concept-18",
+      "match": true
+    },
+    {
+      "id": "acos-19",
+      "match": true
+    },
+    {
+      "id": "tos",
+      "match": true
+    }
+  ],
+  "tools": [
+    {
+      "id": "t1",
+      "defaults": [
+        "30.0%",
+        "$9.00"
+      ],
+      "custom": [
+        "30.0%",
+        "$12.00"
+      ],
+      "resetMatch": true
+    },
+    {
+      "id": "t0",
+      "defaults": [
+        "$0.90",
+        "$-0.10",
+        "$1.00"
+      ],
+      "custom": [
+        "$2.00",
+        "$0.75",
+        "$1.25"
+      ],
+      "resetMatch": true
+    },
+    {
+      "id": "t2",
+      "defaults": [
+        "$0.75",
+        "25.0%"
+      ],
+      "custom": [
+        "$1.50",
+        "30.0%"
+      ],
+      "resetMatch": true
+    },
+    {
+      "id": "t3",
+      "defaults": [
+        "$10.00",
+        "10次",
+        "$10"
+      ],
+      "custom": [
+        "$13.50",
+        "15次",
+        "$14"
+      ],
+      "resetMatch": true
+    },
+    {
+      "id": "t4",
+      "defaults": [
+        "15次点击",
+        "10.0次"
+      ],
+      "custom": [
+        "13次点击",
+        "8.3次"
+      ],
+      "resetMatch": true
+    }
+  ],
+  "responsive": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overview": {
+        "contentWidth": 375,
+        "noOverflow": true,
+        "width": 390
+      },
+      "reader": {
+        "articles": 4,
+        "contentWidth": 375,
+        "noOverflow": true,
+        "width": 390
+      },
+      "tool": {
+        "contentWidth": 375,
+        "noOverflow": true,
+        "results": 3,
+        "width": 390
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "overview": {
+        "contentWidth": 753,
+        "noOverflow": true,
+        "width": 768
+      },
+      "reader": {
+        "articles": 4,
+        "contentWidth": 753,
+        "noOverflow": true,
+        "width": 768
+      },
+      "tool": {
+        "contentWidth": 753,
+        "noOverflow": true,
+        "results": 3,
+        "width": 768
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "overview": {
+        "contentWidth": 1009,
+        "noOverflow": true,
+        "width": 1024
+      },
+      "reader": {
+        "articles": 4,
+        "contentWidth": 1009,
+        "noOverflow": true,
+        "width": 1024
+      },
+      "tool": {
+        "contentWidth": 1009,
+        "noOverflow": true,
+        "results": 3,
+        "width": 1024
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "overview": {
+        "contentWidth": 1425,
+        "noOverflow": true,
+        "width": 1440
+      },
+      "reader": {
+        "articles": 4,
+        "contentWidth": 1425,
+        "noOverflow": true,
+        "width": 1440
+      },
+      "tool": {
+        "contentWidth": 1440,
+        "noOverflow": true,
+        "results": 3,
+        "width": 1440
+      }
+    }
+  ],
+  "invalidInputs": [
+    {
+      "id": "t1",
+      "error": "请填写售价。",
+      "resultVisible": false
+    },
+    {
+      "id": "t0",
+      "error": "请填写转化率。",
+      "resultVisible": false
+    },
+    {
+      "id": "t2",
+      "error": "请填写目标 ACoS。",
+      "resultVisible": false
+    },
+    {
+      "id": "t3",
+      "error": "请填写转化率。",
+      "resultVisible": false
+    },
+    {
+      "id": "t4",
+      "error": "请填写平均转化率。",
+      "resultVisible": false
+    }
+  ],
+  "breakEven": {
+    "description": "盈亏平衡：预计毛利与点击成本相等。",
+    "values": [
+      "$0.90",
+      "$0.00",
+      "$0.90"
+    ]
+  },
+  "search": {
+    "before": {
+      "count": 7,
+      "first": "主题\n断货与恢复推广\n断货与恢复推广\n\n核心方法与标准流程 断货会掉质量得分，重启要按新品节奏快速拉流量。 拉断货前 30 天客户搜索词报告，找出稳定出单的关键词。 用 SKAG 精准投放 3-5 个高频出单词，竞价给到较高位。 老广告可先抬价 50% + 加预算测试；无曝光则转新品打法。 可新开一个自动广告，出价建议竞价上浮 35-50% 拉流量。 断货期…",
+      "query": "断货"
+    },
+    "after": {
+      "count": 7,
+      "query": "断货"
+    },
+    "preserved": true,
+    "specialCharactersHandled": true
+  },
+  "webmcp": {
+    "search": {
+      "result": "{\"query\":\"SKAG\",\"count\":5,\"results\":[{\"type\":\"concept\",\"title\":\"SKAG\",\"id\":\"skag\",\"excerpt\":\"SKAG 单词单组单活动策略（Single Keyword Ad Group） 含义 一个广告组只放一个精准关键词，出价与预算完全独立控制。 怎么用 新品集中烧核心大词冲排名；老品卡位；便于精确衡量每个词的独立表现。 提示 适合主打核心词，避免一组多词互相稀释数据与预算。\"},{\"type\":\"topic\",\"title\":\"新品推广打法\",\"id\":\"new_product\",\"excerpt\":\"… 5-10 个高流量、高相关词，用单词单组单活动(SKAG) 打精准，集中烧预算冲排名。 竞价用固定竞价(fixed)拉曝光测转化，出价参考建议竞价中高位。 自动广告建议开 3 组（高/中/低）瀑布式跑词，或与手动精准配合测词。 测词节奏：新品每 3 天看一次数据并迭代补词，不要频繁调整竞价。 前期长尾词作用有限，先把…\"},{\"type\":\"topic\",\"title\":\"广告架构与匹配方式\",\"id\":\"ad_structure\",\"excerpt\":\"…，测新词与拓流量。 出单稳定后转移到精准(PER/SKAG)：单词单组单活动，便于单独控竞价与预算。 同一词不要在同类型广告(SP)下同时开广泛+词组抢流量；转移后原组做精否保单一流量入口。 流量按 HT/LT（高/低流量词）分组，避免大词吃光预算导致小词无曝光。 一个组放词数量取决于词流量：大词单词单组；中部词 5-…\"},{\"type\":\"topic\",\"title\":\"关键词调研与布局\",\"id\":\"keyword\",\"excerpt\":\"…、高流量、高相关词。 大词/核心词：5-10 个，SKAG 精准投放冲排名。 长尾词：转化好、竞争小，适合做盈利增量或捡漏(低 bid)。 词按流量分层(HT 高流量 / LT 低流量)分组，避免互相抢预算。 listing 埋词要包含投放大词，否则前台搜不到。 分类目平均转化率：用商机探测器取 top80% 流量词加…\"},{\"type\":\"topic\",\"title\":\"断货与恢复推广\",\"id\":\"stockout\",\"excerpt\":\"…0 天客户搜索词报告，找出稳定出单的关键词。 用 SKAG 精准投放 3-5 个高频出单词，竞价给到较高位。 老广告可先抬价 50% + 加预算测试；无曝光则转新品打法。 可新开一个自动广告，出价建议竞价上浮 35-50% 拉流量。 断货期间不建议直接暂停广告：对于短暂断货的情况，下调预算即可，库存恢复后将预算调回原位…\"}]}",
+      "visible": {
+        "count": 5,
+        "query": "SKAG"
+      }
+    },
+    "invalidSearch": {
+      "rejected": true,
+      "statePreserved": true
+    },
+    "calculator": {
+      "result": "{\"toolId\":\"t3\",\"title\":\"保底日预算\",\"metrics\":[{\"label\":\"日预算参考\",\"value\":13.5,\"unit\":\"USD\",\"precision\":2,\"note\":\"\"},{\"label\":\"估算一单所需点击数\",\"value\":15,\"unit\":\"次\",\"precision\":0,\"note\":\"\"},{\"label\":\"原站取整显示\",\"value\":13.5,\"unit\":\"USD\",\"precision\":0,\"note\":\"\"}],\"summary\":\"按当前平均转化率，预留这些点击的费用作为预算参考。\",\"note\":\"原站名称为“保底日预算”。这是按平均转化率估算一单的预算参考，不保证每日必定出单。原站结果按整数美元取整，工作台同时保留两位小数。\"}",
+      "visible": [
+        "$13.50",
+        "15次",
+        "$14"
+      ]
+    },
+    "invalidCalculator": {
+      "rejected": true,
+      "statePreserved": true
+    }
+  },
+  "consoleLogs": [],
+  "capturedAt": "2026-09-30T08:46:41.745Z"
+}

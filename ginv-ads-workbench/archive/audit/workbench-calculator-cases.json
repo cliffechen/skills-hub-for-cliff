@@ -1,0 +1,427 @@
+{
+  "total": 105,
+  "passed": 105,
+  "failed": 0,
+  "results": [
+    {
+      "name": "ACoS-default",
+      "passed": true
+    },
+    {
+      "name": "ACoS-custom",
+      "passed": true
+    },
+    {
+      "name": "ACoS-zero-margin",
+      "passed": true
+    },
+    {
+      "name": "ACoS-negative-margin",
+      "passed": true
+    },
+    {
+      "name": "EV-default",
+      "passed": true
+    },
+    {
+      "name": "EV-positive",
+      "passed": true
+    },
+    {
+      "name": "EV-equal-default-formula",
+      "passed": true
+    },
+    {
+      "name": "EV-zero-conversion-valid",
+      "passed": true
+    },
+    {
+      "name": "EV-zero-margin-valid",
+      "passed": true
+    },
+    {
+      "name": "EV-negative-margin-valid",
+      "passed": true
+    },
+    {
+      "name": "CPC-default",
+      "passed": true
+    },
+    {
+      "name": "CPC-decimal-input",
+      "passed": true
+    },
+    {
+      "name": "CPC-zero-conversion-valid",
+      "passed": true
+    },
+    {
+      "name": "CPC-zero-target-valid",
+      "passed": true
+    },
+    {
+      "name": "CPC-over100-target-allowed",
+      "passed": true
+    },
+    {
+      "name": "Budget-default",
+      "passed": true
+    },
+    {
+      "name": "Budget-ceil-and-precision",
+      "passed": true
+    },
+    {
+      "name": "Budget-zero-cpc-valid",
+      "passed": true
+    },
+    {
+      "name": "Budget-sub-dollar",
+      "passed": true
+    },
+    {
+      "name": "High-click-default",
+      "passed": true
+    },
+    {
+      "name": "High-click-source-rounding",
+      "passed": true
+    },
+    {
+      "name": "High-click-100-percent",
+      "passed": true
+    },
+    {
+      "name": "t1-empty-t1p",
+      "passed": true
+    },
+    {
+      "name": "t1-whitespace-t1p",
+      "passed": true
+    },
+    {
+      "name": "t1-missing-t1p",
+      "passed": true
+    },
+    {
+      "name": "t1-nan-t1p",
+      "passed": true
+    },
+    {
+      "name": "t1-infinity-t1p",
+      "passed": true
+    },
+    {
+      "name": "t1-empty-t1m",
+      "passed": true
+    },
+    {
+      "name": "t1-whitespace-t1m",
+      "passed": true
+    },
+    {
+      "name": "t1-missing-t1m",
+      "passed": true
+    },
+    {
+      "name": "t1-nan-t1m",
+      "passed": true
+    },
+    {
+      "name": "t1-infinity-t1m",
+      "passed": true
+    },
+    {
+      "name": "t0-empty-t0c",
+      "passed": true
+    },
+    {
+      "name": "t0-whitespace-t0c",
+      "passed": true
+    },
+    {
+      "name": "t0-missing-t0c",
+      "passed": true
+    },
+    {
+      "name": "t0-nan-t0c",
+      "passed": true
+    },
+    {
+      "name": "t0-infinity-t0c",
+      "passed": true
+    },
+    {
+      "name": "t0-empty-t0m",
+      "passed": true
+    },
+    {
+      "name": "t0-whitespace-t0m",
+      "passed": true
+    },
+    {
+      "name": "t0-missing-t0m",
+      "passed": true
+    },
+    {
+      "name": "t0-nan-t0m",
+      "passed": true
+    },
+    {
+      "name": "t0-infinity-t0m",
+      "passed": true
+    },
+    {
+      "name": "t0-empty-t0p",
+      "passed": true
+    },
+    {
+      "name": "t0-whitespace-t0p",
+      "passed": true
+    },
+    {
+      "name": "t0-missing-t0p",
+      "passed": true
+    },
+    {
+      "name": "t0-nan-t0p",
+      "passed": true
+    },
+    {
+      "name": "t0-infinity-t0p",
+      "passed": true
+    },
+    {
+      "name": "t2-empty-t2a",
+      "passed": true
+    },
+    {
+      "name": "t2-whitespace-t2a",
+      "passed": true
+    },
+    {
+      "name": "t2-missing-t2a",
+      "passed": true
+    },
+    {
+      "name": "t2-nan-t2a",
+      "passed": true
+    },
+    {
+      "name": "t2-infinity-t2a",
+      "passed": true
+    },
+    {
+      "name": "t2-empty-t2c",
+      "passed": true
+    },
+    {
+      "name": "t2-whitespace-t2c",
+      "passed": true
+    },
+    {
+      "name": "t2-missing-t2c",
+      "passed": true
+    },
+    {
+      "name": "t2-nan-t2c",
+      "passed": true
+    },
+    {
+      "name": "t2-infinity-t2c",
+      "passed": true
+    },
+    {
+      "name": "t2-empty-t2p",
+      "passed": true
+    },
+    {
+      "name": "t2-whitespace-t2p",
+      "passed": true
+    },
+    {
+      "name": "t2-missing-t2p",
+      "passed": true
+    },
+    {
+      "name": "t2-nan-t2p",
+      "passed": true
+    },
+    {
+      "name": "t2-infinity-t2p",
+      "passed": true
+    },
+    {
+      "name": "t3-empty-t3c",
+      "passed": true
+    },
+    {
+      "name": "t3-whitespace-t3c",
+      "passed": true
+    },
+    {
+      "name": "t3-missing-t3c",
+      "passed": true
+    },
+    {
+      "name": "t3-nan-t3c",
+      "passed": true
+    },
+    {
+      "name": "t3-infinity-t3c",
+      "passed": true
+    },
+    {
+      "name": "t3-empty-t3p",
+      "passed": true
+    },
+    {
+      "name": "t3-whitespace-t3p",
+      "passed": true
+    },
+    {
+      "name": "t3-missing-t3p",
+      "passed": true
+    },
+    {
+      "name": "t3-nan-t3p",
+      "passed": true
+    },
+    {
+      "name": "t3-infinity-t3p",
+      "passed": true
+    },
+    {
+      "name": "t4-empty-t4c",
+      "passed": true
+    },
+    {
+      "name": "t4-whitespace-t4c",
+      "passed": true
+    },
+    {
+      "name": "t4-missing-t4c",
+      "passed": true
+    },
+    {
+      "name": "t4-nan-t4c",
+      "passed": true
+    },
+    {
+      "name": "t4-infinity-t4c",
+      "passed": true
+    },
+    {
+      "name": "ACoS-zero-price",
+      "passed": true
+    },
+    {
+      "name": "ACoS-negative-price",
+      "passed": true
+    },
+    {
+      "name": "ACoS-margin-over-price",
+      "passed": true
+    },
+    {
+      "name": "EV-negative-cpc",
+      "passed": true
+    },
+    {
+      "name": "CPC-negative-target",
+      "passed": true
+    },
+    {
+      "name": "CPC-zero-price",
+      "passed": true
+    },
+    {
+      "name": "CPC-negative-price",
+      "passed": true
+    },
+    {
+      "name": "Budget-negative-cpc",
+      "passed": true
+    },
+    {
+      "name": "t0-negative-conversion",
+      "passed": true
+    },
+    {
+      "name": "t0-over100-conversion",
+      "passed": true
+    },
+    {
+      "name": "t2-negative-conversion",
+      "passed": true
+    },
+    {
+      "name": "t2-over100-conversion",
+      "passed": true
+    },
+    {
+      "name": "t3-negative-conversion",
+      "passed": true
+    },
+    {
+      "name": "t3-over100-conversion",
+      "passed": true
+    },
+    {
+      "name": "t4-negative-conversion",
+      "passed": true
+    },
+    {
+      "name": "t4-over100-conversion",
+      "passed": true
+    },
+    {
+      "name": "Budget-zero-conversion",
+      "passed": true
+    },
+    {
+      "name": "High-click-zero-conversion",
+      "passed": true
+    },
+    {
+      "name": "ACoS-output-overflow",
+      "passed": true
+    },
+    {
+      "name": "EV-output-overflow",
+      "passed": true
+    },
+    {
+      "name": "CPC-output-overflow",
+      "passed": true
+    },
+    {
+      "name": "Budget-output-overflow",
+      "passed": true
+    },
+    {
+      "name": "High-click-underflow-denominator",
+      "passed": true
+    },
+    {
+      "name": "Unknown-tool",
+      "passed": true
+    },
+    {
+      "name": "EV-break-even-positive-floating-error",
+      "passed": true
+    },
+    {
+      "name": "EV-break-even-negative-floating-error",
+      "passed": true
+    },
+    {
+      "name": "Input-handler-clears-old-result",
+      "passed": true
+    },
+    {
+      "name": "Error-handler-clears-old-result",
+      "passed": true
+    }
+  ]
+}

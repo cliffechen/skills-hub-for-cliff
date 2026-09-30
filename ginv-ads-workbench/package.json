@@ -1,0 +1,13 @@
+{
+  "name": "ginv-ads-workbench",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "launch": "node scripts/launch.mjs",
+    "sync": "node scripts/sync-data.mjs",
+    "check": "node --check workbench/dist/app.js && node --check workbench/dist/calculators.js && node scripts/verify-content.mjs",
+    "test": "node --test tests/calculators.test.mjs"
+  }
+}
