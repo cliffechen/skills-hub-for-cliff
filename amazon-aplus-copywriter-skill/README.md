@@ -67,7 +67,7 @@ soffice --headless --convert-to xlsx --outdir /tmp 待重算的文件.xlsx
 
 ## 示例
 
-`examples/` 是 UA700 项目（B0H1CZ8NLF，ZAB Urolithin A 700mg）的完整一组输入与产出：6 张 A+/品牌故事构图、8 张副图、一份 OLENPHOGY 对标库，以及用它们写出的两份成品 Excel（`04-示例产出/`，各 4 个 sheet）。细节见 [examples/README.md](./examples/README.md)。
+`examples/` 是 UA700 项目（B0XXXXXXXX，ZAB Urolithin A 700mg）的完整一组输入与产出：6 张 A+/品牌故事构图、8 张副图、一份 OLENPHOGY 对标库，以及用它们写出的两份成品 Excel（`04-示例产出/`，各 4 个 sheet）。细节见 [examples/README.md](./examples/README.md)。
 
 ## 依赖
 

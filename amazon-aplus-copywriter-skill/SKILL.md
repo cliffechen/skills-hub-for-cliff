@@ -92,7 +92,7 @@ plan 包含：
 - 同时给每张 A+ 图写 alt 文本（≤100 字符），品牌故事按需；listing 副图没有 alt 字段，不写。
 - listing 副图另按 `references/listing-images.md`：每张独立成立、大标题 ≤2 行 ≤45 字符、FDA 声明按图放、对照列按属性限定。
 - 品牌调性位按 `references/brand-voice.md` 写：洞察式品牌宣言，两拍、不写数字/规格/认证、不复述前面图的事实；该图的 alt 也只写品牌＋产品＋情绪主张。JSON 里给这些行（含该图 ALT 行）加 `"voice": "brand"`。
-- 营销话术写进 JSON 的 `marketing` 数组，成分科普写进 `explainers` 数组，写法按上面两份参考文件；plan 确定的功效方向写进 `meta.claims`（`allowed` / `blocked`）。成品效果以用户认可的 B0H1CZ8NLF v5 为准（见 `references/ingredients/urolithin-a.md`）。
+- 营销话术写进 JSON 的 `marketing` 数组，成分科普写进 `explainers` 数组，写法按上面两份参考文件；plan 确定的功效方向写进 `meta.claims`（`allowed` / `blocked`）。成品效果以用户认可的 B0XXXXXXXX v5 为准（见 `references/ingredients/urolithin-a.md`）。
 - 设计层面的问题（换Logo、换瓶身、他牌素材、标签重做、播放按钮等）写进「设计修改清单」，不混在文案里。
 
 ### 第6步：生成交付物
@@ -111,7 +111,7 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/build_xlsx.py copy.json "/path/{ASIN}_{类�
 
 文件名没带时间戳时脚本会自动补上，以脚本打印的 `saved …` 路径为准。
 
-输出 sheet：说明 / 文案总表（含 LEN 字符数、差值公式）/ 营销话术（有 `marketing` 时）/ 成分科普（有 `explainers` 时）/ 设计修改清单 / 事实依据。文件名格式 `{ASIN}_{类型}_v{n}_{YYYYMMDD}_{AM|PM}{hhmm}.xlsx`，如 `B0H1CZ8NLF_A+高级轮播文案_v1_20261001_PM1030.xlsx` / `{ASIN}_副图文案_v1_{时间戳}.xlsx`，放到用户文件夹。用户要 Word/Markdown 时，用同一份 JSON 转换（Word 需先读 docx skill），文件名带同一个时间戳。
+输出 sheet：说明 / 文案总表（含 LEN 字符数、差值公式）/ 营销话术（有 `marketing` 时）/ 成分科普（有 `explainers` 时）/ 设计修改清单 / 事实依据。文件名格式 `{ASIN}_{类型}_v{n}_{YYYYMMDD}_{AM|PM}{hhmm}.xlsx`，如 `B0XXXXXXXX_A+高级轮播文案_v1_20261001_PM1030.xlsx` / `{ASIN}_副图文案_v1_{时间戳}.xlsx`，放到用户文件夹。用户要 Word/Markdown 时，用同一份 JSON 转换（Word 需先读 docx skill），文件名带同一个时间戳。
 
 ### 第7步：验证（必须）
 

@@ -1,8 +1,8 @@
 # 成分档案：Urolithin A（尿石素 A）
 
 - **核实日期**：2026-10-02（超过 12 个月需复核）
-- **首次用于**：B0H1CZ8NLF｜ZAB Urolithin A 700mg per 2-capsule serving, 90 capsules
-- **用户认可成品**：`工作区/05-输出/B0H1CZ8NLF_A+高级轮播文案_v5_20261002_AM1139.xlsx`
+- **首次用于**：B0XXXXXXXX｜ZAB Urolithin A 700mg per 2-capsule serving, 90 capsules
+- **用户认可成品**：`工作区/05-输出/B0XXXXXXXX_A+高级轮播文案_v5_20261002_AM1139.xlsx`
 
 ## 1. 剂量口径
 - 单一化合物，标签剂量即有效量；无 %DV（无每日推荐量）。
@@ -23,7 +23,7 @@
 | 生活结果 | 细胞能量，支持运动和日常 | listing（energy metabolism） | — |
 
 ## 4. 功效方向
-- **allowed**（以 B0H1CZ8NLF listing 为准）：energy metabolism、cellular health、mitochondrial function；aging 只作情绪主题（用户 2026-10-02 决定）。
+- **allowed**（以 B0XXXXXXXX listing 为准）：energy metabolism、cellular health、mitochondrial function；aging 只作情绪主题（用户 2026-10-02 决定）。
 - **blocked**：gut health、healthy gut、digestive、microbiome support（肠道只是来源，不是功效方向）；muscle strength（该 listing 未写）；immune、longevity；reverse / anti-aging。
 - **FDA 授权健康声明**：无。
 
