@@ -16,7 +16,7 @@
 | 类型 | 例子 | 处理 |
 |---|---|---|
 | 疾病 | cure, treat, prevent, heal, diagnose, 具体疾病名 | 禁用 |
-| 逆转/抗衰 | reverse aging, anti-aging, turn back the clock | 禁用；改为 listing 支持的功能方向 |
+| 逆转/抗衰 | reverse aging, anti-aging, turn back the clock | 禁用；改为 listing 支持的功能方向。例外：品牌调性句可把 aging 当情绪主题（如 "Start where aging actually starts."），但不得写逆转/抗衰（用户 2026-10-02 决定，见 `brand-voice.md`）。营销话术的损失厌恶也可用"随年龄的变化"作框架，须标 ⚠️、加 `*` 与 FDA 声明（见 `persuasion-psychology.md`） |
 | 保证 | guaranteed results, works for everyone, instant | 禁用 |
 | 绝对化 | #1, best, most effective, strongest | 无第三方依据禁用 |
 | 吸收/效力数字 | 100% absorption, 10x better | 无成品研究禁用 |
@@ -29,4 +29,5 @@
 - 剂量永远带份量：`700mg per 2-capsule serving`。
 - 配方载体（MCT oil、lecithin、piperine 等）只写"含有"，不写"提升吸收"——除非有依据。
 - 通用科普（如"肠道菌群转化因人而异"）可用，但只写定性结论，不引百分比；在事实页标"非listing"并附文献方向。
+- 成分机理只写"研究观察到 / studies suggest"，主语是成分，不写成本品的效果；成分的来源（如肠道转化）不等于功效方向（如肠道健康），后者需 listing 或用户依据。
 - Supplement Facts 格必须与实物标签逐字一致，学名种加词小写（Punica granatum）。
