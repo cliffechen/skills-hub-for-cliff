@@ -38,6 +38,13 @@ JSON structure (all text may contain real newlines; they become in-cell line bre
      "placement": "M-3 / 【新增】教育图", "facts": "F11", "source": "证据类型＋出处方向",
      "level": "✅|⚠️", "risk": "风险说明"}
   ],
+  "excipients": {                                    # 可选：辅料与剂型（见 references/dosage-form-excipients.md）
+    "form": "硬胶囊（vegetable cellulose 植物胶囊）", "source": "标签图",
+    "items": [
+      {"id": "EXC-A", "angle": "外壳/基质", "headline": "英文标题", "subheadline": "英文副标题",
+       "points": "支撑卖点（换行分隔）", "zh": "中文释义", "facts": "F14", "level": "✅|⚠️", "risk": "风险说明"}
+    ]
+  },
   "issues": [                                        # 设计修改清单
     {"priority": "必改|建议|确认", "location": "...", "problem": "...", "fix": "..."}
   ],
@@ -134,6 +141,10 @@ def main(src, out):
         lines.append(("7. 「成分科普」按顾客的提问顺序，用 ELI5 的结构（一句话本质 → 类比 → 展开 → 和我有什么关系）"
                       "讲成分如何作用。G 列「图上短版」可直接用于 A+ 教育图（第一行为标题），其余列可用于 FAQ、详情或客服回答。"
                       "研究出处只在 L 列，供核对，不上图。", None))
+    if (data.get("excipients") or {}).get("items"):
+        lines.append(("8. 「辅料与剂型」按标签上的剂型和 Other Ingredients，从三个角度（外壳/基质、辅料清单、各司其职）"
+                      "各写一版 Headline + Subheadline + 支撑卖点，可用于 Supplement Facts 配套图或成分透明图。"
+                      "剂型变了（软胶囊、软糖、片剂…）这张表会随之重写。", None))
     claims = meta.get("claims") or {}
     if claims:
         lines += [("", None), ("本产品功效方向", "h"),
@@ -243,6 +254,38 @@ def main(src, out):
         ws.auto_filter.ref = f"A1:N{ws.max_row}"
         ws.row_dimensions[1].height = 30
 
+    # --- 辅料与剂型（可选）---
+    exc = data.get("excipients") or {}
+    if exc.get("items"):
+        ws = wb.create_sheet("辅料与剂型")
+        exc_headers = ["编号", "角度", "Headline", "Subheadline", "支撑卖点", "中文释义", "Headline 字符数",
+                       "Subheadline 字符数", "事实依据", "合规等级", "风险说明"]
+        ws.append(exc_headers)
+        for e in exc["items"]:
+            ws.append([e.get("id", ""), e.get("angle", ""), e.get("headline", ""), e.get("subheadline", ""),
+                       e.get("points", ""), e.get("zh", ""), None, None, e.get("facts", ""),
+                       e.get("level", ""), e.get("risk", "")])
+        style_table(ws, [8, 14, 36, 48, 52, 40, 9, 9, 10, 8, 40])
+        for n in range(2, ws.max_row + 1):
+            fill = PatternFill("solid", fgColor=PALETTE[(n - 2) % len(PALETTE)])
+            for col in range(1, len(exc_headers) + 1):
+                ws.cell(n, col).fill = fill
+            lvl = str(ws.cell(n, 10).value or "")
+            for mark, color in LEVEL_FILL.items():
+                if lvl.startswith(mark):
+                    ws.cell(n, 10).fill = PatternFill("solid", fgColor=color)
+            for col in (3, 4):
+                ws.cell(n, col).font = Font(name=FONT, bold=True, size=10, color="C00000")
+        ws.insert_rows(1)  # form/source line above the table; LEN formulas written after the shift
+        for n in range(3, ws.max_row + 1):
+            ws.cell(n, 7).value = f"=LEN(C{n})"
+            ws.cell(n, 8).value = f"=LEN(D{n})"
+        c = ws.cell(1, 1, value=f"剂型：{exc.get('form', '')}｜出处：{exc.get('source', '')}")
+        c.font = Font(name=FONT, bold=True, size=11)
+        ws.freeze_panes = "C3"
+        ws.auto_filter.ref = f"A2:K{ws.max_row}"
+        ws.row_dimensions[2].height = 30
+
     # --- 设计修改清单 ---
     ws = wb.create_sheet("设计修改清单")
     ws.append(["#", "优先级", "位置", "问题", "建议处理", "状态"])
@@ -265,6 +308,7 @@ def main(src, out):
     wb.save(out)
     print(f"saved {out}  rows={len(data['rows'])} marketing={len(data.get('marketing') or [])} "
           f"explainers={len(data.get('explainers') or [])} "
+          f"excipients={len((data.get('excipients') or {}).get('items') or [])} "
           f"issues={len(data.get('issues', []))} facts={len(data.get('facts', []))}")
 
 

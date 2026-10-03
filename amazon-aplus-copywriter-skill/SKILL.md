@@ -56,6 +56,8 @@ description: 亚马逊图片文案编写（A+、品牌故事、listing主副图�
 
 每条事实编号 F01、F02…，记录出处（listing标题/要点N/详情/标签图/用户确认+日期/通用科普）。
 
+**剂型与辅料事实**：有标签图（或用户贴了 Other Ingredients）时，单独记一条：剂型、Serving size、外壳/基质、全部 Other Ingredients 原文、Vegetarian/Vegan 等标签字样。剂型按 `references/dosage-form-excipients.md` 识别；用户在对话里明确说的剂型优先。标签与 listing 的辅料或剂型不一致时进冲突表，以标签为准。
+
 **成分机理事实**（补剂类）：识别主成分和有功效作用的辅助成分，先查 `references/ingredients/{成分}.md` 有没有档案；有且未过期就沿用，没有就按 `references/ingredient-research.md` 的调研清单查（剂量口径、来源与缺口、作用、年龄、允许/拦截的功效方向、原料风险、顾客疑虑）。这类事实接着编号，来源标"通用科普（非 listing）"或"研究（非本品）"并附出处方向，只保留定性结论。
 
 ### 第2步：读对标库 → 规则卡
@@ -77,7 +79,7 @@ plan 包含：
 4. **冲突表**：按 `references/conflict-checklist.md` 逐项检查构图 vs 事实，列出问题与默认处理。
 5. **合规方式**：识别品类；补剂/保健品启用 `references/compliance-supplements.md`；其他品类按基线规则＋品类常识，必要时提醒用户核对类目政策。
 6. **成分链路与功效方向**（补剂类）：每个主成分一条链路 `缺口 → 作用 → 年龄 → 生活结果`（带 F 编号）；本产品 allowed / blocked 功效方向；多成分时各成分的分工。（见 `references/ingredient-research.md`）
-7. **营销话术与成分科普**：A+/品牌故事批次默认附两张 sheet——「营销话术」16 条成分链路式损失厌恶（`references/persuasion-psychology.md`）、「成分科普」约 6–7 个 ELI5 主题（`references/ingredient-eli5.md`）；用户可关闭或改数量，其他心理学原理和站外话术只在用户要求时写。listing 副图批次不生成。
+7. **营销话术与成分科普**：A+/品牌故事批次默认附两张 sheet——「营销话术」16 条成分链路式损失厌恶（`references/persuasion-psychology.md`）、「成分科普」约 6–7 个 ELI5 主题（`references/ingredient-eli5.md`）；用户可关闭或改数量，其他心理学原理和站外话术只在用户要求时写。listing 副图批次不生成。另外，有标签图或用户提到剂型时，A+ 与副图批次都默认附「辅料与剂型」sheet：按剂型从外壳/基质、辅料清单、各司其职三个角度各写一版 headline + subheadline + 支撑卖点（`references/dosage-form-excipients.md`）；plan 里写明识别出的剂型和依据，用户可关闭。
 8. **交付格式**（默认Excel）。
 9. **AskUserQuestion 选择题**（≤4题，推荐项放第一个）：常见题目——品牌名写法、某张图的叙事角度、listing未覆盖的徽章/认证是否有证据、交付格式。
 
@@ -92,7 +94,7 @@ plan 包含：
 - 同时给每张 A+ 图写 alt 文本（≤100 字符），品牌故事按需；listing 副图没有 alt 字段，不写。
 - listing 副图另按 `references/listing-images.md`：每张独立成立、大标题 ≤2 行 ≤45 字符、FDA 声明按图放、对照列按属性限定。
 - 品牌调性位按 `references/brand-voice.md` 写：洞察式品牌宣言，两拍、不写数字/规格/认证、不复述前面图的事实；该图的 alt 也只写品牌＋产品＋情绪主张。JSON 里给这些行（含该图 ALT 行）加 `"voice": "brand"`。
-- 营销话术写进 JSON 的 `marketing` 数组，成分科普写进 `explainers` 数组，写法按上面两份参考文件；plan 确定的功效方向写进 `meta.claims`（`allowed` / `blocked`）。成品效果以用户认可的 B0XXXXXXXX v5 为准（见 `references/ingredients/urolithin-a.md`）。
+- 营销话术写进 JSON 的 `marketing` 数组，成分科普写进 `explainers` 数组，写法按上面两份参考文件；plan 确定的功效方向写进 `meta.claims`（`allowed` / `blocked`）。辅料与剂型写进 `excipients`（`form` / `source` / `items`），只写标签上真实出现的辅料，不写 no fillers、吸收提升；vegan、free-from 类需标签或供应商依据。成品效果以用户认可的 B0XXXXXXXX v5 为准（见 `references/ingredients/urolithin-a.md`）。
 - 设计层面的问题（换Logo、换瓶身、他牌素材、标签重做、播放按钮等）写进「设计修改清单」，不混在文案里。
 
 ### 第6步：生成交付物
@@ -111,7 +113,7 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/build_xlsx.py copy.json "/path/{ASIN}_{类�
 
 文件名没带时间戳时脚本会自动补上，以脚本打印的 `saved …` 路径为准。
 
-输出 sheet：说明 / 文案总表（含 LEN 字符数、差值公式）/ 营销话术（有 `marketing` 时）/ 成分科普（有 `explainers` 时）/ 设计修改清单 / 事实依据。文件名格式 `{ASIN}_{类型}_v{n}_{YYYYMMDD}_{AM|PM}{hhmm}.xlsx`，如 `B0XXXXXXXX_A+高级轮播文案_v1_20261001_PM1030.xlsx` / `{ASIN}_副图文案_v1_{时间戳}.xlsx`，放到用户文件夹。用户要 Word/Markdown 时，用同一份 JSON 转换（Word 需先读 docx skill），文件名带同一个时间戳。
+输出 sheet：说明 / 文案总表（含 LEN 字符数、差值公式）/ 营销话术（有 `marketing` 时）/ 成分科普（有 `explainers` 时）/ 辅料与剂型（有 `excipients` 时）/ 设计修改清单 / 事实依据。文件名格式 `{ASIN}_{类型}_v{n}_{YYYYMMDD}_{AM|PM}{hhmm}.xlsx`，如 `B0XXXXXXXX_A+高级轮播文案_v1_20261001_PM1030.xlsx` / `{ASIN}_副图文案_v1_{时间戳}.xlsx`，放到用户文件夹。用户要 Word/Markdown 时，用同一份 JSON 转换（Word 需先读 docx skill），文件名带同一个时间戳。
 
 ### 第7步：验证（必须）
 
@@ -140,5 +142,6 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,soft
 - `references/brand-voice.md`：品牌调性位的洞察式品牌宣言写法、触发条件与禁区
 - `references/persuasion-psychology.md`：营销话术 sheet——默认成分链路式损失厌恶；按需原理、A+ 红线与站外诚实要求
 - `references/ingredient-eli5.md`：成分科普 sheet 的 ELI5 写法、主题顺序与合规
+- `references/dosage-form-excipients.md`：辅料与剂型 sheet——剂型识别、各剂型辅料角色、三个角度与证据红线
 - `references/ingredient-research.md`：遇到任何新成分的调研方法论（不含具体成分结论）
 - `references/ingredients/`：成分档案（每个成分一份，按需读取；`_template.md` 为存档模板）
