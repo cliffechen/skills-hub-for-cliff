@@ -6,7 +6,7 @@
 |---|---|---|
 | `工作区/01-A+排版/` | A+ 模块图、品牌故事构图（PNG/JPG） | 按技能第0步判断类型，逐张 Read |
 | `工作区/02-主图副图/` | listing 主图/副图构图（PNG/JPG） | 按 `references/listing-images.md` 写 |
-| `工作区/03-SupplementFacts-可选/` | 真实产品的 Supplement Facts 标签图 | 有则作为事实来源（出处记为"标签图"），优先级高于构图里的占位数字；没有就跳过 |
+| `工作区/03-SupplementFacts-可选/` | 真实产品的 Supplement Facts 标签图 | 有则作为事实来源（出处记为"标签图"），优先级高于构图里的占位数字；同时驱动「辅料与剂型」模块（`references/dosage-form-excipients.md`）。没有标签图但用户在对话里提到剂型时，按所说剂型写，并在 plan 里列出待确认的辅料；都没有就跳过 |
 | `工作区/04-对标文案库-可选/` | 对标品牌的 markdown 文案集（可按品牌分子文件夹） | 有则按 `references/library-digest-guide.md` 提炼规则卡，只借结构与方法、不照抄原句；没有则用 `references/baseline-rules.md` |
 | `工作区/05-输出/` | 交付的 Excel、copy.json 等 | 所有产出放这里 |
 

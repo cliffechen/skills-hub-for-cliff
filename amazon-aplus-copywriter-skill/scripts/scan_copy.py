@@ -30,7 +30,12 @@ Also checks the optional "explainers" list (see references/ingredient-eli5.md): 
   detail / so_what / on_image get the --forbid, fear, A+ policy (FLAG) and --supplement (WARN) checks;
   claim asterisks count toward the FDA disclaimer check.
 
-Claim guard (all rows + marketing + explainers), per product: meta.claims.blocked lists the benefit
+Also checks the optional "excipients" block (see references/dosage-form-excipients.md): fields headline /
+  subheadline / points get the --forbid, fear, A+ policy (FLAG) and --supplement (WARN) checks, plus:
+  "no fillers / filler-free" and absorption / bioavailability wording are a FLAG (excipients can't back them);
+  vegan / non-GMO / gluten-free / gelatin-free / sugar-free / "free from|of" are a WARN (need label or supplier proof).
+
+Claim guard (all rows + marketing + explainers + excipients), per product: meta.claims.blocked lists the benefit
   directions this product's listing does not cover (decided in the plan, see references/ingredient-research.md),
   e.g. {"claims": {"allowed": ["energy metabolism"], "blocked": ["gut health", "digestive", "immune"]}}.
   Any blocked phrase is a FLAG. Without meta.claims a WARN reminds you to define them.
@@ -63,6 +68,10 @@ def blocked_patterns(phrases):
     """Turn plain blocked phrases into word-bounded regexes ("gut health" -> r"\bgut health\b")."""
     return [r"\b" + re.escape(p.strip().lower()) + r"\b" for p in phrases if p and p.strip()]
 EXPLAINER_FIELDS = ("essence", "analogy", "detail", "so_what", "on_image")
+EXCIPIENT_FIELDS = ("headline", "subheadline", "points")
+EXCIPIENT_BANNED = [r"no fillers?\b", r"filler[- ]free", r"absor", r"bioavailab", r"fast[- ]acting"]
+EXCIPIENT_PROOF = [r"\bvegan\b", r"non-?gmo", r"gluten[- ]free", r"gelatin[- ]free", r"\bno gelatin\b",
+                   r"sugar[- ]free", r"\bfree (from|of)\b"]
 PLACEHOLDER = re.compile(r"\[[^\]]+\]")
 FDA_MARK = "not intended to diagnose"
 BRAND_SPEC = [
@@ -151,6 +160,28 @@ def check_explainers(items, a, forbid, flags, warns, star_rows):
                 star_rows.append(eid)
 
 
+def check_excipients(items, a, forbid, flags, warns, star_rows):
+    for e in items:
+        eid = e.get("id", "?")
+        for field in EXCIPIENT_FIELDS:
+            t = e.get(field) or ""
+            if not t or t == "—":
+                continue
+            low = t.lower()
+            common_checks(eid, field, t, a, forbid, flags, warns)
+            pat = first_hit(APLUS_POLICY, low)
+            if pat:
+                flags.append(f"{eid} [{field}] A+ policy wording /{pat}/: {t!r}")
+            pat = first_hit(EXCIPIENT_BANNED, low)
+            if pat:
+                flags.append(f"{eid} [{field}] excipient copy can't claim /{pat}/ - fillers are on the label / no absorption data: {t!r}")
+            pat = first_hit(EXCIPIENT_PROOF, low)
+            if pat:
+                warns.append(f"{eid} [{field}] /{pat}/ needs label or supplier proof: {t!r}")
+            if claim_star(t) and eid not in star_rows:
+                star_rows.append(eid)
+
+
 def check_marketing(items, a, forbid, flags, warns, star_rows):
     for m in items:
         mid = m.get("id", "?")
@@ -191,6 +222,7 @@ def main():
     rows = data["rows"]
     marketing = data.get("marketing") or []
     explainers = data.get("explainers") or []
+    excipients = (data.get("excipients") or {}).get("items") or []
     forbid = [t.strip() for t in a.forbid.split(",") if t.strip()]
     flags, warns = [], []
     claims = (data.get("meta") or {}).get("claims") or {}
@@ -244,11 +276,13 @@ def main():
     check_brand_voice(rows, flags, warns)
     check_marketing(marketing, a, forbid, flags, warns, star_rows)
     check_explainers(explainers, a, forbid, flags, warns, star_rows)
+    check_excipients(excipients, a, forbid, flags, warns, star_rows)
 
     if a.supplement and star_rows and not has_fda:
         flags.append(f"claim asterisks in {star_rows} but no FDA disclaimer row found")
 
-    print(f"rows scanned: {len(rows)} | marketing: {len(marketing)} | explainers: {len(explainers)} | claim-asterisk rows: {star_rows} | "
+    print(f"rows scanned: {len(rows)} | marketing: {len(marketing)} | explainers: {len(explainers)} | "
+          f"excipients: {len(excipients)} | claim-asterisk rows: {star_rows} | "
           f"FDA disclaimer present: {has_fda}")
     for f in flags:
         print("FLAG ", f)
