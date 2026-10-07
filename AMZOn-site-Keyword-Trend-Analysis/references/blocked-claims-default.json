@@ -1,0 +1,262 @@
+{
+  "_readme": "Bundled copy of the claim-direction blacklist (from amazon-preupload-check). Used only to raise red flags; never changes a trend verdict.",
+  "directions": {
+    "disease": {
+      "zh": "疾病/医疗声明（不可放开）",
+      "patterns": [
+        "\\bcures?\\b",
+        "\\bcured\\b",
+        "\\btreat(s|ed|ing|ment)?\\b",
+        "\\bprevent(s|ed|ing|ion)?\\b",
+        "\\bheal(s|ed|ing)?\\b",
+        "\\bdiagnos",
+        "\\bmitigat",
+        "\\bdisease",
+        "\\bdisorder",
+        "\\bsyndrome",
+        "\\bdeficiency\\b",
+        "\\binfection",
+        "\\binflammat",
+        "\\bpain\\b",
+        "\\barthritis",
+        "\\bosteopor",
+        "\\bdiabet",
+        "\\bcancer",
+        "\\btumou?r",
+        "\\bdepress",
+        "\\banxiety\\b",
+        "\\binsomnia",
+        "\\bhypertension",
+        "\\balzheimer",
+        "\\bdementia",
+        "\\badhd\\b",
+        "\\bobes(e|ity)\\b",
+        "\\bcovid",
+        "\\bflu\\b",
+        "\\bcold(s)? and flu",
+        "\\bvirus",
+        "\\bantiviral",
+        "\\bantibacterial",
+        "\\bantibiotic",
+        "\\bantidepressant",
+        "\\banti-?inflammatory",
+        "\\bdetox(ify|ification)?\\b",
+        "\\bmedicine\\b",
+        "\\bmedication",
+        "\\bdrug\\b",
+        "\\bprescription",
+        "\\bsymptom",
+        "\\bremed(y|ies)\\b",
+        "\\bclinical(ly)? (proven|tested)"
+      ],
+      "rewrite_hint": "删除；疾病声明无法改写成合规说法，改写成份事实或品质卖点"
+    },
+    "weight": {
+      "zh": "减重/体重管理/代谢燃脂（Amazon 高风险类目）",
+      "patterns": [
+        "(?<!net )\bweight",
+        "\\bslim",
+        "\\bfat\\b",
+        "fat[- ]burn",
+        "\\bburn(s|ing)? (fat|calories)",
+        "\\bcalorie",
+        "\\bappetite",
+        "\\bcravings?",
+        "\\bsatiety",
+        "\\bmetaboli",
+        "\\bthermogenic",
+        "\\bbelly\\b",
+        "\\bwaist",
+        "\\bketo(sis|genic)?\\b",
+        "\\blean\\b",
+        "\\bcarb blocker",
+        "\\bbody shape",
+        "\\bbloat"
+      ],
+      "rewrite_hint": "去掉体重/代谢方向，改写成分份量、剂型、用法等事实"
+    },
+    "bone_joint": {
+      "zh": "骨骼/关节/软骨（Amazon 高风险类目：关节健康）",
+      "patterns": [
+        "\\bbones?\\b",
+        "\\bskelet",
+        "\\bjoints?\\b",
+        "\\bcartilage",
+        "\\bknees?\\b",
+        "\\bmobility",
+        "\\bflexibility",
+        "\\bstiff",
+        "\\bligament",
+        "\\btendon",
+        "\\bbone density",
+        "\\bstrong bones"
+      ],
+      "rewrite_hint": "去掉骨骼关节方向；只写成分含量（如 Calcium 500 mg per serving）"
+    },
+    "sexual": {
+      "zh": "性功能/激素（Amazon 高风险类目）",
+      "patterns": [
+        "\\blibido",
+        "\\bsexual",
+        "\\bsex drive",
+        "\\btestosterone",
+        "\\bestrogen",
+        "\\bhormon",
+        "\\bvirility",
+        "\\bmale enhancement",
+        "\\bperformance in bed",
+        "\\berectil",
+        "\\bfertility",
+        "\\bmenopaus",
+        "\\bpms\\b"
+      ],
+      "rewrite_hint": "删除"
+    },
+    "sports": {
+      "zh": "运动营养/增肌/体能（Amazon 高风险类目）",
+      "patterns": [
+        "\\bmuscle",
+        "\\bpre-?workout",
+        "\\bpost-?workout",
+        "\\bworkout",
+        "\\bendurance",
+        "\\bstamina",
+        "\\bathletic",
+        "\\bstrength\\b",
+        "\\bpump\\b",
+        "\\banabolic",
+        "\\bbodybuild",
+        "\\brecovery\\b",
+        "\\bperformance\\b",
+        "\\bgains\\b"
+      ],
+      "rewrite_hint": "去掉运动表现方向；健身场景图也要避免"
+    },
+    "sleep_mood_cognition": {
+      "zh": "睡眠/情绪/压力/认知",
+      "patterns": [
+        "\\bsleep",
+        "\\brelax",
+        "\\bcalm",
+        "\\bstress",
+        "\\bmood\\b",
+        "\\bfocus",
+        "\\bmemory",
+        "\\bbrain",
+        "\\bcognit",
+        "\\bconcentrat",
+        "\\bmental clarity"
+      ],
+      "rewrite_hint": "去掉；如产品确有依据，在 check-config.json 放开并写成 supports … * + FDA 声明"
+    },
+    "immune": {
+      "zh": "免疫",
+      "patterns": [
+        "\\bimmun",
+        "\\bdefen[cs]e",
+        "\\bwhite blood"
+      ],
+      "rewrite_hint": "去掉"
+    },
+    "cardio_metabolic": {
+      "zh": "心血管/血糖/血压/胆固醇",
+      "patterns": [
+        "\\bheart\\b",
+        "\\bcardio",
+        "\\bblood sugar",
+        "\\bglucose",
+        "\\binsulin",
+        "\\bblood pressure",
+        "\\bcholesterol",
+        "\\bcirculation",
+        "\\barter"
+      ],
+      "rewrite_hint": "删除"
+    },
+    "energy": {
+      "zh": "能量/疲劳",
+      "patterns": [
+        "\\benergy",
+        "\\benergi",
+        "\\bfatigue",
+        "\\btired",
+        "\\bvitality",
+        "\\bboost"
+      ],
+      "rewrite_hint": "去掉；产品如有依据可在 check-config.json 放开"
+    },
+    "digestive": {
+      "zh": "肠道/消化/肝脏/排毒",
+      "patterns": [
+        "\\bgut\\b",
+        "\\bdigest",
+        "\\bconstipat",
+        "\\bregularity",
+        "\\bliver",
+        "\\bcleans",
+        "\\bmicrobiome"
+      ],
+      "rewrite_hint": "去掉"
+    },
+    "beauty_aging": {
+      "zh": "抗衰/美容（皮肤、头发、指甲）",
+      "patterns": [
+        "anti-?aging",
+        "\\bage-?defying",
+        "\\byouthful",
+        "\\bwrinkle",
+        "\\bcollagen production",
+        "\\bglow",
+        "\\bhair growth",
+        "\\bhair loss",
+        "\\bskin health",
+        "\\blongevity",
+        "\\breverse"
+      ],
+      "rewrite_hint": "去掉"
+    },
+    "organ_specific": {
+      "zh": "特定器官/系统（眼睛、前列腺、泌尿、甲状腺、呼吸）",
+      "patterns": [
+        "\\bvision\\b",
+        "\\beyes?\\b",
+        "\\bprostate",
+        "\\burinary",
+        "\\bbladder",
+        "\\bthyroid",
+        "\\blungs?\\b",
+        "\\brespirat",
+        "\\bkidney"
+      ],
+      "rewrite_hint": "去掉"
+    }
+  },
+  "allowed_phrases": [
+    "overall wellness",
+    "overall health",
+    "daily nutritional support",
+    "daily wellness routine",
+    "nutritional support"
+  ],
+  "certification_words": [
+    "non-?gmo",
+    "gluten[- ]free",
+    "vegan",
+    "vegetarian",
+    "kosher",
+    "halal",
+    "organic",
+    "third[- ]party tested",
+    "lab[- ]tested",
+    "c?gmp",
+    "\\bnsf\\b",
+    "\\busp\\b",
+    "dairy[- ]free",
+    "soy[- ]free",
+    "sugar[- ]free",
+    "allergen[- ]free",
+    "made in (the )?usa",
+    "keto[- ]friendly",
+    "paleo"
+  ]
+}
