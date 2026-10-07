@@ -3,7 +3,7 @@
   <p><strong>把 Amazon US 膳食补充剂的实战经验，沉淀成可复用的 Agent Skills。</strong></p>
   <p>从选品调研、关键词库、Listing 图片与 A+ 文案，到手机预览、广告知识与计算、成分合规与配方重建，这里把反复出现的运营动作整理成能直接交给 AI Agent 使用的工作流与本地工具。</p>
   <p>
-    <a href="#技能目录"><img src="https://img.shields.io/badge/Skills-35-00a8e1?style=for-the-badge" alt="35 个 Skill 入口" /></a>
+    <a href="#技能目录"><img src="https://img.shields.io/badge/Skills-36-00a8e1?style=for-the-badge" alt="36 个 Skill 入口" /></a>
     <img src="https://img.shields.io/badge/Platform-Amazon_US-ff9900?style=for-the-badge" alt="Amazon US" />
     <img src="https://img.shields.io/badge/Python-3.10%2B-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
     <img src="https://img.shields.io/badge/Status-Continuously_Updated-22c55e?style=for-the-badge" alt="持续更新中" />
@@ -18,7 +18,7 @@
 
 收录与整理的范围：
 
-- **选品与市场调研**：类目扫描、多维度关键词对比、Top100 产品结构、竞品差评归类、站外信号采集、Go / No-Go 评分。
+- **选品与市场调研**：类目扫描、多维度关键词对比、Top100 产品结构、竞品差评归类、站外信号采集、Go / No-Go 评分、成分入场时机速判。
 - **关键词与 Listing 运营**：下拉词采集、新品词库与 Search Term 基础、SP 搜索词报告分析、Listing QA 批量生成。
 - **图片与 A+ 内容**：主图合规判断、辅图文案、A+ 页面结构、品牌故事、四风格合规文案、手机端浏览预览。
 - **广告运营与知识工具**：广告主题与概念阅读、全文搜索、ACoS / CPC / 点击预算计算、本地内容归档与审计。
@@ -68,6 +68,7 @@
 | 做 Amazon US 膳食补充剂选品和 Go/No-Go 判断 | [`US_Sup_Product_Research_for_Qoderwork`](./US_Sup_Product_Research_for_Qoderwork/) | 重型选品调研，依赖 Sorftime / xCrawl 等工具 |
 | 围绕种子词做 Amazon US 选品调研、自动处理关键词漂移，并生成审计报告 | [`amazon-sorftime-mcp-with-serpapi-tavily`](./amazon-sorftime-mcp-with-serpapi-tavily/) | Sorftime 主数据 + SerpApi Google Web Trends + Tavily；固定输出 JSON、Markdown、HTML |
 | 只看需求端：判断一个关键词及周边词的需求真假、趋势走向，并预测上架那个月（默认 +4–6 个月）的位置 | [`AMZOn-site-Keyword-Trend-Analysis`](./AMZOn-site-Keyword-Trend-Analysis/) | 卖家精灵 + SIF + Sorftime 三个 MCP；多源交叉、脉冲剔除、7 类趋势原型、三情景预测；输出 Excel + 离线 HTML 趋势图；不看成本与供应链 |
+| 以跟随者视角快速判断某个成分现在跟进晚不晚、好不好推 | [`ds-entry-quickcheck`](./ds-entry-quickcheck/) | 卖家精灵 + SIF；入场曲线、供需增速比、后来者出单率、新头部、核心词转化率五个指标 → 可跟进 / 谨慎 / 不建议；结论句加逐点文字分析；lite / plus / compare 三档；HTML 报告按需生成 |
 | 调用 Sorftime MCP / ZooData 兼容数据层，查商品、市场、评论、历史趋势 | [`zoodata-amz-marketing-skill/zoodata`](./zoodata-amz-marketing-skill/zoodata/) | 共享数据层，默认优先走 Sorftime MCP |
 | 做亚马逊市场、竞品、定价、进入、选品、评论等多工作流分析 | [`zoodata-amz-marketing-skill`](./zoodata-amz-marketing-skill/) | 集中收纳 `zoodata` 与一组 `amazon-*` 数据分析技能 |
 | 为跨境出口企业做指定产品+目标市场的深度市场进入/GTM 战略报告（B2B/B2C 通用） | [`GinvSkill-market-entry-report`](./GinvSkill-market-entry-report/) | 麦肯锡式分析框架，按固定七章结构输出可交付客户的 HTML 战略报告 |
@@ -93,18 +94,18 @@
 
 ## 技能目录
 
-截至 **2026-10-07**，仓库包含 **35 个 `SKILL.md` 入口**，以及本地应用项目，共 **22 个顶层目录**。`amazon-mobile-preview-tool` 与 `ginv-ads-workbench` 不提供 `SKILL.md`，按项目 README 启动，不计入 Skills 数量。
+截至 **2026-10-08**，仓库包含 **36 个 `SKILL.md` 入口**，以及本地应用项目，共 **23 个顶层目录**。`amazon-mobile-preview-tool` 与 `ginv-ads-workbench` 不提供 `SKILL.md`，按项目 README 启动，不计入 Skills 数量。
 
 | 集合 | Skills | 内容方向 | 入口 |
 |---|---:|---|---|
 | Amazon Design | 5 | 主副图、品牌故事、A+ 与轮播的设计稿文案、手机端预览 | [amazon-mobile-preview-tool](./amazon-mobile-preview-tool/) · [amazon-copy-writing-project](./amazon-copy-writing-project/) · [amazon-aplus-copywriter-skill](./amazon-aplus-copywriter-skill/) · [amazon-supplement-visual-content](./amazon-supplement-visual-content/) · [amazon-supplement-visual-content-WB](./amazon-supplement-visual-content-WB/) · [spf-products-advances-to-image-copy](./spf-products-advances-to-image-copy/) |
 | 关键词与 Listing 运营 | 3 | 下拉词拓词、新品词库、Search Term 与广告词基础、Listing QA | [amazon-dropdown-expander](./amazon-dropdown-expander/) · [amazon-new-listing-keyword-library](./amazon-new-listing-keyword-library/) · [amz-qa-creator](./amz-qa-creator/) |
 | 关键词监控、搜索词与情报蒸馏 | 4 | 周度爆发词监控、SP 搜索词报告分析、全域情报蒸馏 | [ABAKeywords-tracker-for-codex](./ABAKeywords-tracker-for-codex/) · [ABAKeywords-tracker-for-workbuddy](./ABAKeywords-tracker-for-workbuddy/) · [amazon-search-term-advisor](./amazon-search-term-advisor/) · [marketing-distiller](./marketing-distiller/) |
-| 选品、市场调研与出海战略 | 15 | 市场与竞品数据、关键词需求趋势与预测、机会与定价、市场进入判断、GTM 战略报告 | [US_Sup_Product_Research_for_Qoderwork](./US_Sup_Product_Research_for_Qoderwork/) · [amazon-sorftime-mcp-with-serpapi-tavily](./amazon-sorftime-mcp-with-serpapi-tavily/) · [AMZOn-site-Keyword-Trend-Analysis](./AMZOn-site-Keyword-Trend-Analysis/) · [zoodata-amz-marketing-skill](./zoodata-amz-marketing-skill/) · [GinvSkill-market-entry-report](./GinvSkill-market-entry-report/) |
+| 选品、市场调研与出海战略 | 16 | 市场与竞品数据、关键词需求趋势与预测、成分入场时机速判、机会与定价、市场进入判断、GTM 战略报告 | [US_Sup_Product_Research_for_Qoderwork](./US_Sup_Product_Research_for_Qoderwork/) · [amazon-sorftime-mcp-with-serpapi-tavily](./amazon-sorftime-mcp-with-serpapi-tavily/) · [AMZOn-site-Keyword-Trend-Analysis](./AMZOn-site-Keyword-Trend-Analysis/) · [ds-entry-quickcheck](./ds-entry-quickcheck/) · [zoodata-amz-marketing-skill](./zoodata-amz-marketing-skill/) · [GinvSkill-market-entry-report](./GinvSkill-market-entry-report/) |
 | 成分合规与配方研发 | 7 | 成分与 IP 风险、安全重建、配方升级、成分流量边界、受众收口 | [ingredients-breakdown-compliance-check](./ingredients-breakdown-compliance-check/) · [supplement-formula-pipeline](./supplement-formula-pipeline/) |
 | 广告运营与知识工具 | 0 | 本地广告知识工作台、全文搜索、五个计算工具、内容归档与审计 | [ginv-ads-workbench](./ginv-ads-workbench/) |
 | Skill 管理与索引 | 1 | 扫描仓库、识别客户端结构、维护 Obsidian 索引与 skill 路由 | [ob-skill-github-organizer](./ob-skill-github-organizer/) |
-| **合计** | **35** | **持续更新中** | 22 个顶层目录 |
+| **合计** | **36** | **持续更新中** | 23 个顶层目录 |
 
 关于这张表的几点说明：
 
@@ -147,6 +148,20 @@
 - 先剔除脉冲、单品事件和措辞迁移，再归入 7 类趋势原型（结构性增长、加速新兴、真季节性、成熟平稳、见顶回落、一次性脉冲、结构性下滑）
 - 定性预测：方向与阶段、距峰谷周数、保守 / 基准 / 乐观三情景、置信度、证实与证伪信号
 - 交付 Excel（8 个 sheet）+ 离线 HTML 趋势图；功效与品牌词只做红旗提示，不影响结论
+
+[`ds-entry-quickcheck`](./ds-entry-quickcheck/)
+
+以跟随者的视角，快速回答"这个成分现在跟进，晚不晚、好不好推"。不追求第一批入场，关注的是入场潮走到了哪一步、后来者还能不能卖起来：
+
+- 五个指标：
+  - 逐月入场曲线：近 3 个月新进场多少、是否还在加速
+  - 同一半年窗口内的需求增速 ÷ 供给增速
+  - 近期新品的出单率
+  - 近一年冒出的新头部（评分数过 300）
+  - 核心词点击→购买转化率：<8% 不建议 / 8–10% 谨慎 / 10–12% 观望 / 12–15% 潜力 / ≥15% 重点关注
+- 输出以文字为主：一句结论加逐点分析，每一点先给一两个关键数字再说"这说明什么"；明细表另存，HTML 报告按需生成
+- lite（单成分）/ plus（加剂型、定价、卖家构成）/ compare（2–5 个成分排序）三档
+- 脚本直连卖家精灵与 SIF 的 MCP HTTP 端点，带缓存与限流重试；样本截断时自动降级为下限或标注"判断不了"
 
 [`zoodata-amz-marketing-skill`](./zoodata-amz-marketing-skill/)：`zoodata` 和配套 `amazon-*` 数据分析技能
 
@@ -398,6 +413,7 @@ skills-hub-for-cliff/
 ├── US_Sup_Product_Research_for_Qoderwork/      # 补充剂选品调研套件（Sorftime + xCrawl）
 ├── amazon-sorftime-mcp-with-serpapi-tavily/    # 种子词选品调研（Sorftime + SerpApi + Tavily）
 ├── AMZOn-site-Keyword-Trend-Analysis/          # 需求端关键词趋势选品与预测（卖家精灵 + SIF + Sorftime）
+├── ds-entry-quickcheck/                        # 成分入场时机速判：入场曲线 + 供需 + 转化率（卖家精灵 + SIF）
 ├── zoodata-amz-marketing-skill/                # ZooData 数据层 + 10 个 amazon-* 分析技能
 ├── GinvSkill-market-entry-report/              # 市场进入 / GTM 战略报告（作者 Ginv）
 ├── ingredients-breakdown-compliance-check/     # 成分拆解、IP 与合规风险报告
@@ -405,7 +421,7 @@ skills-hub-for-cliff/
 └── ob-skill-github-organizer/                  # Skill 索引维护与路由（元 skill）
 ```
 
-这是带注释的阅读视图；仓库实际是平铺结构，22 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
+这是带注释的阅读视图；仓库实际是平铺结构，23 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
 
 ## 维护流程
 
