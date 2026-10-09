@@ -64,6 +64,8 @@ description: 亚马逊图片文案编写（A+、品牌故事、listing主副图�
 
 按 `references/library-digest-guide.md` 读库，产出 ≤12 条的规则卡（每条注明来自哪个文件）。规则卡在 plan 里展示给用户。
 
+品牌有档案（`references/brand-profiles/{品牌}.md`，如 ZAB → `zab.md`）时先读：语气、签名句式和已确认的品牌承诺以档案为准；合规仍以 `compliance-supplements.md` 为准，事实仍以事实底座为准。规则卡和档案冲突时，在 plan 里说明取舍。
+
 ### 第3步：读构图 → 文字位清单
 
 逐张查看图片，记录：图号、文件名、每个文字位（位置、行数、字重/颜色/斜体等样式、原占位文字）、画面元素（人物、产品、食物、图标、徽章、他牌素材）。识别连图（跨图延续的标题或产品）。
@@ -75,19 +77,21 @@ description: 亚马逊图片文案编写（A+、品牌故事、listing主副图�
 plan 包含：
 1. **事实底座**：F编号清单＋来源说明（含中文回译提示）。
 2. **规则卡摘要**（来自对标库或基线规则）。
-3. **逐图任务卡**：每张图回答消费者的哪个问题 → 主标题方向 → 关键数字（对象/单位/份量）→ 与上一张/下一张如何衔接；品牌调性位单独标出。A+ 整体按"问题→机制→核对/证据→场景→信任"排。
-4. **冲突表**：按 `references/conflict-checklist.md` 逐项检查构图 vs 事实，列出问题与默认处理。
-5. **合规方式**：识别品类；补剂/保健品启用 `references/compliance-supplements.md`；其他品类按基线规则＋品类常识，必要时提醒用户核对类目政策。
-6. **成分链路与功效方向**（补剂类）：每个主成分一条链路 `缺口 → 作用 → 年龄 → 生活结果`（带 F 编号）；本产品 allowed / blocked 功效方向；多成分时各成分的分工。（见 `references/ingredient-research.md`）
-7. **营销话术与成分科普**：A+/品牌故事批次默认附两张 sheet——「营销话术」16 条成分链路式损失厌恶（`references/persuasion-psychology.md`）、「成分科普」约 6–7 个 ELI5 主题（`references/ingredient-eli5.md`）；用户可关闭或改数量，其他心理学原理和站外话术只在用户要求时写。listing 副图批次不生成。另外，有标签图或用户提到剂型时，A+ 与副图批次都默认附「辅料与剂型」sheet：按剂型从外壳/基质、辅料清单、各司其职三个角度各写一版 headline + subheadline + 支撑卖点（`references/dosage-form-excipients.md`）；plan 里写明识别出的剂型和依据，用户可关闭。
-8. **交付格式**（默认Excel）。
-9. **AskUserQuestion 选择题**（≤4题，推荐项放第一个）：常见题目——品牌名写法、某张图的叙事角度、listing未覆盖的徽章/认证是否有证据、交付格式。
+3. **买家与主线**（按 `references/conversion-copy.md`）：2–4 类买家各自"已经相信 / 还在怀疑"什么；整组的品类张力（一句话主线）；有价格优势时怎么在不写钱的前提下讲出来。
+4. **逐图任务卡**：每张图回答哪类买家的哪个怀疑 → 主标题方向 → 关键数字（对象/单位/份量）→ 与上一张/下一张如何衔接；品牌调性位单独标出。副图、A+、轮播按 `conversion-copy.md` §7 分工，A+ 不重复副图的句子；带 \* 的功效集中在 2–3 张。
+5. **冲突表**：按 `references/conflict-checklist.md` 逐项检查构图 vs 事实，列出问题与默认处理。
+6. **合规方式**：识别品类；补剂/保健品启用 `references/compliance-supplements.md`；其他品类按基线规则＋品类常识，必要时提醒用户核对类目政策。
+7. **成分链路与功效方向**（补剂类）：每个主成分一条链路 `缺口 → 作用 → 年龄 → 生活结果`（带 F 编号）；本产品 allowed / blocked 功效方向；多成分时各成分的分工。（见 `references/ingredient-research.md`）
+8. **营销话术与成分科普**：A+/品牌故事批次默认附两张 sheet——「营销话术」16 条成分链路式损失厌恶（`references/persuasion-psychology.md`）、「成分科普」约 6–7 个 ELI5 主题（`references/ingredient-eli5.md`）；用户可关闭或改数量，其他心理学原理和站外话术只在用户要求时写。listing 副图批次不生成。另外，有标签图或用户提到剂型时，A+ 与副图批次都默认附「辅料与剂型」sheet：按剂型从外壳/基质、辅料清单、各司其职三个角度各写一版 headline + subheadline + 支撑卖点（`references/dosage-form-excipients.md`）；plan 里写明识别出的剂型和依据，用户可关闭。
+9. **交付格式**（默认Excel）。
+10. **AskUserQuestion 选择题**（≤4题，推荐项放第一个）：常见题目——品牌名写法、某张图的叙事角度、listing未覆盖的徽章/认证是否有证据、交付格式。
 
 然后**停止**，等用户确认。
 
 ### 第5步：写文案
 
 逐文字位写：新英文文案、备选一句、中文释义、事实编号、合规/设计备注。要点：
+- 先过 `references/conversion-copy.md` 的四个测试（换成分 / 主语 / 张力 / 场景）：合规只限制功效，不限制情绪；删掉功效词的地方要用处境、生活时刻、反差或数字换算补回说服力。不写钱字（pay、afford、price…），不贬低竞品，也不拿自家其他剂型做反例。
 - 字数贴近占位原文（同样行数、相近字符数）；超出时给更短的备选或注明可折行。
 - 标注约定：`**…**` 加粗，`*…*` 红色/强调斜体，句尾单独 `*` 为功能声明星号；单元格内换行即排版换行。
 - 需要新增的文字位（FDA 声明、可选小标签、可选徽章）标【新增】或【可选新增】。
@@ -139,7 +143,9 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,soft
 - `references/aplus-specs.md`：A+ / 品牌故事模块规格与 alt 文本
 - `references/manual-facts-template.md`：手动事实填空模板
 - `references/listing-images.md`：listing 主图/副图规格与写法差异
+- `references/conversion-copy.md`：让文案有购买冲动——买家阶段地图、品类张力、价格优势的写法、对比的边界、副图/A+/轮播分工
 - `references/brand-voice.md`：品牌调性位的洞察式品牌宣言写法、触发条件与禁区
+- `references/brand-profiles/`：品牌语气档案（每个品牌一份，如 `zab.md`）；写该品牌任何模块前先读
 - `references/persuasion-psychology.md`：营销话术 sheet——默认成分链路式损失厌恶；按需原理、A+ 红线与站外诚实要求
 - `references/ingredient-eli5.md`：成分科普 sheet 的 ELI5 写法、主题顺序与合规
 - `references/dosage-form-excipients.md`：辅料与剂型 sheet——剂型识别、各剂型辅料角色、三个角度与证据红线

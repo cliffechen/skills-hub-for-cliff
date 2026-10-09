@@ -18,7 +18,9 @@ amazon-aplus-copywriter-skill/
 │   ├── conflict-checklist.md       # 构图 vs 事实的 14 项冲突检查
 │   ├── compliance-supplements.md   # 补剂合规包（结构/功能声明、禁用说法）
 │   ├── aplus-specs.md              # A+ / 品牌故事模块尺寸与 alt 文本
+│   ├── conversion-copy.md          # 让文案有购买冲动：买家阶段、品类张力、价格优势写法、对比边界、副图/A+/轮播分工
 │   ├── brand-voice.md              # 品牌调性位：洞察式品牌宣言写法与禁区
+│   ├── brand-profiles/             # 品牌语气档案：每个品牌一份（zab.md），写该品牌文案前先读
 │   ├── persuasion-psychology.md    # 营销话术：默认成分链路式损失厌恶（正读/反读）；按需原理与站外话术
 │   ├── ingredient-eli5.md          # 成分科普：ELI5 写法（本质→类比→展开→So what）
 │   ├── dosage-form-excipients.md   # 辅料与剂型：按剂型写外壳/填充物/辅料（硬胶囊/软胶囊/软糖/片剂…）
@@ -29,11 +31,8 @@ amazon-aplus-copywriter-skill/
 ├── scripts/
 │   ├── build_xlsx.py               # JSON → Excel（说明/文案总表/营销话术/成分科普/辅料与剂型/设计修改清单/事实依据）；文件名自动加生成时间戳
 │   └── scan_copy.py                # 合规与冲突扫描（禁用词、星号声明、alt 长度、副图标题、品牌调性位、A+ 政策词、营销话术、成分科普、辅料与剂型）
-└── examples/                       # 示例：UA700 项目的真实构图、对标库与成品表
-    ├── 01-示例构图-A+与品牌故事/    # 6 张 4:3 构图（Canva 导出，图上文字为占位符）
-    ├── 02-示例构图-副图/            # 8 张 1600×1600 副图
-    ├── 03-对标品牌文案库-OLENPHOGY/ # 对标库样例：markdown 方法库 + assets（229 个文件）
-    └── 04-示例产出/                 # 两份成品 Excel（A+ 与副图）
+└── examples/
+    └── 04-示例产出/                 # 两份成品 Excel（A+ 与副图），交付格式样例
 ```
 
 ## 输入
@@ -68,7 +67,7 @@ soffice --headless --convert-to xlsx --outdir /tmp 待重算的文件.xlsx
 
 ## 示例
 
-`examples/` 是 UA700 项目（B0XXXXXXXX，ZAB Urolithin A 700mg）的完整一组输入与产出：6 张 A+/品牌故事构图、8 张副图、一份 OLENPHOGY 对标库，以及用它们写出的两份成品 Excel（`04-示例产出/`，各 4 个 sheet）。细节见 [examples/README.md](./examples/README.md)。
+`examples/04-示例产出/` 是 UA700 项目（B0XXXXXXXX，ZAB Urolithin A 700mg）写出的两份成品 Excel，用来对照交付格式。构图、对标库这类输入不放在仓库里：用的时候放进本地 `工作区/`（已在 .gitignore 里）。细节见 [examples/README.md](./examples/README.md)。
 
 ## 依赖
 
