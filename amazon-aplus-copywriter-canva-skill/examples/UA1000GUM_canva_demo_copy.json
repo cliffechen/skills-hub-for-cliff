@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "title": "UA1000GUM｜副图文案 Canva 示例",
+    "subtitle": "ZAB Urolithin A Gummies 1,000 mg｜示例仅含 P3、P8",
+    "decisions": [
+      "备注覆盖写入，原备注先备份"
+    ],
+    "rules": [],
+    "claims": {
+      "allowed": [
+        "cellular renewal",
+        "energy metabolism",
+        "mitochondrial"
+      ],
+      "blocked": [
+        "gut health"
+      ]
+    }
+  },
+  "rows": [
+    {
+      "id": "P3-01",
+      "page": 3,
+      "group": "副图3",
+      "file": "UA1000GUM p3",
+      "slot": "H1",
+      "placeholder": "You've Read About Urolithin A.Here's 1,000 mg of It.*",
+      "copy": "You've Read About Urolithin A. Here's 1,000 mg of It.*",
+      "alt": "Read About Urolithin A? Here's 1,000 mg.*",
+      "zh": "你读过尿石素A的资料，这里就是每份1000mg。",
+      "facts": "F01",
+      "note": ""
+    },
+    {
+      "id": "P3-02",
+      "page": 3,
+      "group": "副图3",
+      "file": "UA1000GUM p3",
+      "slot": "副标",
+      "placeholder": "Supports Cellular Renewal, Muscle Strength & Immune Function.*",
+      "copy": "Supports Cellular Renewal, Muscle Strength & Immune Function.*",
+      "alt": "",
+      "zh": "支持细胞更新、肌肉力量与免疫功能",
+      "facts": "F01, F05",
+      "note": "Immune 方向待确认"
+    },
+    {
+      "id": "P3-03",
+      "page": 3,
+      "group": "副图3",
+      "file": "UA1000GUM p3",
+      "slot": "页脚",
+      "placeholder": "（无）",
+      "copy": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+      "alt": "",
+      "zh": "FDA 声明",
+      "facts": "—",
+      "note": "【新增】"
+    },
+    {
+      "id": "P8-01",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Supplement Facts",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-02",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Serving Size: 3 Gummies",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-03",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Servings Per Container: 30",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-04",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "90 Gummies",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-05",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Urolithin A　1,000 mg　†",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-06",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Vitamin E (as ______)　10 mg　67%",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-07",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "†Daily Value not established.",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-08",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Other Ingredients: Maltitol, Purified Water, Gelatin, Citric Acid Monohydrate, Sodium Citrate, Natural Flavoring (Grapefruit Flavor), Flavoring (Jasmine Flavor), Corn Starch, Carnauba Wax.",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-09",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "Formulated in the United States with imported ingredients.",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    },
+    {
+      "id": "P8-10",
+      "page": 8,
+      "group": "副图8·标签",
+      "file": "UA1000GUM p8",
+      "slot": "",
+      "placeholder": "—",
+      "copy": "AMERICAN-OWNED BRAND",
+      "alt": "",
+      "zh": "",
+      "facts": "F02",
+      "note": "与实物标签逐字一致"
+    }
+  ],
+  "issues": [],
+  "facts": [
+    {
+      "id": "F01",
+      "fact": "Urolithin A 1,000 mg per 3-gummy serving",
+      "source": "用户确认 2026-10-09",
+      "note": "示例"
+    },
+    {
+      "id": "F02",
+      "fact": "Supplement Facts 以实物标签为准",
+      "source": "待用户提供标签图",
+      "note": "示例"
+    },
+    {
+      "id": "F05",
+      "fact": "功效方向保留 Muscle & Immune（运营原意）",
+      "source": "Canva 原备注",
+      "note": "待确认"
+    }
+  ],
+  "canva": {
+    "design_id": "DAHR284bBN8",
+    "design_title": "UA1000GUM",
+    "edit_url": "https://www.canva.com/d/F0zXoW2J2HkOVqB",
+    "write_mode": "replace",
+    "review_date": "2026-10-09",
+    "pages": [
+      {
+        "page": 3,
+        "page_id": "PBPkKTdQ4vzP9tQY",
+        "label": "钩子 Hook",
+        "designer": [
+          "删除图上 \"KEEP Muscle & Immune\"（这是内部指令，误上图）。",
+          "H1 改为无衬线字体，与其他页统一（现为红色衬线斜体）。",
+          "补上FDA 页脚（原文见①区）（页面用了 *）。",
+          "瓶子在右侧和顶部被裁切，调整构图让标签完整露出。"
+        ],
+        "confirm": [
+          "\"Immune Function\" 合规风险最高，确认是否保留（运营原意：保留肌肉与免疫）。",
+          "考虑与 P2 对调顺序，让 1,000 mg 卖点在第二张图出现。"
+        ],
+        "log": [
+          "内部指令误上图（严重）；缺 FDA 页脚；字体不统一；瓶子被裁切。"
+        ]
+      },
+      {
+        "page": 8,
+        "page_id": "PBLWL4jNBZWcdhcd",
+        "label": "营养成分表 Label",
+        "on_image_hint": "（必须与实物标签逐字一致）",
+        "designer": [
+          "删除重复的 \"Other Ingredients:\"。",
+          "修正标点：\"Sodium Citrate,Natural\" 补空格；\"Flavour) , Corn\" 删逗号前空格。",
+          "维生素 E 的 %DV 改为 67%（DV 15 mg），不能标 †。",
+          "未拿到证据前，删除 GMP Certified Facility 徽章。",
+          "两个圆形叶子徽章：若为 Vegan/Vegetarian，必须删除（含明胶 Gelatin）。"
+        ],
+        "confirm": [
+          "维生素 E 的来源形式（如 d-alpha tocopherol）。",
+          "每份是否需标 Calories / Total Carbohydrate / Sugar Alcohol（含麦芽糖醇）。",
+          "拼写 Flavour/Flavoring 以实物标签为准。",
+          "两个圆形叶子徽章的实际文字。"
+        ],
+        "log": [
+          "维生素 E 的 %DV 标错（法规问题）；辅料重复；徽章无依据或与明胶冲突。"
+        ]
+      }
+    ]
+  }
+}
