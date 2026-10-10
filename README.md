@@ -1,9 +1,9 @@
 <div align="center">
   <h1>Skills Hub for Cliff</h1>
   <p><strong>把 Amazon US 膳食补充剂的实战经验，沉淀成可复用的 Agent Skills。</strong></p>
-  <p>从选品调研、关键词库、Listing 图片与 A+ 文案，到手机预览、广告知识与计算、成分合规与配方重建，这里把反复出现的运营动作整理成能直接交给 AI Agent 使用的工作流与本地工具。</p>
+  <p>从选品调研、关键词库、Listing 图片与 A+ 文案、Canva 设计稿直写，到手机预览、广告知识与计算、成分合规与配方重建，这里把反复出现的运营动作整理成能直接交给 AI Agent 使用的工作流与本地工具。</p>
   <p>
-    <a href="#技能目录"><img src="https://img.shields.io/badge/Skills-36-00a8e1?style=for-the-badge" alt="36 个 Skill 入口" /></a>
+    <a href="#技能目录"><img src="https://img.shields.io/badge/Skills-37-00a8e1?style=for-the-badge" alt="37 个 Skill 入口" /></a>
     <img src="https://img.shields.io/badge/Platform-Amazon_US-ff9900?style=for-the-badge" alt="Amazon US" />
     <img src="https://img.shields.io/badge/Python-3.10%2B-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+" />
     <img src="https://img.shields.io/badge/Status-Continuously_Updated-22c55e?style=for-the-badge" alt="持续更新中" />
@@ -21,6 +21,7 @@
 - **选品与市场调研**：类目扫描、多维度关键词对比、Top100 产品结构、竞品差评归类、站外信号采集、Go / No-Go 评分、成分入场时机速判。
 - **关键词与 Listing 运营**：下拉词采集、新品词库与 Search Term 基础、SP 搜索词报告分析、Listing QA 批量生成。
 - **图片与 A+ 内容**：主图合规判断、辅图文案、A+ 页面结构、品牌故事、四风格合规文案、手机端浏览预览。
+- **Canva 设计稿直写**：通过 Canva 连接器读设计、按页写文案备注、生成符合 FDA 格式的 Supplement Facts 面板页并回读核验。
 - **广告运营与知识工具**：广告主题与概念阅读、全文搜索、ACoS / CPC / 点击预算计算、本地内容归档与审计。
 - **成分合规与配方研发**：成分堆栈拆解、品牌成分与 IP 风险、安全重建、配方升级、成分流量边界。
 - **Skill 管理与索引**：扫描仓库、识别各客户端结构、维护 Obsidian 索引、回答「我现在该用哪个 skill」。
@@ -42,7 +43,15 @@
 | 根据 Amazon 产品写主图、辅图、A+ 页面结构、设计 brief、生图 prompt | [`amazon-supplement-visual-content`](./amazon-supplement-visual-content/) | Codex/OpenAI 原版，适合正式出图前做内容与合规总控 |
 | 在 WorkBuddy 里做补充剂图片/A+ 内容 | [`amazon-supplement-visual-content-WB`](./amazon-supplement-visual-content-WB/) | WorkBuddy 版目录，目前用于和原版区分管理 |
 | 快速生成 7 张图和 A+ 图片英文文案 | [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/) | 偏文案生成，适合已有 SFP 和卖点时快速出稿 |
+
+### Canva · 在设计稿里直接读、写、建页
+
+这一类 skill 都通过 Canva 连接器（MCP）直接操作你的 Canva 设计：读每页的文字位和缩略图，把结果写回设计里，写完回读核验。
+
+| 你要做什么 | 推荐 skill | 说明 |
+|---|---|---|
 | 为设计稿逐个文字位写英文文案（A+、品牌故事、Listing 主副图），出 Excel；可直接读 Canva 设计，并把文案和修改意见按页写进备注（①上图文案 / ②设计指令 / ③待确认 / ④审核记录），支持每个文字位多版 | [`amazon-aplus-copywriter-canva-skill`](./amazon-aplus-copywriter-canva-skill/) | 先出 plan 待确认；事实来自 ASIN、手动填写或用户指定的 Canva 页；含补剂合规包与扫描脚本；Canva 连接器读取并直接写备注（没有该接口时用浏览器 / computer use）+ 回读核验；适配 Claude Code、Cursor、ZCode |
+| 把一份 Supplement Facts 资料（截图 / Excel / PDF / 文字）做成 Canva 里的一页 SPF 面板，版式对齐 FDA 要求，并先查出 SPF 本身的成分与写法缺陷 | [`canva-spf-creator`](./canva-spf-creator/) | 转录 → 缺陷检查（🔴 数算不通或必填项缺失用 `XX` 占位 / 🟡 待确认 / 🟢 已按 FDA 改好）→ 克隆模板页保住字体 → 直接保存 → 逐元素回读坐标；动手的页面左上角标 `create by canva mcp`；含 %DV 重算与 FDA 排序脚本 |
 
 ### 关键词与 Listing 运营
 
@@ -94,18 +103,19 @@
 
 ## 技能目录
 
-截至 **2026-10-10**，仓库包含 **36 个 `SKILL.md` 入口**，以及本地应用项目，共 **23 个顶层目录**。`amazon-mobile-preview-tool` 与 `ginv-ads-workbench` 不提供 `SKILL.md`，按项目 README 启动，不计入 Skills 数量。
+截至 **2026-10-11**，仓库包含 **37 个 `SKILL.md` 入口**，以及本地应用项目，共 **24 个顶层目录**。`amazon-mobile-preview-tool` 与 `ginv-ads-workbench` 不提供 `SKILL.md`，按项目 README 启动，不计入 Skills 数量。
 
 | 集合 | Skills | 内容方向 | 入口 |
 |---|---:|---|---|
-| Amazon Design | 5 | 主副图、品牌故事、A+ 与轮播的设计稿文案、Canva 备注写入、手机端预览 | [amazon-mobile-preview-tool](./amazon-mobile-preview-tool/) · [amazon-copy-writing-project](./amazon-copy-writing-project/) · [amazon-aplus-copywriter-canva-skill](./amazon-aplus-copywriter-canva-skill/) · [amazon-supplement-visual-content](./amazon-supplement-visual-content/) · [amazon-supplement-visual-content-WB](./amazon-supplement-visual-content-WB/) · [spf-products-advances-to-image-copy](./spf-products-advances-to-image-copy/) |
+| Amazon Design | 4 | 主副图、品牌故事、A+ 与轮播的设计稿文案、手机端预览 | [amazon-mobile-preview-tool](./amazon-mobile-preview-tool/) · [amazon-copy-writing-project](./amazon-copy-writing-project/) · [amazon-supplement-visual-content](./amazon-supplement-visual-content/) · [amazon-supplement-visual-content-WB](./amazon-supplement-visual-content-WB/) · [spf-products-advances-to-image-copy](./spf-products-advances-to-image-copy/) |
+| Canva | 2 | 读 Canva 设计写文案与按页备注、生成 FDA 格式的 Supplement Facts 面板页、SPF 缺陷检查 | [amazon-aplus-copywriter-canva-skill](./amazon-aplus-copywriter-canva-skill/) · [canva-spf-creator](./canva-spf-creator/) |
 | 关键词与 Listing 运营 | 3 | 下拉词拓词、新品词库、Search Term 与广告词基础、Listing QA | [amazon-dropdown-expander](./amazon-dropdown-expander/) · [amazon-new-listing-keyword-library](./amazon-new-listing-keyword-library/) · [amz-qa-creator](./amz-qa-creator/) |
 | 关键词监控、搜索词与情报蒸馏 | 4 | 周度爆发词监控、SP 搜索词报告分析、全域情报蒸馏 | [ABAKeywords-tracker-for-codex](./ABAKeywords-tracker-for-codex/) · [ABAKeywords-tracker-for-workbuddy](./ABAKeywords-tracker-for-workbuddy/) · [amazon-search-term-advisor](./amazon-search-term-advisor/) · [marketing-distiller](./marketing-distiller/) |
 | 选品、市场调研与出海战略 | 16 | 市场与竞品数据、关键词需求趋势与预测、成分入场时机速判、机会与定价、市场进入判断、GTM 战略报告 | [US_Sup_Product_Research_for_Qoderwork](./US_Sup_Product_Research_for_Qoderwork/) · [amazon-sorftime-mcp-with-serpapi-tavily](./amazon-sorftime-mcp-with-serpapi-tavily/) · [AMZOn-site-Keyword-Trend-Analysis](./AMZOn-site-Keyword-Trend-Analysis/) · [ds-entry-quickcheck](./ds-entry-quickcheck/) · [zoodata-amz-marketing-skill](./zoodata-amz-marketing-skill/) · [GinvSkill-market-entry-report](./GinvSkill-market-entry-report/) |
 | 成分合规与配方研发 | 7 | 成分与 IP 风险、安全重建、配方升级、成分流量边界、受众收口 | [ingredients-breakdown-compliance-check](./ingredients-breakdown-compliance-check/) · [supplement-formula-pipeline](./supplement-formula-pipeline/) |
 | 广告运营与知识工具 | 0 | 本地广告知识工作台、全文搜索、五个计算工具、内容归档与审计 | [ginv-ads-workbench](./ginv-ads-workbench/) |
 | Skill 管理与索引 | 1 | 扫描仓库、识别客户端结构、维护 Obsidian 索引与 skill 路由 | [ob-skill-github-organizer](./ob-skill-github-organizer/) |
-| **合计** | **36** | **持续更新中** | 23 个顶层目录 |
+| **合计** | **37** | **持续更新中** | 24 个顶层目录 |
 
 关于这张表的几点说明：
 
@@ -224,15 +234,27 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 [`spf-products-advances-to-image-copy`](./spf-products-advances-to-image-copy/)  
 偏“图片文案生成”，适合根据 Supplement Facts 和卖点快速产出 7 张图和 A+ 模块文案，内置 FDA/Amazon 合规检查和 Alexa AI 抽取优化。
 
-[`amazon-aplus-copywriter-canva-skill`](./amazon-aplus-copywriter-canva-skill/)  
-把设计稿里的每个文字位替换成以产品事实为依据的英文文案（A+ 模块图、品牌故事、Listing 主副图），交付美工可直接复制的 Excel，并带「连 Canva → 看图 → 写备注」链路；只给本地 PNG/JPG 时按 8 步流程走（原 `amazon-aplus-copywriter-skill` 已并入）。用 Canva MCP 逐页读取图上文字、缩略图和原备注；plan 确认后照常写文案、出 Excel，再通过浏览器 / computer use 登录 Canva（账号由用户掌控，邮箱验证码向用户索取），把每页备注写成固定四区格式（①上图文案 / ②设计指令 / ③待确认 / ④审核记录），写前回读防并发覆盖、写后回读逐字核验，并检测内部指令误上图。`adapters/` 提供 Claude Code、Cursor（含 Cloud Agent）、ZCode 与通用 agent 的接入说明，`install.sh` 一键安装到各自的 skills 目录。
-
 [`amazon-copy-writing-project`](./amazon-copy-writing-project/)  
 可复用的本地「文案工作台」项目：为产品详情页 / A+ / 轮播设计稿撰写四风格合规文案。单页工作台左边看设计稿、右边改槽位文案，内置黑名单合规检查、高亮框坐标标定、日/夜主题与按风格导出 Markdown；配套「资料/」产品材料目录规范和换新产品标准流程。
 
 四个视图（`Tab` 键循环）：**工作台**（逐槽位落版文案，按设计稿文本块容量收口，每槽位含 3 条发散备选可一键换入）、**四风格对比**、**自由创作**（每图 3 个不受槽位约束的创意角度）、**消费人群画像**（逐成分功效与证据强度 + 受众三层画像 + 定位风险 + 场景切入，附换产品时的重新生成指令）。
 
-### 5. 成分合规、IP 风险与配方研发
+### 5. Canva · 在设计稿里直接读、写、建页
+
+通过 Canva 连接器（MCP）直接操作 Canva 设计的 skill 归在这一类。共同做法：先读后写、只动指定的页、写完回读核验。
+
+[`amazon-aplus-copywriter-canva-skill`](./amazon-aplus-copywriter-canva-skill/)  
+把设计稿里的每个文字位替换成以产品事实为依据的英文文案（A+ 模块图、品牌故事、Listing 主副图），交付美工可直接复制的 Excel，并带「连 Canva → 看图 → 写备注」链路；只给本地 PNG/JPG 时按 8 步流程走（原 `amazon-aplus-copywriter-skill` 已并入）。用 Canva MCP 逐页读取图上文字、缩略图和原备注；plan 确认后照常写文案、出 Excel，再通过浏览器 / computer use 登录 Canva（账号由用户掌控，邮箱验证码向用户索取），把每页备注写成固定四区格式（①上图文案 / ②设计指令 / ③待确认 / ④审核记录），写前回读防并发覆盖、写后回读逐字核验，并检测内部指令误上图。`adapters/` 提供 Claude Code、Cursor（含 Cloud Agent）、ZCode 与通用 agent 的接入说明，`install.sh` 一键安装到各自的 skills 目录。
+
+[`canva-spf-creator`](./canva-spf-creator/)  
+把膳食补充剂的 Supplement Facts 资料（截图、Excel、PDF、文字）做成 Canva 设计里的一页 SPF 面板，版式对齐 FDA 的 21 CFR 101.36。流程是「转录 → 缺陷检查 → 克隆模板页建面板 → 直接保存 → 回读核验 → 来回修改」。
+
+- **缺陷检查是固定交付物**：🔴 数算不通或 FDA 必填项缺失（%DV 与含量对不上、缺份数、软糖缺热量与碳水），页面上用 `XX` 占位，清单里给出算出来的数；🟡 写法有歧义需要补信息（缺来源形式、香精没标性质、明胶没标来源、矿物质元素量与胶囊装量对不上）；🟢 顺序、版式、拼写标点按 FDA 直接改好。
+- **克隆模板页保住品牌字体**：Canva 接口新建的文字不能选字体，所以从设计里已有的一页 SPF 克隆，再改字、删多余行、重排；Other Ingredients 固定放在框外。
+- **防错位**：动手的页面左上角标 `create by canva mcp`；保存后逐个元素回读文字与坐标，不一致就补改再存。
+- `scripts/check_spf.py` 负责 %DV 重算、FDA 成分排序、份数算术和 Other Ingredients 扫描；`references/` 里有 FDA 规则摘要、Daily Value 表和 Canva 建页的操作与坑。
+
+### 6. 成分合规、IP 风险与配方研发
 
 [`ingredients-breakdown-compliance-check`](./ingredients-breakdown-compliance-check/)  
 用于拆解成分堆栈，识别 branded ingredient、TM/R、专利、FDA/Amazon 和商业化风险。
@@ -256,7 +278,7 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 → 实验室沟通简报
 ```
 
-### 6. 关键词监控与情报蒸馏
+### 7. 关键词监控与情报蒸馏
 
 [`ABAKeywords-tracker-for-codex`](./ABAKeywords-tracker-for-codex/)  
 从 AMZ123 的 ABA/SFR 排名抓取 Amazon US 补充剂爆发型关键词，做成分词分类与翻译、机会词分级，Tier 1/2 用 Sorftime 补趋势 / CPC / 拓词，维护周度历史并产出中文 HTML 机会报告。Codex 版。
@@ -267,7 +289,7 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 [`marketing-distiller`](./marketing-distiller/)  
 「全域蒸馏器」分享包：输入任意行业、品牌、网站或话题，产出完整的全域认知系统——数据库、竞品拆解、内容生态、知识地图与情报系统，自带 Google 高级搜索语法武器库与 URL 验证机制。标准包位于 `全域蒸馏器Skill分享包/`。
 
-### 7. Skill 管理与 Obsidian 索引
+### 8. Skill 管理与 Obsidian 索引
 
 [`ob-skill-github-organizer`](./ob-skill-github-organizer/)
 
@@ -291,7 +313,7 @@ Canva → 亚马逊手机预览工具。在本地导入主副图、From the bran
 我想根据 Amazon 产品写图片文案，应该用哪个 skill？
 ```
 
-### 8. 广告运营与知识工具
+### 9. 广告运营与知识工具
 
 [`ginv-ads-workbench`](./ginv-ads-workbench/)
 
@@ -320,6 +342,15 @@ cd skills-hub-for-cliff
 产品事实来源：ASIN B0XXXXXXXX
 对标品牌文案库：examples/03-对标品牌文案库-OLENPHOGY
 目标：为每个文字位写英文文案，先出 plan 等我确认，确认后再写，最后交付 Excel。
+```
+
+再例如：
+
+```text
+使用 canva-spf-creator。
+SPF 资料：<截图 / Excel / PDF 路径>
+Canva 设计：<设计链接>
+放在：最后一页
 ```
 
 ### 本地应用项目
@@ -398,10 +429,11 @@ skill-package/
 skills-hub-for-cliff/
 ├── amazon-mobile-preview-tool/                 # 本地项目：主副图 / 品牌故事 / A+ 手机预览
 ├── amazon-copy-writing-project/                # 本地项目：四风格合规文案工作台
-├── amazon-aplus-copywriter-canva-skill/        # A+ / 品牌故事 / Listing 主副图文案 → Excel；读 Canva 设计并按页写备注
 ├── amazon-supplement-visual-content/           # 主图合规判断 + 辅图 / A+ 文案与设计 brief
 ├── amazon-supplement-visual-content-WB/        # 上者的 WorkBuddy 版目录
 ├── spf-products-advances-to-image-copy/        # Supplement Facts → 7 张图 + A+ 英文文案
+├── amazon-aplus-copywriter-canva-skill/        # Canva：A+ / 品牌故事 / Listing 主副图文案 → Excel；读设计并按页写备注
+├── canva-spf-creator/                          # Canva：SPF 资料 → FDA 格式 Supplement Facts 面板页 + 缺陷检查
 ├── amazon-dropdown-expander/                   # Amazon US 下拉框拓词 → CSV
 ├── amazon-new-listing-keyword-library/         # 新品关键词词库 + 选词策略报告
 ├── amz-qa-creator/                             # Listing QA 批量生成（默认 200 组）
@@ -421,7 +453,7 @@ skills-hub-for-cliff/
 └── ob-skill-github-organizer/                  # Skill 索引维护与路由（元 skill）
 ```
 
-这是带注释的阅读视图；仓库实际是平铺结构，23 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
+这是带注释的阅读视图；仓库实际是平铺结构，24 个顶层目录都在根下。`marketing-distiller` 与 `ABAKeywords-tracker-for-workbuddy` 的实际入口在它们各自的 `SKILL/SKILL.md`。
 
 ## 维护流程
 
