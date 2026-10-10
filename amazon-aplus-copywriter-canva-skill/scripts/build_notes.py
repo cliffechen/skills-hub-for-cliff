@@ -117,11 +117,13 @@ def lint(n, text, z1_lines, rows):
 
 
 def main():
+    for stream in (sys.stdout, sys.stderr):  # Windows consoles default to a legacy code page
+        stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     ap.add_argument("copy_json")
     ap.add_argument("--out", default="notes")
     ap.add_argument("--pages", help="e.g. 1-8 or 1,3,5")
-    ap.add_argument("--before", help="notes_before.json (get-presenter-notes output) for write_mode=archive")
+    ap.add_argument("--before", help="notes_before.json (get-presenter-notes or read-design output) for write_mode=archive")
     a = ap.parse_args()
 
     data = json.load(open(a.copy_json, encoding="utf-8"))
@@ -147,7 +149,10 @@ def main():
     if archive:
         if not a.before:
             sys.exit("write_mode=archive needs --before notes_before.json")
-        for item in json.load(open(a.before, encoding="utf-8")):
+        items = json.load(open(a.before, encoding="utf-8"))
+        if isinstance(items, dict):  # read-design output saved verbatim
+            items = items.get("presenter_notes", [])
+        for item in items:
             before[int(item["page_number"])] = item.get("notes", "")
 
     os.makedirs(a.out, exist_ok=True)

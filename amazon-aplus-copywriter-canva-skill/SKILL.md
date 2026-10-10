@@ -43,7 +43,7 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 |---|---|---|
 | 读 | 找设计、读每页文字、缩略图、原备注、导出 | Canva MCP（`https://mcp.canva.com/mcp`） |
 | 看 | 看图（版式、人物、徽章、小字） | agent 自带的图片查看；没有则用视觉 MCP |
-| 写备注 | 把备注写进每一页 | 浏览器自动化 / computer use（Canva MCP 没有写备注的接口） |
+| 写备注 | 把备注写进每一页 | Canva MCP 的 `edit-design` 有 `replace_speaker_notes` 操作时直接用它（Claude Code 实测可用，见 `adapters/claude-code.md`）；没有则走浏览器自动化 / computer use |
 
 1. 用一次轻量调用验证 MCP 已授权（如 `search-designs` 取 1 条）。未连接 → 按 `adapters/` 指引让用户授权，不要改用网页抓取绕过。
 2. 定位设计：用户给链接就用链接；给标题用 `search-designs`；说"最近的"用 `sort_by=modified_descending`。把设计名、页数、修改时间告诉用户确认是这一个。
@@ -172,7 +172,7 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,soft
 
 ### 第C9步：写入 Canva 备注 → 回读核验
 
-按 `references/computer-use-canva.md` 执行，要点：
+Canva MCP 能直接写备注时（`edit-design` 的 `replace_speaker_notes`），第 3–4 步换成 `adapters/claude-code.md`「通道 A」的事务写入，第 1、2、5、6 步不变。否则按 `references/computer-use-canva.md` 执行，要点：
 
 1. **写前回读**：`get-presenter-notes` 再取一次，与 `notes_before.json` 比对。有页面被别人改过 → 停下，把差异告诉用户，问"以新的为准重写 / 合并 / 跳过该页"。
 2. **备份**：把当前备注存为 `notes_backup_{时间戳}.json`（写入方式为覆盖时必须做）。

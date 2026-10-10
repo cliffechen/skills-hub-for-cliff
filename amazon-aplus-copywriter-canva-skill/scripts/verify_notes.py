@@ -7,6 +7,7 @@ Usage:
 
 --readback / --compare files are the get-presenter-notes output saved as JSON:
   [{"page_id": "...", "page_number": 3, "notes": "..."}]
+or the read-design output saved verbatim: {"presenter_notes": [ ...same items... ]}
 --expected is the build_notes.py output dir (p{N}.txt + manifest.json).
 --on-image-dir holds p{N}.txt with get-design-content output for that single page.
 
@@ -39,7 +40,10 @@ def squash(text):
 
 
 def load_readback(path):
-    return {int(i["page_number"]): i.get("notes", "") for i in json.load(open(path, encoding="utf-8"))}
+    data = json.load(open(path, encoding="utf-8"))
+    if isinstance(data, dict):
+        data = data.get("presenter_notes", [])
+    return {int(i["page_number"]): i.get("notes", "") for i in data}
 
 
 def zones(text):
@@ -75,6 +79,8 @@ def compare(before_path, now_path):
 
 
 def main():
+    for stream in (sys.stdout, sys.stderr):  # Windows consoles default to a legacy code page
+        stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     ap.add_argument("--expected")
     ap.add_argument("--readback")

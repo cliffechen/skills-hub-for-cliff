@@ -84,7 +84,8 @@ python3 $S/verify_notes.py --expected 工作区/05-输出/canva/notes_20261009_P
 ## 已验证
 
 - Cursor Cloud Agent（2026-10-09）：Canva MCP 读取 → computerUse 子代理用邮箱验证码登录 → UA1000GUM 第 1–8 页备注写入 → 回读逐字一致。`examples/UA1000GUM_canva_demo_copy.json` 用 `build_notes.py` 生成的第 3、8 页与实际写入内容逐字一致；`verify_notes.py` 能检出第 3 页图上的 "KEEP Muscle & Immune"。
-- Claude Code、ZCode：安装路径、MCP 配置和变量替换按官方文档整理，浏览器写入步骤待实机确认。
+- Claude 桌面端 Code 标签页（Windows，2026-10-10）：在 UA1000GUM 的两页副本上，Canva 连接器 `edit-design` 的 `replace_speaker_notes` 直接写备注、Claude in Chrome 用 `form_input` 写备注，两条通道回读均逐字一致；脚本在 Windows 下跑通。细节见 `adapters/claude-code.md`。
+- ZCode：安装路径、MCP 配置和变量替换按官方文档整理，浏览器写入步骤待实机确认。
 
 ## 合规边界
 

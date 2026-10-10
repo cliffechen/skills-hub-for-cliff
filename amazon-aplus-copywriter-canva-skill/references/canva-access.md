@@ -8,7 +8,7 @@
 | 看 | 能查看本地图片文件（多模态） | 打开一张下载好的缩略图能描述内容 | 接视觉 MCP（如 ZCode 的 `zai-mcp-server`）；再不行只做文字层审查，并在 plan 里写明"未看图" |
 | 写备注 | 浏览器自动化或 computer use | 能打开网页、点击、输入，最好能截图 | 交付 `notes/p{N}.txt`，请用户自己粘贴；或作为设计评论发出（见下文"退路"） |
 
-Canva MCP 能读备注（`get-presenter-notes`）、改画布文字和元素（`start-editing-transaction` → `perform-editing-operations` → `commit-editing-transaction`）、发评论（`comment-on-design`），但**没有写备注的接口**。所以写备注必须走浏览器。不要尝试用编辑事务"顺便"改备注，也不要把备注内容写成画布上的隐藏文本框。
+Canva MCP 能读备注（`get-presenter-notes`）、改画布文字和元素（`start-editing-transaction` → `perform-editing-operations` → `commit-editing-transaction`）、发评论（`comment-on-design`），但旧版工具集**没有写备注的接口**，写备注要走浏览器。新版连接器（工具为 `read-design` / `edit-design`）的 `edit-design` 带 `replace_speaker_notes` 操作，可以直接写，工具对照和步骤见 `adapters/claude-code.md`；先看本 agent 的工具列表属于哪一种。不要尝试用编辑事务"顺便"改备注，也不要把备注内容写成画布上的隐藏文本框。
 
 工具名在不同 agent 里会带前缀（如 `mcp__canva__get-presenter-notes`、`Canva.get-presenter-notes`，或经 `CallDynamicTool` 调用），以本 agent 实际列出的为准；下文用裸名。
 
