@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Download page thumbnails listed in a saved get-design-pages response.
 
+Only needed with the older Canva tool set: read-design returns thumbnails as images directly.
+
 Usage: python3 fetch_thumbs.py pages.json out_dir
 
 pages.json is the get-design-pages result saved verbatim ({"items": [...]} or a bare list).

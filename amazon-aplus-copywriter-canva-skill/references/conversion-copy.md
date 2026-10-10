@@ -44,7 +44,7 @@
 
 1. **信任证据要给低价做担保**：检测、透明标签、剂型说明不是"优点清单"，是在回答"便宜但为什么可信"。
 2. **图上不写钱**：A+ 禁 price / affordable / discount；副图也不写价格。文案里也**不用 pay、cost、afford、markup、hype** 这类暗指价格或贬低头部品牌的词（用户 2026-10-10：太冲）。
-3. **把便宜翻译成"吃得久"**：`Made to Be Taken Every Day — / For Years, Not Weeks.`；`The Best Routine / Is the One You Keep.` 价格让买家在页面上自己看到。
+3. **把便宜翻译成"吃得久"**：`Made to Be Taken Every Day — / For Years, Not Weeks.`；`A Better Routine / Is the One You Keep.` 价格让买家在页面上自己看到。
 
 ## 5. 对比：不比别人，也不比自己
 

@@ -9,7 +9,7 @@
 | `工作区/03-SupplementFacts-可选/` | 真实产品的 Supplement Facts 标签图 | 有则作为事实来源（出处记为"标签图"），优先级高于构图里的占位数字；同时驱动「辅料与剂型」模块（`references/dosage-form-excipients.md`）。没有标签图但用户在对话里提到剂型时，按所说剂型写，并在 plan 里列出待确认的辅料；都没有就跳过 |
 | `工作区/04-对标文案库-可选/` | 对标品牌的 markdown 文案集（可按品牌分子文件夹） | 有则按 `references/library-digest-guide.md` 提炼规则卡，只借结构与方法、不照抄原句；没有则用 `references/baseline-rules.md` |
 | `工作区/05-输出/` | 交付的 Excel、copy.json 等 | 所有产出放这里 |
-| `工作区/05-输出/canva/` | Canva 读写的中间文件：`pages.json`、`thumbs/`、`onimage/p{N}.txt`、`notes_before.json`、`notes_{时间戳}/`、`notes_backup_{时间戳}.json`、`notes_after.json` | 由技能第 C3、6、C9 步生成，不要手工改 |
+| `工作区/05-输出/canva/` | Canva 读写的中间文件：`pages.json`、`thumbs/`、`onimage/p{N}.txt`、`notes_before.json`、`notes_{时间戳}/`、`notes_backup_{时间戳}.json`、`notes_after.json` | 由技能第 C3、6、C9 步生成，不要手工改。同时做多个设计时，每个设计一个子文件夹（`canva/{设计名}/`） |
 
 - 开始前先列出各文件夹里的文件，把识别到的内容告诉用户；某个文件夹为空就跳过对应类型，不要报错。
 - 01 和 02 都空、用户也没给 Canva 设计时，提醒用户先放图或给设计链接。

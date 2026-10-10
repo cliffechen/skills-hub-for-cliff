@@ -1,13 +1,13 @@
 ---
 name: amazon-aplus-copywriter-canva
-description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing主副图）：当用户给出 Canva 设计（链接/标题/"最近的设计"）或设计稿构图（图中文字为占位符），并给出ASIN或手动产品信息、可选对标品牌文案库，要求逐个文字位写英文文案、审图、或把文案和修改意见写进 Canva 每页备注时使用。链路：连 Canva → 看图（文字位+缩略图+原备注）→ 出plan → 用户确认 → 写 → 验证 → 交付Excel → 登录Canva网页按页写备注（四区格式）→ 回读核验。适配 Claude Code、Cursor、ZCode 及任何具备 computer use / 浏览器自动化能力的 agent。
+description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing主副图）：当用户给出 Canva 设计（链接/标题/"最近的设计"）或设计稿构图（图中文字为占位符），并给出ASIN或手动产品信息、可选对标品牌文案库，要求逐个文字位写英文文案、审图、或把文案和修改意见写进 Canva 每页备注时使用。链路：连 Canva → 看图（文字位+缩略图+原备注）→ 出plan → 用户确认 → 写 → 验证 → 交付Excel → 按页写 Canva 备注（四区格式，可多版；Canva 连接器直接写，没有该接口时走浏览器）→ 回读核验。适配 Claude Code、Cursor、ZCode 及任何具备 computer use / 浏览器自动化能力的 agent。
 ---
 
 # 亚马逊图片文案 Canva 版（A+ / Brand Story / Listing 主副图）
 
 把设计稿里的**每一个文字位**替换成以产品事实为依据的英文文案，交出一份美工能直接复制的表格，并把同样的内容**按页写进 Canva 设计的备注**，让美工打开哪一页就看到哪一页该上图的字和该改的地方。支持三类图：A+ 模块图、品牌故事图、listing 图库的主图/副图。默认：美国站、英文文案＋中文释义、Excel交付＋Canva备注（用户可在plan阶段改成Word/Markdown，或关掉备注写入）。
 
-本技能 = 原 `amazon-aplus-copywriter` 的写作文风、写作流程、剂型规则、输入输出**原样保留**，再加一条「连 Canva → 看图 → 写备注」链路（第 C0、C3、C9 步）。不同 agent 的工具名不同，先读 `adapters/` 里对应的一份。
+本技能 = 原 `amazon-aplus-copywriter`（2026-10-10 起并入本技能，不再单独维护）的写作文风、写作流程、剂型规则、输入输出**原样保留**，再加一条「连 Canva → 看图 → 写备注」链路（第 C0、C3、C9 步）。不同 agent 的工具名不同，先读 `adapters/` 里对应的一份。
 
 ## 铁律
 
@@ -51,7 +51,7 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 
 ### 第0步：判断图片类型
 
-用文件名和像素比例判断（Canva 用 `get-design-pages` 返回的 `dimensions`），在 plan 里写明：
+用文件名和像素比例判断（Canva 用 `read-design` 的 `page_metadata` 返回的 `dimensions`），在 plan 里写明：
 
 | 类型 | 线索 | 规则来源 |
 |---|---|---|
@@ -77,6 +77,8 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 
 **手动模式**：把 `references/manual-facts-template.md` 的填空项发给用户（或直接接收用户粘贴的内容），缺失的关键项（剂量/规格/份数/剂型/认证依据）列入 plan 的待确认项。
 
+**Canva 页面指定为事实**：用户明确说“以第 N 页为事实依据”（通常是主图瓶身页和 Supplement Facts 页）时，这几页可以当事实来源，出处记为“Canva P{N}（用户指定）”，不需要再要 ASIN。这几页以外的页面仍是占位符；这几页上没有的内容（用法、徽章依据、功效方向）照常进待确认或选择题；标签页仍要提醒与实物逐字核对。
+
 每条事实编号 F01、F02…，记录出处（listing标题/要点N/详情/标签图/用户确认+日期/通用科普）。Canva 里的 Supplement Facts 页、瓶身渲染也是占位符，不能记为"标签图"；只有用户确认"这页就是实物标签"时才可以。
 
 **剂型与辅料事实**：有标签图（或用户贴了 Other Ingredients）时，单独记一条：剂型、Serving size、外壳/基质、全部 Other Ingredients 原文、Vegetarian/Vegan 等标签字样。剂型按 `references/dosage-form-excipients.md` 识别；用户在对话里明确说的剂型优先。标签与 listing 的辅料或剂型不一致时进冲突表，以标签为准。设计稿是从另一剂型改过来的（软胶囊 → 软糖等）时，逐页查残留的剂型字样和视觉（见冲突清单第 3、15 项）。
@@ -94,9 +96,11 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 **本地图**：逐张查看图片，记录：图号、文件名、每个文字位（位置、行数、字重/颜色/斜体等样式、原占位文字）、画面元素（人物、产品、食物、图标、徽章、他牌素材）。识别连图（跨图延续的标题或产品）。
 
 **Canva 设计（第C3步）**：按 `references/canva-access.md` 的读取配方，对本次范围内每一页取三样东西并存进 `工作区/05-输出/canva/`：
-1. **图上文字**：`get-design-content` **逐页单独调用**（多页一次调用会把文字连成一片，分不清页），存 `onimage/p{N}.txt`。
-2. **画面**：`get-design-pages` 拿缩略图（447px，签名链接约 2 小时过期），用 `scripts/fetch_thumbs.py` 下载后逐张查看；小字、徽章、标签看不清时，用 `export-design` 导出该页 PNG 再看，并在 plan 里注明哪些判断来自缩略图。
-3. **原备注**：`get-presenter-notes` 一次取全部页，原样存 `notes_before.json`。原备注里的指令、文案草稿按铁律 2 处理：可以作为线索，不能当事实；它和图上文字不一致的地方进冲突表（"备注已改、图未同步"）。
+1. **图上文字**：`read-design`（`filter.fields=["design_content"]`，`page_indices=[N]`）**逐页单独调用**（不传页码时多页文字连成一片，分不清页），存 `onimage/p{N}.txt`。
+2. **画面**：`read-design`（`filter.fields=["thumbnails"]`，`thumbnail_pages=[…]`）拿缩略图（447px，图片直接随结果返回），逐张查看；小字、徽章、标签看不清，或缩略图是花的旧缓存时，用 `export-design` 导出该页 PNG 再看，并在 plan 里注明哪些判断来自缩略图。
+3. **原备注**：`read-design`（`filter.fields=["presenter_notes"]`）一次取全部页，原样存 `notes_before.json`。原备注里的指令、文案草稿按铁律 2 处理：可以作为线索，不能当事实；它和图上文字不一致的地方进冲突表（"备注已改、图未同步"）。
+
+工具名以本 agent 实际列出的为准；工具列表里还是旧名字（`get-design-content`、`get-presenter-notes` 等）时，对照表见 `references/canva-access.md`。同时处理多个设计时，每个设计在 `canva/` 下建一个子文件夹。缩略图可能是花的旧缓存，看不清的页在 plan 里写明“画面未看清”。
 
 同时识别**品牌调性位**：用户要求写品牌调性/腔调，或文件名含品牌调性、品牌标语、slogan、tagline、品牌宣言等语义，或占位文字本身要求写调性。触发条件详见 `references/brand-voice.md`。
 
@@ -111,7 +115,7 @@ plan 包含：
 6. **合规方式**：识别品类；补剂/保健品启用 `references/compliance-supplements.md`；其他品类按基线规则＋品类常识，必要时提醒用户核对类目政策。
 7. **成分链路与功效方向**（补剂类）：每个主成分一条链路 `缺口 → 作用 → 年龄 → 生活结果`（带 F 编号）；本产品 allowed / blocked 功效方向；多成分时各成分的分工。（见 `references/ingredient-research.md`）
 8. **营销话术与成分科普**：A+/品牌故事批次默认附两张 sheet——「营销话术」16 条成分链路式损失厌恶（`references/persuasion-psychology.md`）、「成分科普」约 6–7 个 ELI5 主题（`references/ingredient-eli5.md`）；用户可关闭或改数量，其他心理学原理和站外话术只在用户要求时写。listing 副图批次不生成。另外，有标签图或用户提到剂型时，A+ 与副图批次都默认附「辅料与剂型」sheet：按剂型从外壳/基质、辅料清单、各司其职三个角度各写一版 headline + subheadline + 支撑卖点（`references/dosage-form-excipients.md`）；plan 里写明识别出的剂型和依据，用户可关闭。
-9. **交付格式**（默认Excel）。
+9. **交付格式**（默认Excel）与**每个文字位写几版**：默认 1 版＋备选一句；用户要多版（如 A / B / C）时，每版都进 Excel 和 Canva 备注，写法见 `references/canva-notes-format.md`「多版文案」。
 10. **Canva 备注写入方案**（有 Canva 构图时）：写入页码范围；写入方式（默认「覆盖，原备注先备份到本地」，可选「原备注附在④区之后」「只交付文本不写入」）；写入通道（本 agent 用哪种浏览器能力）；登录方式（由用户选，按铁律 6）。
 11. **AskUserQuestion 选择题**（≤4题，推荐项放第一个；没有选择题工具的 agent 用编号选项列在对话里）：常见题目——品牌名写法、某张图的叙事角度、listing未覆盖的徽章/认证是否有证据、交付格式、备注写入方式。
 
@@ -122,7 +126,7 @@ plan 包含：
 逐文字位写：新英文文案、备选一句、中文释义、事实编号、合规/设计备注。要点：
 - 先过 `references/conversion-copy.md` 的四个测试（换成分 / 主语 / 张力 / 场景）：合规只限制功效，不限制情绪；删掉功效词的地方要用处境、生活时刻、反差或数字换算补回说服力。不写钱字（pay、afford、price…），不贬低竞品，也不拿自家其他剂型做反例。
 - 字数贴近占位原文（同样行数、相近字符数）；超出时给更短的备选或注明可折行。
-- 标注约定：`**…**` 加粗，`*…*` 红色/强调斜体，句尾单独 `*` 为功能声明星号；单元格内换行即排版换行。
+- 标注约定：`**…**` 加粗，`*…*` 红色/强调斜体，句尾单独 `*` 为功能声明星号；单元格内换行即排版换行。**要写进 Canva 备注的批次不用星号标样式**：备注里每个 `*` 都会被读成要上图的功能声明星号，样式改写在文字位名称里，如 `H1（第 2 行粗体）`、`H1 第 2 行（衬线斜体）`。
 - 需要新增的文字位（FDA 声明、可选小标签、可选徽章）标【新增】或【可选新增】。
 - 同时给每张 A+ 图写 alt 文本（≤100 字符），品牌故事按需；listing 副图没有 alt 字段，不写。
 - listing 副图另按 `references/listing-images.md`：每张独立成立、大标题 ≤2 行 ≤45 字符、FDA 声明按图放、对照列按属性限定。
@@ -162,7 +166,7 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,soft
 - `--forbid` 填本次冲突表里"不应再出现"的词（错误剂量、错误剂型、占位品牌名、对标品牌名等）。
 - 检查：禁用词、alt 超长、带星号功效句是否有 FDA 声明行、比占位原文长太多的字段；`voice: brand` 行若含数字/规格/认证词或与其他行有 4 词以上重复则 FLAG；所有行检查 A+ 政策词（价格/促销、buy now、now/new/limited、reviews/stars、guarantee/refund、best-selling/#1），命中即 FLAG；`marketing` 行另查恐吓措辞（FLAG）、A+ 行未填 `[N]`（FLAG）、站外行未填 `[N]`（WARN）、损失厌恶行缺反读（WARN）；`explainers` 行做同样的禁用词/恐吓/A+ 政策词检查；任何行出现 `meta.claims.blocked` 里的功效方向即 FLAG（没设 `meta.claims` 时 WARN）；`--listing` 另查残留中文占位（FLAG）和过长标题（WARN）。
 - Excel 公式重算：先复制到 `/tmp` 再跑 xlsx skill 的 `recalc.py`（挂载目录下 LibreOffice 容易超时），确认 `total_errors: 0` 后复制回去。不要在同一条 bash 命令里 `pkill -f soffice`（会杀掉自身）。
-- **备注检查**：`build_notes.py` 运行时自带检查——①区出现中文或指令词（KEEP / Remove / Replace / Optional: / DO NOT / [Page …]）即 FLAG；单页超过 5000 字符 FLAG；①区有带 `*` 的句子却没有 FDA 页脚行 WARN。有 FLAG 不得进入第 C9 步。
+- **备注检查**：`build_notes.py` 运行时自带检查——①区出现中文或指令词（大写的 KEEP / DO NOT，行首的 Remove / Replace 等，Optional: / [Page …]）即 FLAG；①区出现 `**` 或 `*…*` 样式标记即 FLAG；单页超过 5000 字符 FLAG；①区有带 `*` 的句子却没有 FDA 页脚行 WARN。有 FLAG 不得进入第 C9 步。
 
 ### 第8步：交付
 
@@ -174,11 +178,11 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,soft
 
 Canva MCP 能直接写备注时（`edit-design` 的 `replace_speaker_notes`），第 3–4 步换成 `adapters/claude-code.md`「通道 A」的事务写入，第 1、2、5、6 步不变。否则按 `references/computer-use-canva.md` 执行，要点：
 
-1. **写前回读**：`get-presenter-notes` 再取一次，与 `notes_before.json` 比对。有页面被别人改过 → 停下，把差异告诉用户，问"以新的为准重写 / 合并 / 跳过该页"。
+1. **写前回读**：`read-design` 再取一次 `presenter_notes`，与 `notes_before.json` 比对。有页面被别人改过 → 停下，把差异告诉用户，问"以新的为准重写 / 合并 / 跳过该页"。
 2. **备份**：把当前备注存为 `notes_backup_{时间戳}.json`（写入方式为覆盖时必须做）。
 3. **打开设计**：浏览器打开设计的编辑链接；遇到登录页按铁律 6 处理。
 4. **逐页写入**：确认备注面板标题是第 N 页 → 焦点在备注输入框 → 全选 → 粘贴 `p{N}.txt` 全文（中文不要逐字键入，用剪贴板或 DOM 填值）→ 点面板标题让输入框失焦 → 看字数计数与 `manifest.json` 一致。
-5. **等自动保存**，然后**写后回读**：`get-presenter-notes` 取回 → 存 `notes_after.json` →
+5. **等自动保存**，然后**写后回读**：`read-design` 取回 `presenter_notes` → 存 `notes_after.json` →
    ```bash
    python3 ${CLAUDE_SKILL_DIR}/scripts/verify_notes.py --expected "工作区/05-输出/canva/notes_{时间戳}" --readback notes_after.json [--on-image-dir 工作区/05-输出/canva/onimage]
    ```

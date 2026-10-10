@@ -5,11 +5,11 @@ Usage:
   python3 verify_notes.py --expected notes_dir --readback notes_after.json [--on-image-dir onimage_dir]
   python3 verify_notes.py --compare notes_before.json notes_now.json      # detect concurrent edits
 
---readback / --compare files are the get-presenter-notes output saved as JSON:
-  [{"page_id": "...", "page_number": 3, "notes": "..."}]
-or the read-design output saved verbatim: {"presenter_notes": [ ...same items... ]}
+--readback / --compare files are the read-design output saved verbatim:
+  {"presenter_notes": [{"page_id": "...", "page_number": 3, "notes": "..."}]}
+or the bare list that the older get-presenter-notes tool returns.
 --expected is the build_notes.py output dir (p{N}.txt + manifest.json).
---on-image-dir holds p{N}.txt with get-design-content output for that single page.
+--on-image-dir holds p{N}.txt with read-design design_content for that single page.
 
 Checks:
   - per page: notes in Canva == expected text (trailing whitespace ignored) -> MATCH / DIFF (FLAG)
@@ -24,9 +24,9 @@ import os
 import re
 import sys
 
+# KEEP / DO NOT only count in capitals: real headlines say "the One You Keep" or "Keep Showing Up."
 INSTRUCTION = re.compile(
-    r"\bKEEP\b|\bDO NOT\b|^\s*(Remove|Delete|Replace|Fix|TODO|Designer)\b|\bOptional\s*:|\[Page\s*\d|→|^\s*【",
-    re.I,
+    r"\bKEEP\b|\bDO NOT\b|(?i:^\s*(Remove|Delete|Replace|Fix|TODO|Designer)\b|\bOptional\s*:|\[Page\s*\d)|→|^\s*【",
 )
 ZONE = re.compile(r"^【([①②③④⑤])")
 

@@ -49,14 +49,14 @@
 ## 5. 保存与核验
 
 - Canva 自动保存。全部写完后等几秒，看顶部保存状态（云图标 / "所有更改已保存"）。
-- 回到 agent 侧用 `get-presenter-notes` 回读，跑 `verify_notes.py`。截图里的计数只是辅助，以回读结果为准。
+- 回到 agent 侧用 `read-design` 取 `presenter_notes` 回读，跑 `verify_notes.py`。截图里的计数只是辅助，以回读结果为准。
 
 ## 6. 故障处理
 
 | 现象 | 处理 |
 |---|---|
 | 粘贴后备注是乱码或问号 | 剪贴板编码问题：换上面对应系统的命令；DOM 级改用 fill |
-| 粘贴进了画布（出现新文本框） | 立即 `Ctrl/Cmd+Z`，直到画布恢复；用 `get-design-content` 抽查该页，告诉用户 |
+| 粘贴进了画布（出现新文本框） | 立即 `Ctrl/Cmd+Z`，直到画布恢复；用 `read-design` 取该页 `design_content` 抽查，告诉用户 |
 | 面板页码和预期不符 | 不写，重新翻页 |
 | 计数停在 5000 | 文本超长被截断：回到第 7 步压缩该页②区 |
 | 回读与预期不符 | 重写该页一次；仍不符就报告差异（通常是别人同时在编辑） |
@@ -65,6 +65,6 @@
 
 ## 7. 收尾
 
-- 不改画布：抽查一页 `get-design-content`，与 `onimage/p{N}.txt` 一致。
+- 不改画布：抽查一页 `read-design` 的 `design_content`，与 `onimage/p{N}.txt` 一致。
 - 问用户是否退出 Canva 登录（右上角头像 → 退出）。
 - 汇报：写了哪几页、备份文件位置、`verify_notes.py` 结果、①区仍"未上图"的条目数。

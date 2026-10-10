@@ -28,9 +28,9 @@ bash {技能目录}/install.sh claude --user     # 复制到 ~/.claude/skills/am
 
 ### 工具对照（实测）
 
-技能正文用的是旧工具名，这个连接器里读取类合并成了 `read-design` 一个工具：
+技能正文用的就是这个连接器的工具名（读取类合并成了 `read-design` 一个工具）。和旧工具名的对应：
 
-| 技能正文里的说法 | 本连接器的调用 | 备注 |
+| 旧工具名 | 本连接器的调用（技能正文的写法） | 备注 |
 |---|---|---|
 | `get-presenter-notes` | `read-design`，`filter.fields=["presenter_notes"]` | 不传 `page_indices` 即全部页。返回 `{"presenter_notes":[{page_id, page_number, notes}]}`，原样存盘即可，`verify_notes.py` 和 `build_notes.py --before` 两种外形都认 |
 | `get-design-content`（逐页） | `read-design`，`filter.fields=["design_content"]`，`page_indices=[N]` | 传了 `page_indices` 只返回该页文字；不传时多页连成一片，仍然要逐页取 |
@@ -90,6 +90,40 @@ bash {技能目录}/install.sh claude --user     # 复制到 ~/.claude/skills/am
 
 通道 A 不涉及网页登录。其他通道遇到登录页时：停在登录页，请用户自己完成登录（密码、验证码、Google 等第三方授权都由用户操作），登录后再继续。不走"用户把验证码发给 agent 代填"这条路。
 
+## 整条流程实跑记录（2026-10-10，桌面端 Windows）
+
+设计 UA1000G-TeddiLab-Combination（22 页），用户指定第 13、21 页为事实依据，写第 14–21 页副图。全程只用 Canva 连接器，没有开浏览器。
+
+| 步骤 | 实际调用 | 备注 |
+|---|---|---|
+| C0 定位 | `resolve-shortlink`（`canva.link/…` 短链）→ 得到 `design/{ID}` | `canva.link` 短链必须先解析 |
+| C3 读 | `read-design` 一次取 `design_metadata` + `page_metadata` + `presenter_notes` + `thumbnails`（9 页）；再每页一次 `design_content` | 每页一次的调用可以放在同一轮并行发出 |
+| 4 plan | 对话里出 plan + `AskUserQuestion` 4 题（1 题多选） | |
+| 6–7 | `build_xlsx.py`、`build_notes.py --pages 14-21`、`scan_copy.py` | |
+| C9 写 | 通道 A：8 页分两次 `edit-design`（每次 4 页）→ `commit` → `read-design` 回读 | 写了两轮，第二轮覆盖第一轮 |
+
+### 坑和注意点
+
+1. **回读结果不会自动落盘。** 连接器的返回只在对话里，`verify_notes.py` 要的是文件。先把回读的 JSON 原样用 Write 存成 `notes_now.json` / `notes_after.json` 再跑脚本；实跑时第二步是靠逐页目测对照完成的，这比脚本弱，页数多时不要这样做。
+2. **写入内容要由模型把 `p{N}.txt` 抄进工具参数。** 抄写本身可能出错，所以写后回读不能省；每次调用放 4 页左右，回读也分批，别一次比十几页。
+3. **`edit-design` 的返回很大。** 它会带回 `page_index` 那一页的完整元素树（一页上万字符）和一张预览图。只在需要确认草稿时看 `document.page.notes`；写后回读用 `read-design` 且 `fields` 只取 `presenter_notes`。
+4. **预览图是确认“没碰画布”的依据。** `edit-design` 返回的是 `page_index` 那一页的当前渲染（约 600px，清晰），和写入前的缩略图对一下；另外抽一页 `design_content` 与 `onimage/p{N}.txt` 比。
+5. **`read-design` 的缩略图可能是花的旧缓存**（实跑 9 页里有 2 页）。这种页在 plan 和备注③区写明“画面未看清，请在原图核对”，不要凭花图下结论。
+6. **空备注没有 `notes` 字段。** 回读里空页只有 `page_id` 和 `page_number`，脚本按空字符串处理；自己写代码时用 `.get("notes", "")`。
+7. **设计会在你读和写之间被改。** 实跑时两次读取之间 `updated_at` 变了（备注没变）。写前回读只比备注；画布文字有没有变，写 plan 之后隔了较久就重读一次 `design_content`。
+8. **第二轮覆盖前，上一轮的备注就是要备份的“原备注”。** 本地有上一轮的 `notes_{时间戳}/` 时，先确认回读与它一致，再把它存成 `notes_backup_{新时间戳}.json`。
+9. **`--forbid` 的词会按词首匹配。** `softgel` 能拦住 `softgels`；想拦 `GMP` 又放过 `cGMP` 可以直接填 `GMP Certified`。别把自己新文案里要用的词填进去。
+10. **标题长度检查靠文字位名称。** `scan_copy.py --listing` 只检查名称里带“标题”、`H1` 或 `headline` 的文字位（≤45 字符、≤2 行）。
+11. **技能没安装时也能跑，但不会自动触发。** 实跑是直接读仓库里的 SKILL.md 做的。要让它按描述触发，先 `install.sh claude --user`（2026-10-10 已装到用户级；原 `amazon-aplus-copywriter` 已并入本技能并卸载）。
+12. **仓库是稀疏检出时看不到技能文件夹。** `git sparse-checkout add amazon-aplus-copywriter-canva-skill`。
+13. **工作区在哪个文件夹。** 中间文件按当前项目的 `工作区/05-输出/canva/{设计名}/` 放；在本技能文件夹里开会话时，`CLAUDE.md` 会自动加载工作区约定。
+
+### 这次没做或做弱了的
+
+- Excel 的公式重算（SKILL.md 第 7 步的 `recalc.py`）没跑：Windows 上没有验证过 LibreOffice 这一步；Excel 打开时会自己算。
+- 对标库没有重读，用的是 `listing-images.md`、`conversion-copy.md`、品牌档案里已经提炼过的规则。这样做要在 plan 里明说，由用户决定要不要重读。
+- 写后核对用的是目测，不是 `verify_notes.py`（见上面第 1 条）。
+
 ## 先在副本上试
 
 第一次在某个环境跑 C9，或连接器更新后，先用 `copy-design`（`page_numbers` 选 1–2 页）做一个副本，在副本上写一页、回读一致，再写正式设计。副本会继承原设计的标题和备注，用 `update_title` 改成带"测试"字样的名字，用完请用户在 Canva 里删除（连接器没有删除设计的工具）。
@@ -108,6 +142,6 @@ bash {技能目录}/install.sh claude --user     # 复制到 ~/.claude/skills/am
 ## 还没测的
 
 - 终端 `claude mcp add` 接的 Canva MCP 是否与桌面端连接器工具集相同。
-- 整份设计（十几页）一次写完；实测只写了两页的副本。
+- 一次事务写 8 页以上；实测最多 8 页（分两次调用，每次 4 页）。
 - 多人同时编辑时，连接器事务与网页端改动冲突的表现。
 - `export-design` 导出单页 PNG。

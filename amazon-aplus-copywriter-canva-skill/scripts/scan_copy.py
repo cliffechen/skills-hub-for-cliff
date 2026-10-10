@@ -5,9 +5,10 @@ Usage:
   python3 scan_copy.py copy.json [--forbid "1000mg,softgel,OldBrand"] [--supplement] [--listing] [--max-over 10]
 
 Checks the "copy" and "alt" fields of every row:
-  - --forbid terms (this run's conflict list: wrong dose, wrong dosage form, placeholder brand, benchmark brand)
+  - --forbid terms (this run's conflict list: wrong dose, wrong dosage form, placeholder brand, benchmark brand);
+    matched at the start of a word, so "GMP Certified" does not hit "cGMP Certified"
   - --supplement: high-risk supplement claim words; claim asterisks need an FDA disclaimer row
-  - --listing: gallery images (主图/副图). Headline-like slots (slot contains 标题) over 45 chars or 2 lines
+  - --listing: gallery images (主图/副图). Headline-like slots (slot contains 标题 / H1 / headline) over 45 chars or 2 lines
     get a WARN; any Chinese character left in copy is a FLAG (placeholder not replaced)
   - A+ content policy words (price/promo, buy now, now/new/limited, reviews/stars, guarantee/refund,
     best-selling/#1) are a FLAG in every row (the FDA disclaimer row is exempt)
@@ -127,11 +128,16 @@ def check_brand_voice(rows, flags, warns):
                 warns.append(f"{rid} [{field}] brand voice is {words} words - aim for two short beats")
 
 
+def has_term(term, low):
+    """Forbidden term at the start of a word: 'softgel' hits 'softgels', 'GMP Certified' does not hit 'cGMP Certified'."""
+    return re.search(r"(?<![a-z])" + re.escape(term.lower()), low) is not None
+
+
 def common_checks(rid, field, t, a, forbid, flags, warns):
     """Checks shared by marketing and explainer lines: forbid terms, fear, claim guard, supplement risk."""
     low = t.lower()
     for term in forbid:
-        if term.lower() in low:
+        if has_term(term, low):
             flags.append(f"{rid} [{field}] contains forbidden term '{term}': {t!r}")
     pat = first_hit(FEAR, low)
     if pat:
@@ -244,7 +250,7 @@ def main():
                 continue
             low = t.lower()
             for term in forbid:
-                if term.lower() in low:
+                if has_term(term, low):
                     flags.append(f"{rid} [{field}] contains forbidden term '{term}': {t!r}")
             pat = first_hit(APLUS_POLICY, low)
             if pat:
@@ -258,7 +264,7 @@ def main():
                         warns.append(f"{rid} [{field}] high-risk wording /{pat}/: {t!r}")
             if a.listing and field == "copy" and cjk.search(t):
                 flags.append(f"{rid} [copy] still contains Chinese characters (placeholder not replaced?): {t!r}")
-            if a.listing and field == "copy" and "标题" in (r.get("slot") or ""):
+            if a.listing and field == "copy" and re.search(r"标题|H1|headline", r.get("slot") or "", re.I):
                 plain = re.sub(r"\*", "", t)
                 if len(plain) > 45 or plain.count("\n") > 1:
                     warns.append(f"{rid} headline is {len(plain)} chars / {plain.count(chr(10))+1} lines - long for a 1600px gallery thumbnail")

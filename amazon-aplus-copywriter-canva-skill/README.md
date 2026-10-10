@@ -2,7 +2,7 @@
 
 亚马逊图片文案编写 Skill 的 Canva 版——A+ 模块图、From the brand 品牌故事、Listing 主图/副图。
 
-在原 `amazon-aplus-copywriter` 的基础上（写作文风、8 步流程、剂型与辅料规则、输入输出全部保留），增加一条 Canva 链路：
+在原 `amazon-aplus-copywriter`（2026-10-10 起并入本技能，不再单独维护）的基础上（写作文风、8 步流程、剂型与辅料规则、输入输出全部保留），增加一条 Canva 链路：
 
 **连 Canva → 看图（每页文字位 + 缩略图 + 原备注）→ 出 plan → 用户确认 → 写 → 扫描验证 → 交付 Excel → 登录 Canva 网页按页写备注 → 回读核验**
 
@@ -33,7 +33,7 @@ amazon-aplus-copywriter-canva/
 │   ├── scan_copy.py                # 原脚本：合规与冲突扫描
 │   ├── build_notes.py              # 新：JSON → 每页备注 p{N}.txt + all_notes.md + manifest.json，并检查①区
 │   ├── verify_notes.py             # 新：写后回读核验；图上文字 vs ①区同步表；内部指令上图检测；写前并发改动检测
-│   └── fetch_thumbs.py             # 新：按 get-design-pages 结果批量下载缩略图
+│   └── fetch_thumbs.py             # 旧版 Canva 工具集用：按 get-design-pages 结果批量下载缩略图
 └── examples/
     ├── 04-示例产出/                 # 原技能的两份成品 Excel
     └── UA1000GUM_canva_demo_copy.json  # Canva 示例（第 3、8 页），产出与实际写入 Canva 的备注逐字一致
@@ -84,7 +84,7 @@ python3 $S/verify_notes.py --expected 工作区/05-输出/canva/notes_20261009_P
 ## 已验证
 
 - Cursor Cloud Agent（2026-10-09）：Canva MCP 读取 → computerUse 子代理用邮箱验证码登录 → UA1000GUM 第 1–8 页备注写入 → 回读逐字一致。`examples/UA1000GUM_canva_demo_copy.json` 用 `build_notes.py` 生成的第 3、8 页与实际写入内容逐字一致；`verify_notes.py` 能检出第 3 页图上的 "KEEP Muscle & Immune"。
-- Claude 桌面端 Code 标签页（Windows，2026-10-10）：在 UA1000GUM 的两页副本上，Canva 连接器 `edit-design` 的 `replace_speaker_notes` 直接写备注、Claude in Chrome 用 `form_input` 写备注，两条通道回读均逐字一致；脚本在 Windows 下跑通。细节见 `adapters/claude-code.md`。
+- Claude 桌面端 Code 标签页（Windows，2026-10-10）：在 UA1000GUM 的两页副本上，Canva 连接器 `edit-design` 的 `replace_speaker_notes` 直接写备注、Claude in Chrome 用 `form_input` 写备注，两条通道回读均逐字一致；脚本在 Windows 下跑通。同一天在正式设计 UA1000G-TeddiLab-Combination 上跑完整条流程（读第 13–21 页 → plan → 确认 → Excel → 第 14–21 页备注写入两轮，第二轮为 A / B / C 三版）。流程、坑和已知限制见 `adapters/claude-code.md`。
 - ZCode：安装路径、MCP 配置和变量替换按官方文档整理，浏览器写入步骤待实机确认。
 
 ## 合规边界

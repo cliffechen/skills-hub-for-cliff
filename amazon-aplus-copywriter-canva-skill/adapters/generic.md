@@ -5,7 +5,7 @@
 | 能力 | 技能里的说法 | 找什么 |
 |---|---|---|
 | 读写本地文件、跑 Python | Read / Write / Bash | 文件工具、shell 工具 |
-| 读 Canva | `search-designs`、`get-design-pages`、`get-design-content`、`get-presenter-notes`、`export-design` | 接入 Canva 远程 MCP `https://mcp.canva.com/mcp`（OAuth）。不支持远程 MCP 的 agent 用 `npx -y mcp-remote@latest https://mcp.canva.com/mcp` 走 stdio |
+| 读 Canva | `search-designs`、`read-design`、`edit-design`、`export-design`（旧工具名对照见 `references/canva-access.md`） | 接入 Canva 远程 MCP `https://mcp.canva.com/mcp`（OAuth）。不支持远程 MCP 的 agent 用 `npx -y mcp-remote@latest https://mcp.canva.com/mcp` 走 stdio |
 | 看图 | "逐张查看" | 能读取图片文件的多模态工具；没有就接视觉 MCP |
 | 操作浏览器 | 第 C9 步 | 截图+点击式 computer use，或 DOM 级浏览器自动化（Playwright MCP：`npx @playwright/mcp@latest`） |
 | 问用户选择题 | AskUserQuestion | 有选择题工具就用；没有就在对话里列编号选项，等用户回复 |

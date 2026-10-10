@@ -12,6 +12,7 @@ Reads the same copy.json as build_xlsx.py plus the optional "canva" block and "p
 
 Lint (exit code 1 on any FLAG):
   - zone ① value contains CJK characters or designer-instruction words -> FLAG
+  - zone ① value contains **bold** / *italic* markup (put the style in the slot name instead) -> FLAG
   - note longer than 5000 characters (Canva limit) -> FLAG
   - zone ① has a claim asterisk but no FDA footer line -> WARN
   - page has no zone ① lines -> WARN
@@ -31,11 +32,14 @@ Z5 = "【⑤ 原备注 ARCHIVE】"
 MAX_CHARS = 5000
 
 CJK = re.compile(r"[\u3400-\u9fff\uf900-\ufaff]")
+# KEEP / DO NOT only count in capitals: real headlines say "the One You Keep" or "Keep Showing Up."
 INSTRUCTION = re.compile(
-    r"\bKEEP\b|\bDO NOT\b|\bdo not put\b|^\s*(Remove|Delete|Replace|Fix|Add|Swap|Move|TODO|Designer|Note)\b"
-    r"|\bOptional\s*:|\[Page\s*\d|\bFDA if\b|\bif needed\b|→",
-    re.I,
+    r"\bKEEP\b|\bDO NOT\b|(?i:\bdo not put\b|^\s*(Remove|Delete|Replace|Fix|Add|Swap|Move|TODO|Designer|Note)\b"
+    r"|\bOptional\s*:|\[Page\s*\d|\bFDA if\b|\bif needed\b)|→",
+    re.M,
 )
+# **bold** / *italic* markup: on a Canva note every asterisk reads as a claim asterisk to be put on the image
+STYLE_MARKUP = re.compile(r"\*\*|^\*[^*\n]+\*$", re.M)
 CLAIM_STAR = re.compile(r"\*\s*$|\*\s*[.)]?\s*$")
 
 
@@ -105,6 +109,8 @@ def lint(n, text, z1_lines, rows):
             flags.append(f"P{n} ①[{r.get('slot')}] 含中文（①区只放上图的英文）：{val[:60]}")
         if INSTRUCTION.search(val):
             flags.append(f"P{n} ①[{r.get('slot')}] 疑似设计指令写进了上图文案：{val[:60]}")
+        if STYLE_MARKUP.search(val):
+            flags.append(f"P{n} ①[{r.get('slot')}] 含 ** 或 *…* 样式标记，会被当成要上图的星号；样式写进文字位名称：{val[:60]}")
     if len(text) > MAX_CHARS:
         flags.append(f"P{n} 备注 {len(text)} 字符，超过 Canva 上限 {MAX_CHARS}")
     has_star = any(CLAIM_STAR.search(str(r.get("copy", ""))) for r in rows)
@@ -123,7 +129,7 @@ def main():
     ap.add_argument("copy_json")
     ap.add_argument("--out", default="notes")
     ap.add_argument("--pages", help="e.g. 1-8 or 1,3,5")
-    ap.add_argument("--before", help="notes_before.json (get-presenter-notes or read-design output) for write_mode=archive")
+    ap.add_argument("--before", help="notes_before.json (read-design presenter_notes output) for write_mode=archive")
     a = ap.parse_args()
 
     data = json.load(open(a.copy_json, encoding="utf-8"))

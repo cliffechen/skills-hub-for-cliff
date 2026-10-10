@@ -69,6 +69,7 @@
 - **常用**：clear, plain, listed, stated, per serving, on the label, by design, every batch, routine, daily, steady, simple, considered, made to, a job
 - **少用，要有依据**：clean（先定义：每个成分都列出、都有分工）、pure、premium、science-backed、clinically studied（只说成分有研究，不说本品效果）
 - **禁用**：miracle、breakthrough、revolutionary、detox、superfood、anti-aging、reverse aging、turn back the clock、longevity、clinically proven（没有本品研究时）、FDA approved、guaranteed、#1、best、100%、instant、biohack，以及恐吓词
+- **极限词**（用户 2026-10-10）：best 属极限词，示例句里也不用；要表达这层意思用 better（A Better Routine / Is the One You Keep.）
 - **不用**（2026-10-10）：pay、cost、afford、markup、hype 这类暗指价格或贬低头部品牌的词——ZAB 价格明显低于头部，但只用"吃得久"来表达（For Years, Not Weeks）；Not the Hype 这类说法太冲
 
 ## 7. 对比与徽章（用户 2026-10-10）
@@ -97,7 +98,7 @@
 ## 10. 示例句
 
 - **用户认可**（A+ v5，2026-10-02 / 10-03）：Your Days Feel Different. Your Support Should Be Too.\*｜Start where energy actually starts — inside every cell.\*｜Formulated With Intent｜Every Ingredient Has a Job. Nothing Extra.
-- **用户认可**（Urolithin A 1,000 mg 软胶囊 副图/A+/轮播，2026-10-10）：You've Read About Urolithin A. / Here's 1,000 mg of It.｜Same Pomegranate. Different Gut. / Different Result.｜What Your Cells Get Every Morning\*｜Made to Be Taken Every Day — / For Years, Not Weeks.｜We Test Every Batch. / Then We Show You.｜Sealed in a Softgel. / Suspended in MCT Oil.｜Two Softgels With Your Coffee. / Then Go Live Your Day.｜Nothing Hidden. / Read Every Line.｜Your Cells Have a / *Cleanup Crew.\**｜The Best Routine / Is the One You Keep.｜Every Ingredient / Has a Job.｜Tested Before / It Ships.｜For the One Who / Reads Every Label.
+- **用户认可**（Urolithin A 1,000 mg 软胶囊 副图/A+/轮播，2026-10-10）：You've Read About Urolithin A. / Here's 1,000 mg of It.｜Same Pomegranate. Different Gut. / Different Result.｜What Your Cells Get Every Morning\*｜Made to Be Taken Every Day — / For Years, Not Weeks.｜We Test Every Batch. / Then We Show You.｜Sealed in a Softgel. / Suspended in MCT Oil.｜Two Softgels With Your Coffee. / Then Go Live Your Day.｜Nothing Hidden. / Read Every Line.｜Your Cells Have a / *Cleanup Crew.\**｜A Better Routine / Is the One You Keep.｜Every Ingredient / Has a Job.｜Tested Before / It Ships.｜For the One Who / Reads Every Label.
 - **本次交付**（品牌故事 v1，2026-10-05，待用户逐句确认）：Aging Support, Simplified.\*｜One key ingredient. One daily serving. A label you can actually read.｜All Effort. / No Guesswork.｜High standards in every form we make. Clear to read. Simple to take. Easy to live with.｜Read The Game. / Read The Label.｜Your Routine Starts Here.｜Consistency beats intensity. You keep the habit. We keep the standard, batch after batch.｜Keep Showing Up. / So Will We.
 
 ## 11. 自检
