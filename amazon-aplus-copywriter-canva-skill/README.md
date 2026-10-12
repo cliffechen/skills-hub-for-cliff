@@ -27,6 +27,9 @@ amazon-aplus-copywriter-canva/
 │   ├── computer-use-canva.md       # 新：浏览器登录 Canva、逐页写备注、故障处理
 │   ├── conflict-checklist.md       # 冲突检查 18 项（新增 15–18：剂型改版残留、内部指令上图、备注已改图未同步、跨页矛盾）
 │   ├── compliance-supplements.md   # 补剂合规包（新增：%DV 与糖醇的标签检查提醒）
+│   ├── product-context.md          # 2026-10-13 新：产品上下文模板（每个产品一份，放本地工作区）
+│   ├── reader-stages-and-hooks.md  # 2026-10-13 新：读者认知阶段、画面与标题分工、钩子矩阵、两个维度的版本
+│   ├── edit-sweeps.md              # 2026-10-13 新：逐句七关、换牌测试（含 lockup 规则）、去 AI 腔
 │   └── …                           # 其余与原技能相同：baseline-rules、listing-images、dosage-form-excipients、brand-profiles/zab.md 等
 ├── scripts/
 │   ├── build_xlsx.py               # 原脚本：JSON → Excel
@@ -50,7 +53,7 @@ amazon-aplus-copywriter-canva/
 
 ## 输出
 
-- Excel（原格式不变）：说明 / 文案总表 / 营销话术 / 成分科普 / 辅料与剂型 / 设计修改清单 / 事实依据
+- Excel（原格式不变）：说明 / 文案总表 / 营销话术 / 成分科普 / 辅料与剂型 / 钩子矩阵 / 检查记录 / 设计修改清单 / 事实依据
 - Canva 每页备注（四区格式），以及本地的 `notes_{时间戳}/`（每页 txt、汇总 md、manifest）和写入前备份
 
 ## 安装
@@ -86,6 +89,10 @@ python3 $S/verify_notes.py --expected 工作区/05-输出/canva/notes_20261009_P
 - Cursor Cloud Agent（2026-10-09）：Canva MCP 读取 → computerUse 子代理用邮箱验证码登录 → UA1000GUM 第 1–8 页备注写入 → 回读逐字一致。`examples/UA1000GUM_canva_demo_copy.json` 用 `build_notes.py` 生成的第 3、8 页与实际写入内容逐字一致；`verify_notes.py` 能检出第 3 页图上的 "KEEP Muscle & Immune"。
 - Claude 桌面端 Code 标签页（Windows，2026-10-10）：在 UA1000GUM 的两页副本上，Canva 连接器 `edit-design` 的 `replace_speaker_notes` 直接写备注、Claude in Chrome 用 `form_input` 写备注，两条通道回读均逐字一致；脚本在 Windows 下跑通。同一天在正式设计 UA1000G-TeddiLab-Combination 上跑完整条流程（读第 13–21 页 → plan → 确认 → Excel → 第 14–21 页备注写入两轮，第二轮为 A / B / C 三版）。流程、坑和已知限制见 `adapters/claude-code.md`。
 - ZCode：安装路径、MCP 配置和变量替换按官方文档整理，浏览器写入步骤待实机确认。
+
+## 方法来源
+
+`product-context.md`、`reader-stages-and-hooks.md`、`edit-sweeps.md` 三份参考文件的方法改写自 [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)（MIT）的 `product-marketing`、`ad-creative`、`copy-editing`、`copywriting`，按亚马逊补剂图片文案的规则删改：去掉了 CTA、保证、紧迫感这些在 A+ 里违规的部分，把“降低风险”改成用事实回答买家疑问。未照搬原文。
 
 ## 合规边界
 

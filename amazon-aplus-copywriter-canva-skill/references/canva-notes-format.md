@@ -53,9 +53,17 @@ Inside the Cell.*
 共用·页脚：*These statements have not been evaluated by the Food and Drug Administration. …
 ```
 
+两个维度（用户 2026-10-13，详见 `reader-stages-and-hooks.md` §6）：A / B / C 是**读者版本**（写给谁）；同一读者版本里，含敏感功效词的文字位另给一行**保守档**，文字位写成 `【A·保守】标题`，不含敏感词。行的顺序：A 全部 → A·保守 → B 全部 → B·保守 → C…… → 共用。
+
+```
+【A】正文：Algae calcium supports bone health, and vitamin D3 helps your body absorb it.*
+【A·保守】正文：400 mg algae calcium per serving, with vitamin D3 to help your body absorb it.*
+```
+
 - **rows**：每个版本一行，`slot` 以 `【A】`、`【B】`、`【C】` 开头；三版相同的项（功效图标、FDA 页脚、徽章、剂量行）只写一行，`slot` 以 `共用·` 开头。同一页的行按 A 全部 → B 全部 → C 全部 → 共用 的顺序排，方便整版对照。这时不再用 `alt`（备选）字段。
 - **`canva.pages[].on_image_preface`**：写一行 `（A / B / C 三版任选其一，【共用】各项三版相同）`。
 - **③区**：加一条“从 A / B / C 里选定一版再上图，可以按文字位混搭”，再逐条写各版要注意的事（哪版标题超过 45 字符、哪两页用了同一句、哪版的说法需要额外证据）。
+- **`on_image_preface`（两个维度时）**：写成 `（先选读者版本 A / B / C，再按风险偏好决定各文字位用标准还是「·保守」；【共用】各项各版相同）`，并在③区写明每版写给谁、哪版是主版本、敏感功效词是什么。
 - **②区**：指令不能绑定某一版的文字，写成“文字用①区选定的那一版”。
 - **只有一版的页**（如 Supplement Facts 标签页）：`on_image_preface` 写明“标签正文只有一版”，能选的部分（如小标题）单独列 `【B】小标题`、`【C】小标题`，“A 版不加”写进③区。
 - **长度**：三版加起来仍要 ≤5000 字符；实测 4 行表格的三版约 1,950 字符。

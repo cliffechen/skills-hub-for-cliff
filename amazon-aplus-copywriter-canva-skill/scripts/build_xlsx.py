@@ -17,14 +17,25 @@ JSON structure (all text may contain real newlines; they become in-cell line bre
     "rules": ["每个数字都写清对象、单位和每份基准", "..."],  # 规则卡摘要
     "notes": ["尺寸提示……", "..."],                  # 其他说明（可选）
     "claims": {"allowed": ["energy metabolism"],     # 本产品功效方向（plan 确定，见 references/ingredient-research.md）
-               "blocked": ["gut health", "immune"]}  # scan_copy 按 blocked 拦截越界说法
+               "blocked": ["gut health", "immune"],  # scan_copy 按 blocked 拦截越界说法
+               "sensitive": ["bone"]},               # 可选：敏感功效词；【A·保守】行里不得出现（见 references/reader-stages-and-hooks.md）
+    "versions": [{"key": "A", "reader": "换牌者", "stage": "已认品牌", "main": true}],  # 可选：读者版本
+    "swap_terms": ["calcium", "softgel"]             # 可选：本品特有词，供 scan_copy 做换牌测试（见 references/edit-sweeps.md）
   },
   "rows": [                                          # 每个文字位一行
     {"id": "A1-01", "group": "A+图1", "file": "A+纯图1.png", "slot": "左侧引语",
      "placeholder": "占位原文（新增位写“（无）”，不适用写“—”）",
      "copy": "新英文文案", "alt": "备选英文", "zh": "中文释义",
      "facts": "F01, F02", "note": "合规/设计备注",
-     "voice": "brand"}                               # 可选：品牌调性文字位（含其 ALT 行），scan_copy 会做专项检查
+     "voice": "brand",                               # 可选：品牌调性文字位（含其 ALT 行），scan_copy 会做专项检查
+     "swap_ok": "只有本品……"}                        # 可选：lockup 两短句过换牌测试的理由（见 references/edit-sweeps.md）
+  ],
+  "hooks": [                                         # 可选：钩子矩阵（见 references/reader-stages-and-hooks.md）
+    {"segment": "换牌者", "stage": "已认品牌", "motivation": "每天 4 粒太多", "evidence": "E11",
+     "treatment": "痛点＋结果", "visual": "手心两粒", "headline": "英文标题", "used_in": "副图 P6-A"}
+  ],
+  "sweeps": [                                        # 可选：检查记录（见 references/edit-sweeps.md）
+    {"location": "副图 P4-B 标题", "old": "旧文案", "failed": "去 AI 腔：否定对比", "problem": "……", "new": "新文案"}
   ],
   "marketing": [                                     # 可选：营销话术候选池（见 references/persuasion-psychology.md）
     {"id": "MK-01", "principle": "损失厌恶", "mechanism": "人对失去比得到更敏感",
@@ -145,11 +156,23 @@ def main(src, out):
         lines.append(("8. 「辅料与剂型」按标签上的剂型和 Other Ingredients，从三个角度（外壳/基质、辅料清单、各司其职）"
                       "各写一版 Headline + Subheadline + 支撑卖点，可用于 Supplement Facts 配套图或成分透明图。"
                       "剂型变了（软胶囊、软糖、片剂…）这张表会随之重写。", None))
+    if data.get("hooks"):
+        lines.append(("9. 「钩子矩阵」列出每个标题写给谁、针对哪个动机、依据是哪条证据，以及画面和标题各负责说什么。", None))
+    if data.get("sweeps"):
+        lines.append(("10. 「检查记录」列出写完后逐句检查时改掉的句子：旧文案、没过哪一关、问题、新文案。", None))
+    versions = meta.get("versions") or []
+    if versions:
+        lines += [("", None), ("读者版本（整组图的假设，所有访客看到的是同一套图）", "h")]
+        lines += [("· 【{}】{}｜{}{}".format(v.get("key", ""), v.get("reader", ""), v.get("stage", ""),
+                                          "｜主版本" if v.get("main") else ""), None) for v in versions]
     claims = meta.get("claims") or {}
     if claims:
         lines += [("", None), ("本产品功效方向", "h"),
                   ("· 允许（allowed）：" + "、".join(claims.get("allowed") or []), None),
                   ("· 不写（blocked）：" + "、".join(claims.get("blocked") or []), None)]
+        if claims.get("sensitive"):
+            lines.append(("· 敏感功效词（sensitive）：" + "、".join(claims["sensitive"]) +
+                          "。文字位名称带「·保守」的行是不含这些词的替换写法，按风险偏好逐个文字位选用。", None))
     if meta.get("decisions"):
         lines += [("", None), ("本次已确认的决定", "h")] + [("· " + d, None) for d in meta["decisions"]]
     if meta.get("rules"):
@@ -286,6 +309,31 @@ def main(src, out):
         ws.auto_filter.ref = f"A2:K{ws.max_row}"
         ws.row_dimensions[2].height = 30
 
+    # --- 钩子矩阵（可选）---
+    hooks = data.get("hooks") or []
+    if hooks:
+        ws = wb.create_sheet("钩子矩阵")
+        ws.append(["人群", "认知阶段", "动机", "证据", "写法", "画面负责", "标题负责", "用在"])
+        for h in hooks:
+            ws.append([h.get("segment", ""), h.get("stage", ""), h.get("motivation", ""), h.get("evidence", ""),
+                       h.get("treatment", ""), h.get("visual", ""), h.get("headline", ""), h.get("used_in", "")])
+        style_table(ws, [18, 16, 30, 10, 16, 28, 44, 16])
+        for n in range(2, ws.max_row + 1):
+            ws.cell(n, 7).font = Font(name=FONT, bold=True, size=10, color="C00000")
+
+    # --- 检查记录（可选）---
+    sweeps = data.get("sweeps") or []
+    if sweeps:
+        ws = wb.create_sheet("检查记录")
+        ws.append(["位置", "旧文案", "没过哪一关", "问题", "新文案"])
+        for sw in sweeps:
+            ws.append([sw.get("location", ""), sw.get("old", ""), sw.get("failed", ""), sw.get("problem", ""),
+                       sw.get("new", "")])
+        style_table(ws, [16, 40, 24, 44, 46])
+        for n in range(2, ws.max_row + 1):
+            ws.cell(n, 2).font = Font(name=FONT, size=10, color="808080")
+            ws.cell(n, 5).font = Font(name=FONT, bold=True, size=10, color="C00000")
+
     # --- 设计修改清单 ---
     ws = wb.create_sheet("设计修改清单")
     ws.append(["#", "优先级", "位置", "问题", "建议处理", "状态"])
@@ -309,6 +357,7 @@ def main(src, out):
     print(f"saved {out}  rows={len(data['rows'])} marketing={len(data.get('marketing') or [])} "
           f"explainers={len(data.get('explainers') or [])} "
           f"excipients={len((data.get('excipients') or {}).get('items') or [])} "
+          f"hooks={len(hooks)} sweeps={len(sweeps)} "
           f"issues={len(data.get('issues', []))} facts={len(data.get('facts', []))}")
 
 

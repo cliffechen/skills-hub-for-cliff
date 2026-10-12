@@ -85,6 +85,8 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 
 **成分机理事实**（补剂类）：识别主成分和有功效作用的辅助成分，先查 `references/ingredients/{成分}.md` 有没有档案；有且未过期就沿用，没有就按 `references/ingredient-research.md` 的调研清单查（剂量口径、来源与缺口、作用、年龄、允许/拦截的功效方向、原料风险、顾客疑虑）。这类事实接着编号，来源标"通用科普（非 listing）"或"研究（非本品）"并附出处方向，只保留定性结论。
 
+**产品上下文**：先找 `工作区/00-产品上下文/{产品代号或 ASIN}.md`。有就读它，并把本次新拿到的评论、关键词数据、用户新说的策略补进去；没有就按 `references/product-context.md` 的模板建一份（人群与任务、反对意见 O 编号、换牌动因、买家语言、敏感功效词），在 plan 里给用户看摘要。评论和竞品差评转述成“说法 + 频次”，记为 E 编号，和 F 编号放同一张事实表：E 只支撑角度和用词，不支撑功效或数字（`references/reader-stages-and-hooks.md` §4）。这份文件含经营策略，只放本地工作区。
+
 ### 第2步：读对标库 → 规则卡
 
 按 `references/library-digest-guide.md` 读库，产出 ≤12 条的规则卡（每条注明来自哪个文件）。规则卡在 plan 里展示给用户。
@@ -102,6 +104,8 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 
 工具名以本 agent 实际列出的为准；工具列表里还是旧名字（`get-design-content`、`get-presenter-notes` 等）时，对照表见 `references/canva-access.md`。同时处理多个设计时，每个设计在 `canva/` 下建一个子文件夹。缩略图可能是花的旧缓存，看不清的页在 plan 里写明“画面未看清”。
 
+每页另记一句“画面已经在说什么”（人物在做什么、图上已有的数字、图标、表格）。第 5 步写标题时写画面没说的那一半，不给图配字幕（`references/reader-stages-and-hooks.md` §3）。
+
 同时识别**品牌调性位**：用户要求写品牌调性/腔调，或文件名含品牌调性、品牌标语、slogan、tagline、品牌宣言等语义，或占位文字本身要求写调性。触发条件详见 `references/brand-voice.md`。
 
 ### 第4步：输出 plan（对话中，然后停下）
@@ -109,13 +113,13 @@ description: 亚马逊图片文案编写 Canva 版（A+、品牌故事、listing
 plan 包含：
 1. **事实底座**：F编号清单＋来源说明（含中文回译提示）。
 2. **规则卡摘要**（来自对标库或基线规则）。
-3. **买家与主线**（按 `references/conversion-copy.md`）：2–4 类买家各自"已经相信 / 还在怀疑"什么；整组的品类张力（一句话主线）；有价格优势时怎么在不写钱的前提下讲出来。
-4. **逐图任务卡**：每张图回答哪类买家的哪个怀疑 → 主标题方向 → 关键数字（对象/单位/份量）→ 与上一张/下一张如何衔接；品牌调性位单独标出。副图、A+、轮播按 `conversion-copy.md` §7 分工，A+ 不重复副图的句子；带 \* 的功效集中在 2–3 张。
+3. **买家与主线**（按 `references/conversion-copy.md` 和 `references/reader-stages-and-hooks.md`）：2–4 类买家各自“已经相信 / 还在怀疑”什么，各处在哪个认知阶段（由主搜索词和广告策略判断，哪类是主流量）；产品上下文里的反对意见 O1…… 各由哪张图回答；整组的品类张力（一句话主线）；有价格优势时怎么在不写钱的前提下讲出来。附钩子矩阵（人群 × 动机 × 写法，每行带证据编号）。
+4. **逐图任务卡**：每张图回答哪类买家的哪个怀疑 → 主标题方向 → 关键数字（对象/单位/份量）→ 与上一张/下一张如何衔接；品牌调性位单独标出。副图、A+、轮播按 `conversion-copy.md` §7 分工，A+ 不重复副图的句子；带 \* 的功效集中在 2–3 张。 每张图另列两栏：画面负责说什么 / 标题负责说什么。
 5. **冲突表**：按 `references/conflict-checklist.md` 逐项检查构图 vs 事实，列出问题与默认处理。Canva 设计另查：图上文字 vs 原备注、内部指令上图、跨页自相矛盾。
 6. **合规方式**：识别品类；补剂/保健品启用 `references/compliance-supplements.md`；其他品类按基线规则＋品类常识，必要时提醒用户核对类目政策。
 7. **成分链路与功效方向**（补剂类）：每个主成分一条链路 `缺口 → 作用 → 年龄 → 生活结果`（带 F 编号）；本产品 allowed / blocked 功效方向；多成分时各成分的分工。（见 `references/ingredient-research.md`）
 8. **营销话术与成分科普**：A+/品牌故事批次默认附两张 sheet——「营销话术」16 条成分链路式损失厌恶（`references/persuasion-psychology.md`）、「成分科普」约 6–7 个 ELI5 主题（`references/ingredient-eli5.md`）；用户可关闭或改数量，其他心理学原理和站外话术只在用户要求时写。listing 副图批次不生成。另外，有标签图或用户提到剂型时，A+ 与副图批次都默认附「辅料与剂型」sheet：按剂型从外壳/基质、辅料清单、各司其职三个角度各写一版 headline + subheadline + 支撑卖点（`references/dosage-form-excipients.md`）；plan 里写明识别出的剂型和依据，用户可关闭。
-9. **交付格式**（默认Excel）与**每个文字位写几版**：默认 1 版＋备选一句；用户要多版（如 A / B / C）时，每版都进 Excel 和 Canva 备注，写法见 `references/canva-notes-format.md`「多版文案」。
+9. **交付格式**（默认Excel）与**每个文字位写几版**：默认 1 版＋备选一句。用户要多版时按两个维度给（用户 2026-10-13）：读者版本 A / B / C（每版是整组图的一个假设，写明写给谁、哪版是主版本——同一 ASIN 的图所有访客看到的都一样，不能按搜索词分图）；功效档位（先定本产品的敏感功效词，标准档里含敏感词的文字位另给一行 `【A·保守】`）。每版都进 Excel 和 Canva 备注，写法见 `references/reader-stages-and-hooks.md` §6 和 `references/canva-notes-format.md`「多版文案」。
 10. **Canva 备注写入方案**（有 Canva 构图时）：写入页码范围；写入方式（默认「覆盖，原备注先备份到本地」，可选「原备注附在④区之后」「只交付文本不写入」）；写入通道（本 agent 用哪种浏览器能力）；登录方式（由用户选，按铁律 6）。
 11. **AskUserQuestion 选择题**（≤4题，推荐项放第一个；没有选择题工具的 agent 用编号选项列在对话里）：常见题目——品牌名写法、某张图的叙事角度、listing未覆盖的徽章/认证是否有证据、交付格式、备注写入方式。
 
@@ -125,6 +129,10 @@ plan 包含：
 
 逐文字位写：新英文文案、备选一句、中文释义、事实编号、合规/设计备注。要点：
 - 先过 `references/conversion-copy.md` 的四个测试（换成分 / 主语 / 张力 / 场景）：合规只限制功效，不限制情绪；删掉功效词的地方要用处境、生活时刻、反差或数字换算补回说服力。不写钱字（pay、afford、price…），不贬低竞品，也不拿自家其他剂型做反例。
+- 标题写画面没说的那一半；写法按读者的认知阶段选（有据数字、痛点＋结果、状态变化、感受等，见 `references/reader-stages-and-hooks.md` §1–3）。每条反对意见至少在一张图上用事实回答，弱项如实写（含量只占每日参考值的 31%，就把 31% 写上）。
+- 去 AI 腔（`references/edit-sweeps.md` §3）：不写否定对比（Not X, Y）、否定清单、自问自答、铺垫句、套话，标题里不用破折号；三连短句一张图最多一处。两行 lockup 可以是两个短句，但必须过换牌测试：带本品特有的词或数字，或在该行写 `swap_ok` 理由（用户 2026-10-13）。
+- 事实不够就写 `[NEED: 缺什么]` 并进③待确认，不编。标签上没有服用说明时，不写 with breakfast 这类场景；评论里提到但没人确认的产品细节不上图。
+- 多版时：`meta.versions` 写读者版本，`meta.claims.sensitive` 写敏感功效词，`meta.swap_terms` 写本品特有词；含敏感词的文字位加 `【A·保守】` 行。
 - 字数贴近占位原文（同样行数、相近字符数）；超出时给更短的备选或注明可折行。
 - 标注约定：`**…**` 加粗，`*…*` 红色/强调斜体，句尾单独 `*` 为功能声明星号；单元格内换行即排版换行。**要写进 Canva 备注的批次不用星号标样式**：备注里每个 `*` 都会被读成要上图的功能声明星号，样式改写在文字位名称里，如 `H1（第 2 行粗体）`、`H1 第 2 行（衬线斜体）`。
 - 需要新增的文字位（FDA 声明、可选小标签、可选徽章）标【新增】或【可选新增】。
@@ -154,11 +162,13 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/build_notes.py copy.json --out "工作区/05
 
 文件名没带时间戳时脚本会自动补上，以脚本打印的 `saved …` 路径为准。
 
-输出 sheet：说明 / 文案总表（含 LEN 字符数、差值公式）/ 营销话术（有 `marketing` 时）/ 成分科普（有 `explainers` 时）/ 辅料与剂型（有 `excipients` 时）/ 设计修改清单 / 事实依据。文件名格式 `{ASIN}_{类型}_v{n}_{YYYYMMDD}_{AM|PM}{hhmm}.xlsx`，如 `B0XXXXXXXX_A+高级轮播文案_v1_20261001_PM1030.xlsx` / `{ASIN}_副图文案_v1_{时间戳}.xlsx`，放到用户文件夹。用户要 Word/Markdown 时，用同一份 JSON 转换（Word 需先读 docx skill），文件名带同一个时间戳。
+输出 sheet：说明 / 文案总表（含 LEN 字符数、差值公式）/ 营销话术（有 `marketing` 时）/ 成分科普（有 `explainers` 时）/ 辅料与剂型（有 `excipients` 时）/ 钩子矩阵（有 `hooks` 时）/ 检查记录（有 `sweeps` 时）/ 设计修改清单 / 事实依据。文件名格式 `{ASIN}_{类型}_v{n}_{YYYYMMDD}_{AM|PM}{hhmm}.xlsx`，如 `B0XXXXXXXX_A+高级轮播文案_v1_20261001_PM1030.xlsx` / `{ASIN}_副图文案_v1_{时间戳}.xlsx`，放到用户文件夹。用户要 Word/Markdown 时，用同一份 JSON 转换（Word 需先读 docx skill），文件名带同一个时间戳。
 
 `build_notes.py` 产出每页一份 `p{N}.txt`（即将写进 Canva 的备注全文）、`all_notes.md`（汇总预览）和 `manifest.json`（页码、page_id、字符数）。
 
 ### 第7步：验证（必须）
+
+跑脚本之前先按 `references/edit-sweeps.md` 逐句过七关（清楚、语气、所以呢、凭什么信、够不够具体、情绪、顾虑）和换牌测试，再以最挑剔的那类买家通读一遍；改掉的句子写进 JSON 的 `sweeps`。脚本只查得出句式，查不出“所以呢”和“凭什么信”。
 
 ```bash
 python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,softgel,旧品牌名" [--supplement] [--listing]
@@ -166,6 +176,7 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/scan_copy.py copy.json --forbid "1000mg,soft
 - `--forbid` 填本次冲突表里"不应再出现"的词（错误剂量、错误剂型、占位品牌名、对标品牌名等）。
 - 检查：禁用词、alt 超长、带星号功效句是否有 FDA 声明行、比占位原文长太多的字段；`voice: brand` 行若含数字/规格/认证词或与其他行有 4 词以上重复则 FLAG；所有行检查 A+ 政策词（价格/促销、buy now、now/new/limited、reviews/stars、guarantee/refund、best-selling/#1），命中即 FLAG；`marketing` 行另查恐吓措辞（FLAG）、A+ 行未填 `[N]`（FLAG）、站外行未填 `[N]`（WARN）、损失厌恶行缺反读（WARN）；`explainers` 行做同样的禁用词/恐吓/A+ 政策词检查；任何行出现 `meta.claims.blocked` 里的功效方向即 FLAG（没设 `meta.claims` 时 WARN）；`--listing` 另查残留中文占位（FLAG）和过长标题（WARN）。
 - Excel 公式重算：先复制到 `/tmp` 再跑 xlsx skill 的 `recalc.py`（挂载目录下 LibreOffice 容易超时），确认 `total_errors: 0` 后复制回去。不要在同一条 bash 命令里 `pkill -f soffice`（会杀掉自身）。
+- 句式与档位（`references/edit-sweeps.md` §6）：自问自答、套话、否定清单、未解决的 `[NEED:`、lockup 两短句没过换牌测试、保守行出现敏感功效词，均 FLAG；否定对比每处 WARN，同一读者版本超过一句 FLAG；三连短句、短文案里的破折号、标题没有本品特有词为 WARN。
 - **备注检查**：`build_notes.py` 运行时自带检查——①区出现中文或指令词（大写的 KEEP / DO NOT，行首的 Remove / Replace 等，Optional: / [Page …]）即 FLAG；①区出现 `**` 或 `*…*` 样式标记即 FLAG；单页超过 5000 字符 FLAG；①区有带 `*` 的句子却没有 FDA 页脚行 WARN。有 FLAG 不得进入第 C9 步。
 
 ### 第8步：交付
@@ -199,6 +210,9 @@ Canva MCP 能直接写备注时（`edit-design` 的 `replace_speaker_notes`）�
 - `references/manual-facts-template.md`：手动事实填空模板
 - `references/listing-images.md`：listing 主图/副图规格与写法差异
 - `references/conversion-copy.md`：让文案有购买冲动——买家阶段地图、品类张力、价格优势的写法、对比的边界、副图/A+/轮播分工
+- `references/product-context.md`：产品上下文（每个产品一份，放本地工作区）——人群与任务、反对意见、换牌动因、买家语言、敏感功效词
+- `references/reader-stages-and-hooks.md`：读者认知阶段与写法、画面和标题的分工、证据表、钩子矩阵、两个维度的版本（读者 × 功效档位）
+- `references/edit-sweeps.md`：写完后的逐句检查——七关、换牌测试（含 lockup 规则）、去 AI 腔、`[NEED:]`、检查记录
 - `references/brand-voice.md`：品牌调性位的洞察式品牌宣言写法、触发条件与禁区
 - `references/brand-profiles/`：品牌语气档案（每个品牌一份，如 `zab.md`）；写该品牌任何模块前先读
 - `references/persuasion-psychology.md`：营销话术 sheet——默认成分链路式损失厌恶；按需原理、A+ 红线与站外诚实要求

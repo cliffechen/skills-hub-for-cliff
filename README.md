@@ -50,7 +50,7 @@
 
 | 你要做什么 | 推荐 skill | 说明 |
 |---|---|---|
-| 为设计稿逐个文字位写英文文案（A+、品牌故事、Listing 主副图），出 Excel；可直接读 Canva 设计，并把文案和修改意见按页写进备注（①上图文案 / ②设计指令 / ③待确认 / ④审核记录），支持每个文字位多版 | [`amazon-aplus-copywriter-canva-skill`](./amazon-aplus-copywriter-canva-skill/) | 先出 plan 待确认；事实来自 ASIN、手动填写或用户指定的 Canva 页；含补剂合规包与扫描脚本；Canva 连接器读取并直接写备注（没有该接口时用浏览器 / computer use）+ 回读核验；适配 Claude Code、Cursor、ZCode |
+| 为设计稿逐个文字位写英文文案（A+、品牌故事、Listing 主副图），出 Excel；可直接读 Canva 设计，并把文案和修改意见按页写进备注（①上图文案 / ②设计指令 / ③待确认 / ④审核记录），支持多版（读者版本 × 功效档位）；写完逐句检查并去 AI 腔 | [`amazon-aplus-copywriter-canva-skill`](./amazon-aplus-copywriter-canva-skill/) | 先出 plan 待确认；事实来自 ASIN、手动填写或用户指定的 Canva 页；含补剂合规包与扫描脚本；Canva 连接器读取并直接写备注（没有该接口时用浏览器 / computer use）+ 回读核验；适配 Claude Code、Cursor、ZCode |
 | 把一份 Supplement Facts 资料（截图 / Excel / PDF / 文字）做成 Canva 里的一页 SPF 面板，版式对齐 FDA 要求，并先查出 SPF 本身的成分与写法缺陷 | [`canva-spf-creator`](./canva-spf-creator/) | 转录 → 缺陷检查（🔴 数算不通或必填项缺失用 `XX` 占位 / 🟡 待确认 / 🟢 已按 FDA 改好）→ 克隆模板页保住字体 → 直接保存 → 逐元素回读坐标；动手的页面左上角标 `create by canva mcp`；含 %DV 重算与 FDA 排序脚本 |
 
 ### 关键词与 Listing 运营

@@ -40,6 +40,18 @@ Claim guard (all rows + marketing + explainers + excipients), per product: meta.
   directions this product's listing does not cover (decided in the plan, see references/ingredient-research.md),
   e.g. {"claims": {"allowed": ["energy metabolism"], "blocked": ["gut health", "digestive", "immune"]}}.
   Any blocked phrase is a FLAG. Without meta.claims a WARN reminds you to define them.
+
+Style checks on every row's "copy" (see references/edit-sweeps.md; ALT rows, the FDA disclaimer and label text
+  - slot contains 标签 - are skipped):
+  - self-answered question / colon reveal, stock phrases, negation lists ("No X, no Y"), unresolved [NEED: ...] -> FLAG
+  - contrast reveal ("Not X, Y", "was never", "isn't X. It's Y") -> WARN each; more than one in the same reader
+    version (slot prefix 【A】/【B】/...) -> FLAG (a brand signature line is allowed once per set)
+  - three short fragments in a row, dash in short copy -> WARN
+  - swap test: a lockup slot holding only short sentences (<= 4 words each) must contain a digit or one of
+    meta.swap_terms, or carry "swap_ok": "<why another brand could not run this line>" on the row -> else FLAG;
+    other headline-like slots with no product-specific word -> WARN
+  - conservative rows (slot contains 保守, see references/reader-stages-and-hooks.md) must not contain any
+    meta.claims.sensitive term -> FLAG
 Exit code 1 if any FLAG was found, else 0. WARN items are informational.
 """
 import argparse
@@ -126,6 +138,83 @@ def check_brand_voice(rows, flags, warns):
             words = len(WORD_RE.findall(low))
             if not rid.upper().startswith("ALT") and words > 16:
                 warns.append(f"{rid} [{field}] brand voice is {words} words - aim for two short beats")
+
+
+CONTRAST = [
+    r"\bnot (just|only|because)\b", r"\bisn'?t\b[^.?!\n]{0,40}[.,]\s*it'?s\b", r",\s*not\s+[a-z]",
+    r"(^|[.!?]\s+|\n)not\s+[a-z][^.\n]{0,40}\.", r"\bwas never\b", r"\bnever (just|only)\b",
+    r"\bless \w+, more \w+", r"\bnot more\b",
+]
+NEGATION_LIST = r"\bno\s+[\w-]+(\s+[\w-]+)?\s*[,.]\s*(and\s+)?no\s+[\w-]+"
+SELF_ANSWER = r"\b(the )?(result|catch|best part|secret|truth|difference|bottom line)\s*[?:]"
+STOCK = [r"say (goodbye|hello) to", r"\bunlock(s|ing)? the\b", r"\bunleash", r"next level", r"\breimagined\b",
+         r"\bredefined\b", r"game[- ]changer", r"here'?s the thing", r"in today'?s", r"whether you'?re",
+         r"take our word"]
+VERSION_RE = re.compile(r"【([A-Z])(?:·[^】]*)?】")
+HEADLINE_SLOT = re.compile(r"标题|H1|headline|lockup", re.I)
+
+
+def sentences(cell):
+    """Sentences of one text cell (line breaks are layout, not sentence ends)."""
+    flat = re.sub(r"\s+", " ", cell.replace("*", "")).strip()
+    return [x for x in re.split(r"(?<=[.!?])\s+", flat) if x]
+
+
+def check_style(rows, meta, flags, warns):
+    """AI-tell shapes, swap test for lockups, conservative-tier rows. See references/edit-sweeps.md."""
+    swap_terms = [t.lower() for t in (meta.get("swap_terms") or []) if t.strip()]
+    sensitive = [t for t in ((meta.get("claims") or {}).get("sensitive") or []) if t.strip()]
+    contrast_by_version = {}
+    reminded = False
+    for r in rows:
+        rid, slot, t = r.get("id", "?"), r.get("slot") or "", r.get("copy") or ""
+        if not t or t == "—" or rid.upper().startswith("ALT") or DISCLAIMER_EXEMPT.search(t) or "标签" in slot:
+            continue
+        low = t.lower()
+        if "[need" in low:
+            flags.append(f"{rid} unresolved [NEED: ...] - get the fact or rewrite without it: {t!r}")
+        if re.search(SELF_ANSWER, low):
+            flags.append(f"{rid} self-answered question / colon reveal - keep the answer, drop the setup: {t!r}")
+        if re.search(NEGATION_LIST, low):
+            flags.append(f"{rid} negation list - say what is there; keep at most one real absence: {t!r}")
+        pat = first_hit(STOCK, low)
+        if pat:
+            flags.append(f"{rid} stock phrase /{pat}/ - replace with the fact it stands for: {t!r}")
+        if first_hit(CONTRAST, low):
+            m = VERSION_RE.match(slot)
+            contrast_by_version.setdefault(m.group(1) if m else "", []).append(rid)
+            warns.append(f"{rid} contrast reveal (Not X, Y) - state Y with its reason unless this is the one "
+                         f"signature line of the set: {t!r}")
+        if len(t) <= 90 and re.search(r"—| – ", t):
+            warns.append(f"{rid} dash in short copy - use a period or a line break: {t!r}")
+        for cell in [c for c in re.split(r"\s*\|\s*", t) if c.strip()]:
+            run = 0
+            for sent in sentences(cell):
+                short = sent[-1] in ".!?" and len(sent.split()) <= 3
+                run = run + 1 if short else 0
+                if run == 3:
+                    warns.append(f"{rid} three short fragments in a row - merge into one sentence with a fact: {cell!r}")
+        if "保守" in slot:
+            for term in sensitive:
+                if has_term(term, low):
+                    flags.append(f"{rid} conservative row contains sensitive term '{term}' (meta.claims.sensitive): {t!r}")
+        if HEADLINE_SLOT.search(slot) and r.get("voice") != "brand":
+            specific = bool(re.search(r"\d", t)) or any(term in low for term in swap_terms)
+            sents = sentences(t)
+            two_short = len(sents) >= 2 and all(len(x.split()) <= 4 for x in sents)
+            if not specific and not (r.get("swap_ok") or "").strip():
+                if re.search(r"lockup", slot, re.I) and two_short:
+                    flags.append(f"{rid} lockup fails the swap test - add a product-specific word/number or a "
+                                 f"\"swap_ok\" reason on the row: {t!r}")
+                elif swap_terms and len(low.split()) <= 8:
+                    warns.append(f"{rid} swap test - no product-specific word; would this line work for another brand? {t!r}")
+                elif not swap_terms and not reminded:
+                    warns.append("meta.swap_terms not set - list the product-specific words (ingredient, form, "
+                                 "source) so headline slots can be swap-tested")
+                    reminded = True
+    for ver, ids in contrast_by_version.items():
+        if len(ids) > 1:
+            flags.append(f"contrast reveal used {len(ids)} times in version {ver or '(single)'} {ids} - at most one per set")
 
 
 def has_term(term, low):
@@ -279,6 +368,7 @@ def main():
             if over > a.max_over:
                 warns.append(f"{rid} copy is {over} chars longer than placeholder ({len(copy)} vs {len(ph)}) - check fit or offer shorter alt")
 
+    check_style(rows, data.get("meta") or {}, flags, warns)
     check_brand_voice(rows, flags, warns)
     check_marketing(marketing, a, forbid, flags, warns, star_rows)
     check_explainers(explainers, a, forbid, flags, warns, star_rows)
