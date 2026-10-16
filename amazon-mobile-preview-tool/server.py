@@ -24,7 +24,11 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent
-STATIC_FILES = {"index.html", "app.js", "style.css", "preview.js", "preview.css"}
+DEVICES = ("iphone-16", "iphone-16-pro-max", "iphone-se", "pixel-8", "android-small")
+# Projects saved before device frames stored a bare viewport size.
+LEGACY_VIEWPORTS = {"360x780": "android-small", "390x844": "iphone-16", "430x932": "iphone-16-pro-max"}
+PRODUCT_FIELDS = ("brand", "title", "price", "rating", "reviews", "bullets")
+STATIC_FILES = {"index.html", "app.js", "style.css", "preview.js", "preview.css", "slicer.js"}
 MIME_EXTENSIONS = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".webp", "video/mp4": ".mp4"}
 ASSET_CATEGORIES = ("main", "aplus")
 ID_RE = re.compile(r"^[a-f0-9]{32}$")
@@ -142,6 +146,33 @@ def read_json(path: Path) -> dict:
         raise APIError(404, "找不到此项目。") from None
     except (json.JSONDecodeError, UnicodeError, ValueError):
         raise APIError(500, "本地项目文件无法读取。原文件已保留，请检查数据目录。") from None
+
+
+def default_settings() -> dict:
+    return {"device": "iphone-16", "zoom": "fit", "shell": True, "editorCollapsed": False,
+            "surface": "app", "dark": False, "guides": True, "touch": True}
+
+
+def validate_settings(settings) -> dict:
+    if not isinstance(settings, dict):
+        raise APIError(400, "预览设置无效。")
+    defaults = default_settings()
+    device = settings.get("device") or LEGACY_VIEWPORTS.get(settings.get("viewport"))
+    if device not in DEVICES:
+        raise APIError(400, "手机机型设置无效。")
+    zoom = settings.get("zoom")
+    if zoom not in ("fit", "real") and not finite_number(zoom, 0.1, 3):
+        raise APIError(400, "显示缩放必须是适应窗口、实际大小或 10%–300%。")
+    surface = settings.get("surface", defaults["surface"])
+    if surface not in ("app", "web"):
+        raise APIError(400, "预览页面类型无效。")
+    result = {"device": device, "zoom": zoom, "surface": surface}
+    for key in ("shell", "editorCollapsed", "dark", "guides", "touch"):
+        value = settings.get(key, defaults[key]) if key in ("dark", "guides", "touch") else settings.get(key)
+        if type(value) is not bool:
+            raise APIError(400, "预览设置无效。")
+        result[key] = value
+    return result
 
 
 def text_field(value, label: str, limit: int = 20000) -> str:
@@ -459,9 +490,9 @@ class ProjectStore:
             project = {
                 "schemaVersion": 1, "id": project_id, "name": name, "revision": 0,
                 "createdAt": timestamp, "updatedAt": timestamp,
-                "product": {"brand": "", "title": "", "price": ""},
+                "product": {key: "" for key in PRODUCT_FIELDS},
                 "gallery": [], "modules": [], "assets": {},
-                "settings": {"viewport": "390x844", "zoom": "fit", "shell": True, "editorCollapsed": False},
+                "settings": default_settings(),
                 "view": {"galleryIndex": 0, "carouselIndices": {}, "scrollTop": 0},
             }
             directory = self.available_directory(name)
@@ -486,6 +517,9 @@ class ProjectStore:
             directory = self.directory(project_id)
             project = read_json(directory / "project.json")
             project["assets"] = self.catalog(directory)
+            settings = project.get("settings")
+            if isinstance(settings, dict) and "device" not in settings and settings.get("viewport") in LEGACY_VIEWPORTS:
+                project["settings"] = {**default_settings(), **{k: v for k, v in settings.items() if k != "viewport"}, "device": LEGACY_VIEWPORTS[settings["viewport"]]}
             return project
 
     def validate(self, incoming: dict, current: dict, catalog: dict) -> dict:
@@ -499,7 +533,7 @@ class ProjectStore:
         product = incoming.get("product")
         if not isinstance(product, dict):
             raise APIError(400, "商品信息格式无效。")
-        result["product"] = {key: text_field(product.get(key, ""), "商品信息") for key in ("brand", "title", "price")}
+        result["product"] = {key: text_field(product.get(key, ""), "商品信息") for key in PRODUCT_FIELDS}
         all_ids = set()
 
         def item_id(item):
@@ -552,13 +586,7 @@ class ProjectStore:
                     asset_ref(slide, "assetId", "image/")
                     for key in ("label", "title", "body"):
                         text_field(slide.get(key, ""), "轮播文字")
-        settings = result.get("settings")
-        if not isinstance(settings, dict) or settings.get("viewport") not in ("360x780", "390x844", "430x932"):
-            raise APIError(400, "手机视口设置无效。")
-        if settings.get("zoom") != "fit" and not finite_number(settings.get("zoom"), 0.1, 3):
-            raise APIError(400, "显示缩放必须是适应窗口或 10%–300%。")
-        if any(type(settings.get(key)) is not bool for key in ("shell", "editorCollapsed")):
-            raise APIError(400, "预览设置无效。")
+        result["settings"] = validate_settings(result.get("settings"))
         view = result.get("view")
         if not isinstance(view, dict) or not finite_number(view.get("galleryIndex"), 0, 100000) or not finite_number(view.get("scrollTop"), 0, 100000000):
             raise APIError(400, "预览位置格式无效。")

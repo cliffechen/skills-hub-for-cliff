@@ -13,7 +13,7 @@ import PyInstaller.__main__
 
 ROOT = Path(__file__).resolve().parent
 SAMPLE = Path("data") / "示例 · 现有设计稿"
-STATIC = ("index.html", "app.js", "style.css", "preview.js", "preview.css")
+STATIC = ("index.html", "app.js", "style.css", "preview.js", "preview.css", "slicer.js")
 
 
 def main() -> None:

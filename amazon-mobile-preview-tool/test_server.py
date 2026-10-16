@@ -83,7 +83,8 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(project["schemaVersion"], 1)
         self.assertEqual(project["revision"], 0)
         self.assertEqual(project["modules"], [])
-        self.assertEqual(project["settings"]["viewport"], "390x844")
+        self.assertEqual(project["settings"]["device"], "iphone-16")
+        self.assertEqual(project["settings"]["surface"], "app")
         project["modules"] = [
             {"id": "empty-image", "type": "image", "assetId": "", "title": "半成品", "body": ""},
             {"id": "empty-carousel", "type": "carousel", "slides": []},
@@ -97,6 +98,39 @@ class ServerTests(unittest.TestCase):
         status, _, listing = self.request("GET", "/api/projects")
         self.assertEqual(status, 200)
         self.assertEqual(listing["projects"][0]["name"], "草稿产品")
+
+    def test_preview_settings_and_product_extras_round_trip(self):
+        BULLETS = "Point one\nPoint two"
+        project = self.create()
+        project["settings"].update({"device": "pixel-8", "zoom": "real", "surface": "web", "dark": True, "guides": False, "touch": False})
+        project["product"].update({"rating": "4.6", "reviews": "1,284", "bullets": BULLETS})
+        status, _, saved = self.request("PUT", f"/api/projects/{project['id']}", project)
+        self.assertEqual(status, 200)
+        self.assertEqual(saved["settings"], {"device": "pixel-8", "zoom": "real", "surface": "web", "dark": True, "guides": False, "touch": False, "shell": True, "editorCollapsed": False})
+        self.assertEqual(saved["product"]["bullets"], BULLETS)
+        for bad in ({"device": "nokia"}, {"surface": "desktop"}, {"zoom": "huge"}, {"dark": "yes"}):
+            attempt = copy.deepcopy(saved)
+            attempt["settings"].update(bad)
+            status, _, body = self.request("PUT", f"/api/projects/{project['id']}", attempt)
+            self.assertEqual(status, 400, bad)
+        self.assertEqual(self.store.get(project["id"])["revision"], saved["revision"])
+
+    def test_legacy_viewport_settings_are_upgraded(self):
+        project = self.create()
+        directory = self.store.directory(project["id"])
+        stored = server.read_json(directory / "project.json")
+        stored["settings"] = {"viewport": "430x932", "zoom": 0.85, "shell": False, "editorCollapsed": True}
+        stored["product"] = {"brand": "B", "title": "T", "price": "1"}
+        server.atomic_json(directory / "project.json", stored)
+        loaded = self.store.get(project["id"])
+        self.assertEqual(loaded["settings"]["device"], "iphone-16-pro-max")
+        self.assertNotIn("viewport", loaded["settings"])
+        self.assertEqual((loaded["settings"]["zoom"], loaded["settings"]["shell"], loaded["settings"]["editorCollapsed"]), (0.85, False, True))
+        saved = self.store.save(project["id"], loaded)
+        self.assertEqual(saved["product"]["rating"], "")
+        legacy_put = copy.deepcopy(saved)
+        legacy_put["settings"] = {"viewport": "360x780", "zoom": "fit", "shell": True, "editorCollapsed": False}
+        self.assertEqual(self.store.save(project["id"], legacy_put)["settings"]["device"], "android-small")
 
     def test_brand_story_round_trip_preserves_existing_product_and_modules(self):
         project = self.create()

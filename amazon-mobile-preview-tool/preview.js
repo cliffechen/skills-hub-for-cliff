@@ -23,6 +23,17 @@ const icon = (name, className = '') => {
     user: 'M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z M4 21v-2a8 6 0 0 1 16 0v2',
     cart: 'M2 3h3l2.5 12h12L22 7H6 M9 19a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z M18 19a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z',
     menu: 'M3 5h18 M3 12h18 M3 19h18',
+    back: 'M15 4 7 12l8 8',
+    mic: 'M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z M5 11a7 7 0 0 0 14 0 M12 18v3',
+    share: 'M12 15V3 M7 8l5-5 5 5 M5 12v8h14v-8',
+    pin: 'M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11Z M12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z',
+    lock: 'M7 11V8a5 5 0 0 1 10 0v3 M5 11h14v10H5z',
+    reload: 'M20 12a8 8 0 1 1-2.3-5.7 M20 4v5h-5',
+    forward: 'M9 4l8 8-8 8',
+    tabs: 'M8 8h12v12H8z M4 16V4h12',
+    book: 'M4 5c3-1.3 5.7-1 8 1 2.3-2 5-2.3 8-1v14c-3-1.3-5.7-1-8 1-2.3-2-5-2.3-8-1z M12 6v14',
+    dots: 'M12 5h.01 M12 12h.01 M12 19h.01',
+    close: 'M6 6l12 12 M18 6 6 18',
   };
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   path.setAttribute('d', paths[name]);
@@ -52,22 +63,49 @@ export class PhonePreview {
   }
 
   _build() {
-    this.header = el('header', 'preview-search-header preview-shell-only');
-    const location = el('div', 'preview-location', 'Deliver to United States ⌄');
+    // Android Chrome address bar (web surface only).
+    this.chromeBar = el('div', 'preview-browser-top preview-web-only preview-android-only preview-shell-only');
+    const chromeAddress = el('div', 'preview-address');
+    chromeAddress.append(icon('lock', 'preview-address-lock'), el('span', '', 'amazon.com'));
+    this.chromeBar.append(icon('home', 'preview-browser-icon'), chromeAddress, el('span', 'preview-tab-count', '3'), icon('dots', 'preview-browser-icon'));
+
+    // Amazon Shopping app header.
+    this.header = el('header', 'preview-search-header preview-app-only preview-shell-only');
+    const searchRow = el('div', 'preview-search-row');
     const search = el('div', 'preview-search-field');
-    search.append(icon('search', 'preview-search-icon'), el('span', '', 'Search Amazon'), icon('camera', 'preview-camera-icon'));
-    this.header.append(search, location);
+    search.append(icon('search', 'preview-search-icon'), el('span', 'preview-search-placeholder', 'Search Amazon'), icon('camera', 'preview-camera-icon'), icon('mic', 'preview-mic-icon'));
+    searchRow.append(icon('back', 'preview-back-icon'), search);
+    const location = el('div', 'preview-location');
+    location.append(icon('pin', 'preview-location-icon'), el('span', '', 'Deliver to United States'));
+    this.header.append(searchRow, location);
+
+    // amazon.com mobile web header.
+    this.webHeader = el('header', 'preview-web-header preview-web-only preview-shell-only');
+    const webTop = el('div', 'preview-web-top');
+    webTop.append(icon('menu', 'preview-web-icon'), el('span', 'preview-web-logo', 'amazon'), el('span', 'preview-web-signin', 'Sign in ›'), icon('user', 'preview-web-icon'), icon('cart', 'preview-web-icon'));
+    const webSearch = el('div', 'preview-web-search');
+    webSearch.append(el('span', 'preview-search-placeholder', 'Search Amazon'), icon('search', 'preview-web-search-button'));
+    const webLocation = el('div', 'preview-web-location');
+    webLocation.append(icon('pin', 'preview-location-icon'), el('span', '', 'Deliver to United States'));
+    this.webHeader.append(webTop, webSearch, webLocation);
 
     this.scroller = el('div', 'preview-scroll');
     this.scroller.tabIndex = 0;
     this.scroller.setAttribute('aria-label', '亚马逊手机预览页面');
     this.productIntro = el('section', 'preview-product-intro preview-shell-only');
     this.productIntro.dataset.previewAnchor = 'product-intro';
+    const brandRow = el('div', 'preview-brand-row');
     this.brand = el('div', 'preview-brand');
     this.rating = el('div', 'preview-rating');
-    this.rating.append(el('span', '', '4.5 '), el('span', 'preview-stars', '★★★★☆'), el('span', 'preview-review-count', '  128'));
+    this.ratingValue = el('span', 'preview-rating-value');
+    this.stars = el('span', 'preview-stars', '★★★★★');
+    this.starsFill = el('span', 'preview-stars-fill', '★★★★★');
+    this.stars.append(this.starsFill);
+    this.reviewCount = el('span', 'preview-review-count');
+    this.rating.append(this.ratingValue, this.stars, this.reviewCount);
+    brandRow.append(this.brand, this.rating);
     this.productTitle = el('h1', 'preview-product-title');
-    this.productIntro.append(this.brand, this.rating, this.productTitle);
+    this.productIntro.append(brandRow, this.productTitle);
 
     this.gallerySection = el('section', 'preview-gallery');
     this.gallerySection.dataset.previewAnchor = 'gallery';
@@ -76,35 +114,68 @@ export class PhonePreview {
       this.galleryIndex = this.gallery.index;
       this._emitView();
     });
+    const galleryTools = el('div', 'preview-gallery-tools preview-shell-only');
+    galleryTools.append(icon('share', 'preview-gallery-tool'));
     this.galleryDots = el('div', 'preview-gallery-dots');
-    this.gallerySection.append(this.gallery.viewport, this.galleryDots);
+    this.gallerySection.append(this.gallery.viewport, galleryTools, this.galleryDots);
+    // Tapping a product image opens the full-screen viewer, as in the app.
+    this.gallery.viewport.addEventListener('click', event => {
+      if (event.target.closest('.preview-image')) this._openViewer(this.gallery.index);
+    });
 
     this.buy = el('section', 'preview-buy preview-shell-only');
     this.buy.dataset.previewAnchor = 'buy';
     this.price = el('div', 'preview-price');
-    this.buy.append(this.price, el('div', 'preview-delivery', 'FREE delivery'), el('div', 'preview-stock', 'In Stock'));
+    const prime = el('div', 'preview-prime');
+    prime.append(el('span', 'preview-prime-check', '✓'), el('span', 'preview-prime-word', 'prime'));
+    const day = offset => new Date(Date.now() + offset * 86400000);
+    const delivery = el('div', 'preview-delivery');
+    delivery.append('FREE delivery ', el('b', '', day(3).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })));
+    const fastest = el('div', 'preview-delivery preview-delivery-fast');
+    fastest.append('Or fastest delivery ', el('b', '', `Tomorrow, ${day(1).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`));
+    const deliverTo = el('div', 'preview-deliver-to');
+    deliverTo.append(icon('pin', 'preview-location-icon'), el('span', '', 'Deliver to United States'));
     const cart = el('div', 'preview-purchase-button', 'Add to Cart');
     const purchase = el('div', 'preview-purchase-button preview-purchase-now', 'Buy Now');
     cart.setAttribute('aria-hidden', 'true');
     purchase.setAttribute('aria-hidden', 'true');
-    this.buy.append(cart, purchase, el('div', 'preview-simulation-note', '商品信息仅用于模拟浏览'));
+    this.soldBy = el('div', 'preview-sold-by');
+    this.buy.append(this.price, prime, delivery, fastest, deliverTo, el('div', 'preview-stock', 'In Stock'), el('div', 'preview-quantity', 'Quantity: 1'), cart, purchase, this.soldBy, el('div', 'preview-simulation-note', '商品信息仅用于模拟浏览'));
+
+    this.about = el('section', 'preview-about preview-shell-only');
+    this.about.dataset.previewAnchor = 'about';
+    this.aboutList = el('ul', 'preview-about-list');
+    this.about.append(el('h2', 'preview-section-heading', 'About this item'), this.aboutList);
 
     this.aplus = el('section', 'preview-aplus');
     this.aplus.dataset.previewAnchor = 'aplus';
     this.aplusHeading = el('h2', 'preview-aplus-heading preview-shell-only', 'Product description');
     this.moduleList = el('div', 'preview-modules');
     this.emptyAplus = el('div', 'preview-aplus-empty', 'A+ 内容将在这里显示');
-    this.aplus.append(this.aplusHeading, this.moduleList, this.emptyAplus);
-    this.scroller.append(this.productIntro, this.gallerySection, this.buy, this.aplus);
+    this.aplusBadge = el('div', 'preview-guide-badge preview-aplus-badge');
+    this.aplus.append(this.aplusBadge, this.aplusHeading, this.moduleList, this.emptyAplus);
+    this.foldLine = el('div', 'preview-fold-line');
+    this.foldLine.append(el('span', '', '首屏底部 · 打开页面第一眼只看到这条线以上'));
+    this.scroller.append(this.productIntro, this.gallerySection, this.buy, this.about, this.aplus, this.foldLine);
 
-    this.footer = el('nav', 'preview-bottom-nav preview-shell-only');
+    this.footer = el('nav', 'preview-bottom-nav preview-app-only preview-shell-only');
     this.footer.setAttribute('aria-label', '模拟 Amazon 导航');
     [['home', 'Home'], ['user', 'You'], ['cart', 'Cart'], ['menu', 'Menu']].forEach(([iconName, name], index) => {
       const item = el('div', `preview-nav-item${index === 0 ? ' is-active' : ''}`);
       item.append(icon(iconName, 'preview-nav-icon'), el('span', 'preview-nav-label', name));
       this.footer.append(item);
     });
-    this.root.replaceChildren(this.header, this.scroller, this.footer);
+
+    // iOS Safari bottom bar (web surface only).
+    this.safariBar = el('div', 'preview-safari-bar preview-web-only preview-ios-only preview-shell-only');
+    const safariAddress = el('div', 'preview-address');
+    safariAddress.append(el('span', 'preview-address-aa', 'AA'), icon('lock', 'preview-address-lock'), el('span', '', 'amazon.com'), icon('reload', 'preview-address-reload'));
+    const safariTools = el('div', 'preview-safari-tools');
+    for (const name of ['back', 'forward', 'share', 'book', 'tabs']) safariTools.append(icon(name, 'preview-browser-icon'));
+    this.safariBar.append(safariAddress, safariTools);
+
+    this._buildViewer();
+    this.root.replaceChildren(this.chromeBar, this.header, this.webHeader, this.scroller, this.footer, this.safariBar, this.viewer);
     this.scroller.addEventListener('scroll', () => {
       if (performance.now() < this.programmaticUntil) return;
       clearTimeout(this.scrollTimer);
@@ -113,6 +184,8 @@ export class PhonePreview {
     for (const name of ['wheel', 'touchstart', 'pointerdown', 'keydown']) {
       this.scroller.addEventListener(name, () => { this.preservation = null; }, { passive: true });
     }
+    this._bindTouchScroll();
+    this.setEnvironment({});
   }
 
   update(project, { preservePosition = true } = {}) {
@@ -121,6 +194,7 @@ export class PhonePreview {
     const anchor = !changedProject && preservePosition ? this._captureAnchor() : null;
     const selectedGallery = this.gallery.items[this.gallery.index]?.id;
     if (changedProject) {
+      this._closeViewer(false);
       this._clearTargetHighlight();
       this.modules.forEach(record => record.video?.pause());
       this.modules.clear();
@@ -134,10 +208,19 @@ export class PhonePreview {
     this.project = project;
     this.projectId = project.id;
     this.root.classList.toggle('preview-content-only', project.settings?.shell === false);
-    text(this.brand, project.product?.brand ? `Visit the ${project.product.brand} Store` : 'Visit the Brand Store');
-    text(this.productTitle, project.product?.title || 'Your product title');
-    const price = String(project.product?.price || '29.99');
-    text(this.price, /^[\d.,]+$/.test(price) ? `$${price}` : price);
+    const product = project.product || {};
+    text(this.brand, product.brand ? `Visit the ${product.brand} Store` : 'Visit the Brand Store');
+    text(this.productTitle, product.title || 'Your product title');
+    const rating = clamp(parseFloat(product.rating) || 4.5, 0, 5);
+    this.ratingValue.textContent = rating.toFixed(1);
+    this.starsFill.style.width = `${(rating / 5) * 100}%`;
+    this.reviewCount.textContent = `(${product.reviews || '128'})`;
+    this.rating.setAttribute('aria-label', `${rating.toFixed(1)} out of 5 stars`);
+    this._renderPrice(String(product.price || '29.99'));
+    text(this.soldBy, `Ships from Amazon · Sold by ${product.brand || 'Brand'}`);
+    const bullets = String(product.bullets || '').split('\n').map(line => line.trim()).filter(Boolean);
+    this.aboutList.replaceChildren(...bullets.map(line => el('li', '', line)));
+    this.about.hidden = !bullets.length;
     const galleryItems = project.gallery || [];
     this._syncSlides(this.gallery, galleryItems, item => ({ kind: 'gallery', itemId: item.id }));
     let galleryIndex = this.galleryIndex;
@@ -271,6 +354,8 @@ export class PhonePreview {
       node.append(record.media.node);
     }
     node.append(body);
+    record.badge = el('span', 'preview-guide-badge preview-module-badge');
+    node.append(record.badge);
     return record;
   }
 
@@ -599,6 +684,7 @@ export class PhonePreview {
         this._syncTabs(record);
       }
     });
+    this._updateGuides();
   }
 
   _afterMediaLoad() {
@@ -715,6 +801,290 @@ export class PhonePreview {
     clearTimeout(this.highlightTimer);
     this.highlightedTarget?.classList.remove('is-preview-revealed');
     this.highlightedTarget = null;
+  }
+
+  /* Environment: which Amazon surface and phone platform is simulated, plus viewing aids. */
+  setEnvironment(env = {}) {
+    this.env = { surface: 'app', platform: 'ios', dark: false, guides: true, touch: true, ...this.env, ...env };
+    const { surface, platform, dark, guides, touch } = this.env;
+    const classes = this.root.classList;
+    classes.toggle('preview-surface-app', surface !== 'web');
+    classes.toggle('preview-surface-web', surface === 'web');
+    classes.toggle('preview-platform-ios', platform !== 'android');
+    classes.toggle('preview-platform-android', platform === 'android');
+    classes.toggle('preview-dark', Boolean(dark));
+    classes.toggle('preview-guides', Boolean(guides));
+    classes.toggle('preview-touch', Boolean(touch));
+    if (!this.project) return;
+    const anchor = this._captureAnchor();
+    this._layoutAll();
+    this._applyAnchor(anchor);
+  }
+
+  _renderPrice(price) {
+    const match = price.replace(/[$\s,]/g, '').match(/^(\d+)(?:\.(\d{1,2}))?$/);
+    this.price.hidden = false;
+    if (!match) {
+      this.price.textContent = price;
+      return;
+    }
+    this.price.replaceChildren(
+      el('span', 'preview-price-symbol', '$'),
+      el('span', 'preview-price-whole', Number(match[1]).toLocaleString('en-US')),
+      el('span', 'preview-price-fraction', (match[2] || '00').padEnd(2, '0')),
+    );
+  }
+
+  /* First-screen line and "how many screens" badges, measured in this phone's visible height. */
+  _updateGuides() {
+    if (!this.env?.guides || !this.scroller) return;
+    const screen = this.scroller.clientHeight;
+    if (!screen) return;
+    this.foldLine.style.top = `${screen}px`;
+    this.modules.forEach(record => {
+      record.badge.textContent = `≈ ${(record.node.offsetHeight / screen).toFixed(1)} 屏`;
+    });
+    const hasModules = this.modules.size > 0;
+    this.aplusBadge.hidden = !hasModules;
+    if (hasModules) {
+      const top = this.aplus.offsetTop;
+      this.aplusBadge.textContent = `图文从第 ${Math.floor(top / screen) + 1} 屏开始 · 共 ≈ ${(this.aplus.offsetHeight / screen).toFixed(1)} 屏`;
+    }
+  }
+
+  /* Finger-style scrolling: drag the page with the mouse, with momentum and edge bounce. */
+  _bindTouchScroll() {
+    const scroller = this.scroller;
+    let drag = null;
+    let frame = 0;
+    let suppressClickUntil = 0;
+    const stopMomentum = () => { cancelAnimationFrame(frame); frame = 0; };
+    const maxScroll = () => Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+    const setStretch = (value, animate = false) => {
+      scroller.style.transition = animate ? 'transform 320ms cubic-bezier(.2,.8,.2,1)' : 'none';
+      scroller.style.transform = value ? `translate3d(0, ${value}px, 0)` : '';
+    };
+    // Resistance grows the further the page is pulled past its edge.
+    const rubber = distance => Math.sign(distance) * (1 - 1 / (Math.abs(distance) / 320 + 1)) * 160;
+    scroller.addEventListener('wheel', stopMomentum, { passive: true });
+    scroller.addEventListener('pointerdown', event => {
+      stopMomentum();
+      if (!this.env?.touch || event.pointerType !== 'mouse' || event.button !== 0) return;
+      if (event.target.closest('video, input, textarea, select, .preview-carousel-tabs')) return;
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, top: scroller.scrollTop, direction: null, scale: this._displayScale(), samples: [{ t: performance.now(), y: event.clientY }], stretch: 0 };
+    });
+    scroller.addEventListener('pointermove', event => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const dx = (event.clientX - drag.x) / drag.scale;
+      const dy = (event.clientY - drag.y) / drag.scale;
+      if (!drag.direction && Math.max(Math.abs(dx), Math.abs(dy)) > 7) {
+        drag.direction = Math.abs(dy) > Math.abs(dx) ? 'y' : 'x';
+        if (drag.direction === 'y') {
+          scroller.setPointerCapture(event.pointerId);
+          this.root.classList.add('is-panning');
+        }
+      }
+      if (drag.direction !== 'y') return;
+      event.preventDefault();
+      const wanted = drag.top - dy;
+      const limit = maxScroll();
+      const clamped = Math.max(0, Math.min(limit, wanted));
+      scroller.scrollTop = clamped;
+      drag.stretch = wanted < 0 ? rubber(-wanted) : wanted > limit ? -rubber(wanted - limit) : 0;
+      setStretch(drag.stretch);
+      const now = performance.now();
+      drag.samples.push({ t: now, y: event.clientY });
+      while (drag.samples.length > 2 && now - drag.samples[0].t > 100) drag.samples.shift();
+    });
+    const finish = event => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const done = drag;
+      drag = null;
+      this.root.classList.remove('is-panning');
+      if (scroller.hasPointerCapture(event.pointerId)) scroller.releasePointerCapture(event.pointerId);
+      if (done.direction !== 'y') return;
+      suppressClickUntil = performance.now() + 350;
+      if (done.stretch) {
+        setStretch(0, true);
+        return;
+      }
+      const first = done.samples[0];
+      const last = done.samples[done.samples.length - 1];
+      const elapsed = last.t - first.t;
+      if (elapsed <= 0 || performance.now() - last.t > 80) return;
+      let velocity = -((last.y - first.y) / done.scale) / elapsed; // px per ms, page direction
+      let previous = performance.now();
+      const step = now => {
+        const dt = Math.min(32, now - previous);
+        previous = now;
+        const before = scroller.scrollTop;
+        scroller.scrollTop = before + velocity * dt;
+        velocity *= Math.pow(0.9965, dt);
+        const atEdge = scroller.scrollTop === before && Math.abs(velocity * dt) >= 1;
+        if (Math.abs(velocity) < 0.02 || atEdge) {
+          frame = 0;
+          if (atEdge) {
+            setStretch(-Math.sign(velocity) * Math.min(40, Math.abs(velocity) * 30));
+            requestAnimationFrame(() => setStretch(0, true));
+          }
+          return;
+        }
+        frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+    };
+    scroller.addEventListener('pointerup', finish);
+    scroller.addEventListener('pointercancel', finish);
+    scroller.addEventListener('lostpointercapture', finish);
+    scroller.addEventListener('click', event => {
+      if (performance.now() < suppressClickUntil) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    scroller.addEventListener('transitionend', () => { scroller.style.transition = ''; });
+  }
+
+  /* Full-screen product image viewer: swipe between images, double-click or wheel to zoom. */
+  _buildViewer() {
+    this.viewer = el('div', 'preview-viewer');
+    this.viewer.hidden = true;
+    this.viewer.tabIndex = -1;
+    this.viewer.setAttribute('role', 'dialog');
+    this.viewer.setAttribute('aria-label', '商品大图');
+    const bar = el('div', 'preview-viewer-bar');
+    const close = el('button', 'preview-viewer-close');
+    close.type = 'button';
+    close.setAttribute('aria-label', '关闭大图');
+    close.append(icon('close'));
+    this.viewerCount = el('span', 'preview-viewer-count');
+    bar.append(close, this.viewerCount, el('span', 'preview-viewer-hint', '双击 / 滚轮放大'));
+    this.viewerStage = el('div', 'preview-viewer-stage');
+    this.viewerImage = el('img', 'preview-viewer-image');
+    this.viewerImage.draggable = false;
+    this.viewerImage.alt = '';
+    this.viewerStage.append(this.viewerImage);
+    this.viewerThumbs = el('div', 'preview-viewer-thumbs');
+    this.viewer.append(bar, this.viewerStage, this.viewerThumbs);
+    this.viewerState = { index: 0, zoom: 1, x: 0, y: 0, items: [], drag: null };
+    close.addEventListener('click', () => this._closeViewer());
+    this.viewer.addEventListener('keydown', event => {
+      if (event.key === 'Escape') this._closeViewer();
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') this._viewerGo(this.viewerState.index + (event.key === 'ArrowLeft' ? -1 : 1));
+      else return;
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    const stage = this.viewerStage;
+    stage.addEventListener('pointerdown', event => {
+      if (event.button !== 0) return;
+      const s = this.viewerState;
+      stage.setPointerCapture(event.pointerId);
+      s.drag = { id: event.pointerId, x: event.clientX, y: event.clientY, startX: s.x, startY: s.y, scale: this._displayScale(), dx: 0 };
+    });
+    stage.addEventListener('pointermove', event => {
+      const s = this.viewerState;
+      if (!s.drag || event.pointerId !== s.drag.id) return;
+      const dx = (event.clientX - s.drag.x) / s.drag.scale;
+      const dy = (event.clientY - s.drag.y) / s.drag.scale;
+      if (s.zoom > 1) {
+        s.x = s.drag.startX + dx;
+        s.y = s.drag.startY + dy;
+        this._viewerApply();
+      } else {
+        s.drag.dx = dx;
+        this._viewerApply(dx);
+      }
+    });
+    const end = event => {
+      const s = this.viewerState;
+      if (!s.drag || event.pointerId !== s.drag.id) return;
+      const { dx } = s.drag;
+      s.drag = null;
+      if (s.zoom === 1 && Math.abs(dx) > 50) this._viewerGo(s.index + (dx < 0 ? 1 : -1));
+      else this._viewerApply();
+    };
+    stage.addEventListener('pointerup', end);
+    stage.addEventListener('pointercancel', end);
+    stage.addEventListener('dblclick', event => {
+      const s = this.viewerState;
+      if (s.zoom > 1) {
+        Object.assign(s, { zoom: 1, x: 0, y: 0 });
+      } else {
+        const rect = stage.getBoundingClientRect();
+        const scale = this._displayScale();
+        s.zoom = 2.5;
+        s.x = -((event.clientX - rect.left - rect.width / 2) / scale) * (s.zoom - 1);
+        s.y = -((event.clientY - rect.top - rect.height / 2) / scale) * (s.zoom - 1);
+      }
+      this._viewerApply();
+    });
+    stage.addEventListener('wheel', event => {
+      event.preventDefault();
+      const s = this.viewerState;
+      const next = clamp(s.zoom * (event.deltaY < 0 ? 1.15 : 1 / 1.15), 1, 4);
+      s.x *= (next - 1) / Math.max(0.0001, s.zoom - 1) || 0;
+      s.y *= (next - 1) / Math.max(0.0001, s.zoom - 1) || 0;
+      s.zoom = next < 1.02 ? 1 : next;
+      this._viewerApply();
+    }, { passive: false });
+  }
+
+  _viewerApply(dragX = 0) {
+    const s = this.viewerState;
+    const maxX = ((s.zoom - 1) * this.viewerStage.clientWidth) / 2;
+    const maxY = ((s.zoom - 1) * this.viewerStage.clientHeight) / 2;
+    s.x = clamp(s.x, -maxX, maxX);
+    s.y = clamp(s.y, -maxY, maxY);
+    this.viewerImage.classList.toggle('is-dragging', Boolean(s.drag));
+    this.viewerImage.style.transform = `translate3d(${s.x + dragX}px, ${s.y}px, 0) scale(${s.zoom})`;
+    this.viewerStage.classList.toggle('is-zoomed', s.zoom > 1);
+  }
+
+  _openViewer(galleryIndex) {
+    const items = this.gallery.items.map((item, index) => ({ item, index })).filter(({ item }) => item.media.assetId && this.project?.assets?.[item.media.assetId]);
+    if (!items.length) return;
+    const s = this.viewerState;
+    s.items = items;
+    this.viewerThumbs.replaceChildren(...items.map(({ item }, position) => {
+      const thumb = el('button', 'preview-viewer-thumb');
+      thumb.type = 'button';
+      thumb.setAttribute('aria-label', `查看第 ${position + 1} 张`);
+      const image = el('img');
+      image.src = this._assetURL(item.media.assetId);
+      image.alt = '';
+      image.draggable = false;
+      thumb.append(image);
+      thumb.addEventListener('click', () => this._viewerGo(position));
+      return thumb;
+    }));
+    this.viewer.hidden = false;
+    this._viewerGo(Math.max(0, items.findIndex(entry => entry.index === galleryIndex)));
+    this.viewer.focus({ preventScroll: true });
+  }
+
+  _viewerGo(position) {
+    const s = this.viewerState;
+    if (!s.items.length) return;
+    s.index = clamp(position, 0, s.items.length - 1);
+    Object.assign(s, { zoom: 1, x: 0, y: 0, drag: null });
+    const { item } = s.items[s.index];
+    const source = this._assetURL(item.media.assetId);
+    if (this.viewerImage.getAttribute('src') !== source) this.viewerImage.src = source;
+    this.viewerCount.textContent = `${s.index + 1} / ${s.items.length}`;
+    [...this.viewerThumbs.children].forEach((thumb, index) => thumb.classList.toggle('is-active', index === s.index));
+    const active = this.viewerThumbs.children[s.index];
+    if (active) this.viewerThumbs.scrollLeft = active.offsetLeft - (this.viewerThumbs.clientWidth - active.offsetWidth) / 2;
+    this._viewerApply();
+  }
+
+  _closeViewer(syncGallery = true) {
+    if (!this.viewer || this.viewer.hidden) return;
+    this.viewer.hidden = true;
+    const s = this.viewerState;
+    // Return to the image last viewed, as the app does.
+    if (syncGallery && s.items[s.index]) this._setIndex(this.gallery, s.items[s.index].index, true);
+    if (syncGallery) this.scroller.focus({ preventScroll: true });
   }
 
   _emitView() {

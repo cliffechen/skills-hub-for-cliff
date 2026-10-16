@@ -1,4 +1,5 @@
 import { PhonePreview } from './preview.js';
+import { openSlicer } from './slicer.js';
 
 const $ = (id) => document.getElementById(id);
 const state = { project: null, projects: [], selected: null, version: 0, savedVersion: 0,
@@ -9,6 +10,19 @@ const esc = (value = '') => String(value).replace(/[&<>"']/g, (c) => ({'&':'&amp
 const imageTypes = new Set(['image/png', 'image/jpeg', 'image/webp']);
 const assetURL = (id) => `/api/projects/${state.project.id}/assets/${id}`;
 const targetJSON = (target) => esc(JSON.stringify(target));
+// Phone models in CSS pixels. Bezels and safe areas are approximations of the real devices.
+const DEVICES = {
+  'iphone-16': { name: 'iPhone 16 / 15', w: 393, h: 852, inches: 6.1, platform: 'ios', top: 54, bottom: 34, r: 55, bx: 13, bt: 13, bb: 13, island: true },
+  'iphone-16-pro-max': { name: 'iPhone 16 Plus / 15 Pro Max', w: 430, h: 932, inches: 6.7, platform: 'ios', top: 54, bottom: 34, r: 58, bx: 13, bt: 13, bb: 13, island: true },
+  'iphone-se': { name: 'iPhone SE', w: 375, h: 667, inches: 4.7, platform: 'ios', top: 20, bottom: 0, r: 0, bx: 20, bt: 92, bb: 92, homeButton: true },
+  'pixel-8': { name: 'Pixel 8', w: 412, h: 915, inches: 6.2, platform: 'android', top: 32, bottom: 22, r: 44, bx: 11, bt: 11, bb: 11 },
+  'android-small': { name: 'Android 小屏 · Galaxy S', w: 360, h: 780, inches: 6.1, platform: 'android', top: 30, bottom: 22, r: 36, bx: 10, bt: 10, bb: 10 },
+};
+const DEFAULT_SETTINGS = { device: 'iphone-16', zoom: 'fit', shell: true, editorCollapsed: false, surface: 'app', dark: false, guides: true, touch: true };
+const settingsOf = () => ({ ...DEFAULT_SETTINGS, ...(state.project?.settings || {}) });
+const CARD_INCHES = 3.370; // ISO/IEC 7810 ID-1 card width
+const pxPerInch = () => { try { return Number(localStorage.getItem('amazon-preview.px-per-inch')) || 0; } catch { return 0; } };
+const VIEW_CONTROLS = ['deviceSelect', 'zoomSelect', 'calibrateButton', 'shellToggle', 'darkToggle', 'guidesToggle', 'touchToggle', 'surfaceApp', 'surfaceWeb'];
 
 function toast(message, isError = false) {
   $('toast').textContent = message;
@@ -42,8 +56,9 @@ function setSaveStatus() {
   $('editorPanel').inert = busy;
   $('projectSelect').disabled = busy || !state.projects.length;
   $('newProject').disabled = busy;
+  $('openSlicer').disabled = busy;
   $('retrySave').disabled = busy;
-  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'viewportSelect', 'zoomSelect', 'shellToggle', 'toggleEditor']) $(id).disabled = busy || !state.project;
+  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'toggleEditor', ...VIEW_CONTROLS]) $(id).disabled = busy || !state.project;
 }
 
 function markChanged({ preview = true, editor = false, delay = 650 } = {}) {
@@ -242,9 +257,9 @@ function sortButtons(kind, id, index, length, moduleId = '') {
 function renderEditor() {
   const p = state.project;
   const disabled = !p;
-  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'viewportSelect', 'zoomSelect', 'shellToggle', 'jumpGallery', 'jumpAplus']) $(id).disabled = disabled;
+  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'jumpGallery', 'jumpAplus', ...VIEW_CONTROLS]) $(id).disabled = disabled;
   if (!p) { $('productFields').innerHTML = ''; $('galleryEditor').innerHTML = ''; $('brandStoryList').innerHTML = ''; $('moduleList').innerHTML = ''; return; }
-  $('productFields').innerHTML = field('品牌', p.product.brand, 'product.brand', false, '品牌名称（可留空）') + field('商品标题', p.product.title, 'product.title', true, '添加标题，感受主图在商品页里的效果') + field('价格', p.product.price, 'product.price', false, '例如 $39.99');
+  $('productFields').innerHTML = field('品牌', p.product.brand, 'product.brand', false, '品牌名称（可留空）') + field('商品标题', p.product.title, 'product.title', true, '添加标题，感受主图在商品页里的效果') + field('价格', p.product.price, 'product.price', false, '例如 $39.99') + `<div class="field-row">${field('星级', p.product.rating || '', 'product.rating', false, '4.5')}${field('评价数', p.product.reviews || '', 'product.reviews', false, '1,284')}</div>` + field('About this item 要点', p.product.bullets || '', 'product.bullets', true, '每行一条，最多显示 5–7 条');
   $('galleryEditor').innerHTML = `<div class="asset-grid">${p.gallery.map((item, index) => `<div class="gallery-item" data-sort-drop="gallery" data-sort-id="${item.id}"><div class="slide-header"><span class="badge">${index === 0 ? '主图' : `副图 ${index}`}</span>${sortButtons('gallery', item.id, index, p.gallery.length)}</div>${assetSlot({ kind: 'gallery', itemId: item.id }, index === 0 ? '主图' : `副图 ${index}`)}</div>`).join('')}</div><button class="button full-width" data-action="add-gallery" type="button">＋ 添加主副图 · 可多选</button>${!p.gallery.length ? '<p class="hint">也可直接粘贴一张截图，开始预览。</p>' : ''}`;
   const renderModule = (mod, index, modules) => {
     const typeLabel = { image: '整张图片', carousel: '导航轮播', video: '全宽视频', 'brand-story': '品牌故事' }[mod.type];
@@ -260,7 +275,7 @@ function renderEditor() {
       const cards = mod.slides.map((slide, i) => `<div class="slide-editor" data-sort-drop="slide" data-sort-id="${slide.id}" data-module-id="${mod.id}"><div class="slide-header"><span class="badge">品牌卡片 ${i + 1}</span>${sortButtons('slide', slide.id, i, mod.slides.length, mod.id)}</div>${assetSlot({ kind: 'slide', moduleId: mod.id, slideId: slide.id }, '品牌故事卡片 · 竖图')}<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', slide.title, `slide:${mod.id}:${slide.id}:title`)}${field('正文', slide.body, `slide:${mod.id}:${slide.id}:body`, true)}</details></div>`).join('');
       content = `${field('品牌名称', mod.brandName, `module:${mod.id}:brandName`, false, '例如：YOUR BRAND')}${brandAssets}<p class="hint">背景铺满品牌区域；Logo 优先于品牌名称显示。每张卡片独立导入，按约 4:5 竖卡完整显示，左右滑动查看。</p>${cards}<button class="button full-width" data-action="add-slide" data-module-id="${mod.id}" type="button">＋ 添加品牌卡片</button><button class="button full-width compact" data-action="batch-slides" data-module-id="${mod.id}" type="button">批量导入品牌卡片</button>`;
     }
-    return `<section class="module-card" data-module-id="${mod.id}" data-sort-drop="module" data-sort-id="${mod.id}"><div class="module-head"><button type="button" class="module-title" data-action="reveal-module" data-module-id="${mod.id}" aria-label="定位${mod.type === 'brand-story' ? '品牌故事' : ' A+ 模块'} ${index + 1}：${typeLabel}" title="点击定位右侧模块"><span class="module-number">${String(index + 1).padStart(2, '0')}</span><span><strong>${typeLabel}</strong><small>${english}</small></span></button>${sortButtons('module', mod.id, index, modules.length)}</div><div class="module-fields">${content}${!['carousel', 'brand-story'].includes(mod.type) ? `<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', mod.title, `module:${mod.id}:title`)}${field('正文', mod.body, `module:${mod.id}:body`, true)}</details>` : ''}</div></section>`;
+    return `<section class="module-card" data-module-type="${mod.type}" data-module-id="${mod.id}" data-sort-drop="module" data-sort-id="${mod.id}"><div class="module-head"><button type="button" class="module-title" data-action="reveal-module" data-module-id="${mod.id}" aria-label="定位${mod.type === 'brand-story' ? '品牌故事' : ' A+ 模块'} ${index + 1}：${typeLabel}" title="点击定位右侧模块"><span class="module-number">${String(index + 1).padStart(2, '0')}</span><span><strong>${typeLabel}</strong><small>${english}</small></span></button>${sortButtons('module', mod.id, index, modules.length)}</div><div class="module-fields">${content}${!['carousel', 'brand-story'].includes(mod.type) ? `<details class="optional-fields"><summary>图片外的标题与正文（可选）</summary>${field('标题', mod.title, `module:${mod.id}:title`)}${field('正文', mod.body, `module:${mod.id}:body`, true)}</details>` : ''}</div></section>`;
   };
   $('brandStoryList').innerHTML = p.modules.filter((mod) => mod.type === 'brand-story').map(renderModule).join('') || '<div class="section-empty"><strong>From the brand</strong><p>添加品牌故事，展示品牌背景与横滑卡片。</p></div>';
   $('moduleList').innerHTML = p.modules.filter((mod) => mod.type !== 'brand-story').map(renderModule).join('') || '<div class="section-empty"><strong>从一个模块开始</strong><p>选择下方模块，把你的 Canva 设计放进手机页面。</p></div>';
@@ -283,31 +298,88 @@ function addModule(type) {
 }
 
 function applySettings() {
-  const s = state.project?.settings || { viewport: '390x844', zoom: 'fit', shell: true, editorCollapsed: false };
-  $('viewportSelect').value = s.viewport;
-  $('zoomSelect').value = s.zoom === 'fit' ? 'fit' : String(Math.round(Number(s.zoom) * 100));
+  const s = settingsOf();
+  const device = DEVICES[s.device] || DEVICES[DEFAULT_SETTINGS.device];
+  $('deviceSelect').value = DEVICES[s.device] ? s.device : DEFAULT_SETTINGS.device;
+  $('zoomSelect').value = ['fit', 'real'].includes(s.zoom) ? s.zoom : String(Math.round(Number(s.zoom) * 100));
+  $('calibrateButton').hidden = s.zoom !== 'real';
   $('shellToggle').checked = s.shell;
+  $('darkToggle').checked = s.dark;
+  $('guidesToggle').checked = s.guides;
+  $('touchToggle').checked = s.touch;
+  $(s.surface === 'web' ? 'surfaceWeb' : 'surfaceApp').checked = true;
   document.body.classList.toggle('is-collapsed', !!s.editorCollapsed);
   $('toggleEditor').setAttribute('aria-expanded', String(!s.editorCollapsed));
   $('toggleEditor').setAttribute('aria-label', s.editorCollapsed ? '展开编辑区' : '收起编辑区');
   $('toggleEditor').title = s.editorCollapsed ? '展开编辑区' : '收起编辑区';
   const label = $('toggleEditor').querySelector('[data-editor-label]');
   if (label) label.textContent = s.editorCollapsed ? '展开编辑' : '收起编辑';
+
+  // Device frame and the status bar / home area colours that match the simulated page.
+  const frame = $('phoneViewport');
+  const vars = { '--w': device.w, '--h': device.h, '--bx': device.bx, '--bt': device.bt, '--bb': device.bb, '--r': device.r, '--outer-r': device.r ? device.r + device.bx : 56, '--safe-top': device.top, '--safe-bottom': device.bottom };
+  for (const [key, value] of Object.entries(vars)) frame.style.setProperty(key, `${value}px`);
+  frame.classList.toggle('platform-android', device.platform === 'android');
+  frame.classList.toggle('island-ios', !!device.island);
+  frame.classList.toggle('home-button', !!device.homeButton);
+  const web = s.surface === 'web';
+  let statusBg = s.dark ? '#0f1111' : '#fff';
+  let homeBg = statusBg;
+  if (s.shell && !web) statusBg = s.dark ? 'linear-gradient(90deg, #12302f, #193731)' : 'linear-gradient(90deg, #82d8e3, #a6e6ce)';
+  if (s.shell && web && device.platform === 'ios') { statusBg = '#232f3e'; homeBg = s.dark ? '#1c1c1e' : '#f7f7f7'; }
+  if (s.shell && web && device.platform === 'android') statusBg = s.dark ? '#202124' : '#fff';
+  const lightInk = s.dark || (s.shell && web && device.platform === 'ios');
+  frame.style.setProperty('--status-bg', statusBg);
+  frame.style.setProperty('--home-bg', homeBg);
+  frame.style.setProperty('--status-ink', lightInk ? '#fff' : '#0f1111');
+  frame.style.setProperty('--home-ink', s.dark ? '#fff' : '#0f1111');
+  phone.setEnvironment({ surface: s.surface, platform: device.platform, dark: s.dark, guides: s.guides, touch: s.touch });
   requestAnimationFrame(resizePhone);
 }
 
 function resizePhone() {
-  const s = state.project?.settings || { viewport: '390x844', zoom: 'fit' };
-  const [width, height] = s.viewport.split('x').map(Number);
+  const s = settingsOf();
+  const device = DEVICES[s.device] || DEVICES[DEFAULT_SETTINGS.device];
+  const width = device.w + 2 * device.bx;
+  const height = device.h + device.bt + device.bb;
   const stage = $('phoneStage');
   const style = getComputedStyle(stage);
   const availableWidth = stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
   const availableHeight = stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-  const scale = s.zoom === 'fit' ? Math.max(0.2, Math.min(1, availableWidth / width, availableHeight / height)) : Number(s.zoom);
-  Object.assign($('phoneViewport').style, { width: `${width}px`, height: `${height}px`, transform: `scale(${scale})`, transformOrigin: 'top left' });
+  let scale;
+  if (s.zoom === 'fit') scale = Math.max(0.2, Math.min(1, availableWidth / width, availableHeight / height));
+  else if (s.zoom === 'real') scale = (pxPerInch() || 96) / (Math.hypot(device.w, device.h) / device.inches);
+  else scale = Number(s.zoom);
+  Object.assign($('phoneViewport').style, { transform: `scale(${scale})`, transformOrigin: 'top left' });
   Object.assign($('phoneSizer').style, { width: `${width * scale}px`, height: `${height * scale}px` });
   const scaleLabel = $('scaleLabel');
-  if (scaleLabel) scaleLabel.textContent = `${width} × ${height} · ${Math.round(scale * 100)}%`;
+  if (scaleLabel) scaleLabel.textContent = `${device.name} · ${device.w} × ${device.h} · ${s.zoom === 'real' ? `实际大小${pxPerInch() ? '' : '（未校准）'}` : `${Math.round(scale * 100)}%`}`;
+}
+
+function showCalibration() {
+  return new Promise((resolve) => {
+    const start = Math.round((pxPerInch() || 96) * CARD_INCHES);
+    const dialog = document.createElement('dialog');
+    dialog.className = 'project-dialog calibrate-dialog';
+    dialog.innerHTML = `<form method="dialog"><p class="dialog-eyebrow">REAL SIZE</p><h2>校准实际大小</h2><p class="hint">把一张银行卡或信用卡贴在屏幕上，拖动滑块，让下面的框和卡片一样宽。只需校准一次，换显示器或调整系统缩放后再校准。</p><div class="calibrate-card" style="width:${start}px;height:${Math.round(start / 1.586)}px">银行卡大小</div><input type="range" min="150" max="900" value="${start}" aria-label="卡片宽度"><div class="dialog-actions"><button class="button" value="cancel" formnovalidate>取消</button><button class="button primary" value="save">保存</button></div></form>`;
+    document.body.append(dialog);
+    const range = dialog.querySelector('input');
+    const card = dialog.querySelector('.calibrate-card');
+    range.addEventListener('input', () => { card.style.width = `${range.value}px`; card.style.height = `${Math.round(range.value / 1.586)}px`; });
+    dialog.addEventListener('close', () => {
+      if (dialog.returnValue === 'save') { try { localStorage.setItem('amazon-preview.px-per-inch', String(Number(range.value) / CARD_INCHES)); } catch { /* Calibration then lasts for this page only. */ } }
+      dialog.remove();
+      resolve(dialog.returnValue === 'save');
+    }, { once: true });
+    dialog.showModal();
+  });
+}
+
+function setViewSetting(key, value, options = {}) {
+  if (!state.project) return;
+  state.project.settings = { ...settingsOf(), [key]: value };
+  applySettings();
+  markChanged({ preview: false, ...options });
 }
 
 function openFiles(intent, video = false) {
@@ -361,6 +433,10 @@ function placeAsset(asset, intent, index) {
   if (intent.mode === 'gallery') {
     const item = { id: uid(), assetId: asset.id }; p.gallery.push(item);
     return { kind: 'gallery', itemId: item.id };
+  }
+  if (intent.mode === 'image-modules') {
+    const mod = { id: uid(), type: 'image', title: '', body: '', assetId: asset.id }; p.modules.push(mod);
+    return { kind: 'image', moduleId: mod.id };
   }
   if (intent.mode === 'slides') {
     const mod = p.modules.find((m) => m.id === intent.moduleId);
@@ -433,6 +509,24 @@ async function importFiles(files, intent) {
     if (errors.length) toast(errors[0], true);
     if (state.selected) selectTarget(state.selected, false);
   }
+  return success;
+}
+
+async function importSlices(files, as) {
+  if (!state.project || state.importing || state.loading) { toast('正在处理上一批素材，请稍候再导入。', true); return; }
+  let intent = { mode: 'image-modules' };
+  let carousel = null;
+  if (as === 'carousel') {
+    carousel = { id: uid(), type: 'carousel', title: '', body: '', slides: [] };
+    state.project.modules.push(carousel);
+    intent = { mode: 'slides', moduleId: carousel.id };
+  }
+  const success = await importFiles(files, intent);
+  if (carousel && !carousel.slides.length) {
+    state.project.modules = state.project.modules.filter((m) => m.id !== carousel.id);
+    markChanged({ editor: true });
+  }
+  if (success && state.selected) phone.revealTarget(state.selected);
 }
 
 function getList(kind, moduleId) {
@@ -573,12 +667,23 @@ $('addImageModule').addEventListener('click', () => addModule('image'));
 $('addCarouselModule').addEventListener('click', () => addModule('carousel'));
 $('addVideoModule').addEventListener('click', () => addModule('video'));
 $('addBrandStoryModule').addEventListener('click', () => addModule('brand-story'));
+$('openSlicer').addEventListener('click', () => openSlicer({ onImport: importSlices, canImport: !!state.project }));
 $('toggleEditor').addEventListener('click', () => {
   if (state.project) { state.project.settings.editorCollapsed = !state.project.settings.editorCollapsed; applySettings(); markChanged({ preview: false }); }
 });
-$('viewportSelect').addEventListener('change', (event) => { state.project.settings.viewport = event.target.value; applySettings(); markChanged(); });
-$('zoomSelect').addEventListener('change', (event) => { state.project.settings.zoom = event.target.value === 'fit' ? 'fit' : Number(event.target.value) / 100; applySettings(); markChanged({ preview: false }); });
-$('shellToggle').addEventListener('change', (event) => { state.project.settings.shell = event.target.checked; markChanged(); });
+$('deviceSelect').innerHTML = Object.entries(DEVICES).map(([id, d]) => `<option value="${id}">${esc(d.name)} · ${d.w}×${d.h}</option>`).join('');
+$('deviceSelect').addEventListener('change', (event) => setViewSetting('device', event.target.value));
+$('zoomSelect').addEventListener('change', async (event) => {
+  const value = event.target.value;
+  if (value === 'real' && !pxPerInch()) await showCalibration();
+  setViewSetting('zoom', ['fit', 'real'].includes(value) ? value : Number(value) / 100);
+});
+$('calibrateButton').addEventListener('click', async () => { if (await showCalibration()) resizePhone(); });
+$('shellToggle').addEventListener('change', (event) => { state.project.settings = { ...settingsOf(), shell: event.target.checked }; applySettings(); markChanged(); });
+$('darkToggle').addEventListener('change', (event) => setViewSetting('dark', event.target.checked));
+$('guidesToggle').addEventListener('change', (event) => setViewSetting('guides', event.target.checked));
+$('touchToggle').addEventListener('change', (event) => setViewSetting('touch', event.target.checked));
+for (const id of ['surfaceApp', 'surfaceWeb']) $(id).addEventListener('change', (event) => { if (event.target.checked) setViewSetting('surface', event.target.value); });
 $('jumpGallery').addEventListener('click', () => phone.jumpTo('gallery'));
 $('jumpAplus').addEventListener('click', () => phone.jumpTo('aplus'));
 document.addEventListener('keydown', (event) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); if (!state.loading && !state.importing) saveNow(); } });

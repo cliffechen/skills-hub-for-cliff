@@ -16,6 +16,7 @@
       <symbol id="icon-carousel" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M2 7v10M22 7v10M10 10l4 2-4 2"/></symbol>
       <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></symbol>
       <symbol id="icon-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m6-11-3 3 3 3"/></symbol>
+      <symbol id="icon-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1 20 20M8.1 15.9 20 4"/></symbol>
       <symbol id="icon-edit" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15z"/></symbol>
       <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
       <symbol id="icon-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4M11 19h2"/></symbol>
@@ -33,6 +34,7 @@
         <button id="newProject" class="button new-project" type="button"><svg class="icon"><use href="#icon-plus"/></svg><span>新建项目</span></button>
       </div>
       <div class="header-actions">
+        <button id="openSlicer" class="button tool-button" type="button" title="把 Canva 长图按 4:3 切成多张，可下载或导入当前项目"><svg class="icon"><use href="#icon-scissors"/></svg><span>切长图</span></button>
         <span id="saveStatus" class="save-status" role="status" aria-live="polite">保存在本机</span>
         <button id="retrySave" class="button compact" type="button" hidden>重试保存</button>
         <button id="toggleEditor" class="icon-button panel-toggle" type="button" title="收起编辑区" aria-expanded="true" aria-controls="editorPanel"><svg class="icon" aria-hidden="true"><use href="#icon-panel"/></svg><span data-editor-label class="sr-only">收起编辑</span></button>
@@ -89,18 +91,46 @@
         <div class="preview-toolbar">
           <div class="preview-toolbar-title"><svg class="icon"><use href="#icon-phone"/></svg><span>移动端画布</span><span class="live-badge">实时预览</span></div>
           <div class="preview-controls">
-            <label class="toolbar-control"><span>视口</span><select id="viewportSelect" aria-label="手机视口尺寸"><option value="360x780">360 × 780</option><option value="390x844" selected>390 × 844</option><option value="430x932">430 × 932</option></select></label>
-            <label class="toolbar-control zoom-control"><span>缩放</span><select id="zoomSelect" aria-label="画布显示缩放"><option value="fit" selected>适应窗口</option><option value="100">100%</option><option value="85">85%</option><option value="70">70%</option><option value="50">50%</option></select></label>
+            <label class="toolbar-control"><span>机型</span><select id="deviceSelect" aria-label="手机机型"></select></label>
+            <label class="toolbar-control zoom-control"><span>缩放</span><select id="zoomSelect" aria-label="画布显示缩放"><option value="fit" selected>适应窗口</option><option value="real">实际大小</option><option value="100">100%</option><option value="85">85%</option><option value="70">70%</option><option value="50">50%</option></select></label>
+            <button id="calibrateButton" class="text-button" type="button" title="用一张银行卡校准屏幕，实际大小才准确" hidden>校准</button>
           </div>
         </div>
         <div class="preview-subtoolbar">
           <div class="jump-controls" aria-label="跳转到页面区域"><button id="jumpGallery" class="text-button" type="button">主副图</button><span aria-hidden="true">/</span><button id="jumpAplus" class="text-button" type="button">A+ 页面</button></div>
-          <label class="switch-control"><input id="shellToggle" type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span>Amazon 外观</span></label>
+          <div class="view-options">
+            <div class="segmented" role="radiogroup" aria-label="模拟环境">
+              <label><input type="radio" name="surface" value="app" id="surfaceApp" checked><span>Amazon App</span></label>
+              <label><input type="radio" name="surface" value="web" id="surfaceWeb"><span>手机网页</span></label>
+            </div>
+            <label class="switch-control"><input id="shellToggle" type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span>Amazon 外观</span></label>
+            <label class="switch-control" title="模拟 App 深色主题，检查透明图和深色背景下的效果"><input id="darkToggle" type="checkbox"><span class="switch-track" aria-hidden="true"></span><span>深色</span></label>
+            <label class="switch-control" title="首屏底线和每个模块占几屏"><input id="guidesToggle" type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span>首屏线</span></label>
+            <label class="switch-control" title="鼠标变成手指，按住拖动滚动页面"><input id="touchToggle" type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span>手指</span></label>
+          </div>
         </div>
 
         <div id="phoneStage" class="phone-stage">
           <div id="phoneSizer" class="phone-sizer">
-            <div id="phoneViewport" class="phone-viewport"><div id="previewRoot"></div></div>
+            <div id="phoneViewport" class="phone-device">
+              <span class="device-key device-key-power" aria-hidden="true"></span>
+              <span class="device-key device-key-volume" aria-hidden="true"></span>
+              <span class="device-se-speaker" aria-hidden="true"></span>
+              <span class="device-se-button" aria-hidden="true"></span>
+              <div class="device-screen">
+                <div class="device-status" aria-hidden="true">
+                  <span class="device-time">9:41</span>
+                  <span class="device-status-icons">
+                    <svg viewBox="0 0 18 12" width="18" height="12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg viewBox="0 0 16 12" width="16" height="12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.3 6.8a6.6 6.6 0 0 1 9.4 0l-1.5 1.5a4.5 4.5 0 0 0-6.4 0zM1 4.5a9.9 9.9 0 0 1 14 0l-1.5 1.5a7.8 7.8 0 0 0-11 0z"/></svg>
+                    <svg viewBox="0 0 27 12" width="27" height="12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="18" height="8" rx="1.8"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4z" opacity=".45"/></svg>
+                  </span>
+                </div>
+                <div id="previewRoot"></div>
+                <div class="device-home" aria-hidden="true"><span class="device-home-bar"></span></div>
+                <span class="device-island" aria-hidden="true"></span>
+              </div>
+            </div>
           </div>
           <div id="emptyState" class="welcome-state">
             <div class="welcome-illustration" aria-hidden="true"><div class="mini-phone"><div class="mini-header"></div><div class="mini-image"><svg class="icon"><use href="#icon-image"/></svg></div><div class="mini-line"></div><div class="mini-line short"></div><div class="mini-block"></div></div><span class="welcome-plus">+</span></div>
