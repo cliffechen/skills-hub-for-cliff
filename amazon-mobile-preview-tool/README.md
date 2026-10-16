@@ -6,13 +6,15 @@
 
 ## 启动
 
-Windows 双击 **启动预览工具.bat**。启动窗口会显示网址并打开默认浏览器；保留启动窗口，关闭它会停止服务。
+**Windows 便携版（推荐）**：在 [Releases](https://github.com/cliffechen/skills-hub-for-cliff/releases/tag/amazon-mobile-preview-tool-v1.0.0) 下载 `AmazonMobilePreview.exe`，放进任意文件夹后双击。无需安装 Python。启动窗口会显示网址并打开默认浏览器；保留启动窗口，关闭它会停止服务。
 
-需要 Python 3.10 或更新版本，无需安装任何第三方 Python 包或前端依赖。从 GitHub 下载或克隆仓库后，进入 `amazon-mobile-preview-tool` 文件夹再启动。默认使用 `http://127.0.0.1:8877`；端口被占用时自动选择后续可用端口。
+- 首次运行会在 exe 同目录生成 `data` 文件夹，并放入“示例 · 现有设计稿”；自己的项目也保存在这里。换电脑时把 exe 和 `data` 文件夹一起拷走。
+- 默认使用 `http://127.0.0.1:8877`；端口被占用、被 Hyper-V / WSL / Docker 保留或被安全软件拦截时，自动跳过并改用其他可用端口，实际网址以启动窗口显示为准。
+- exe 未做数字签名，首次打开若出现“Windows 已保护你的电脑”，点“更多信息 → 仍要运行”。
 
-macOS / Linux 可在本工具目录执行 `bash 启动预览工具.sh`；各平台也可以执行 `python server.py`（部分系统使用 `python3 server.py`）。仓库附带“示例 · 现有设计稿”，首次打开即可预览；点击“新建项目”可保存自己的产品。
+**源码运行（macOS / Linux / 开发）**：需要 Python 3.10 或更新版本，无需安装任何第三方 Python 包或前端依赖。进入 `amazon-mobile-preview-tool` 文件夹执行 `python server.py`（部分系统使用 `python3 server.py`）。点击“新建项目”可保存自己的产品。
 
-如果编辑过启动脚本后提示 `rorlevel` 或其他被截断的命令“不是内部或外部命令”，请检查 `.bat` 是否保存为 **UTF-8（无 BOM）和 Windows CRLF 换行**。项目中的启动脚本已使用此格式，`.editorconfig` 也规定了该格式，避免编辑时被改成 LF。
+**自行打包 exe**：在 Windows 上双击 `打包exe.bat`，首次会创建 `.venv` 并安装 PyInstaller，产物为 `dist/AmazonMobilePreview.exe`。只打包示例项目，`data/` 中的个人项目不会进入 exe。`.bat` 需保持 **UTF-8（无 BOM）和 Windows CRLF 换行**，`.editorconfig` 已规定该格式。
 
 ## 常用操作
 

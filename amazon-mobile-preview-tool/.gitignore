@@ -13,3 +13,9 @@ Thumbs.db
 # Keep the bundled example; new personal projects stay local by default.
 /data/*
 !/data/示例 · 现有设计稿/
+
+# Portable exe build output (exe is published as a GitHub Release asset).
+/.venv/
+/build/
+/dist/
+*.spec

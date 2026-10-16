@@ -38,7 +38,7 @@
 
 | 你要做什么 | 推荐项目 / skill | 说明 |
 |---|---|---|
-| 检查主副图、From the brand 品牌故事、A+ 整图、高级轮播和视频在手机上的浏览效果 | [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/) | 本地离线预览工具；Python 3.10+，无需第三方包；主副图、品牌故事与 A+ 独立编辑分区；Windows 双击启动 |
+| 检查主副图、From the brand 品牌故事、A+ 整图、高级轮播和视频在手机上的浏览效果 | [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/) | 本地离线预览工具；Windows 便携 exe 免装 Python，或 Python 3.10+ 源码运行；主副图、品牌故事与 A+ 独立编辑分区 |
 | 在可视化工作台里为详情页 / A+ 设计稿写四风格合规文案，看图定位槽位、改稿、合规检查、导出 | [`amazon-copy-writing-project`](./amazon-copy-writing-project/) | 本地 Python 工作台（离线运行），四视图 + 逐槽位文案 + 发散备选 + 人群研究与场景切入 |
 | 根据 Amazon 产品写主图、辅图、A+ 页面结构、设计 brief、生图 prompt | [`amazon-supplement-visual-content`](./amazon-supplement-visual-content/) | Codex/OpenAI 原版，适合正式出图前做内容与合规总控 |
 | 在 WorkBuddy 里做补充剂图片/A+ 内容 | [`amazon-supplement-visual-content-WB`](./amazon-supplement-visual-content-WB/) | WorkBuddy 版目录，目前用于和原版区分管理 |
@@ -223,7 +223,7 @@
 
 Canva → 亚马逊手机预览工具。在本地导入主副图、From the brand 品牌故事、A+ 整图、高级轮播、MP4 视频及封面，检查不同手机视口下的浏览效果。品牌故事支持背景、Logo 和可横向滑动的竖版卡片，位于普通 A+ 内容前。左侧主副图、品牌故事与 A+ 独立分区，前两者分别使用 `#24333F`、`#242321` 底色；支持拖拽、粘贴换图、组内排序与自动保存。卡片悬停以 `#FFA41C` 高亮，点击品牌故事或 A+ 卡片会定位右侧模块并闪烁两次。
 
-需要 Python 3.10+，无需第三方包或前端构建，可离线运行。Windows 双击项目内的 `启动预览工具.bat`；项目与素材保存在 `data/<项目名称>/`，主副图位于 `assets/main/`，A+ 图片、轮播、视频和封面位于 `assets/aplus/`。附带可直接打开的示例设计稿，操作与备份方式见[项目 README](./amazon-mobile-preview-tool/README.md)。
+可离线运行。Windows 在 [Releases](https://github.com/cliffechen/skills-hub-for-cliff/releases/tag/amazon-mobile-preview-tool-v1.0.0) 下载便携版 `AmazonMobilePreview.exe` 双击即用，无需 Python；其他系统用 Python 3.10+ 运行 `python server.py`，无需第三方包。项目与素材保存在 `data/<项目名称>/`，主副图位于 `assets/main/`，A+ 图片、轮播、视频和封面位于 `assets/aplus/`。附带可直接打开的示例设计稿，操作与备份方式见[项目 README](./amazon-mobile-preview-tool/README.md)。
 
 [`amazon-supplement-visual-content`](./amazon-supplement-visual-content/)  
 用于 Amazon US 补充剂主图合规判断、辅图文案、A+ 页面结构、设计 brief 和生图 prompt。
@@ -357,7 +357,7 @@ Canva 设计：<设计链接>
 
 下载本仓库 ZIP 并解压，或克隆后进入对应项目目录。请保留完整项目文件夹，包括静态文件和随附的示例素材。
 
-- **手机预览工具**：进入 [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/)，安装 Python 3.10+ 后双击 `启动预览工具.bat`。也可在该目录运行 `python server.py`，浏览器默认打开 `http://127.0.0.1:8877`；端口占用时自动顺延。关闭启动窗口即停止服务。
+- **手机预览工具**：Windows 在 [Releases](https://github.com/cliffechen/skills-hub-for-cliff/releases/tag/amazon-mobile-preview-tool-v1.0.0) 下载 `AmazonMobilePreview.exe` 双击即用，数据保存在 exe 同目录的 `data` 文件夹。也可进入 [`amazon-mobile-preview-tool`](./amazon-mobile-preview-tool/)，用 Python 3.10+ 运行 `python server.py`，浏览器默认打开 `http://127.0.0.1:8877`；端口占用时自动顺延。关闭启动窗口即停止服务。
 - **文案工作台**：进入 [`amazon-copy-writing-project`](./amazon-copy-writing-project/)，按其[工作台 README](./amazon-copy-writing-project/_workbench/README.md)准备资料，双击 `_workbench/启动工作台.bat` 启动。
 - **广告知识工作台**：进入 [`ginv-ads-workbench`](./ginv-ads-workbench/)，安装 Node.js（建议 22 或以上）后双击 `启动工作台.cmd`。也可在该目录运行 `npm start`，浏览器打开 `http://127.0.0.1:4173`；无需 `npm install`，默认离线使用。详细操作见[项目 README](./ginv-ads-workbench/README.md)。
 
