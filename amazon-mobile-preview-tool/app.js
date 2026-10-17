@@ -22,6 +22,7 @@ const DEFAULT_SETTINGS = { device: 'iphone-16', zoom: 'fit', shell: true, editor
 const settingsOf = () => ({ ...DEFAULT_SETTINGS, ...(state.project?.settings || {}) });
 const CARD_INCHES = 3.370; // ISO/IEC 7810 ID-1 card width
 const pxPerInch = () => { try { return Number(localStorage.getItem('amazon-preview.px-per-inch')) || 0; } catch { return 0; } };
+const QA_FIELDS = ['question', 'answer', 'author', 'date', 'votes'];
 const VIEW_CONTROLS = ['deviceSelect', 'zoomSelect', 'calibrateButton', 'shellToggle', 'darkToggle', 'guidesToggle', 'touchToggle', 'surfaceApp', 'surfaceWeb'];
 
 function toast(message, isError = false) {
@@ -58,7 +59,7 @@ function setSaveStatus() {
   $('newProject').disabled = busy;
   $('openSlicer').disabled = busy;
   $('retrySave').disabled = busy;
-  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'toggleEditor', ...VIEW_CONTROLS]) $(id).disabled = busy || !state.project;
+  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'addQa', 'importQa', 'toggleEditor', ...VIEW_CONTROLS]) $(id).disabled = busy || !state.project;
 }
 
 function markChanged({ preview = true, editor = false, delay = 650 } = {}) {
@@ -154,6 +155,7 @@ async function openProject(id) {
   try {
     if (state.project && !(await saveNow())) { renderProjectList(); return; }
     const project = await request(`/api/projects/${id}`);
+    project.qa ||= [];
     state.project = project;
     state.version = state.savedVersion = 0;
     state.saveError = null;
@@ -201,7 +203,7 @@ async function retrySave() {
       project.assets[copied.id] = copied; assetMap.set(asset.id, copied.id);
     }
     const remap = (value) => assetMap.get(value) || '';
-    project.product = original.product; project.settings = original.settings; project.view = original.view;
+    project.product = original.product; project.settings = original.settings; project.view = original.view; project.qa = original.qa || [];
     project.gallery = original.gallery.map((item) => ({ ...item, assetId: remap(item.assetId) }));
     project.modules = original.modules.map((mod) => ({ ...mod,
       ...(mod.type === 'image' ? { assetId: remap(mod.assetId) } : {}),
@@ -257,8 +259,8 @@ function sortButtons(kind, id, index, length, moduleId = '') {
 function renderEditor() {
   const p = state.project;
   const disabled = !p;
-  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'jumpGallery', 'jumpAplus', ...VIEW_CONTROLS]) $(id).disabled = disabled;
-  if (!p) { $('productFields').innerHTML = ''; $('galleryEditor').innerHTML = ''; $('brandStoryList').innerHTML = ''; $('moduleList').innerHTML = ''; return; }
+  for (const id of ['renameProject', 'addImageModule', 'addCarouselModule', 'addVideoModule', 'addBrandStoryModule', 'addQa', 'importQa', 'jumpGallery', 'jumpAplus', ...VIEW_CONTROLS]) $(id).disabled = disabled;
+  if (!p) { $('productFields').innerHTML = ''; $('galleryEditor').innerHTML = ''; $('brandStoryList').innerHTML = ''; $('moduleList').innerHTML = ''; $('qaList').innerHTML = ''; return; }
   $('productFields').innerHTML = field('品牌', p.product.brand, 'product.brand', false, '品牌名称（可留空）') + field('商品标题', p.product.title, 'product.title', true, '添加标题，感受主图在商品页里的效果') + field('价格', p.product.price, 'product.price', false, '例如 $39.99') + `<div class="field-row">${field('星级', p.product.rating || '', 'product.rating', false, '4.5')}${field('评价数', p.product.reviews || '', 'product.reviews', false, '1,284')}</div>` + field('About this item 要点', p.product.bullets || '', 'product.bullets', true, '每行一条，最多显示 5–7 条');
   $('galleryEditor').innerHTML = `<div class="asset-grid">${p.gallery.map((item, index) => `<div class="gallery-item" data-sort-drop="gallery" data-sort-id="${item.id}"><div class="slide-header"><span class="badge">${index === 0 ? '主图' : `副图 ${index}`}</span>${sortButtons('gallery', item.id, index, p.gallery.length)}</div>${assetSlot({ kind: 'gallery', itemId: item.id }, index === 0 ? '主图' : `副图 ${index}`)}</div>`).join('')}</div><button class="button full-width" data-action="add-gallery" type="button">＋ 添加主副图 · 可多选</button>${!p.gallery.length ? '<p class="hint">也可直接粘贴一张截图，开始预览。</p>' : ''}`;
   const renderModule = (mod, index, modules) => {
@@ -279,6 +281,57 @@ function renderEditor() {
   };
   $('brandStoryList').innerHTML = p.modules.filter((mod) => mod.type === 'brand-story').map(renderModule).join('') || '<div class="section-empty"><strong>From the brand</strong><p>添加品牌故事，展示品牌背景与横滑卡片。</p></div>';
   $('moduleList').innerHTML = p.modules.filter((mod) => mod.type !== 'brand-story').map(renderModule).join('') || '<div class="section-empty"><strong>从一个模块开始</strong><p>选择下方模块，把你的 Canva 设计放进手机页面。</p></div>';
+  const qa = p.qa || [];
+  $('qaList').innerHTML = qa.map((item, index) => `<section class="module-card qa-card" data-qa-id="${item.id}" data-sort-drop="qa" data-sort-id="${item.id}"><div class="module-head"><button type="button" class="module-title" data-action="reveal-qa" data-qa-id="${item.id}" title="点击定位右侧问答"><span class="module-number">Q${index + 1}</span><span><strong>${esc(item.question.trim().slice(0, 40) || '新问答')}</strong><small>CUSTOMER QUESTION</small></span></button>${sortButtons('qa', item.id, index, qa.length)}</div><div class="module-fields">${field('问题', item.question, `qa:${item.id}:question`, true, 'Is this vegan-friendly?')}${field('回答', item.answer, `qa:${item.id}:answer`, true, 'Yes, the softgel shell is plant-based…')}<div class="field-row">${field('回答者', item.author, `qa:${item.id}:author`, false, 'Amazon Customer')}${field('日期', item.date, `qa:${item.id}:date`, false, 'June 5, 2026')}</div>${field('有用票数（可选）', item.votes, `qa:${item.id}:votes`, false, '例如 12')}</div></section>`).join('') || '<div class="section-empty"><strong>Customer questions &amp; answers</strong><p>添加顾客常问的问题和回答，预览显示在 A+ 下方。</p></div>';
+}
+
+const newQa = (fields = {}) => ({ id: uid(), ...Object.fromEntries(QA_FIELDS.map((key) => [key, ''])), ...fields });
+function addQa() {
+  if (!state.project) return;
+  const item = newQa();
+  (state.project.qa ||= []).push(item);
+  markChanged({ editor: true });
+  const card = $('qaList').querySelector(`[data-qa-id="${item.id}"]`);
+  card?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  card?.querySelector('textarea')?.focus({ preventScroll: true });
+  phone.revealTarget({ kind: 'qa', qaId: item.id });
+}
+
+// Accepts "Q: … / A: …" (or 问：/ 答：) blocks; lines without a prefix continue the previous part.
+function parseQa(text) {
+  const items = [];
+  let current = null;
+  let part = null;
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    const q = line.match(/^(?:Q|Question|问题?)\s*\d*\s*[:：.、]\s*(.*)$/i);
+    const a = line.match(/^(?:A|Answer|答案?|回答)\s*\d*\s*[:：.、]\s*(.*)$/i);
+    if (q) { current = newQa({ question: q[1] }); items.push(current); part = 'question'; }
+    else if (a && current) { current.answer = current.answer ? `${current.answer}\n${a[1]}` : a[1]; part = 'answer'; }
+    else if (line && current && part) current[part] = current[part] ? `${current[part]}\n${line}` : line;
+  }
+  return items.filter((item) => item.question || item.answer);
+}
+
+function importQa() {
+  if (!state.project) return;
+  const dialog = document.createElement('dialog');
+  dialog.className = 'project-dialog qa-dialog';
+  dialog.innerHTML = `<form method="dialog"><p class="dialog-eyebrow">CUSTOMER Q&amp;A</p><h2>批量粘贴问答</h2><p class="hint">每条问题以 <b>Q:</b> 或 <b>问：</b> 开头，回答以 <b>A:</b> 或 <b>答：</b> 开头，可多行。导入后追加在现有问答后面。</p><label class="field">问答内容<textarea rows="10" placeholder="Q: Is this vegan-friendly?\nA: Yes, the softgel shell is plant-based.\n\nQ: How many softgels per day?\nA: Take 2 softgels daily with food."></textarea></label><p class="hint qa-count">识别到 0 条</p><div class="dialog-actions"><button class="button" value="cancel" formnovalidate>取消</button><button class="button primary" value="save">导入</button></div></form>`;
+  document.body.append(dialog);
+  const area = dialog.querySelector('textarea');
+  area.addEventListener('input', () => { dialog.querySelector('.qa-count').textContent = `识别到 ${parseQa(area.value).length} 条`; });
+  dialog.addEventListener('close', () => {
+    const items = dialog.returnValue === 'save' ? parseQa(area.value) : [];
+    dialog.remove();
+    if (!items.length) { if (dialog.returnValue === 'save') toast('没有识别到问答，请用 Q: / A: 开头。', true); return; }
+    (state.project.qa ||= []).push(...items);
+    markChanged({ editor: true });
+    phone.revealTarget({ kind: 'qa', qaId: items[0].id });
+    toast(`已导入 ${items.length} 条问答。`);
+  }, { once: true });
+  dialog.showModal();
+  area.focus();
 }
 
 function addModule(type) {
@@ -530,6 +583,7 @@ async function importSlices(files, as) {
 }
 
 function getList(kind, moduleId) {
+  if (kind === 'qa') return state.project.qa;
   return kind === 'gallery' ? state.project.gallery : kind === 'module' ? state.project.modules : state.project.modules.find((m) => m.id === moduleId)?.slides;
 }
 function getSortList(kind, moduleId, id) {
@@ -565,6 +619,8 @@ $('editorPanel').addEventListener('click', async (event) => {
   if (!button) {
     if (event.target.closest('button, input, textarea, select, label, summary, a')) return;
     const slide = event.target.closest('.slide-editor');
+    const qaCard = event.target.closest('.qa-card');
+    if (qaCard) { phone.revealTarget({ kind: 'qa', qaId: qaCard.dataset.qaId }); return; }
     const card = event.target.closest('.module-card');
     const gallery = event.target.closest('.gallery-item');
     if (slide) phone.revealTarget({ kind: 'slide', moduleId: slide.dataset.moduleId, slideId: slide.dataset.sortId });
@@ -574,6 +630,7 @@ $('editorPanel').addEventListener('click', async (event) => {
   }
   const { action, moduleId, kind, id } = button.dataset;
   if (action === 'reveal-module') phone.revealTarget({ moduleId });
+  if (action === 'reveal-qa') phone.revealTarget({ kind: 'qa', qaId: button.dataset.qaId });
   if (action === 'choose') { const target = JSON.parse(button.dataset.targetRef); selectTarget(target, false); openFiles({ mode: 'replace', target }, target.kind === 'video'); }
   if (action === 'clear-asset') { const target = JSON.parse(button.dataset.targetRef); const item = currentAsset(target); if (item) item[assetKey(target)] = ''; markChanged({ editor: true }); }
   if (action === 'add-gallery') openFiles({ mode: 'gallery' });
@@ -602,6 +659,16 @@ $('editorPanel').addEventListener('input', (event) => {
   if (path.startsWith('product.')) state.project.product[path.split('.')[1]] = event.target.value;
   else {
     const [kind, moduleId, third, fourth] = path.split(':');
+    if (kind === 'qa') {
+      const item = state.project.qa.find((q) => q.id === moduleId);
+      if (item) item[third] = event.target.value;
+      if (third === 'question') {
+        const title = event.target.closest('.qa-card')?.querySelector('.module-title strong');
+        if (title) title.textContent = event.target.value.trim().slice(0, 40) || '新问答';
+      }
+      markChanged();
+      return;
+    }
     const mod = state.project.modules.find((m) => m.id === moduleId);
     if (kind === 'module') mod[third] = event.target.value;
     else mod.slides.find((s) => s.id === third)[fourth] = event.target.value;
@@ -667,6 +734,8 @@ $('addImageModule').addEventListener('click', () => addModule('image'));
 $('addCarouselModule').addEventListener('click', () => addModule('carousel'));
 $('addVideoModule').addEventListener('click', () => addModule('video'));
 $('addBrandStoryModule').addEventListener('click', () => addModule('brand-story'));
+$('addQa').addEventListener('click', addQa);
+$('importQa').addEventListener('click', importQa);
 $('openSlicer').addEventListener('click', () => openSlicer({ onImport: importSlices, canImport: !!state.project }));
 $('toggleEditor').addEventListener('click', () => {
   if (state.project) { state.project.settings.editorCollapsed = !state.project.settings.editorCollapsed; applySettings(); markChanged({ preview: false }); }

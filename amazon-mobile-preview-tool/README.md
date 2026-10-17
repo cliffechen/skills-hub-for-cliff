@@ -6,7 +6,7 @@
 
 ## 启动
 
-**Windows 便携版（推荐）**：在 [Releases](https://github.com/cliffechen/skills-hub-for-cliff/releases/tag/amazon-mobile-preview-tool-v1.1.0) 下载 `AmazonMobilePreview.exe`，放进任意文件夹后双击。无需安装 Python。启动窗口会显示网址并打开默认浏览器；保留启动窗口，关闭它会停止服务。
+**Windows 便携版（推荐）**：在 [Releases](https://github.com/cliffechen/skills-hub-for-cliff/releases/tag/amazon-mobile-preview-tool-v1.2.0) 下载 `AmazonMobilePreview.exe`，放进任意文件夹后双击。无需安装 Python。启动窗口会显示网址并打开默认浏览器；保留启动窗口，关闭它会停止服务。
 
 - 首次运行会在 exe 同目录生成 `data` 文件夹，并放入“示例 · 现有设计稿”；自己的项目也保存在这里。换电脑时把 exe 和 `data` 文件夹一起拷走。
 - 默认使用 `http://127.0.0.1:8877`；端口被占用、被 Hyper-V / WSL / Docker 保留或被安全软件拦截时，自动跳过并改用其他可用端口，实际网址以启动窗口显示为准。
@@ -39,6 +39,14 @@
 - 左侧“商品信息”可填星级、评价数和 About this item 要点（每行一条），都是选填。
 
 页面结构参照美国站公开界面做近似还原，不保证与 Amazon 前台像素级一致；首屏线、屏数标签只在预览里显示。
+
+### 问答 Q&A
+
+左侧“05 问答 Q&A”分区可以直接填写和修改顾客问答：点击 **＋ 添加问答**，填写问题、回答，以及可选的回答者、日期和有用票数；用拖动手柄或上下箭头排序，“×”删除。
+
+有现成问答时点击 **批量粘贴问答**：每条问题以 `Q:` 或 `问：` 开头，回答以 `A:` 或 `答：` 开头，回答可以写多行，导入后追加在现有问答后面。
+
+右侧预览在 A+ 下方显示 “Customer questions & answers”，默认展示前 3 条，其余点 “See more answered questions” 展开。点击左侧问答卡片会定位并闪烁右侧对应问答。
 
 ### 切长图
 

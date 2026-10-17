@@ -28,6 +28,7 @@ DEVICES = ("iphone-16", "iphone-16-pro-max", "iphone-se", "pixel-8", "android-sm
 # Projects saved before device frames stored a bare viewport size.
 LEGACY_VIEWPORTS = {"360x780": "android-small", "390x844": "iphone-16", "430x932": "iphone-16-pro-max"}
 PRODUCT_FIELDS = ("brand", "title", "price", "rating", "reviews", "bullets")
+QA_FIELDS = ("question", "answer", "author", "date", "votes")
 STATIC_FILES = {"index.html", "app.js", "style.css", "preview.js", "preview.css", "slicer.js"}
 MIME_EXTENSIONS = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".webp", "video/mp4": ".mp4"}
 ASSET_CATEGORIES = ("main", "aplus")
@@ -491,7 +492,7 @@ class ProjectStore:
                 "schemaVersion": 1, "id": project_id, "name": name, "revision": 0,
                 "createdAt": timestamp, "updatedAt": timestamp,
                 "product": {key: "" for key in PRODUCT_FIELDS},
-                "gallery": [], "modules": [], "assets": {},
+                "gallery": [], "modules": [], "qa": [], "assets": {},
                 "settings": default_settings(),
                 "view": {"galleryIndex": 0, "carouselIndices": {}, "scrollTop": 0},
             }
@@ -586,6 +587,15 @@ class ProjectStore:
                     asset_ref(slide, "assetId", "image/")
                     for key in ("label", "title", "body"):
                         text_field(slide.get(key, ""), "轮播文字")
+        qa = result.get("qa", [])
+        if not isinstance(qa, list) or len(qa) > 500:
+            raise APIError(400, "问答列表无效或过长。")
+        result["qa"] = []
+        for entry in qa:
+            if not isinstance(entry, dict):
+                raise APIError(400, "问答格式无效。")
+            item_id(entry)
+            result["qa"].append({"id": entry["id"], **{key: text_field(entry.get(key, ""), "问答内容") for key in QA_FIELDS}})
         result["settings"] = validate_settings(result.get("settings"))
         view = result.get("view")
         if not isinstance(view, dict) or not finite_number(view.get("galleryIndex"), 0, 100000) or not finite_number(view.get("scrollTop"), 0, 100000000):

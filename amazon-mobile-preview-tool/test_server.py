@@ -115,6 +115,27 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(status, 400, bad)
         self.assertEqual(self.store.get(project["id"])["revision"], saved["revision"])
 
+    def test_customer_qa_round_trip_and_validation(self):
+        project = self.create()
+        self.assertEqual(project["qa"], [])
+        project["qa"] = [
+            {"id": "qa-1", "question": "Is this vegan?", "answer": "Yes.\nPlant-based shell.", "author": "Brand", "date": "June 5, 2026", "votes": "12"},
+            {"id": "qa-2", "question": "Draft only"},
+        ]
+        status, _, saved = self.request("PUT", f"/api/projects/{project['id']}", project)
+        self.assertEqual(status, 200)
+        self.assertEqual(saved["qa"][0]["answer"], "Yes.\nPlant-based shell.")
+        self.assertEqual(saved["qa"][1], {"id": "qa-2", "question": "Draft only", "answer": "", "author": "", "date": "", "votes": ""})
+        self.assertEqual(self.store.get(project["id"])["qa"], saved["qa"])
+        for bad in ([{"id": "qa-1", "question": 5}], [{"question": "no id"}], [{"id": "qa-1"}, {"id": "qa-1"}], "not a list"):
+            attempt = copy.deepcopy(saved)
+            attempt["qa"] = bad
+            status, _, _ = self.request("PUT", f"/api/projects/{project['id']}", attempt)
+            self.assertEqual(status, 400, bad)
+        legacy = copy.deepcopy(saved)
+        del legacy["qa"]
+        self.assertEqual(self.store.save(project["id"], legacy)["qa"], [])
+
     def test_legacy_viewport_settings_are_upgraded(self):
         project = self.create()
         directory = self.store.directory(project["id"])

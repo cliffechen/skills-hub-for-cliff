@@ -226,6 +226,19 @@
 .preview-root .preview-video-wrap > .preview-placeholder { aspect-ratio: 16 / 9; }
 .preview-root .preview-video-error { padding: 12px 16px; background: #fff4ed; color: #93401d; font-size: 12px; line-height: 1.5; }
 
+/* Customer questions & answers. */
+.preview-root .preview-qa { position: relative; padding: 18px 14px 20px; border-top: 6px solid var(--preview-divider); background: var(--preview-bg); }
+.preview-root .preview-qa-search { display: flex; align-items: center; gap: 8px; height: 40px; margin-bottom: 14px; padding: 0 11px; border: 1px solid #888c8c; border-radius: 8px; color: var(--preview-muted); font-size: 13px; box-shadow: inset 0 1px 2px #0f111126; }
+.preview-root .preview-qa-search-icon { width: 18px; height: 18px; }
+.preview-root .preview-qa-list { display: grid; gap: 16px; }
+.preview-root .preview-qa-item { position: relative; display: grid; gap: 5px; font-size: 14px; line-height: 1.4; }
+.preview-root .preview-qa-question, .preview-root .preview-qa-answer { display: grid; grid-template-columns: 76px minmax(0, 1fr); }
+.preview-root .preview-qa-label { font-weight: 700; }
+.preview-root .preview-qa-question .preview-qa-text { font-weight: 700; color: var(--preview-link); }
+.preview-root .preview-qa-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.preview-root .preview-qa-meta { padding-left: 76px; font-size: 12px; color: var(--preview-muted); }
+.preview-root .preview-qa-more { margin-top: 16px; width: 100%; height: 38px; border: 1px solid #d5d9d9; border-radius: 8px; background: var(--preview-bg); color: var(--preview-ink); font-size: 13px; box-shadow: 0 2px 5px #0f111114; cursor: pointer; }
+
 /* App bottom tab bar. */
 .preview-root .preview-bottom-nav { display: flex; height: 52px; flex: 0 0 52px; background: var(--preview-bg); border-top: 1px solid var(--preview-line); z-index: 2; padding: 0 9px 2px; }
 .preview-root .preview-nav-item { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; color: var(--preview-ink); }

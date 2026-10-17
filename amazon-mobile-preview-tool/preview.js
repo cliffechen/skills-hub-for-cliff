@@ -154,9 +154,24 @@ export class PhonePreview {
     this.emptyAplus = el('div', 'preview-aplus-empty', 'A+ 内容将在这里显示');
     this.aplusBadge = el('div', 'preview-guide-badge preview-aplus-badge');
     this.aplus.append(this.aplusBadge, this.aplusHeading, this.moduleList, this.emptyAplus);
+    // Customer questions & answers, below the product description as on the product page.
+    this.qaSection = el('section', 'preview-qa');
+    this.qaSection.dataset.previewAnchor = 'qa';
+    const qaSearch = el('div', 'preview-qa-search');
+    qaSearch.append(icon('search', 'preview-qa-search-icon'), el('span', '', 'Have a question? Search for answers'));
+    this.qaList = el('div', 'preview-qa-list');
+    this.qaMore = el('button', 'preview-qa-more');
+    this.qaMore.type = 'button';
+    this.qaMore.addEventListener('click', () => {
+      this.qaExpanded = !this.qaExpanded;
+      this._renderQa();
+      this._layoutAll();
+    });
+    this.qaSection.append(el('h2', 'preview-section-heading', 'Customer questions & answers'), qaSearch, this.qaList, this.qaMore);
+    this.qaExpanded = false;
     this.foldLine = el('div', 'preview-fold-line');
     this.foldLine.append(el('span', '', '首屏底部 · 打开页面第一眼只看到这条线以上'));
-    this.scroller.append(this.productIntro, this.gallerySection, this.buy, this.about, this.aplus, this.foldLine);
+    this.scroller.append(this.productIntro, this.gallerySection, this.buy, this.about, this.aplus, this.qaSection, this.foldLine);
 
     this.footer = el('nav', 'preview-bottom-nav preview-app-only preview-shell-only');
     this.footer.setAttribute('aria-label', '模拟 Amazon 导航');
@@ -221,6 +236,8 @@ export class PhonePreview {
     const bullets = String(product.bullets || '').split('\n').map(line => line.trim()).filter(Boolean);
     this.aboutList.replaceChildren(...bullets.map(line => el('li', '', line)));
     this.about.hidden = !bullets.length;
+    if (changedProject) this.qaExpanded = false;
+    this._renderQa();
     const galleryItems = project.gallery || [];
     this._syncSlides(this.gallery, galleryItems, item => ({ kind: 'gallery', itemId: item.id }));
     let galleryIndex = this.galleryIndex;
@@ -768,6 +785,19 @@ export class PhonePreview {
       if (index < 0) return false;
       this._setIndex(this.gallery, index, false);
       node = this.gallerySection;
+    } else if (target.kind === 'qa') {
+      const position = (this.project.qa || []).filter(item => item.question?.trim() || item.answer?.trim()).findIndex(item => item.id === target.qaId);
+      if (position < 0) {
+        // A blank new entry is not drawn yet; show where it will appear.
+        if (this.qaSection.hidden) return false;
+        node = this.qaSection;
+      } else {
+        if (position >= 3 && !this.qaExpanded) {
+          this.qaExpanded = true;
+          this._renderQa();
+        }
+        node = this.qaList.querySelector(`[data-qa-id="${CSS.escape(target.qaId)}"]`) || this.qaSection;
+      }
     } else {
       const record = this.modules.get(target.moduleId);
       if (!record) return false;
@@ -819,6 +849,27 @@ export class PhonePreview {
     const anchor = this._captureAnchor();
     this._layoutAll();
     this._applyAnchor(anchor);
+  }
+
+  _renderQa() {
+    const items = (this.project?.qa || []).filter(item => item.question?.trim() || item.answer?.trim());
+    const visible = this.qaExpanded ? items : items.slice(0, 3);
+    this.qaSection.hidden = !items.length;
+    this.qaList.replaceChildren(...visible.map(item => {
+      const node = el('div', 'preview-qa-item');
+      node.dataset.qaId = item.id;
+      const question = el('div', 'preview-qa-question');
+      question.append(el('span', 'preview-qa-label', 'Question:'), el('span', 'preview-qa-text', item.question.trim() || '…'));
+      const answer = el('div', 'preview-qa-answer');
+      answer.append(el('span', 'preview-qa-label', 'Answer:'), el('span', 'preview-qa-text', item.answer.trim() || 'No answer yet.'));
+      node.append(question, answer);
+      const by = [item.author?.trim() && `By ${item.author.trim()}`, item.date?.trim() && `on ${item.date.trim()}`].filter(Boolean).join(' ');
+      const votes = item.votes?.trim() ? `${item.votes.trim()} ${item.votes.trim() === '1' ? 'person' : 'people'} found this helpful` : '';
+      if (by || votes) node.append(el('div', 'preview-qa-meta', [by, votes].filter(Boolean).join(' · ')));
+      return node;
+    }));
+    this.qaMore.hidden = items.length <= 3;
+    this.qaMore.textContent = this.qaExpanded ? 'See fewer questions' : `See more answered questions (${items.length - 3})`;
   }
 
   _renderPrice(price) {
